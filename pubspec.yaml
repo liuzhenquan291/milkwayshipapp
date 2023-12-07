@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get: ^4.1.4  # 请检查最新版本
+  shared_preferences: ^2.0.12  # 请检查最新版本
 
 
   # The following adds the Cupertino Icons font to your application.
