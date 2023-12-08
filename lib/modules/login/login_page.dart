@@ -1,45 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:milkwayshipapp/modules/root/home_page.dart';
+
+import 'global_controller.dart';
+import 'package:milkwayshipapp/core/server.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final ApiService apiService = ApiService();
 
-  LoginPage() {
-    _checkLoginStatus();
-  }
-
-  Future<void> _checkLoginStatus() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
-    if (token != null && token.isNotEmpty) {
-      Get.off(HomePage());
-    }
-  }
-
-  Future<void> _login() async {
-    // 在这里执行登录逻辑，获取token
-    String token = "your_generated_token";
-
-    // 缓存token
-    await _saveTokenToSharedPreferences(token);
-
-    // 导航到主页
-    Get.off(HomePage());
-  }
-
-  Future<void> _saveTokenToSharedPreferences(String token) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('token', token);
-  }
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('登录或注册'),
+        title: const Text('Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -48,18 +24,63 @@ class LoginPage extends StatelessWidget {
           children: [
             TextField(
               controller: usernameController,
-              decoration: InputDecoration(labelText: '手机号'),
+              decoration: const InputDecoration(
+                labelText: 'Username',
+              ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(labelText: '密码'),
+              decoration: const InputDecoration(
+                labelText: 'Password',
+              ),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             ElevatedButton(
-              onPressed: _login,
-              child: Text('登录'),
+              onPressed: () async {
+                final username = usernameController.text;
+                final password = passwordController.text;
+
+                if (username.isNotEmpty && password.isNotEmpty) {
+                  try {
+                    final data = {'username': username, 'password': password};
+                    final response = await apiService.postRequest(
+                        'http://localhost:8002/login/', data);
+
+                    // 检查登录成功与否
+                    if (response.statusCode == 200) {
+                      // 模拟登录成功后更新token
+                      Get.find<GlobalController>().token.value =
+                          'your_token_here';
+                      Get.offAllNamed('/');
+                    } else {
+                      // 处理登录失败
+                      Get.snackbar(
+                        '登录失败',
+                        '服务器异常',
+                        backgroundColor: Colors.red,
+                        colorText: Colors.white,
+                      );
+                    }
+                  } catch (e) {
+                    Get.snackbar(
+                      '前端异常',
+                      e.toString(),
+                      backgroundColor: Colors.red,
+                      colorText: Colors.white,
+                    );
+                  }
+                } else {
+                  Get.snackbar(
+                    '输入错误',
+                    '账号和密码不能为空',
+                    backgroundColor: Colors.red,
+                    colorText: Colors.white,
+                  );
+                }
+              },
+              child: const Text('Login'),
             ),
           ],
         ),

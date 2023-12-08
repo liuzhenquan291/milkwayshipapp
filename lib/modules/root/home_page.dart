@@ -1,40 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:milkwayshipapp/modules/login/login_page.dart';
+
+import 'home_controller.dart';
 
 class HomePage extends StatelessWidget {
-  Future<void> _logout() async {
-    // 清除token
-    await _clearTokenFromSharedPreferences();
+  final HomeController _controller = Get.put(HomeController());
 
-    // 导航到登录页
-    Get.offAll(LoginPage());
-  }
+  // 添加 key 参数
+  // HomePage() {
+  //   _checkLoginStatus();
+  // }
 
-  Future<void> _clearTokenFromSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('token');
+  Future<void> _checkLoginStatus() async {
+    bool isLogin = _controller.isLoggedIn.value;
+    if (!isLogin) {
+      Get.offAllNamed('/login');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: const Text('Home'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Welcome to the Home Page'),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _logout,
-              child: Text('Logout'),
-            ),
-          ],
-        ),
+      body: Obx(
+        () => _controller.isLoggedIn.value
+            ? const Center(child: Text('Home Page'))
+            : Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.offAllNamed('/login');
+                  },
+                  child: const Text('Go to Login'),
+                ),
+              ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: '首页',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.emoji_people),
+            label: '势力',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: '攻略',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: '我的',
+          ),
+        ],
+        currentIndex: 0,
+        selectedItemColor: Colors.blue,
+        onTap: (index) {
+          // 处理底部导航栏点击事件
+        },
       ),
     );
   }
