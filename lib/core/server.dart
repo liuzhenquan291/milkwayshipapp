@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/urls.dart';
 
 class ApiService extends GetxService {
   String? token = "";
@@ -11,7 +12,7 @@ class ApiService extends GetxService {
   void onInit() {
     super.onInit();
     _dio = dio.Dio();
-    _dio.options.baseUrl = "";
+    _dio.options.baseUrl = baseUrl;
 
     _dio.interceptors.add(
       dio.InterceptorsWrapper(
