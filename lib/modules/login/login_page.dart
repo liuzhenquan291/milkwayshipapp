@@ -3,13 +3,15 @@ import 'package:get/get.dart';
 
 import 'global_controller.dart';
 import 'package:milkwayshipapp/core/server.dart';
+import 'package:milkwayshipapp/core/utils.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final ApiService apiService = ApiService();
 
-  LoginPage({Key? key}) : super(key: key);
+  final EncrypterController encrypterController =
+      Get.find<EncrypterController>();
+  // LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,15 +27,17 @@ class LoginPage extends StatelessWidget {
             TextField(
               controller: usernameController,
               decoration: const InputDecoration(
-                labelText: 'Username',
+                labelText: '手机号',
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(
+              height: 16,
+            ),
             TextField(
               controller: passwordController,
               obscureText: true,
               decoration: const InputDecoration(
-                labelText: 'Password',
+                labelText: '密码',
               ),
             ),
             const SizedBox(height: 32),
@@ -44,16 +48,20 @@ class LoginPage extends StatelessWidget {
 
                 if (username.isNotEmpty && password.isNotEmpty) {
                   try {
-                    final data = {'username': username, 'password': password};
+                    ApiService apiService = Get.find<ApiService>();
+                    final passwdEnc =
+                        EncrypterController().encryptMd5(password);
+                    final data = {'username': username, 'password': passwdEnc};
                     final response = await apiService.postRequest(
-                        'http://localhost:8002/login/', data);
+                        'http://192.168.162.56:8008/login/', data);
 
                     // 检查登录成功与否
-                    if (response.statusCode == 200) {
+                    if (response?.statusCode == 200) {
                       // 模拟登录成功后更新token
                       Get.find<GlobalController>().token.value =
                           'your_token_here';
-                      Get.offAllNamed('/');
+                      // Get.offAllNamed('/');
+                      Get.toNamed('/');
                     } else {
                       // 处理登录失败
                       Get.snackbar(
@@ -80,7 +88,13 @@ class LoginPage extends StatelessWidget {
                   );
                 }
               },
-              child: const Text('Login'),
+              child: const Text('登录'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Get.offAllNamed('/register');
+              },
+              child: const Text('注册'),
             ),
           ],
         ),

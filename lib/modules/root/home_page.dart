@@ -14,7 +14,8 @@ class HomePage extends StatelessWidget {
   Future<void> _checkLoginStatus() async {
     bool isLogin = _controller.isLoggedIn.value;
     if (!isLogin) {
-      Get.offAllNamed('/login');
+      // Get.offAllNamed('/login');
+      Get.toNamed('/login');
     }
   }
 
@@ -30,7 +31,8 @@ class HomePage extends StatelessWidget {
             : Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.offAllNamed('/login');
+                    // Get.offAllNamed('/login');
+                    Get.toNamed('/login');
                   },
                   child: const Text('Go to Login'),
                 ),
