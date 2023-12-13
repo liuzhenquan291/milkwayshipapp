@@ -29,6 +29,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/',
           page: () => HomePage(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => EncrypterController());
+            Get.lazyPut(() => GlobalController());
+          }),
         ),
         GetPage(
           name: '/login',

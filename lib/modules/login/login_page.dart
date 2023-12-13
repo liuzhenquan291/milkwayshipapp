@@ -55,20 +55,26 @@ class _LoginState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () async {
-                final username = usernameController.text;
-                final password = passwordController.text;
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    final username = usernameController.text;
+                    final password = passwordController.text;
 
-                _login(username, password);
-              },
-              child: const Text('登录'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Get.offAllNamed('/register');
-              },
-              child: const Text('注册'),
+                    _login(username, password);
+                  },
+                  child: const Text('登录'),
+                ),
+                const SizedBox(width: 32),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.offAllNamed('/register');
+                  },
+                  child: const Text('注册'),
+                ),
+              ],
             ),
           ],
         ),
