@@ -9,9 +9,23 @@ import 'package:milkwayshipapp/core/utils.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 import 'package:milkwayshipapp/modules/login/user_model.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  LoginPage({
+    Key? key,
+  }) : super(key: key);
+  @override
+  State<StatefulWidget> createState() {
+    return _LoginState();
+  }
+}
+
+class _LoginState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +84,7 @@ class LoginPage extends StatelessWidget {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
+      return;
     }
 
     try {
@@ -77,22 +92,33 @@ class LoginPage extends StatelessWidget {
       final EncrypterController encrypterController =
           Get.find<EncrypterController>();
       final passwdEnc = encrypterController.encryptMd5(password);
+      print(passwdEnc);
       final data = {'username': username, 'password': passwdEnc};
       final response = await apiService.postRequest(userLoginPath, data);
 
       // 检查登录成功与否
       if (response?.statusCode == 200) {
         // 模拟登录成功后更新token
-        Map<String, dynamic> responseData = jsonDecode(response?.data);
-        UserModel user = UserModel.fromJson(responseData);
-        Get.find<GlobalController>().token.value = user.token as String;
-        Get.find<GlobalController>().username.value = user.username as String;
-        Get.find<GlobalController>().userDisplayName.value =
-            user.userDisplayName as String;
-        Get.find<GlobalController>().userRole.value = user.userRole as String;
-        Get.find<GlobalController>().isLogin.value = true;
+        ResponseData responseData = ResponseData.fromJson(response?.data);
+        if (responseData.code == 0) {
+          UserModel user =
+              UserModel.fromJson(responseData.data as Map<String, dynamic>);
+          Get.find<GlobalController>().token.value = user.token as String;
+          Get.find<GlobalController>().username.value = user.username as String;
+          Get.find<GlobalController>().userDisplayName.value =
+              user.userDisplayName as String;
+          Get.find<GlobalController>().userRole.value = user.userRole as String;
+          Get.find<GlobalController>().isLogin.value = true;
 
-        Get.offAllNamed('/');
+          Get.offAllNamed('/');
+        } else {
+          Get.snackbar(
+            "登录异常",
+            responseData.message.toString(),
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+          );
+        }
       } else {
         // 处理登录失败
         Get.snackbar(

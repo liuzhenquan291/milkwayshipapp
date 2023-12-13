@@ -3,6 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 
+class ResponseData {
+  int? code;
+  String? message;
+  Map<String, dynamic>? data;
+
+  ResponseData.fromJson(Map<String, dynamic> json) {
+    code = json['code'];
+    message = json['message'];
+    data = json['data'];
+  }
+}
+
 class ApiService extends GetxService {
   String? token = "";
   bool? isLogin = false;
@@ -47,6 +59,17 @@ class ApiService extends GetxService {
             Get.defaultDialog(
               title: '未找到资源',
               content: const Text('未找到资源...'),
+              confirm: TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text('OK'),
+              ),
+            );
+          } else if (dioError.response?.statusCode != 200) {
+            Get.defaultDialog(
+              title: '服务器错误',
+              content: const Text('服务器错误...'),
               confirm: TextButton(
                 onPressed: () {
                   Get.back();
