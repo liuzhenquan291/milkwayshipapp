@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/middlewares.dart';
 import 'package:milkwayshipapp/modules/login/global_controller.dart';
 // import 'package:milkwayshipapp/core/utils.dart';
 import 'package:milkwayshipapp/modules/root/home_page.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/',
           page: () => HomePage(),
+          middlewares: [AuthMiddleware(priority: 0)],
           binding: BindingsBuilder(() {
             Get.lazyPut(() => EncrypterController());
             Get.lazyPut(() => GlobalController());
