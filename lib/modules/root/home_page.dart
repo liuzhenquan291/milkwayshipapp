@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/modules/login/global_controller.dart';
 
 import '../../components/marquee.dart';
+import '../../core/apps.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -32,19 +33,19 @@ class _HomeState extends State<HomePage> {
     List<Map<String, String>> grandItems = [
       {
         "title": "用户\n管理",
-        "app": "",
+        "app": appRoute.userPage,
       },
       {
         "title": "势力\n管理",
-        "app": "",
+        "app": appRoute.regionPage,
       },
       {
         "title": "角色\n管理",
-        "app": "",
+        "app": appRoute.shipUserPage,
       },
       {
         "title": "聚宝\n  盆",
-        "app": "",
+        "app": appRoute.cornucopiaPage,
       },
     ];
     List<String> scrollMessages = [
@@ -182,13 +183,13 @@ class _HomeState extends State<HomePage> {
             _currentIndex = index;
 
             if (_currentIndex == 0) {
-              Get.offAllNamed('/');
+              Get.offAllNamed(appRoute.rootPage);
             } else if (_currentIndex == 1) {
-              Get.offAllNamed('/login');
+              Get.offAllNamed(appRoute.loginPage);
             } else if (_currentIndex == 2) {
-              Get.offAllNamed('/register');
+              Get.offAllNamed(appRoute.registerPage);
             } else if (_currentIndex == 3) {
-              Get.offAllNamed('/');
+              Get.offAllNamed(appRoute.rootPage);
             }
           });
         },

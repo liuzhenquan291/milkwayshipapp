@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/apps.dart';
 import 'global_controller.dart';
 import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/utils.dart';
@@ -29,7 +30,7 @@ class _LoginState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text("请登录"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -68,7 +69,7 @@ class _LoginState extends State<LoginPage> {
                 const SizedBox(width: 32),
                 ElevatedButton(
                   onPressed: () {
-                    Get.offAllNamed('/register');
+                    Get.offAllNamed(appRoute.registerPage);
                   },
                   child: const Text('注册'),
                 ),
@@ -114,7 +115,7 @@ class _LoginState extends State<LoginPage> {
           Get.find<GlobalController>().userRole.value = user.userRole as String;
           Get.find<GlobalController>().isLogin.value = true;
 
-          Get.offAllNamed('/');
+          Get.offAllNamed(appRoute.rootPage);
         } else {
           Get.snackbar(
             "登录异常",

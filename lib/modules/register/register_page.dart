@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:milkwayshipapp/core/utils.dart';
 
+import '../../core/apps.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
 import '../login/global_controller.dart';
@@ -142,7 +143,7 @@ class _RegisterState extends State<RegisterPage> {
                   const SizedBox(width: 16.0),
                   ElevatedButton(
                     onPressed: () async {
-                      Get.offAllNamed('/login');
+                      Get.offAllNamed(appRoute.loginPage);
                     },
                     child: const Text(
                       '返回登录',
@@ -232,7 +233,7 @@ class _RegisterState extends State<RegisterPage> {
                 user.userRole as String;
             Get.find<GlobalController>().isLogin.value = true;
 
-            Get.offAllNamed('/');
+            Get.offAllNamed(appRoute.rootPage);
           } else {
             Get.snackbar(
               "注册异常",

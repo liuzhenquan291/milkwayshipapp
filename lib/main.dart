@@ -8,7 +8,9 @@ import 'package:milkwayshipapp/modules/login/login_page.dart';
 import 'package:milkwayshipapp/modules/root/app_bindings.dart';
 import 'package:milkwayshipapp/modules/register/register_page.dart';
 
+import 'core/apps.dart';
 import 'core/utils.dart';
+import 'modules/user/user_page.dart';
 
 void main() {
   // Get.put(GlobalController());
@@ -25,10 +27,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: AppBindings(),
-      initialRoute: '/',
+      initialRoute: appRoute.rootPage,
       getPages: [
         GetPage(
-          name: '/',
+          name: appRoute.rootPage,
           page: () => HomePage(),
           middlewares: [AuthMiddleware(priority: 0)],
           binding: BindingsBuilder(() {
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
           }),
         ),
         GetPage(
-          name: '/login',
+          name: appRoute.loginPage,
           binding: BindingsBuilder(() {
             Get.lazyPut(() => EncrypterController());
             Get.lazyPut(() => GlobalController());
@@ -45,12 +47,21 @@ class MyApp extends StatelessWidget {
           page: () => LoginPage(),
         ),
         GetPage(
-            name: "/register",
-            page: () => RegisterPage(),
-            binding: BindingsBuilder(() {
-              Get.lazyPut(() => EncrypterController());
-              Get.lazyPut(() => GlobalController());
-            })),
+          name: appRoute.registerPage,
+          page: () => RegisterPage(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => EncrypterController());
+            Get.lazyPut(() => GlobalController());
+          }),
+        ),
+        GetPage(
+          name: appRoute.userPage,
+          page: () => UserPage(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => EncrypterController());
+            Get.lazyPut(() => GlobalController());
+          }),
+        ),
       ],
       // home: HomePage(),
     );
