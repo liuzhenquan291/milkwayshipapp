@@ -1,13 +1,14 @@
+// 势力管理页的势力列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class UserListController extends GetxController {
+class ShipuserListController extends GetxController {
   final RefreshController refreshController = RefreshController();
   // final ScrollController scrollController = ScrollController();
-  List<Map<String, String>> userList = [];
+  List<Map<String, String>> shipuserList = [];
   int page = 1;
 
   @override
@@ -24,12 +25,12 @@ class UserListController extends GetxController {
 
   Future<void> _loadData() async {
     final apiService = Get.find<ApiService>();
-    final response =
-        await apiService.getRequest(apiUrl.useListCreatePath, {'page': page});
+    final response = await apiService
+        .getRequest(apiUrl.shipUserListCreatePath, {'page': page});
     if (response.statusCode != 200) {
       return;
     }
-    final userInfos = response.data as List<dynamic>;
+    final regionInfos = response.data as List<dynamic>;
     /*
 "id" -> "de5e285673d041dba520dfef1338a40f"
 "password" -> "123456"
@@ -45,8 +46,8 @@ class UserListController extends GetxController {
 "wechat_name" -> "蒙蕤"
 */
     List<Map<String, String>> newData =
-        List.generate(userInfos.length, (index) {
-      var item = userInfos[index] as Map<String, dynamic>;
+        List.generate(regionInfos.length, (index) {
+      var item = regionInfos[index] as Map<String, dynamic>;
       return {
         '用户名': item['username'],
         '用户昵称': item['display_name'],
@@ -55,7 +56,7 @@ class UserListController extends GetxController {
         '可用操作': 'options',
       };
     });
-    userList.addAll(newData);
+    shipuserList.addAll(newData);
     page++;
     // refreshController.refreshCompleted(); // 结束刷新状态
     update();
