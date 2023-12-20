@@ -1,52 +1,80 @@
-const baseUrl = "http://192.168.162.56:8008";
+_ApiUrl apiUrl = _ApiUrl();
 
-//// 连接后端 user 应用
-const _userAppPath = "/user";
+class _ApiUrl {
+  final baseUrl = "http://192.168.162.55:8008";
+
+  //// 连接后端 user 应用
+  final _userAppPath = "/user";
 // 登录
-const userLoginPath = "$_userAppPath/login/";
+  late final String userLoginPath;
 // 注册、用户列表
-const useListCreatePath = "$_userAppPath/users/";
+  late final String useListCreatePath;
 // 用户详情、更新、注销
-const userRetriveUpdateDestroyPath = "$_userAppPath/users/%s/";
+  late final String userRetriveUpdateDestroyPath;
 // 管理员审核通过用户申请
-const userApprove = "$_userAppPath/approve/";
+  late final String userApprove;
 // 管理员禁用用户
-const userForbidden = "$_userAppPath/forbidden/";
+  late final String userForbidden;
 // 设置用户身份
-const userSetRole = "$_userAppPath/set_role/";
+  late final String userSetRole;
 
 //// 连接后端 ship 应用
-const _shipAppPath = "/ship";
+  late final String _shipAppPath = "/ship";
 // 游戏角色创建、展示
-const shipUserListCreatePath = "$_shipAppPath/shipusers/";
+  late final String shipUserListCreatePath;
 // 游戏角色详情、更新、注销
-const shipUserRetriveUpdateDestroyPath = "$_shipAppPath/shipusers/%s/";
+  late final String shipUserRetriveUpdateDestroyPath;
 // 管理员审核通过游戏角色
-const shipUserApprovePath = "$_shipAppPath/approve/";
+  late final String shipUserApprovePath;
 // 管理员禁用游戏角色
-const shipUserForbiddenPath = "$_shipAppPath/forbidden/";
+  late final String shipUserForbiddenPath;
 // 管理员设置游戏角色身份
-const shipUserSetRolePath = "$_shipAppPath/set_role/";
+  late final String shipUserSetRolePath;
 // 新建开盆计划、开盆计划列表
-const cornucopiasListCreatePath = "$_shipAppPath/cornucopias/";
+  late final String cornucopiasListCreatePath;
 // 开盆计划  详情、更新、废除
-const cornucopiasRetrieveUpdateDestroyPath = "$_shipAppPath/cornucopias/%s/";
+  late final String cornucopiasRetrieveUpdateDestroyPath;
 // 设置开盆计划已开盆
-const cornucopiasOpenedPath = "$_shipAppPath/cornucopias/opened/";
+  late final String cornucopiasOpenedPath;
 // 申请加入开盆计划
-const cornucopiasJoinPath = "$_shipAppPath/cornucopias/join/";
+  late final String cornucopiasJoinPath;
 // 设置错过开盆
-const cornucopiasMissPath = "$_shipAppPath/cornucopias/miss/";
+  late final String cornucopiasMissPath;
 
 //// 连接后端 region 应用
-const _regionAppPath = '/region';
+  late final String _regionAppPath = '/region';
 // 注册势力、势力列表
-const regionsCreateListPath = "$_regionAppPath/regions/";
+  late final String regionsCreateListPath;
 // 势力详情、更新、注销
-const regionsRetrieveUpdateDestroyPath = "$_regionAppPath/regions/%s/";
+  late final String regionsRetrieveUpdateDestroyPath;
 // 管理员审核通过新势力申请
-const regionsApprovePath = "$_regionAppPath/approve/";
+  late final String regionsApprovePath;
 // 设置势力管理员
-const regionsAddManagerPath = "$_regionAppPath/add_manager/";
+  late final String regionsAddManagerPath;
 // 移除势力管理员
-const regionsRemoveManagerPath = "$_regionAppPath/remove_manager/";
+  late final String regionsRemoveManagerPath;
+
+  _ApiUrl() {
+    userLoginPath = "$_userAppPath/login/";
+    useListCreatePath = "$_userAppPath/users/";
+    userRetriveUpdateDestroyPath = "$_userAppPath/users/%s/";
+    userApprove = "$_userAppPath/approve/";
+    userForbidden = "$_userAppPath/forbidden/";
+    userSetRole = "$_userAppPath/set_role/";
+    shipUserListCreatePath = "$_shipAppPath/shipusers/";
+    shipUserRetriveUpdateDestroyPath = "$_shipAppPath/shipusers/%s/";
+    shipUserApprovePath = "$_shipAppPath/approve/";
+    shipUserForbiddenPath = "$_shipAppPath/forbidden/";
+    shipUserSetRolePath = "$_shipAppPath/set_role/";
+    cornucopiasListCreatePath = "$_shipAppPath/cornucopias/";
+    cornucopiasRetrieveUpdateDestroyPath = "$_shipAppPath/cornucopias/%s/";
+    cornucopiasOpenedPath = "$_shipAppPath/cornucopias/opened/";
+    cornucopiasJoinPath = "$_shipAppPath/cornucopias/join/";
+    cornucopiasMissPath = "$_shipAppPath/cornucopias/miss/";
+    regionsCreateListPath = "$_regionAppPath/regions/";
+    regionsRetrieveUpdateDestroyPath = "$_regionAppPath/regions/%s/";
+    regionsApprovePath = "$_regionAppPath/approve/";
+    regionsAddManagerPath = "$_regionAppPath/add_manager/";
+    regionsRemoveManagerPath = "$_regionAppPath/remove_manager/";
+  }
+}

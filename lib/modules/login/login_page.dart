@@ -97,9 +97,8 @@ class _LoginState extends State<LoginPage> {
       final EncrypterController encrypterController =
           Get.find<EncrypterController>();
       final passwdEnc = encrypterController.encryptMd5(password);
-      print(passwdEnc);
       final data = {'username': username, 'password': passwdEnc};
-      final response = await apiService.postRequest(userLoginPath, data);
+      final response = await apiService.postRequest(apiUrl.userLoginPath, data);
 
       // 检查登录成功与否
       if (response?.statusCode == 200) {

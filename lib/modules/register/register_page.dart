@@ -215,7 +215,8 @@ class _RegisterState extends State<RegisterPage> {
         "wcq_name": wxGname,
       };
       try {
-        final response = await apiService.postRequest(useListCreatePath, data);
+        final response =
+            await apiService.postRequest(apiUrl.useListCreatePath, data);
 
         // 检查登录成功与否
         if (response?.statusCode == 200) {

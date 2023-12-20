@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/middlewares.dart';
-import 'package:milkwayshipapp/modules/login/global_controller.dart';
+// import 'package:milkwayshipapp/modules/login/global_controller.dart';
 // import 'package:milkwayshipapp/core/utils.dart';
 import 'package:milkwayshipapp/modules/root/home_page.dart';
 import 'package:milkwayshipapp/modules/login/login_page.dart';
 import 'package:milkwayshipapp/modules/root/app_bindings.dart';
 import 'package:milkwayshipapp/modules/register/register_page.dart';
+import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 
 import 'core/apps.dart';
 import 'core/utils.dart';
@@ -35,14 +36,14 @@ class MyApp extends StatelessWidget {
           middlewares: [AuthMiddleware(priority: 0)],
           binding: BindingsBuilder(() {
             Get.lazyPut(() => EncrypterController());
-            Get.lazyPut(() => GlobalController());
+            // Get.lazyPut(() => GlobalController());
           }),
         ),
         GetPage(
           name: appRoute.loginPage,
           binding: BindingsBuilder(() {
             Get.lazyPut(() => EncrypterController());
-            Get.lazyPut(() => GlobalController());
+            // Get.lazyPut(() => GlobalController());
           }),
           page: () => LoginPage(),
         ),
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
           page: () => RegisterPage(),
           binding: BindingsBuilder(() {
             Get.lazyPut(() => EncrypterController());
-            Get.lazyPut(() => GlobalController());
+            // Get.lazyPut(() => GlobalController());
           }),
         ),
         GetPage(
@@ -59,7 +60,8 @@ class MyApp extends StatelessWidget {
           page: () => UserPage(),
           binding: BindingsBuilder(() {
             Get.lazyPut(() => EncrypterController());
-            Get.lazyPut(() => GlobalController());
+            Get.lazyPut(() => UserListController());
+            // Get.lazyPut(() => GlobalController());
           }),
         ),
       ],

@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 
+import 'apps.dart';
+
 class ResponseData {
   int? code;
   String? message;
-  Map<String, dynamic>? data;
+  dynamic data;
 
   ResponseData.fromJson(Map<String, dynamic> json) {
     code = json['code'];
@@ -24,7 +26,7 @@ class ApiService extends GetxService {
   void onInit() {
     super.onInit();
     _dio = dio.Dio();
-    _dio.options.baseUrl = baseUrl;
+    _dio.options.baseUrl = apiUrl.baseUrl;
 
     _dio.interceptors.add(
       dio.InterceptorsWrapper(
@@ -53,7 +55,7 @@ class ApiService extends GetxService {
             Get.dialog(
               const Text("请登录..."),
             );
-            Get.offAllNamed('/login'); // 你的登录页面路由
+            Get.offAllNamed(appRoute.loginPage); // 你的登录页面路由
           } else if (dioError.response?.statusCode == 404) {
             // 弹窗请求错误
             Get.defaultDialog(
