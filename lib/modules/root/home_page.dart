@@ -6,9 +6,8 @@ import '../../components/marquee.dart';
 import '../../core/apps.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({
-    Key? key,
-  }) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return _HomeState();

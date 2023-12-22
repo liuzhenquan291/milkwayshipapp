@@ -5,8 +5,10 @@ import '../../core/apps.dart';
 import '../login/global_controller.dart';
 
 class RegionDetailPage extends StatefulWidget {
+  final String? regionId;
   RegionDetailPage({
     Key? key,
+    this.regionId,
   }) : super(key: key);
   @override
   State<StatefulWidget> createState() {
@@ -16,11 +18,18 @@ class RegionDetailPage extends StatefulWidget {
 
 class _RegionDetailState extends State<RegionDetailPage> {
   int _currentIndex = 1;
+  String? regionName;
 
   @override
   Widget build(BuildContext context) {
     final GlobalController gc = Get.find<GlobalController>();
     String userDisplayName = gc.userDisplayName.value;
+
+    final regionId = widget.regionId;
+    bool ifSelfRegion = true;
+    if (regionId == null || regionId.isEmpty) {
+      ifSelfRegion = false;
+    }
 
     List<Map<String, String>> grandItems = [
       {
@@ -45,6 +54,23 @@ class _RegionDetailState extends State<RegionDetailPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('$userDisplayName, 您好!'),
+      ),
+      body: Container(
+        child: Column(
+          children: [
+            const SizedBox(height: 24),
+            Text(ifSelfRegion ? "您当前所属势力${regionName}" : "势力${regionName}"),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Text(),
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
