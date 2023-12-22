@@ -11,6 +11,8 @@ class AppRoute {
   String userPage = '/user';
   // 势力管理页
   String regionPage = '/region';
+  // 势力详情页
+  String regionDetailPage = '/regionDetail';
   // 势力编辑页
   String regionEditPage = '/regionEdit';
   // 新建势力页

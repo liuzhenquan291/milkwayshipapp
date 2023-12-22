@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/modules/regions/region_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/apps.dart';
 import '../login/global_controller.dart';
 
 // class UserPage extends StatefulWidget {
@@ -172,7 +173,7 @@ class RegionPage extends GetView<RegionListController> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.offAllNamed('/'); // 返回上一页
+            Get.offAllNamed(appRoute.rootPage); // 返回上一页
           },
           child: Icon(Icons.arrow_back),
         ),

@@ -1,14 +1,14 @@
-// 游戏角色管理的游戏角色列表 controller
+// 聚宝盆管理页的聚宝盆列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class ShipuserListController extends GetxController {
+class CornucopiaListController extends GetxController {
   final RefreshController refreshController = RefreshController();
   // final ScrollController scrollController = ScrollController();
-  List<Map<String, String>> shipuserList = [];
+  List<Map<String, String>> cornucopiaList = [];
   int page = 1;
 
   @override
@@ -26,7 +26,7 @@ class ShipuserListController extends GetxController {
   Future<void> _loadData() async {
     final apiService = Get.find<ApiService>();
     final response = await apiService
-        .getRequest(apiUrl.shipUserListCreatePath, {'page': page});
+        .getRequest(apiUrl.cornucopiasListCreatePath, {'page': page});
     if (response.statusCode != 200) {
       return;
     }
@@ -56,7 +56,7 @@ class ShipuserListController extends GetxController {
         '可用操作': 'options',
       };
     });
-    shipuserList.addAll(newData);
+    cornucopiaList.addAll(newData);
     page++;
     // refreshController.refreshCompleted(); // 结束刷新状态
     update();

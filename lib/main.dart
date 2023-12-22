@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/middlewares.dart';
+import 'package:milkwayshipapp/modules/account/account_page.dart';
+import 'package:milkwayshipapp/modules/instruction/instruction_page.dart';
 import 'package:milkwayshipapp/modules/regions/region_list_controller.dart';
 // import 'package:milkwayshipapp/modules/login/global_controller.dart';
 // import 'package:milkwayshipapp/core/utils.dart';
@@ -8,12 +10,15 @@ import 'package:milkwayshipapp/modules/root/home_page.dart';
 import 'package:milkwayshipapp/modules/login/login_page.dart';
 import 'package:milkwayshipapp/modules/root/app_bindings.dart';
 import 'package:milkwayshipapp/modules/register/register_page.dart';
+import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
+import 'package:milkwayshipapp/modules/ships/cornucopia_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_page.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 
 import 'core/apps.dart';
 import 'core/utils.dart';
+import 'modules/regions/region_detail_page.dart';
 import 'modules/regions/region_page.dart';
 import 'modules/user/user_page.dart';
 
@@ -34,40 +39,40 @@ class MyApp extends StatelessWidget {
       initialBinding: AppBindings(),
       initialRoute: appRoute.rootPage,
       getPages: [
+        // 首页
         GetPage(
           name: appRoute.rootPage,
           page: () => HomePage(),
           middlewares: [AuthMiddleware(priority: 0)],
           binding: BindingsBuilder(() {
             Get.lazyPut(() => EncrypterController());
-            // Get.lazyPut(() => GlobalController());
           }),
         ),
+        // 登录页
         GetPage(
           name: appRoute.loginPage,
           binding: BindingsBuilder(() {
             Get.lazyPut(() => EncrypterController());
-            // Get.lazyPut(() => GlobalController());
           }),
           page: () => LoginPage(),
         ),
+        // 注册页
         GetPage(
           name: appRoute.registerPage,
           page: () => RegisterPage(),
           binding: BindingsBuilder(() {
             Get.lazyPut(() => EncrypterController());
-            // Get.lazyPut(() => GlobalController());
           }),
         ),
+        // 用户管理页
         GetPage(
           name: appRoute.userPage,
-          page: () => UserPage(),
+          page: () => UserListPage(),
           binding: BindingsBuilder(() {
-            // Get.lazyPut(() => EncrypterController());
             Get.lazyPut(() => UserListController());
-            // Get.lazyPut(() => GlobalController());
           }),
         ),
+        // 势力管理页
         GetPage(
           name: appRoute.regionPage,
           page: () => RegionPage(),
@@ -75,12 +80,40 @@ class MyApp extends StatelessWidget {
             Get.lazyPut(() => RegionListController());
           }),
         ),
+        // 势力详情页
+        GetPage(
+            name: appRoute.regionDetailPage,
+            page: () => RegionDetailPage(),
+            binding: BindingsBuilder(() {})),
+        // 游戏角色管理页
         GetPage(
           name: appRoute.shipUserPage,
-          page: () => ShipuserPage(),
+          page: () => ShipuserListPage(),
           binding: BindingsBuilder(() {
             Get.lazyPut(() => ShipuserListController());
           }),
+        ),
+        // 聚宝盆管理页
+        GetPage(
+          name: appRoute.cornucopiaPage,
+          page: () => CornucopiaListPage(),
+          binding: BindingsBuilder(
+            () {
+              Get.lazyPut(() => CornucopiaListController());
+            },
+          ),
+        ),
+        // 个人中心页
+        GetPage(
+          name: appRoute.accountInfoPage,
+          page: () => AccountPage(),
+          binding: BindingsBuilder(() {}),
+        ),
+        // 攻略页
+        GetPage(
+          name: appRoute.instructionPage,
+          page: () => InstructionPage(),
+          binding: BindingsBuilder(() {}),
         ),
       ],
       // home: HomePage(),

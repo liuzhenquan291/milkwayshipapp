@@ -1,7 +1,7 @@
 // 游戏角色管理页
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
+import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
@@ -17,7 +17,7 @@ import '../login/global_controller.dart';
 //   }
 // }
 
-class ShipuserListPage extends GetView<ShipuserListController> {
+class CornucopiaListPage extends GetView<CornucopiaListController> {
   final GlobalController gc = Get.find<GlobalController>();
   // final UserListController ulct = Get.find<UserListController>();
 
@@ -37,7 +37,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
   @override
   Widget build(BuildContext context) {
     String userDisplayName = gc.userDisplayName.value;
-    return GetBuilder<ShipuserListController>(builder: (controller) {
+    return GetBuilder<CornucopiaListController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
           title: Text('$userDisplayName, 您好!'),
@@ -115,11 +115,11 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                         ),
                       ),
                       Expanded(
-                        child: controller.shipuserList.isNotEmpty != false
+                        child: controller.cornucopiaList.isNotEmpty != false
                             ? ListView.builder(
                                 itemBuilder: (ctx, index) {
                                   Map<String, dynamic> tempUser =
-                                      controller.shipuserList[index];
+                                      controller.cornucopiaList[index];
                                   // String? username = tempUser["用户名"];
                                   return Container(
                                     height: 50,
@@ -160,7 +160,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                     ),
                                   );
                                 },
-                                itemCount: controller.shipuserList.length,
+                                itemCount: controller.cornucopiaList.length,
                               )
                             : Container(
                                 child: Text("暂无数据"),

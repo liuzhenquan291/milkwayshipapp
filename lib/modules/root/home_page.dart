@@ -59,6 +59,7 @@ class _HomeState extends State<HomePage> {
     Get.find<MarqueeController>().updateMessages(scrollMessages);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('$userDisplayName, 您好!'),
       ),
@@ -185,11 +186,11 @@ class _HomeState extends State<HomePage> {
             if (_currentIndex == 0) {
               Get.offAllNamed(appRoute.rootPage);
             } else if (_currentIndex == 1) {
-              Get.offAllNamed(appRoute.loginPage);
+              Get.offAllNamed(appRoute.regionDetailPage);
             } else if (_currentIndex == 2) {
-              Get.offAllNamed(appRoute.registerPage);
+              Get.offAllNamed(appRoute.instructionPage);
             } else if (_currentIndex == 3) {
-              Get.offAllNamed(appRoute.rootPage);
+              Get.offAllNamed(appRoute.accountInfoPage);
             }
           });
         },

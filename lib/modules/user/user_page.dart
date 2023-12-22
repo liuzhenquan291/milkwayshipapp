@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/apps.dart';
 import '../login/global_controller.dart';
 
 // class UserPage extends StatefulWidget {
@@ -15,7 +16,7 @@ import '../login/global_controller.dart';
 //   }
 // }
 
-class UserPage extends GetView<UserListController> {
+class UserListPage extends GetView<UserListController> {
   final GlobalController gc = Get.find<GlobalController>();
   // final UserListController ulct = Get.find<UserListController>();
 
@@ -171,7 +172,7 @@ class UserPage extends GetView<UserListController> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.offAllNamed('/'); // 返回上一页
+            Get.offAllNamed(appRoute.rootPage); // 返回上一页
           },
           child: Icon(Icons.arrow_back),
         ),
