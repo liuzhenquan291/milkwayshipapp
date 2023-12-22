@@ -20,6 +20,7 @@ import 'core/apps.dart';
 import 'core/utils.dart';
 import 'modules/regions/region_detail_page.dart';
 import 'modules/regions/region_page.dart';
+import 'modules/root/index_page.dart';
 import 'modules/user/user_page.dart';
 
 void main() {
@@ -42,11 +43,9 @@ class MyApp extends StatelessWidget {
         // 首页
         GetPage(
           name: appRoute.rootPage,
-          page: () => HomePage(),
+          // page: () => HomePage(),
+          page: () => IndexPage(),
           middlewares: [AuthMiddleware(priority: 0)],
-          binding: BindingsBuilder(() {
-            Get.lazyPut(() => EncrypterController());
-          }),
         ),
         // 登录页
         GetPage(
@@ -80,11 +79,12 @@ class MyApp extends StatelessWidget {
             Get.lazyPut(() => RegionListController());
           }),
         ),
-        // 势力详情页
-        GetPage(
-            name: appRoute.regionDetailPage,
-            page: () => RegionDetailPage(),
-            binding: BindingsBuilder(() {})),
+        // // 势力详情页
+        // GetPage(
+        //   name: appRoute.regionDetailPage,
+        //   page: () => RegionDetailPage(),
+        //   binding: BindingsBuilder(() {}),
+        // ),
         // 游戏角色管理页
         GetPage(
           name: appRoute.shipUserPage,
@@ -103,18 +103,18 @@ class MyApp extends StatelessWidget {
             },
           ),
         ),
-        // 个人中心页
-        GetPage(
-          name: appRoute.accountInfoPage,
-          page: () => AccountPage(),
-          binding: BindingsBuilder(() {}),
-        ),
-        // 攻略页
-        GetPage(
-          name: appRoute.instructionPage,
-          page: () => InstructionPage(),
-          binding: BindingsBuilder(() {}),
-        ),
+        // // 个人中心页
+        // GetPage(
+        //   name: appRoute.accountInfoPage,
+        //   page: () => AccountPage(),
+        //   binding: BindingsBuilder(() {}),
+        // ),
+        // // 攻略页
+        // GetPage(
+        //   name: appRoute.instructionPage,
+        //   page: () => InstructionPage(),
+        //   binding: BindingsBuilder(() {}),
+        // ),
       ],
       // home: HomePage(),
     );
