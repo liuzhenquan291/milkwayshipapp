@@ -52,8 +52,8 @@ class _InstructionState extends State<InstructionPage> {
           children: [
             const SizedBox(height: 24),
             Row(
-              children: [
-                const Text(
+              children: const [
+                Text(
                   "氪矿刷新时间",
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -63,11 +63,12 @@ class _InstructionState extends State<InstructionPage> {
                 ),
               ],
             ),
-            Image.asset(
-              Imgs.krImg,
-              width: 400,
-              height: 600,
-              // 你可以根据需要设置其他属性，比如fit、alignment等
+            Container(
+              alignment: Alignment.topLeft,
+              child: Image.asset(
+                Imgs.krImg,
+                // 你可以根据需要设置其他属性，比如fit、alignment等
+              ),
             ),
           ],
         ),
