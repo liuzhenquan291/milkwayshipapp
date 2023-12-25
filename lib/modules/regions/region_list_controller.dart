@@ -7,7 +7,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RegionListController extends GetxController {
   final RefreshController refreshController = RefreshController();
-  // final ScrollController scrollController = ScrollController();
   List<Map<String, String>> regionList = [];
   int page = 1;
 
@@ -15,12 +14,6 @@ class RegionListController extends GetxController {
   void onInit() {
     super.onInit();
     _loadData();
-    // scrollController.addListener(() {
-    //   if (scrollController.position.pixels ==
-    //       scrollController.position.maxScrollExtent) {
-    //     _loadData();
-    //   }
-    // });
   }
 
   Future<void> _loadData() async {

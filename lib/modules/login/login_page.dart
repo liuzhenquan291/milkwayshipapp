@@ -107,12 +107,12 @@ class _LoginState extends State<LoginPage> {
         if (responseData.code == 0) {
           UserModel user =
               UserModel.fromJson(responseData.data as Map<String, dynamic>);
-          Get.find<GlobalController>().token.value = user.token as String;
-          Get.find<GlobalController>().username.value = user.username as String;
-          Get.find<GlobalController>().userDisplayName.value =
+          Get.find<GlobalController>().token = user.token as String;
+          Get.find<GlobalController>().username = user.username as String;
+          Get.find<GlobalController>().userDisplayName =
               user.userDisplayName as String;
-          Get.find<GlobalController>().userRole.value = user.userRole as String;
-          Get.find<GlobalController>().isLogin.value = true;
+          Get.find<GlobalController>().userRole = user.userRole as String;
+          Get.find<GlobalController>().isLogin = true;
 
           Get.offAllNamed(appRoute.rootPage);
         } else {

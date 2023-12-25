@@ -36,7 +36,7 @@ class RegionPage extends GetView<RegionListController> {
 
   @override
   Widget build(BuildContext context) {
-    String userDisplayName = gc.userDisplayName.value;
+    String userDisplayName = gc.userDisplayName as String;
     return GetBuilder<RegionListController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
@@ -173,7 +173,7 @@ class RegionPage extends GetView<RegionListController> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.offAllNamed(appRoute.rootPage); // 返回上一页
+            Get.back();
           },
           child: Icon(Icons.arrow_back),
         ),

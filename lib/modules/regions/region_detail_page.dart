@@ -1,51 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/modules/regions/region_detail_congroller.dart';
 
 import '../../core/apps.dart';
-import '../login/global_controller.dart';
 
-class RegionDetailPage extends StatefulWidget {
-  final String? regionId;
-  RegionDetailPage({
-    Key? key,
-    this.regionId,
-  }) : super(key: key);
-  @override
-  State<StatefulWidget> createState() {
-    return _RegionDetailState();
-  }
-}
-
-class _RegionDetailState extends State<RegionDetailPage> {
-  String? regionName;
-
+class RegionDetailPage extends GetView<RegionDetailController> {
   @override
   Widget build(BuildContext context) {
-    final regionId = widget.regionId;
-    bool ifSelfRegion = true;
-    if (regionId == null || regionId.isEmpty) {
-      ifSelfRegion = false;
-    }
-
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        child: Column(
-          children: [
-            const SizedBox(height: 24),
-            Text(ifSelfRegion ? "您当前所属势力${regionName}" : "势力${regionName}"),
-            Column(
-              children: [
-                Row(
+    return GetBuilder<RegionDetailController>(builder: (controller) {
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          child: controller.hasRegion
+              ? Column(
                   children: [
-                    Text(""),
+                    const SizedBox(height: 24),
+                    Text(controller.ifSelfRegion
+                        ? "您当前所属势力: ${controller.regionData?.name}"
+                        : "势力: ${controller.regionData?.name}"),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text("根据 token 查询势力信息"),
+                          ],
+                        )
+                      ],
+                    ),
                   ],
                 )
-              ],
-            ),
-          ],
+              : Container(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 200),
+                      const Center(
+                        child: Text(
+                          "您尚未加入任何势力",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black38,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 200),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () async {
+                              try {
+                                print('to');
+                                Get.toNamed(appRoute.regionNewPage);
+                              } catch (e) {
+                                print(e);
+                                rethrow;
+                              }
+                            },
+                            child: const Text('创建势力'),
+                          ),
+                          const SizedBox(width: 32),
+                          ElevatedButton(
+                            onPressed: () {
+                              Get.offNamed(appRoute.regionPage);
+                            },
+                            child: const Text('加入势力'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  // ],
+                ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

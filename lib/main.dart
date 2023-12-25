@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/middlewares.dart';
 import 'package:milkwayshipapp/modules/account/account_page.dart';
 import 'package:milkwayshipapp/modules/instruction/instruction_page.dart';
+import 'package:milkwayshipapp/modules/regions/region_detail_congroller.dart';
 import 'package:milkwayshipapp/modules/regions/region_list_controller.dart';
 // import 'package:milkwayshipapp/modules/login/global_controller.dart';
 // import 'package:milkwayshipapp/core/utils.dart';
@@ -20,6 +21,7 @@ import 'core/apps.dart';
 import 'core/utils.dart';
 import 'modules/regions/region_detail_page.dart';
 import 'modules/regions/region_page.dart';
+import 'modules/regions/regions_new_page.dart';
 import 'modules/root/index_page.dart';
 import 'modules/user/user_page.dart';
 
@@ -46,6 +48,16 @@ class MyApp extends StatelessWidget {
           // page: () => HomePage(),
           page: () => IndexPage(),
           middlewares: [AuthMiddleware(priority: 0)],
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => RegionDetailController());
+          }),
+          children: [
+            // 势力详情页
+            GetPage(
+              name: appRoute.regionDetailPage,
+              page: () => RegionDetailPage(),
+            ),
+          ],
         ),
         // 登录页
         GetPage(
@@ -79,12 +91,11 @@ class MyApp extends StatelessWidget {
             Get.lazyPut(() => RegionListController());
           }),
         ),
-        // // 势力详情页
-        // GetPage(
-        //   name: appRoute.regionDetailPage,
-        //   page: () => RegionDetailPage(),
-        //   binding: BindingsBuilder(() {}),
-        // ),
+        // 加入势力页
+        GetPage(
+          name: appRoute.regionNewPage,
+          page: () => RegionNewPage(),
+        ),
         // 游戏角色管理页
         GetPage(
           name: appRoute.shipUserPage,

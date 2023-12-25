@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 
+import '../modules/login/global_controller.dart';
 import 'apps.dart';
 
 class ResponseData {
@@ -34,6 +35,13 @@ class ApiService extends GetxService {
             dio.RequestInterceptorHandler handler) {
           if (isLogin == true) {
             options.headers['Authorization'] = token ?? "";
+          } else {
+            final gc = Get.find<GlobalController>();
+            if (gc.isLogin != null && gc.isLogin == true) {
+              isLogin = true;
+              token = "Token ${gc.token}";
+              options.headers['Authorization'] = token ?? "";
+            }
           }
           return handler.next(options);
         },
@@ -87,8 +95,15 @@ class ApiService extends GetxService {
     );
   }
 
-  Future<dio.Response> getRequest(String url, dynamic data) async {
+  Future<dio.Response> getRequest(
+      String url, Map<String, dynamic>? data) async {
     try {
+      if (data != null && data.isNotEmpty) {
+        url = "$url?_i=0";
+        data.forEach((key, value) {
+          url = "$url&$key=$value";
+        });
+      }
       final response = await _dio.get(url);
       return response;
     } catch (e) {
@@ -96,7 +111,8 @@ class ApiService extends GetxService {
     }
   }
 
-  Future<dio.Response?> postRequest(String url, dynamic data) async {
+  Future<dio.Response?> postRequest(
+      String url, Map<String, dynamic>? data) async {
     try {
       final response = await _dio.post(url, data: data);
       return response;

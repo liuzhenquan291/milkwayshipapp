@@ -18,24 +18,10 @@ import '../login/global_controller.dart';
 
 class UserListPage extends GetView<UserListController> {
   final GlobalController gc = Get.find<GlobalController>();
-  // final UserListController ulct = Get.find<UserListController>();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   setState(() {});
-  // }
-
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   // Get.delete(tag: "user");
-  // }
 
   @override
   Widget build(BuildContext context) {
-    String userDisplayName = gc.userDisplayName.value;
+    String userDisplayName = gc.userDisplayName as String;
     return GetBuilder<UserListController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
@@ -172,7 +158,7 @@ class UserListPage extends GetView<UserListController> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.offAllNamed(appRoute.rootPage); // 返回上一页
+            Get.back();
           },
           child: Icon(Icons.arrow_back),
         ),

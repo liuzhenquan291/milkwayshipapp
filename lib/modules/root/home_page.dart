@@ -27,7 +27,7 @@ class _HomeState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final GlobalController gc = Get.find<GlobalController>();
-    String userDisplayName = gc.userDisplayName.value;
+    String userDisplayName = gc.userDisplayName as String;
 
     List<Map<String, String>> grandItems = [
       {
@@ -92,7 +92,7 @@ class _HomeState extends State<HomePage> {
                   Map<String, String> item = grandItems[index];
                   return GestureDetector(
                     onTap: () {
-                      Get.offNamed(item['app'] as String);
+                      Get.toNamed(item['app'] as String);
                     },
                     child: Container(
                       color: Colors.blue,

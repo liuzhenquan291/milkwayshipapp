@@ -20,7 +20,7 @@ class _AccountState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     final GlobalController gc = Get.find<GlobalController>();
-    String userDisplayName = gc.userDisplayName.value;
+    String userDisplayName = gc.userDisplayName as String;
 
     // List<Map<String, String>> grandItems = [
     //   {

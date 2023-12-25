@@ -1,7 +1,7 @@
 _ApiUrl apiUrl = _ApiUrl();
 
 class _ApiUrl {
-  final baseUrl = "http://192.168.162.55:8008";
+  final baseUrl = "http://192.168.162.51:8008";
 
   //// 连接后端 user 应用
   final _userAppPath = "/user";
@@ -47,6 +47,8 @@ class _ApiUrl {
   late final String regionsCreateListPath;
 // 势力详情、更新、注销
   late final String regionsRetrieveUpdateDestroyPath;
+// 根据 token 查询对应用户的势力信息
+  late final String regionByUser;
 // 管理员审核通过新势力申请
   late final String regionsApprovePath;
 // 设置势力管理员
@@ -76,5 +78,6 @@ class _ApiUrl {
     regionsApprovePath = "$_regionAppPath/approve/";
     regionsAddManagerPath = "$_regionAppPath/add_manager/";
     regionsRemoveManagerPath = "$_regionAppPath/remove_manager/";
+    regionByUser = "$_regionAppPath/regions/byuser/";
   }
 }

@@ -6,6 +6,8 @@ import 'package:milkwayshipapp/modules/login/global_controller.dart';
 import 'package:milkwayshipapp/modules/regions/region_detail_page.dart';
 import 'package:milkwayshipapp/modules/root/home_page.dart';
 
+import '../../core/edum_wrapper.dart';
+
 class IndexPage extends StatefulWidget {
   IndexPage({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class IndexPage extends StatefulWidget {
 class _IndexState extends State<IndexPage> {
   final List<Widget> tabs = [
     HomePage(),
-    RegionDetailPage(),
+    EdenKeepAliveWrapper(child: RegionDetailPage()),
     InstructionPage(),
     AccountPage(),
   ];
@@ -36,7 +38,7 @@ class _IndexState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     final GlobalController gc = Get.find<GlobalController>();
-    String userDisplayName = gc.userDisplayName.value;
+    String userDisplayName = gc.userDisplayName as String;
     // final HomeController controller = Get.put(HomeController());
 
     return Scaffold(
