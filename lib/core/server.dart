@@ -77,9 +77,17 @@ class ApiService extends GetxService {
               ),
             );
           } else if (dioError.response?.statusCode != 200) {
+            String message = '服务器错误...';
+            try {
+              final data = dioError.response?.data as Map<String, dynamic>;
+              message = data['message'];
+            } catch (e) {
+              print(e);
+            }
+            print(message);
             Get.defaultDialog(
               title: '服务器错误',
-              content: const Text('服务器错误...'),
+              content: Text(message),
               confirm: TextButton(
                 onPressed: () {
                   Get.back();

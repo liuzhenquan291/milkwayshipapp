@@ -17,6 +17,7 @@ import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_page.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 
+import 'components/marquee.dart';
 import 'core/apps.dart';
 import 'core/utils.dart';
 import 'modules/regions/region_detail_page.dart';
@@ -50,8 +51,14 @@ class MyApp extends StatelessWidget {
           middlewares: [AuthMiddleware(priority: 0)],
           binding: BindingsBuilder(() {
             Get.lazyPut(() => RegionDetailController());
+            // Get.lazyPut(() => MarqueeController());
+            // Get.lazyPut(() => ScrollController());
           }),
           children: [
+            GetPage(
+              name: appRoute.homePage,
+              page: () => HomePage(),
+            ),
             // 势力详情页
             GetPage(
               name: appRoute.regionDetailPage,

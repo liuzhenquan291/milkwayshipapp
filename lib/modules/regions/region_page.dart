@@ -40,6 +40,7 @@ class RegionPage extends GetView<RegionListController> {
     return GetBuilder<RegionListController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text('$userDisplayName, 您好!'),
         ),
         body: Column(
@@ -87,29 +88,18 @@ class RegionPage extends GetView<RegionListController> {
                           ),
                         ),
                         child: Row(
-                          children: [
-                            const Expanded(
-                              child: Text("用户名"),
-                              // child: Container(
-
-                              // ),
-                            ),
-                            const Expanded(
-                              child: Text("用户昵称"),
-                              // child: Container(
-                              //   child: Text("用户昵称"),
-                              // ),
+                          children: const [
+                            Expanded(
+                              child: Text("势力名称"),
                             ),
                             Expanded(
-                              child: Text("微信昵称"),
-                              // child: Container(
-                              //   child: Text("微信昵称"),
-                              // ),
+                              child: Text("成员格式"),
                             ),
                             Expanded(
-                              child: Container(
-                                child: Text("用户状态"),
-                              ),
+                              child: Text("战区信息"),
+                            ),
+                            Expanded(
+                              child: Text("势力状态"),
                             ),
                           ],
                         ),
@@ -133,25 +123,39 @@ class RegionPage extends GetView<RegionListController> {
                                     child: Row(
                                       children: [
                                         Expanded(
-                                          child: Text(tempUser["用户名"]),
-                                          // child: Container(
-                                          //   child: Text(tempUser["用户名"]),
-                                          // ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.toNamed(
+                                                appRoute.regionDetailPage,
+                                                parameters: {
+                                                  'regionId': tempUser['id']
+                                                },
+                                              );
+                                            },
+                                            child: Text(
+                                              tempUser["势力名称"],
+                                              style: const TextStyle(
+                                                color: Colors.blue,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["用户昵称"]),
+                                          child: Text(tempUser["成员格式"]),
                                           // child: Container(
                                           //   child: Text(tempUser["用户昵称"]),
                                           // ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["微信昵称"]),
+                                          child: Text(tempUser["战区信息"]),
                                           // child: Container(
                                           //   child: Text(tempUser["微信昵称"]),
                                           // ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["用户状态"]),
+                                          child: Text(tempUser["势力状态"]),
                                           // child: Container(
                                           //   child: Text(tempUser["用户状态"]),
                                           // ),

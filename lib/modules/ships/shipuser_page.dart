@@ -40,6 +40,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
     return GetBuilder<ShipuserListController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text('$userDisplayName, 您好!'),
         ),
         body: Column(

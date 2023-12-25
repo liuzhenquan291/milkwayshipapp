@@ -38,7 +38,7 @@ class _RegionNewPageState extends State<RegionNewPage> {
     // String captcha = _generateCaptcha();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('编辑信息'),
+        title: const Text('创建新势力'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -56,54 +56,76 @@ class _RegionNewPageState extends State<RegionNewPage> {
               const SizedBox(height: 16.0),
               TextField(
                 controller: nameFmtController,
-                obscureText: true,
+                // obscureText: true,
                 decoration: const InputDecoration(
                     labelText: '名字格式', hintText: '势力成员名字格式: 如 "龍魂ৡ+名字"'),
               ),
               const SizedBox(height: 16.0),
               TextField(
                 controller: zoneNameController,
-                obscureText: true,
+                // obscureText: true,
                 decoration: const InputDecoration(
                     labelText: '当前战区', hintText: '请输入战区信息, 如 "第7战区"'),
               ),
               const SizedBox(height: 16.0),
-              TextField(
-                controller: descriptionController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: '势力简介',
+              Container(
+                alignment: Alignment.topLeft,
+                child: const Text(
+                  "势力简介:",
+                  textAlign: TextAlign.left,
                 ),
               ),
               const SizedBox(height: 16.0),
-              Row(
-                // crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                      await _create(
-                        nameController.text,
-                        nameFmtController.text,
-                        zoneNameController.text,
-                        descriptionController.text,
-                      );
-                    },
-                    child: const Text(
-                      '确认创建',
+              TextField(
+                controller: descriptionController,
+                maxLines: 8,
+                maxLength: 200,
+                decoration: const InputDecoration(
+                    // hintText: '200字以内',
                     ),
-                  ),
-                  const SizedBox(width: 16.0),
-                  ElevatedButton(
-                    onPressed: () async {
-                      Get.back();
-                    },
-                    child: const Text(
-                      '返回上一页',
-                    ),
-                  ),
-                ],
               ),
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () async {
+                  await _create(
+                    nameController.text,
+                    nameFmtController.text,
+                    zoneNameController.text,
+                    descriptionController.text,
+                  );
+                },
+                child: const Text(
+                  '确认创建',
+                ),
+              ),
+              // Row(
+              //   // crossAxisAlignment: CrossAxisAlignment.center,
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     ElevatedButton(
+              //       onPressed: () async {
+              //         await _create(
+              //           nameController.text,
+              //           nameFmtController.text,
+              //           zoneNameController.text,
+              //           descriptionController.text,
+              //         );
+              //       },
+              //       child: const Text(
+              //         '确认创建',
+              //       ),
+              //     ),
+              //     const SizedBox(width: 16.0),
+              //     ElevatedButton(
+              //       onPressed: () async {
+              //         Get.back();
+              //       },
+              //       child: const Text(
+              //         '返回上一页',
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ),
@@ -149,7 +171,7 @@ class _RegionNewPageState extends State<RegionNewPage> {
         "name": name,
         "name_fmt": nameFmt,
         "zone_info": zoneName,
-        "description": description,
+        "desc": description,
       };
       try {
         final response =

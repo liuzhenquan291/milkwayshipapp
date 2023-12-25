@@ -47,15 +47,14 @@ class _HomeState extends State<HomePage> {
         "app": appRoute.cornucopiaPage,
       },
     ];
-    List<String> scrollMessages = [
-      "喜报: 醉花荫正式更名龍魂: 因规模扩大, 醉花荫...",
-      "震惊: 大帝在龙虎山钓出前年王八...",
-      "恶搞: 机器人大战黑熊怪最后自己怀孕了...",
-      "喜报: 恐虐、凯文两位大佬双双晋级8强",
-    ];
+    // List<String> scrollMessages = [
+    //   "喜报: 醉花荫正式更名龍魂: 因规模扩大, 醉花荫...",
+    //   "震惊: 大帝在龙虎山钓出前年王八...",
+    //   "恶搞: 机器人大战黑熊怪最后自己怀孕了...",
+    //   "喜报: 恐虐、凯文两位大佬双双晋级8强",
+    // ];
 
-    Get.lazyPut(() => MarqueeController());
-    Get.find<MarqueeController>().updateMessages(scrollMessages);
+    // Get.find<MarqueeController>().updateMessages(scrollMessages);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -111,32 +110,32 @@ class _HomeState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 24),
-            Container(
-              child: GetBuilder<MarqueeController>(
-                init: MarqueeController(),
-                builder: (controller) {
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    // controller: controller.scrollController,
-                    child: Column(
-                      children: controller.messages
-                          .map((message) => Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    textAlign: TextAlign.left,
-                                    "${message.substring(0, message.length > 17 ? 17 : message.length)}...",
-                                    style: TextStyle(fontSize: 20.0),
-                                  ),
-                                ],
-                              )))
-                          .toList(),
-                    ),
-                  );
-                },
-              ),
-            ),
+            // Container(
+            //   child: GetBuilder<MarqueeController>(
+            //     init: MarqueeController(),
+            //     builder: (controller) {
+            //       return SingleChildScrollView(
+            //         scrollDirection: Axis.vertical,
+            //         // controller: controller.scrollController,
+            //         child: Column(
+            //           children: controller.messages
+            //               .map((message) => Padding(
+            //                   padding: EdgeInsets.symmetric(horizontal: 16.0),
+            //                   child: Row(
+            //                     children: [
+            //                       Text(
+            //                         textAlign: TextAlign.left,
+            //                         "${message.substring(0, message.length > 17 ? 17 : message.length)}...",
+            //                         style: TextStyle(fontSize: 20.0),
+            //                       ),
+            //                     ],
+            //                   )))
+            //               .toList(),
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

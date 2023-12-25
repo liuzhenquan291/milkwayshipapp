@@ -60,7 +60,6 @@ class CornucopiaListController extends GetxController {
     page++;
     // refreshController.refreshCompleted(); // 结束刷新状态
     update();
-    print("++++++++++++++++++");
   }
 
   @override

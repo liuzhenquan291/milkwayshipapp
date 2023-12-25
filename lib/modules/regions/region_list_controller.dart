@@ -42,18 +42,17 @@ class RegionListController extends GetxController {
         List.generate(regionInfos.length, (index) {
       var item = regionInfos[index] as Map<String, dynamic>;
       return {
-        '用户名': item['username'],
-        '用户昵称': item['display_name'],
-        '微信昵称': item['wechat_name'],
-        '用户状态': item['status'],
-        '可用操作': 'options',
+        'id': item['id'],
+        '势力名称': item['name'],
+        '成员格式': item['name_fmt'],
+        '战区信息': item['zone_info'],
+        '势力状态': item['status'],
       };
     });
     regionList.addAll(newData);
     page++;
     // refreshController.refreshCompleted(); // 结束刷新状态
     update();
-    print("++++++++++++++++++");
   }
 
   @override

@@ -1,8 +1,10 @@
 AppRoute appRoute = AppRoute();
 
 class AppRoute {
-  // 首页
+  // 导航页
   String rootPage = '/';
+  // 首页
+  String homePage = '/home';
   // 登录页
   String loginPage = '/login';
   // 注册页

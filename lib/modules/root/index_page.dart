@@ -33,7 +33,7 @@ class _IndexState extends State<IndexPage> {
   int _selectedIndex = 0;
   final _pageController = PageController();
   // 将PageController更改为ScrollController
-  late final ScrollController _scrollController;
+  // late final ScrollController _scrollController;
 
   @override
   Widget build(BuildContext context) {

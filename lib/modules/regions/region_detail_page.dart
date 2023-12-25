@@ -5,9 +5,16 @@ import 'package:milkwayshipapp/modules/regions/region_detail_congroller.dart';
 import '../../core/apps.dart';
 
 class RegionDetailPage extends GetView<RegionDetailController> {
+  String? regionId;
+  RegionDetailPage({
+    Key? key,
+    regionId,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RegionDetailController>(builder: (controller) {
+      controller.regionId = regionId;
       return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -48,20 +55,14 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                         children: [
                           ElevatedButton(
                             onPressed: () async {
-                              try {
-                                print('to');
-                                Get.toNamed(appRoute.regionNewPage);
-                              } catch (e) {
-                                print(e);
-                                rethrow;
-                              }
+                              Get.toNamed(appRoute.regionNewPage);
                             },
                             child: const Text('创建势力'),
                           ),
                           const SizedBox(width: 32),
                           ElevatedButton(
                             onPressed: () {
-                              Get.offNamed(appRoute.regionPage);
+                              Get.toNamed(appRoute.regionPage);
                             },
                             child: const Text('加入势力'),
                           ),

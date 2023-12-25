@@ -40,6 +40,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
     return GetBuilder<CornucopiaListController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text('$userDisplayName, 您好!'),
         ),
         body: Column(
