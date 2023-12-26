@@ -53,7 +53,8 @@ class UserListController extends GetxController {
         '用户昵称': item['display_name'],
         '微信昵称': item['wechat_name'],
         '用户状态': item['status'],
-        '可用操作': 'options',
+        // '可用操作': 'options',
+        'userId': item['id'] ?? '',
       };
     });
     userList.addAll(newData);

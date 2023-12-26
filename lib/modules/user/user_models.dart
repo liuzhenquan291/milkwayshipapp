@@ -7,7 +7,8 @@ class UserListUserModel {
   String? status;
   String? statusName;
   String? userRole;
-  String? options; // 可用操作
+  List<dynamic>? options; // 可用操作
+  List<dynamic>? shipUsers;
 
 /*
 "id" -> "de5e285673d041dba520dfef1338a40f"
@@ -33,6 +34,7 @@ class UserListUserModel {
     status = json['status'];
     statusName = json['status_name'];
     userRole = json['user_role'];
-    options = json['operators'];
+    options = json['options'];
+    shipUsers = json['ship_users'];
   }
 }

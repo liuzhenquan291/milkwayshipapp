@@ -118,11 +118,29 @@ class UserListPage extends GetView<UserListController> {
                                     child: Row(
                                       children: [
                                         Expanded(
-                                          child: Text(tempUser["用户名"]),
-                                          // child: Container(
-                                          //   child: Text(tempUser["用户名"]),
-                                          // ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.toNamed(
+                                                appRoute.userOptionPage,
+                                                parameters: {
+                                                  'userId': tempUser['userId']
+                                                },
+                                              );
+                                            },
+                                            child: Text(
+                                              tempUser["用户名"],
+                                              style: const TextStyle(
+                                                color: Colors.blue,
+                                              ),
+                                            ),
+                                          ),
                                         ),
+                                        // Expanded(
+                                        //   child: Text(tempUser["用户名"]),
+                                        //   // child: Container(
+                                        //   //   child: Text(tempUser["用户名"]),
+                                        //   // ),
+                                        // ),
                                         Expanded(
                                           child: Text(tempUser["用户昵称"]),
                                           // child: Container(

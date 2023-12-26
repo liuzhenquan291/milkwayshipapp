@@ -17,6 +17,8 @@ import 'package:milkwayshipapp/modules/ships/cornucopia_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_page.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
+import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
+import 'package:milkwayshipapp/modules/user/user_option_page.dart';
 
 import 'components/marquee.dart';
 import 'core/apps.dart';
@@ -90,6 +92,14 @@ class MyApp extends StatelessWidget {
           page: () => UserListPage(),
           binding: BindingsBuilder(() {
             Get.lazyPut(() => UserListController());
+          }),
+        ),
+        // 用户操作页
+        GetPage(
+          name: appRoute.userOptionPage,
+          page: () => UserOptionPage(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => UserOptionController());
           }),
         ),
         // 势力管理页
