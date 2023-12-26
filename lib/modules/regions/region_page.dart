@@ -126,7 +126,7 @@ class RegionPage extends GetView<RegionListController> {
                                           child: InkWell(
                                             onTap: () {
                                               Get.toNamed(
-                                                appRoute.regionDetailPage,
+                                                appRoute.regionOptionsPage,
                                                 parameters: {
                                                   'regionId': tempUser['id']
                                                 },
@@ -136,8 +136,6 @@ class RegionPage extends GetView<RegionListController> {
                                               tempUser["势力名称"],
                                               style: const TextStyle(
                                                 color: Colors.blue,
-                                                decoration:
-                                                    TextDecoration.underline,
                                               ),
                                             ),
                                           ),

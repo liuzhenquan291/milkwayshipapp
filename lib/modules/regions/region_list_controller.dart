@@ -23,7 +23,8 @@ class RegionListController extends GetxController {
     if (response.statusCode != 200) {
       return;
     }
-    final regionInfos = response.data as List<dynamic>;
+    final responseData = ResponseData.fromJson(response.data);
+    final regionInfos = responseData.data as List<dynamic>;
     /*
 "id" -> "de5e285673d041dba520dfef1338a40f"
 "password" -> "123456"

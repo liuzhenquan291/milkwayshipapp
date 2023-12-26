@@ -1,43 +1,36 @@
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/modules/regions/region_detail_model.dart';
-import 'package:sprintf/sprintf.dart';
-import 'package:dio/dio.dart' as dio;
+// import 'package:dio/dio.dart' as dio;
 
 import '../../core/server.dart';
 import '../../core/urls.dart';
+import '../login/global_controller.dart';
 
 class RegionDetailController extends GetxController {
-  String? regionId;
   RegionDetailModel? regionData;
   bool hasRegion = false;
-  bool ifSelfRegion = false; // 通过 token 查询 势力
 
   @override
   void onInit() {
     super.onInit();
-    // 在控制器初始化时，获取页面参数
-    // regionId = Get.arguments;
     _loadData();
   }
 
-  dio.Response? response;
+  // dio.Response? response;
   Future<void> _loadData() async {
     final apiService = Get.find<ApiService>();
-    String? regionId = Get.arguments;
-
-    if (regionId != null && regionId != "") {
-      ifSelfRegion = false;
-      final url = sprintf(apiUrl.regionsRetrieveUpdateDestroyPath, [regionId]);
-      final response = apiService.getRequest(url, null);
-    } else {
-      final response = apiService.getRequest(apiUrl.regionByUser, null);
-    }
-    if (response == null) {
-    } else if (response?.statusCode != 200) {
+    final response = await apiService.getRequest(apiUrl.regionByUser, null);
+    if (response.statusCode != 200) {
       // TODO: 弹窗
     } else {
-      hasRegion = true;
-      regionData = RegionDetailModel.fromJson(response?.data);
+      final responseData = ResponseData.fromJson(response.data);
+      if (responseData.data == null) {
+        return;
+      } else {
+        hasRegion = true;
+        regionData = RegionDetailModel.fromJson(responseData.data);
+      }
     }
+    update();
   }
 }

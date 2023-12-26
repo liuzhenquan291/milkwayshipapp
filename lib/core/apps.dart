@@ -19,6 +19,8 @@ class AppRoute {
   String regionEditPage = '/regionEdit';
   // 新建势力页
   String regionNewPage = '/regionNew';
+  // 势力操作页
+  String regionOptionsPage = '/regionOptions';
   // 角色管理页
   String shipUserPage = '/ship/user';
   // 角色编辑页

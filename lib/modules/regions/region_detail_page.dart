@@ -5,16 +5,15 @@ import 'package:milkwayshipapp/modules/regions/region_detail_congroller.dart';
 import '../../core/apps.dart';
 
 class RegionDetailPage extends GetView<RegionDetailController> {
-  String? regionId;
-  RegionDetailPage({
-    Key? key,
-    regionId,
-  }) : super(key: key);
+  // String? regionId;
+  // RegionDetailPage({
+  //   Key? key,
+  //   regionId,
+  // }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RegionDetailController>(builder: (controller) {
-      controller.regionId = regionId;
       return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -22,9 +21,7 @@ class RegionDetailPage extends GetView<RegionDetailController> {
               ? Column(
                   children: [
                     const SizedBox(height: 24),
-                    Text(controller.ifSelfRegion
-                        ? "您当前所属势力: ${controller.regionData?.name}"
-                        : "势力: ${controller.regionData?.name}"),
+                    Text("您当前所属势力: ${controller.regionData?.name}"),
                     Column(
                       children: [
                         Row(
