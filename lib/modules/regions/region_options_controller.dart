@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/modules/regions/region_detail_model.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 // import 'package:dio/dio.dart' as dio;
 
@@ -11,6 +12,9 @@ class RegionOptionsController extends GetxController {
   String? regionId;
   RegionDetailModel? regionData;
   String? userDisplayName;
+  bool hasUser = false;
+  bool hasOptions = false;
+  final RefreshController refreshController = RefreshController();
   // bool hasRegion = false;
   // bool ifSelfRegion = false; // 通过 token 查询 势力
 
@@ -34,7 +38,19 @@ class RegionOptionsController extends GetxController {
       // TODO: 弹窗
     } else {
       final responseData = ResponseData.fromJson(response.data);
-      regionData = RegionDetailModel.fromJson(responseData.data);
+      if (responseData.data != null) {
+        regionData = RegionDetailModel.fromJson(responseData.data);
+        if (regionData != null) {
+          final users = regionData?.shipUsers ?? [];
+          if (users.isNotEmpty) {
+            hasUser = true;
+          }
+          final options = regionData?.options ?? [];
+          if (options.isNotEmpty) {
+            hasOptions = true;
+          }
+        }
+      }
     }
     final GlobalController gc = Get.find<GlobalController>();
     userDisplayName = gc.userDisplayName as String;

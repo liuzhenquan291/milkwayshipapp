@@ -9,7 +9,9 @@ class RegionDetailModel {
   String? createUserId;
   String? createdTime;
   String? updatedTime;
-  List<String>? options;
+  String? commander;
+  String? color;
+  List<dynamic>? options;
   List<dynamic>? shipUsers;
 
   RegionDetailModel.fromJson(Map<String, dynamic> json) {
@@ -17,13 +19,26 @@ class RegionDetailModel {
     name = json['name'];
     number = json['number'];
     status = json['number'];
+    commander = json['commander'];
+    color = json['color'];
     nameFmt = json['name_fmt'];
     zoneInfo = json['zone_info'];
     desc = json['desc'];
     createUserId = json['create_user_id'];
     createdTime = json['created_time'];
     updatedTime = json['updated_time'];
+    final _options = json['options'];
+    if (_options == null) {
+      options = [];
+    } else {
+      options = _options;
+    }
     options = json['options'];
-    shipUsers = json['ship_users'];
+    final _shipUsers = json['ship_users'];
+    if (_shipUsers == null) {
+      shipUsers = [];
+    } else {
+      shipUsers = _shipUsers;
+    }
   }
 }
