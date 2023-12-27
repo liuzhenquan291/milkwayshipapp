@@ -55,4 +55,15 @@ class ShipCornucopiaModel {
           : null,
     );
   }
+
+  static List<ShipCornucopiaModel> fromJsonToList(List<dynamic>? list) {
+    if (list == null || list.isEmpty) {
+      return [];
+    }
+    List<ShipCornucopiaModel> lst = [];
+    list.forEach((element) {
+      lst.add(ShipCornucopiaModel.fromJson(element));
+    });
+    return lst;
+  }
 }

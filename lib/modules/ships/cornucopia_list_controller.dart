@@ -15,6 +15,11 @@ class CornucopiaListController extends GetxController {
   CornucopiaInfosModel? cornucopiaInfos;
   String? userDisplayName;
   bool hasData = false;
+  double userDataLength = 0.0;
+  int needCorcuCnt = 0; // 需开盆角色数量
+  int canCorcuCnt = 0; // 可开盆角色数量
+  int toCorcuCnt = 0; // 开盆计划
+  int processingCorcuCnt = 0; // 进行中的盆
 
   @override
   void onInit() {
@@ -39,6 +44,12 @@ class CornucopiaListController extends GetxController {
 
     hasData = true;
     cornucopiaInfos = CornucopiaInfosModel.fromJson(responseData.data);
+    userDataLength = cornucopiaInfos?.shipUserData?.length.toDouble() as double;
+    needCorcuCnt = cornucopiaInfos?.needCorcuShipUserList?.length as int;
+    canCorcuCnt = cornucopiaInfos?.canOpenCorcuShipUserList?.length as int;
+    toCorcuCnt = cornucopiaInfos?.toOpenCorcuDataList?.length as int;
+    processingCorcuCnt =
+        cornucopiaInfos?.processingCorcuDataList?.length as int;
 
     final GlobalController gc = Get.find<GlobalController>();
     userDisplayName = gc.userDisplayName as String;
@@ -62,13 +73,17 @@ class CornucopiaInfosModel {
   List<ShipUserModel>? canOpenCorcuShipUserList;
 
   CornucopiaInfosModel.fromJson(Map<String, dynamic> json) {
-    json['region_data'] != null
+    regionData = json['region_data'] != null
         ? RegionModel.fromJson(json['region_data'] ?? {})
         : null;
-    ShipUserModel.fromJsonToList(json['shipuser_data']);
-    RegionModel.fromJsonToList(json['to_open_corcu_data_list']);
-    RegionModel.fromJsonToList(json['processing_corcu_data_list']);
-    RegionModel.fromJsonToList(json['need_corcu_shipuser_data_list']);
-    RegionModel.fromJsonToList(json['can_open_corcu_shipuser_data_list']);
+    shipUserData = ShipUserModel.fromJsonToList(json['shipuser_data']);
+    toOpenCorcuDataList =
+        ShipCornucopiaModel.fromJsonToList(json['to_open_corcu_data_list']);
+    processingCorcuDataList =
+        ShipCornucopiaModel.fromJsonToList(json['processing_corcu_data_list']);
+    needCorcuShipUserList =
+        ShipUserModel.fromJsonToList(json['need_corcu_shipuser_data_list']);
+    canOpenCorcuShipUserList =
+        ShipUserModel.fromJsonToList(json['can_open_corcu_shipuser_data_list']);
   }
 }
