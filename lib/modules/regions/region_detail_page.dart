@@ -5,12 +5,6 @@ import 'package:milkwayshipapp/modules/regions/region_detail_congroller.dart';
 import '../../core/apps.dart';
 
 class RegionDetailPage extends GetView<RegionDetailController> {
-  // String? regionId;
-  // RegionDetailPage({
-  //   Key? key,
-  //   regionId,
-  // }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RegionDetailController>(builder: (controller) {

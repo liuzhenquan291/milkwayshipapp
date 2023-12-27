@@ -1,71 +1,74 @@
 // 聚宝盆管理页的聚宝盆列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
+import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import '../../core/models/region_model.dart';
+import '../login/global_controller.dart';
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class CornucopiaListController extends GetxController {
-  final RefreshController refreshController = RefreshController();
-  // final ScrollController scrollController = ScrollController();
-  List<Map<String, String>> cornucopiaList = [];
-  int page = 1;
+  // final RefreshController refreshController = RefreshController();
+  CornucopiaInfosModel? cornucopiaInfos;
+  String? userDisplayName;
+  bool hasData = false;
 
   @override
   void onInit() {
     super.onInit();
     _loadData();
-    // scrollController.addListener(() {
-    //   if (scrollController.position.pixels ==
-    //       scrollController.position.maxScrollExtent) {
-    //     _loadData();
-    //   }
-    // });
   }
 
   Future<void> _loadData() async {
     final apiService = Get.find<ApiService>();
-    final response = await apiService
-        .getRequest(apiUrl.cornucopiasListCreatePath, {'page': page});
+    final response =
+        await apiService.getRequest(apiUrl.cornucopiaInfosPath, null);
     if (response.statusCode != 200) {
       return;
     }
-    final regionInfos = response.data as List<dynamic>;
-    /*
-"id" -> "de5e285673d041dba520dfef1338a40f"
-"password" -> "123456"
-"last_login" -> null
-"is_superuser" -> false
-"number" -> "U2311215823"
-"created_time" -> "2023-11-21T17:27:42.221159"
-"updated_time" -> "2023-11-21T17:27:42.221180"
-"deleted" -> false
-"status" -> "init"
-"username" -> "18575546060"
-"display_name" -> "蒙蕤"
-"wechat_name" -> "蒙蕤"
-*/
-    List<Map<String, String>> newData =
-        List.generate(regionInfos.length, (index) {
-      var item = regionInfos[index] as Map<String, dynamic>;
-      return {
-        '用户名': item['username'],
-        '用户昵称': item['display_name'],
-        '微信昵称': item['wechat_name'],
-        '用户状态': item['status'],
-        '可用操作': 'options',
-      };
-    });
-    cornucopiaList.addAll(newData);
-    page++;
-    // refreshController.refreshCompleted(); // 结束刷新状态
+    final responseData = ResponseData.fromJson(response.data);
+
+    if (responseData.code != 0) {
+      // TOOD: 弹窗
+    } else if (response.data == null) {
+      return;
+    }
+
+    hasData = true;
+    cornucopiaInfos = CornucopiaInfosModel.fromJson(responseData.data);
+
+    final GlobalController gc = Get.find<GlobalController>();
+    userDisplayName = gc.userDisplayName as String;
+
     update();
   }
 
   @override
   void onClose() {
-    refreshController.dispose();
     // scrollController.dispose();
     super.onClose();
+  }
+}
+
+class CornucopiaInfosModel {
+  RegionModel? regionData;
+  List<ShipUserModel>? shipUserData;
+  List<ShipCornucopiaModel>? toOpenCorcuDataList;
+  List<ShipCornucopiaModel>? processingCorcuDataList;
+  List<ShipUserModel>? needCorcuShipUserList;
+  List<ShipUserModel>? canOpenCorcuShipUserList;
+
+  CornucopiaInfosModel.fromJson(Map<String, dynamic> json) {
+    json['region_data'] != null
+        ? RegionModel.fromJson(json['region_data'] ?? {})
+        : null;
+    ShipUserModel.fromJsonToList(json['shipuser_data']);
+    RegionModel.fromJsonToList(json['to_open_corcu_data_list']);
+    RegionModel.fromJsonToList(json['processing_corcu_data_list']);
+    RegionModel.fromJsonToList(json['need_corcu_shipuser_data_list']);
+    RegionModel.fromJsonToList(json['can_open_corcu_shipuser_data_list']);
   }
 }

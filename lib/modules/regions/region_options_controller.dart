@@ -6,12 +6,12 @@ import 'package:sprintf/sprintf.dart';
 
 import '../../core/server.dart';
 import '../../core/urls.dart';
-import '../login/global_controller.dart';
+// import '../login/global_controller.dart';
 
 class RegionOptionsController extends GetxController {
   String? regionId;
   RegionDetailModel? regionData;
-  String? userDisplayName;
+  // String? userDisplayName;
   bool hasUser = false;
   bool hasOptions = false;
   final RefreshController refreshController = RefreshController();
@@ -52,8 +52,8 @@ class RegionOptionsController extends GetxController {
         }
       }
     }
-    final GlobalController gc = Get.find<GlobalController>();
-    userDisplayName = gc.userDisplayName as String;
+    // final GlobalController gc = Get.find<GlobalController>();
+    // userDisplayName = gc.userDisplayName as String;
     update();
   }
 }

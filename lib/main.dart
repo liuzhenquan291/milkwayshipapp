@@ -6,16 +6,15 @@ import 'package:milkwayshipapp/modules/instruction/instruction_page.dart';
 import 'package:milkwayshipapp/modules/regions/region_detail_congroller.dart';
 import 'package:milkwayshipapp/modules/regions/region_list_controller.dart';
 import 'package:milkwayshipapp/modules/regions/region_options_page.dart';
-// import 'package:milkwayshipapp/modules/login/global_controller.dart';
-// import 'package:milkwayshipapp/core/utils.dart';
 import 'package:milkwayshipapp/modules/root/home_page.dart';
 import 'package:milkwayshipapp/modules/login/login_page.dart';
 import 'package:milkwayshipapp/modules/root/app_bindings.dart';
 import 'package:milkwayshipapp/modules/register/register_page.dart';
+import 'package:milkwayshipapp/modules/root/settings_page.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
-import 'package:milkwayshipapp/modules/ships/cornucopia_page.dart';
+import 'package:milkwayshipapp/modules/ships/cornucopia_list_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
-import 'package:milkwayshipapp/modules/ships/shipuser_page.dart';
+import 'package:milkwayshipapp/modules/ships/shipuser_list_page.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_page.dart';
@@ -69,6 +68,10 @@ class MyApp extends StatelessWidget {
               page: () => RegionDetailPage(),
             ),
           ],
+        ),
+        GetPage(
+          name: appRoute.settingsPage,
+          page: () => SettingsPage(),
         ),
         // 登录页
         GetPage(

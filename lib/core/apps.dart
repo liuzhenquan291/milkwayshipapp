@@ -39,4 +39,6 @@ class AppRoute {
   String accountInfoPage = '/account';
   // 对用户进行操作页
   String userOptionPage = '/userOptions';
+  // 设置
+  String settingsPage = '/settings';
 }

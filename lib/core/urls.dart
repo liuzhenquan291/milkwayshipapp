@@ -40,6 +40,8 @@ class _ApiUrl {
   late final String cornucopiasJoinPath;
 // 设置错过开盆
   late final String cornucopiasMissPath;
+// 聚宝盆综合信息
+  late final String cornucopiaInfosPath;
 
 //// 连接后端 region 应用
   late final String _regionAppPath = '/region';
@@ -73,6 +75,7 @@ class _ApiUrl {
     cornucopiasOpenedPath = "$_shipAppPath/cornucopias/opened/";
     cornucopiasJoinPath = "$_shipAppPath/cornucopias/join/";
     cornucopiasMissPath = "$_shipAppPath/cornucopias/miss/";
+    cornucopiaInfosPath = "$_shipAppPath/cornucopia_infos/";
     regionsCreateListPath = "$_regionAppPath/regions/";
     regionsRetrieveUpdateDestroyPath = "$_regionAppPath/regions/%s/";
     regionsApprovePath = "$_regionAppPath/approve/";
