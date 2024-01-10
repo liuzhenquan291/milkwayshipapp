@@ -1,7 +1,9 @@
+const myIp = "192.168.162.62";
+
 _ApiUrl apiUrl = _ApiUrl();
 
 class _ApiUrl {
-  final baseUrl = "http://192.168.162.51:8008";
+  final baseUrl = "http://$myIp:8008";
 
   //// 连接后端 user 应用
   final _userAppPath = "/user";

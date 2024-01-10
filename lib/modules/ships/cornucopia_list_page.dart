@@ -20,7 +20,10 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
         // ),
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          // title: const Text('返回首页'),
+          // title: const Text(
+          //   '返回首页',
+          //   style: TextStyle(fontSize: 14),
+          // ),
         ),
         body: Column(
           children: [

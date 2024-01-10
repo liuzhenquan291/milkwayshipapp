@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/regions/region_detail_model.dart';
+import 'package:milkwayshipapp/core/models/region_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 // import 'package:dio/dio.dart' as dio;
@@ -10,7 +10,7 @@ import '../../core/urls.dart';
 
 class RegionOptionsController extends GetxController {
   String? regionId;
-  RegionDetailModel? regionData;
+  RegionModel? regionData;
   // String? userDisplayName;
   bool hasUser = false;
   bool hasOptions = false;
@@ -39,7 +39,7 @@ class RegionOptionsController extends GetxController {
     } else {
       final responseData = ResponseData.fromJson(response.data);
       if (responseData.data != null) {
-        regionData = RegionDetailModel.fromJson(responseData.data);
+        regionData = RegionModel.fromJson(responseData.data);
         if (regionData != null) {
           final users = regionData?.shipUsers ?? [];
           if (users.isNotEmpty) {

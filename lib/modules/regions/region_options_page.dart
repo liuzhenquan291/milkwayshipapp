@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/modules/regions/region_options_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -152,7 +153,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                           child: controller.hasUser
                               ? ListView.builder(
                                   itemBuilder: (ctx, index) {
-                                    Map<String, dynamic> tempUser = controller
+                                    ShipUserModel? tempUser = controller
                                         .regionData?.shipUsers?[index];
                                     return Container(
                                       height: 50,
@@ -176,7 +177,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                                               //   );
                                               // },
                                               child: Text(
-                                                tempUser["游戏角色名"],
+                                                tempUser?.mksName ?? "",
                                                 style: const TextStyle(
                                                   color: Colors.blue,
                                                 ),
@@ -184,25 +185,31 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                                             ),
                                           ),
                                           Expanded(
-                                            child: Text(tempUser["用户名"]),
+                                            child: Text(
+                                                tempUser?.user?.displayName ??
+                                                    ""),
                                             // child: Container(
                                             //   child: Text(tempUser["用户昵称"]),
                                             // ),
                                           ),
                                           Expanded(
-                                            child: Text(tempUser["微信昵称"]),
+                                            child: Text(
+                                                tempUser?.user?.wechatName ??
+                                                    ""),
                                             // child: Container(
                                             //   child: Text(tempUser["微信昵称"]),
                                             // ),
                                           ),
                                           Expanded(
-                                            child: Text(tempUser["微信群昵称"]),
+                                            child: Text(
+                                                tempUser?.user?.wcqName ?? ""),
                                             // child: Container(
                                             //   child: Text(tempUser["用户状态"]),
                                             // ),
                                           ),
                                           Expanded(
-                                            child: Text(tempUser["职务"]),
+                                            child: Text(
+                                                tempUser?.regionsRole ?? ""),
                                             // child: Container(
                                             //   child: Text(tempUser["用户状态"]),
                                             // ),
@@ -222,29 +229,6 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                 ),
               ),
               const SizedBox(height: 24),
-              // () {
-              //   return Row();
-              // }(),
-              // Container(
-              //   height: 50,
-              //   child: ListView(
-              //     // mainAxisAlignment: MainAxisAlignment.center,
-              //     // children: controller.hasOptions
-              //     scrollDirection: Axis.horizontal,
-
-              //     children: controller.hasOptions
-              //         ? controller.regionData?.options?.map((option) {
-              //             return ElevatedButton(
-              //               onPressed: () {
-              //                 // 处理按钮点击事件
-              //                 print('${option['name']} button pressed');
-              //               },
-              //               child: Text(option['name'] as String),
-              //             );
-              //           }).toList() as List<Widget>
-              //         : [],
-              //   ),
-              // ),
               Container(
                   height: 200,
                   child: GridView.builder(
@@ -260,9 +244,9 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                         return ElevatedButton(
                           onPressed: () {
                             // 处理按钮点击事件
-                            print('${option['name']} button pressed');
+                            print('${option?.name ?? ""} button pressed');
                           },
-                          child: Text(option['name'] as String),
+                          child: Text(option?.name ?? ""),
                         );
                       })),
             ],

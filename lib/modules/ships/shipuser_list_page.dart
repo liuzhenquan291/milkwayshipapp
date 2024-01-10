@@ -40,8 +40,8 @@ class ShipuserListPage extends GetView<ShipuserListController> {
     return GetBuilder<ShipuserListController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('$userDisplayName, 您好!'),
+          automaticallyImplyLeading: true,
+          // title: const Text('返回首页'),
         ),
         body: Column(
           children: [
@@ -171,12 +171,6 @@ class ShipuserListPage extends GetView<ShipuserListController> {
               ),
             ),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.back();
-          },
-          child: Icon(Icons.arrow_back),
         ),
       );
     });

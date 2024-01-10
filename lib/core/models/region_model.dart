@@ -1,3 +1,4 @@
+import 'package:milkwayshipapp/core/models/options_model.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 
 class RegionModel {
@@ -13,6 +14,9 @@ class RegionModel {
   String desc;
   String createUserId;
   ShipUserModel? commander;
+  String? color;
+  List<ShipUserModel>? shipUsers;
+  List<OptionModel>? options; // TODO: options
 
   RegionModel({
     required this.id,
@@ -27,6 +31,9 @@ class RegionModel {
     required this.desc,
     required this.createUserId,
     this.commander,
+    this.shipUsers,
+    this.options,
+    this.color,
   });
 
   factory RegionModel.fromJson(Map<String, dynamic> json) {
@@ -42,8 +49,15 @@ class RegionModel {
       zoneInfo: json['zone_info'] ?? '',
       desc: json['desc'] ?? '',
       createUserId: json['create_user_id'] ?? '',
+      color: json['color'] ?? "红色",
       commander: json['commander'] != null
           ? ShipUserModel.fromJson(json['commander'] ?? {})
+          : null,
+      shipUsers: json['ship_users'] != null
+          ? ShipUserModel.fromJsonToList(json['ship_users'] ?? [])
+          : null,
+      options: json['options'] != null
+          ? OptionModel.fromJsonToList(json['options'] ?? [])
           : null,
     );
   }

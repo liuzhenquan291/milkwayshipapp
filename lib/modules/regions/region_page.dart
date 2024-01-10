@@ -40,8 +40,8 @@ class RegionPage extends GetView<RegionListController> {
     return GetBuilder<RegionListController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('$userDisplayName, 您好!'),
+          automaticallyImplyLeading: true,
+          // title: const Text('返回首页'),
         ),
         body: Column(
           children: [
@@ -173,12 +173,12 @@ class RegionPage extends GetView<RegionListController> {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.back();
-          },
-          child: Icon(Icons.arrow_back),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     Get.back();
+        //   },
+        //   child: Icon(Icons.arrow_back),
+        // ),
       );
     });
   }

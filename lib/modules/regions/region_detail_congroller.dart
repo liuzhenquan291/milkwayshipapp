@@ -1,14 +1,16 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/regions/region_detail_model.dart';
+import 'package:milkwayshipapp/core/models/region_model.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 // import 'package:dio/dio.dart' as dio;
 
 import '../../core/server.dart';
 import '../../core/urls.dart';
-import '../login/global_controller.dart';
 
 class RegionDetailController extends GetxController {
-  RegionDetailModel? regionData;
+  RegionModel? regionData;
   bool hasRegion = false;
+  bool hasUser = false;
+  final RefreshController refreshController = RefreshController();
 
   @override
   void onInit() {
@@ -28,7 +30,11 @@ class RegionDetailController extends GetxController {
         return;
       } else {
         hasRegion = true;
-        regionData = RegionDetailModel.fromJson(responseData.data);
+        regionData = RegionModel.fromJson(responseData.data);
+        final userCnt = regionData?.shipUsers?.length ?? 0;
+        if (userCnt > 0) {
+          hasUser = true;
+        }
       }
     }
     update();

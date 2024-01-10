@@ -25,7 +25,8 @@ class UserListPage extends GetView<UserListController> {
     return GetBuilder<UserListController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('$userDisplayName, 您好!'),
+          automaticallyImplyLeading: true,
+          // title: const Text('返回首页'),
         ),
         body: Column(
           children: [
@@ -173,12 +174,6 @@ class UserListPage extends GetView<UserListController> {
               ),
             ),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.back();
-          },
-          child: Icon(Icons.arrow_back),
         ),
       );
     });
