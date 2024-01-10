@@ -1,38 +1,15 @@
 // 游戏角色管理页
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
 import '../login/global_controller.dart';
 
-// class UserPage extends StatefulWidget {
-//   UserPage({
-//     Key? key,
-//   }) : super(key: key);
-//   @override
-//   State<StatefulWidget> createState() {
-//     return _UserState();
-//   }
-// }
-
 class ShipuserListPage extends GetView<ShipuserListController> {
   final GlobalController gc = Get.find<GlobalController>();
-  // final UserListController ulct = Get.find<UserListController>();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   setState(() {});
-  // }
-
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   // Get.delete(tag: "user");
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -90,37 +67,47 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                         child: Row(
                           children: [
                             const Expanded(
-                              child: Text("用户名"),
+                              child: Text("用户"),
                               // child: Container(
 
                               // ),
                             ),
                             const Expanded(
-                              child: Text("用户昵称"),
+                              child: Text("微信昵称"),
                               // child: Container(
                               //   child: Text("用户昵称"),
                               // ),
                             ),
                             Expanded(
-                              child: Text("微信昵称"),
+                              child: Text("角色"),
                               // child: Container(
                               //   child: Text("微信昵称"),
                               // ),
                             ),
                             Expanded(
                               child: Container(
-                                child: Text("用户状态"),
+                                child: Text("所属势力"),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: Text("势力职务"),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: Text("角色状态"),
                               ),
                             ),
                           ],
                         ),
                       ),
                       Expanded(
-                        child: controller.shipuserList.isNotEmpty != false
+                        child: controller.hasUsers
                             ? ListView.builder(
                                 itemBuilder: (ctx, index) {
-                                  Map<String, dynamic> tempUser =
-                                      controller.shipuserList[index];
+                                  ShipUserModel? tempUser =
+                                      controller.shipUsers?[index];
                                   // String? username = tempUser["用户名"];
                                   return Container(
                                     height: 50,
@@ -134,34 +121,46 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                     child: Row(
                                       children: [
                                         Expanded(
-                                          child: Text(tempUser["用户名"]),
-                                          // child: Container(
-                                          //   child: Text(tempUser["用户名"]),
-                                          // ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.toNamed(
+                                                appRoute.shipUserOptionsPage,
+                                                parameters: {
+                                                  'userId': tempUser?.id ?? "",
+                                                },
+                                              );
+                                            },
+                                            child: Text(
+                                              tempUser?.user?.displayName ?? "",
+                                              style: const TextStyle(
+                                                color: Colors.blue,
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["用户昵称"]),
-                                          // child: Container(
-                                          //   child: Text(tempUser["用户昵称"]),
-                                          // ),
+                                          child: Text(
+                                            tempUser?.user?.wechatName ?? "",
+                                          ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["微信昵称"]),
-                                          // child: Container(
-                                          //   child: Text(tempUser["微信昵称"]),
-                                          // ),
+                                          child: Text(
+                                            tempUser?.mksName ?? "",
+                                          ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["用户状态"]),
-                                          // child: Container(
-                                          //   child: Text(tempUser["用户状态"]),
-                                          // ),
+                                          child: Text(
+                                              tempUser?.region?.name ?? ""),
+                                        ),
+                                        Expanded(
+                                          child:
+                                              Text(tempUser?.regionsRole ?? ""),
                                         ),
                                       ],
                                     ),
                                   );
                                 },
-                                itemCount: controller.shipuserList.length,
+                                itemCount: controller.shipUsers?.length ?? 0,
                               )
                             : Container(
                                 child: Text("暂无数据"),

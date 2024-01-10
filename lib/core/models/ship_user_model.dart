@@ -1,3 +1,4 @@
+import 'package:milkwayshipapp/core/models/options_model.dart';
 import 'package:milkwayshipapp/core/models/region_model.dart';
 import 'package:milkwayshipapp/core/models/user_model.dart';
 
@@ -21,6 +22,7 @@ class ShipUserModel {
   DateTime? lastOpenRegionTime;
   UserModel? user;
   RegionModel? region;
+  List<OptionModel>? options;
 
   ShipUserModel({
     required this.id,
@@ -42,6 +44,7 @@ class ShipUserModel {
     this.lastOpenRegionTime,
     this.user,
     this.region,
+    this.options,
   });
 
   factory ShipUserModel.fromJson(Map<String, dynamic> json) {
@@ -72,6 +75,9 @@ class ShipUserModel {
           : null,
       user:
           json['user'] != null ? UserModel.fromJson(json['user'] ?? {}) : null,
+      options: json['options'] != null
+          ? OptionModel.fromJsonToList(json['options'] ?? [])
+          : [],
     );
   }
 

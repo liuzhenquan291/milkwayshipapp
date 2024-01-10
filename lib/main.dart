@@ -15,6 +15,7 @@ import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_page.dart';
+import 'package:milkwayshipapp/modules/ships/shipuser_option_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_page.dart';
@@ -27,6 +28,7 @@ import 'modules/regions/region_options_controller.dart';
 import 'modules/regions/region_page.dart';
 import 'modules/regions/regions_new_page.dart';
 import 'modules/root/index_page.dart';
+import 'modules/ships/shipuser_option_page.dart';
 import 'modules/user/user_page.dart';
 
 void main() {
@@ -134,6 +136,12 @@ class MyApp extends StatelessWidget {
             Get.lazyPut(() => ShipuserListController());
           }),
         ),
+        GetPage(
+            name: appRoute.shipUserOptionsPage,
+            page: () => ShipUserOptionPage(),
+            binding: BindingsBuilder(() {
+              Get.lazyPut(() => ShipUserOptionController());
+            })),
         // 聚宝盆管理页
         GetPage(
           name: appRoute.cornucopiaPage,

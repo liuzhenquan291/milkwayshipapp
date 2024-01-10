@@ -17,7 +17,15 @@ class RegionDetailPage extends GetView<RegionDetailController> {
               ? Column(
                   children: [
                     const SizedBox(height: 24),
-                    Text("您当前所属势力: ${controller.regionData?.name}"),
+                    // Text("您当前所属势力: ${controller.regionData?.name}"),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.all(6),
+                      child: Text(
+                        "您当前所属势力: ${controller.regionData?.name}",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
                     Container(
                       color: Colors.black12,
                       padding: const EdgeInsets.all(10),

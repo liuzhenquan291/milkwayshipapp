@@ -25,6 +25,8 @@ class AppRoute {
   String shipUserPage = '/ship/user';
   // 角色编辑页
   String shipUserEditPage = '/ship/userEdit';
+  // 角色操作页
+  String shipUserOptionsPage = '/shipUserOptions';
   // 新建角色页
   String shipUserNewPage = '/ship/userNew';
   // 聚宝盆管理页
