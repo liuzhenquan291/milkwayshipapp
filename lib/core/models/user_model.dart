@@ -1,3 +1,6 @@
+import 'package:milkwayshipapp/core/models/options_model.dart';
+import 'package:milkwayshipapp/core/models/ship_user_model.dart';
+
 class UserModel {
   String id;
   DateTime? lastLogin;
@@ -10,6 +13,8 @@ class UserModel {
   String displayName;
   String wechatName;
   String wcqName;
+  List<ShipUserModel>? shipUsers;
+  List<OptionModel>? options;
 
   UserModel({
     required this.id,
@@ -23,6 +28,8 @@ class UserModel {
     required this.displayName,
     required this.wechatName,
     required this.wcqName,
+    this.shipUsers,
+    this.options,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -40,6 +47,12 @@ class UserModel {
       displayName: json['display_name'] ?? '',
       wechatName: json['wechat_name'] ?? '',
       wcqName: json['wcq_name'] ?? '',
+      shipUsers: json['ship_users'] != null
+          ? ShipUserModel.fromJsonToList(json['ship_users'] ?? [])
+          : [],
+      options: json['options'] != null
+          ? OptionModel.fromJsonToList(json['options'] ?? [])
+          : [],
     );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
+import '../../core/models/user_model.dart';
 
 class UserOptionPage extends GetView<UserOptionController> {
   String? userId;
@@ -17,9 +19,13 @@ class UserOptionPage extends GetView<UserOptionController> {
     return GetBuilder<UserOptionController>(builder: (controller) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
+        // appBar: AppBar(
+        //   automaticallyImplyLeading: false,
+        //   title: Text('${controller.userDisplayName}, 您好!'),
+        // ),
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('${controller.userDisplayName}, 您好!'),
+          automaticallyImplyLeading: true,
+          // title: const Text('返回势力列表'),
         ),
         body: Column(
           children: [
@@ -51,7 +57,7 @@ class UserOptionPage extends GetView<UserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "昵        称:   ${controller.userData?.userDisplayName}"),
+                            "昵        称:   ${controller.userData?.displayName}"),
                       ),
                     ],
                   ),
@@ -103,13 +109,13 @@ class UserOptionPage extends GetView<UserOptionController> {
                           child: Text("游戏角色名"),
                         ),
                         Expanded(
-                          child: Text("用户名"),
+                          child: Text("势力名"),
                         ),
                         Expanded(
-                          child: Text("微信昵称"),
+                          child: Text("势力编号"),
                         ),
                         Expanded(
-                          child: Text("微信群昵称"),
+                          child: Text("司令"),
                         ),
                         Expanded(
                           child: Text("职务"),
@@ -121,7 +127,7 @@ class UserOptionPage extends GetView<UserOptionController> {
                     child: controller.hasUser
                         ? ListView.builder(
                             itemBuilder: (ctx, index) {
-                              Map<String, dynamic> tempUser =
+                              ShipUserModel? tempUser =
                                   controller.userData?.shipUsers?[index];
                               return Container(
                                 height: 50,
@@ -145,7 +151,7 @@ class UserOptionPage extends GetView<UserOptionController> {
                                       //     );
                                       //   },
                                       child: Text(
-                                        tempUser["游戏角色名"],
+                                        tempUser?.mksName ?? "",
                                         style: const TextStyle(
                                           color: Colors.blue,
                                         ),
@@ -153,25 +159,34 @@ class UserOptionPage extends GetView<UserOptionController> {
                                       // ),
                                     ),
                                     Expanded(
-                                      child: Text(tempUser["用户名"]),
+                                      child: Text(
+                                        tempUser?.region?.name ?? "",
+                                      ),
                                       // child: Container(
                                       //   child: Text(tempUser["用户昵称"]),
                                       // ),
                                     ),
                                     Expanded(
-                                      child: Text(tempUser["微信昵称"]),
+                                      child: Text(
+                                        tempUser?.region?.number ?? "",
+                                      ),
                                       // child: Container(
                                       //   child: Text(tempUser["微信昵称"]),
                                       // ),
                                     ),
                                     Expanded(
-                                      child: Text(tempUser["微信群昵称"]),
+                                      child: Text(
+                                        tempUser?.region?.commander?.mksName ??
+                                            "",
+                                      ),
                                       // child: Container(
                                       //   child: Text(tempUser["用户状态"]),
                                       // ),
                                     ),
                                     Expanded(
-                                      child: Text(tempUser["职务"]),
+                                      child: Text(
+                                        tempUser?.regionsRole ?? "",
+                                      ),
                                       // child: Container(
                                       //   child: Text(tempUser["用户状态"]),
                                       // ),
@@ -190,28 +205,29 @@ class UserOptionPage extends GetView<UserOptionController> {
               ),
             ),
             const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              // children: controller.hasOptions
-              children: controller.hasOptions
-                  ? controller.userData?.options?.map((option) {
-                      return ElevatedButton(
-                        onPressed: () {
-                          // 处理按钮点击事件
-                          print('${option['name']} button pressed');
-                        },
-                        child: Text(option['name'] as String),
-                      );
-                    }).toList() as List<Widget>
-                  : [],
+            Container(
+              height: 200,
+              child: GridView.builder(
+                itemCount: controller.userData?.options?.length ?? 0,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 2, // 交叉轴方向上的间距
+                  childAspectRatio: 4,
+                  mainAxisSpacing: 2, // 主轴方向上的间距
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  final option = controller.userData?.options![index];
+                  return ElevatedButton(
+                    onPressed: () {
+                      // 处理按钮点击事件
+                      print('${option?.name ?? ""} button pressed');
+                    },
+                    child: Text(option?.name ?? ""),
+                  );
+                },
+              ),
             ),
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.back();
-          },
-          child: Icon(Icons.arrow_back),
         ),
       );
     });

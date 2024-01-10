@@ -1,3 +1,4 @@
+import 'package:milkwayshipapp/core/models/region_model.dart';
 import 'package:milkwayshipapp/core/models/user_model.dart';
 
 class ShipUserModel {
@@ -19,6 +20,7 @@ class ShipUserModel {
   DateTime? lastJoinRegionTime;
   DateTime? lastOpenRegionTime;
   UserModel? user;
+  RegionModel? region;
 
   ShipUserModel({
     required this.id,
@@ -39,6 +41,7 @@ class ShipUserModel {
     this.lastJoinRegionTime,
     this.lastOpenRegionTime,
     this.user,
+    this.region,
   });
 
   factory ShipUserModel.fromJson(Map<String, dynamic> json) {
@@ -58,6 +61,9 @@ class ShipUserModel {
       mksName: json['mks_name'] ?? '',
       regionsId: json['regions_id'] ?? '',
       regionsRole: json['regions_role'] ?? '',
+      region: json['region'] != null
+          ? RegionModel.fromJson(json['region'] ?? {})
+          : null,
       lastJoinRegionTime: json['last_join_region_time'] != null
           ? DateTime.parse(json['last_join_region_time'])
           : null,

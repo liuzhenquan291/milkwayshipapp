@@ -1,17 +1,18 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/user/user_models.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 // import 'package:dio/dio.dart' as dio;
 
+import '../../core/models/user_model.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
 import '../login/global_controller.dart';
 
 class UserOptionController extends GetxController {
   String? userId;
-  UserListUserModel? userData;
+  // UserListUserModel? userData;
+  UserModel? userData;
   String? userDisplayName;
   bool hasUser = false;
   bool hasOptions = false;
@@ -40,7 +41,7 @@ class UserOptionController extends GetxController {
     } else {
       final responseData = ResponseData.fromJson(response.data);
       if (responseData.data != null) {
-        userData = UserListUserModel.fromJson(responseData.data);
+        userData = UserModel.fromJson(responseData.data);
         if (userData != null) {
           final users = userData?.shipUsers ?? [];
           if (users.isNotEmpty) {

@@ -230,25 +230,27 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
               ),
               const SizedBox(height: 24),
               Container(
-                  height: 200,
-                  child: GridView.builder(
-                      itemCount: controller.regionData?.options?.length ?? 0,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 2, // 交叉轴方向上的间距
-                        childAspectRatio: 4,
-                        mainAxisSpacing: 2, // 主轴方向上的间距
-                      ),
-                      itemBuilder: (BuildContext context, int index) {
-                        final option = controller.regionData?.options![index];
-                        return ElevatedButton(
-                          onPressed: () {
-                            // 处理按钮点击事件
-                            print('${option?.name ?? ""} button pressed');
-                          },
-                          child: Text(option?.name ?? ""),
-                        );
-                      })),
+                height: 200,
+                child: GridView.builder(
+                  itemCount: controller.regionData?.options?.length ?? 0,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 2, // 交叉轴方向上的间距
+                    childAspectRatio: 4,
+                    mainAxisSpacing: 2, // 主轴方向上的间距
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    final option = controller.regionData?.options![index];
+                    return ElevatedButton(
+                      onPressed: () {
+                        // 处理按钮点击事件
+                        print('${option?.name ?? ""} button pressed');
+                      },
+                      child: Text(option?.name ?? ""),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),
