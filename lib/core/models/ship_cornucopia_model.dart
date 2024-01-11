@@ -5,7 +5,7 @@ class ShipCornucopiaModel {
   String number;
   DateTime createdTime;
   DateTime updatedTime;
-  bool deleted;
+  // bool deleted;
   String status;
   DateTime? scheduleTime;
   DateTime? startTime;
@@ -13,6 +13,9 @@ class ShipCornucopiaModel {
   String operateUserId;
   String operateShipUserId;
   String regionsId;
+  String? action;
+  int? appliCount;
+  int? joinedCount;
   ShipUserModel? shipuser;
 
   ShipCornucopiaModel({
@@ -20,7 +23,7 @@ class ShipCornucopiaModel {
     required this.number,
     required this.createdTime,
     required this.updatedTime,
-    required this.deleted,
+    // required this.deleted,
     required this.status,
     this.scheduleTime,
     this.startTime,
@@ -28,6 +31,9 @@ class ShipCornucopiaModel {
     required this.operateUserId,
     required this.operateShipUserId,
     required this.regionsId,
+    this.action,
+    this.appliCount,
+    this.joinedCount,
     this.shipuser,
   });
 
@@ -37,7 +43,7 @@ class ShipCornucopiaModel {
       number: json['number'] ?? '',
       createdTime: DateTime.parse(json['created_time']),
       updatedTime: DateTime.parse(json['updated_time']),
-      deleted: json['deleted'] ?? false,
+      // deleted: json['deleted'] ?? false,
       status: json['status'] ?? '',
       scheduleTime: json['schedule_time'] != null
           ? DateTime.parse(json['schedule_time'])
@@ -50,6 +56,9 @@ class ShipCornucopiaModel {
       operateUserId: json['operate_user_id'] ?? '',
       operateShipUserId: json['operate_ship_user_id'] ?? '',
       regionsId: json['regions_id'] ?? '',
+      action: json['action'] ?? '',
+      appliCount: json['appli_count'] ?? 0,
+      joinedCount: json['joined_count'] ?? 0,
       shipuser: json['shipuser'] != null
           ? ShipUserModel.fromJson(json['shipuser'] ?? {})
           : null,

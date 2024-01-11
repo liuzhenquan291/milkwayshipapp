@@ -1,5 +1,6 @@
 import 'package:milkwayshipapp/core/models/options_model.dart';
 import 'package:milkwayshipapp/core/models/region_model.dart';
+import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
 import 'package:milkwayshipapp/core/models/user_model.dart';
 
 class ShipUserModel {
@@ -20,9 +21,11 @@ class ShipUserModel {
   String regionsRole;
   DateTime? lastJoinRegionTime;
   DateTime? lastOpenRegionTime;
-  UserModel? user;
-  RegionModel? region;
-  List<OptionModel>? options;
+
+  UserModel? user; // 用户
+  RegionModel? region; // 势力
+  List<OptionModel>? options; // 可执行的操作
+  List<ShipCornucopiaModel>? cornucopias; // 开盆/投盆记录
 
   ShipUserModel({
     required this.id,
@@ -45,6 +48,7 @@ class ShipUserModel {
     this.user,
     this.region,
     this.options,
+    this.cornucopias,
   });
 
   factory ShipUserModel.fromJson(Map<String, dynamic> json) {
@@ -77,6 +81,9 @@ class ShipUserModel {
           json['user'] != null ? UserModel.fromJson(json['user'] ?? {}) : null,
       options: json['options'] != null
           ? OptionModel.fromJsonToList(json['options'] ?? [])
+          : [],
+      cornucopias: json['cornucopias'] != null
+          ? ShipCornucopiaModel.fromJsonToList(json['cornucopias'] ?? [])
           : [],
     );
   }

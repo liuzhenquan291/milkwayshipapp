@@ -16,7 +16,7 @@ class AccountPage extends StatelessWidget {
       },
       {
         "title": "势力信息",
-        "app": appRoute.regionOptionsPage,
+        "app": appRoute.regionPage,
       },
       {
         "title": "角色信息",
@@ -24,7 +24,7 @@ class AccountPage extends StatelessWidget {
       },
       {
         "title": "聚宝盆信息",
-        "app": appRoute.cornucopiaPage,
+        "app": appRoute.cornucopiaSelfPage,
       },
       {
         "title": "设置",
@@ -85,13 +85,6 @@ class AccountPage extends StatelessWidget {
                     height: 70,
                     padding: EdgeInsets.only(left: 10),
                     color: Colors.black12,
-                    // decoration: const BoxDecoration(
-                    //   border: Border(
-                    //     top: BorderSide(color: Colors.black26, width: 1),
-                    //     bottom: BorderSide(color: Colors.black26, width: 1),
-                    //   ),
-                    // ),
-                    // padding: EdgeInsets.all(20),
                     child: Row(
                       children: [
                         Expanded(
@@ -99,6 +92,7 @@ class AccountPage extends StatelessWidget {
                             onTap: () {
                               Get.toNamed(
                                 tempUser['app'],
+                                parameters: {'isSelf': 'true'},
                               );
                             },
                             child: Text(

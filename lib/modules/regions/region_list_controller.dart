@@ -3,12 +3,14 @@
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
+import 'package:milkwayshipapp/modules/login/global_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RegionListController extends GetxController {
   final RefreshController refreshController = RefreshController();
   List<Map<String, String>> regionList = [];
   int page = 1;
+  String? isSelf;
 
   @override
   void onInit() {
@@ -17,9 +19,12 @@ class RegionListController extends GetxController {
   }
 
   Future<void> _loadData() async {
+    final gc = Get.find<GlobalController>();
+    String isSelf = Get.parameters['isSelf'] ?? "";
+    String userId = isSelf != "" ? gc.userId as String : "";
     final apiService = Get.find<ApiService>();
-    final response = await apiService
-        .getRequest(apiUrl.regionsCreateListPath, {'page': page});
+    final response = await apiService.getRequest(
+        apiUrl.regionsCreateListPath, {'page': page, 'user_id': userId});
     if (response.statusCode != 200) {
       return;
     }

@@ -107,6 +107,7 @@ class _LoginState extends State<LoginPage> {
         if (responseData.code == 0) {
           UserModel user =
               UserModel.fromJson(responseData.data as Map<String, dynamic>);
+          Get.find<GlobalController>().userId = user.userId as String;
           Get.find<GlobalController>().token = user.token as String;
           Get.find<GlobalController>().username = user.username as String;
           Get.find<GlobalController>().userDisplayName =

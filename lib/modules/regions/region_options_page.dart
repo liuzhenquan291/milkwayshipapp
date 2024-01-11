@@ -6,6 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RegionOptionsPage extends GetView<RegionOptionsController> {
   String? regionId;
+  String? isSelf;
   RegionOptionsPage({
     Key? key,
     regionId,
@@ -241,12 +242,18 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     final option = controller.regionData?.options![index];
-                    return ElevatedButton(
-                      onPressed: () {
-                        // 处理按钮点击事件
-                        print('${option?.name ?? ""} button pressed');
-                      },
-                      child: Text(option?.name ?? ""),
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            // 处理按钮点击事件
+                            print('${option?.name ?? ""} button pressed');
+                          },
+                          child: Text(option?.name ?? ""),
+                        ),
+                      ],
                     );
                   },
                 ),

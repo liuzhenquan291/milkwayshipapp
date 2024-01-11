@@ -4,14 +4,15 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
+import 'package:milkwayshipapp/modules/login/global_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ShipuserListController extends GetxController {
   final RefreshController refreshController = RefreshController();
-  // final ScrollController scrollController = ScrollController();
   List<ShipUserModel>? shipUsers;
   bool hasUsers = false;
   int page = 1;
+  String? isSelf; // 从个人中心-角色信息 跳转时, 会带这个参数
 
   @override
   void onInit() {
@@ -20,9 +21,12 @@ class ShipuserListController extends GetxController {
   }
 
   Future<void> _loadData() async {
+    final gc = Get.find<GlobalController>();
+    isSelf = Get.parameters['isSelf'] ?? "";
+    String userId = isSelf == "" ? "" : gc.userId as String;
     final apiService = Get.find<ApiService>();
-    final response = await apiService
-        .getRequest(apiUrl.shipUserListCreatePath, {'page': page});
+    final response = await apiService.getRequest(
+        apiUrl.shipUserListCreatePath, {'page': page, 'user_id': userId});
 
     if (response.statusCode != 200) {
       // TODO: 弹窗
@@ -36,7 +40,6 @@ class ShipuserListController extends GetxController {
         }
       }
     }
-    // refreshController.refreshCompleted(); // 结束刷新状态
     update();
   }
 

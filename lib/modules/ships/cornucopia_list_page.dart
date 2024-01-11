@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/models/ship_user_model.dart';
 

@@ -11,6 +11,7 @@ import '../login/global_controller.dart';
 
 class UserOptionController extends GetxController {
   String? userId;
+  String? isSelf;
   // UserListUserModel? userData;
   UserModel? userData;
   String? userDisplayName;
@@ -32,7 +33,12 @@ class UserOptionController extends GetxController {
   // dio.Response? response;
   Future<void> _loadData() async {
     final apiService = Get.find<ApiService>();
-    String? userId = Get.parameters['userId'];
+    final gc = Get.find<GlobalController>();
+    String userId = Get.parameters['userId'] ?? "";
+    String isSelf = Get.parameters['isSelf'] ?? "";
+    if (isSelf == 'true') {
+      userId = gc.userId ?? "";
+    }
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userId]);
     final response = await apiService.getRequest(url, null);
 
@@ -54,7 +60,7 @@ class UserOptionController extends GetxController {
         }
       }
     }
-    final GlobalController gc = Get.find<GlobalController>();
+    // final GlobalController gc = Get.find<GlobalController>();
     userDisplayName = gc.userDisplayName as String;
     update();
   }

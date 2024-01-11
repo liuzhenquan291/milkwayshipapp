@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/middlewares.dart';
-import 'package:milkwayshipapp/modules/account/account_page.dart';
-import 'package:milkwayshipapp/modules/instruction/instruction_page.dart';
 import 'package:milkwayshipapp/modules/regions/region_detail_congroller.dart';
 import 'package:milkwayshipapp/modules/regions/region_list_controller.dart';
 import 'package:milkwayshipapp/modules/regions/region_options_page.dart';
@@ -20,7 +18,6 @@ import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_page.dart';
 
-import 'components/marquee.dart';
 import 'core/apps.dart';
 import 'core/utils.dart';
 import 'modules/regions/region_detail_page.dart';
@@ -28,6 +25,8 @@ import 'modules/regions/region_options_controller.dart';
 import 'modules/regions/region_page.dart';
 import 'modules/regions/regions_new_page.dart';
 import 'modules/root/index_page.dart';
+import 'modules/ships/cornucopia_self_controller.dart';
+import 'modules/ships/cornucopia_self_page.dart';
 import 'modules/ships/shipuser_option_page.dart';
 import 'modules/user/user_page.dart';
 
@@ -152,20 +151,14 @@ class MyApp extends StatelessWidget {
             },
           ),
         ),
-        // // 个人中心页
-        // GetPage(
-        //   name: appRoute.accountInfoPage,
-        //   page: () => AccountPage(),
-        //   binding: BindingsBuilder(() {}),
-        // ),
-        // // 攻略页
-        // GetPage(
-        //   name: appRoute.instructionPage,
-        //   page: () => InstructionPage(),
-        //   binding: BindingsBuilder(() {}),
-        // ),
+        GetPage(
+          name: appRoute.cornucopiaSelfPage,
+          page: () => CornucopiaSelfPage(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => CornucopiaSelfController());
+          }),
+        ),
       ],
-      // home: HomePage(),
     );
   }
 }

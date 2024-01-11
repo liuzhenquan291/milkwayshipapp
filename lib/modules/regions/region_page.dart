@@ -19,20 +19,6 @@ import '../login/global_controller.dart';
 
 class RegionPage extends GetView<RegionListController> {
   final GlobalController gc = Get.find<GlobalController>();
-  // final UserListController ulct = Get.find<UserListController>();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   setState(() {});
-  // }
-
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   // Get.delete(tag: "user");
-  // }
 
   @override
   Widget build(BuildContext context) {

@@ -4,14 +4,13 @@ import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../core/apps.dart';
-import '../../core/models/user_model.dart';
-
 class UserOptionPage extends GetView<UserOptionController> {
   String? userId;
+  String? isSelf; // 是否是自己的账号
   UserOptionPage({
     Key? key,
-    regionId,
+    userId,
+    isSelf,
   }) : super(key: key);
 
   @override
@@ -208,12 +207,13 @@ class UserOptionPage extends GetView<UserOptionController> {
             Container(
               height: 200,
               child: GridView.builder(
+                padding: EdgeInsets.all(8),
                 itemCount: controller.userData?.options?.length ?? 0,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 2, // 交叉轴方向上的间距
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5, // 交叉轴方向上的间距
                   childAspectRatio: 4,
-                  mainAxisSpacing: 2, // 主轴方向上的间距
+                  mainAxisSpacing: 5, // 主轴方向上的间距
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   final option = controller.userData?.options![index];
