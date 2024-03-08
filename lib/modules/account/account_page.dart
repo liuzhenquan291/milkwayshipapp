@@ -9,10 +9,10 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = Get.find<GlobalController>();
 
-    final MenuList = [
+    final menuList = [
       {
         "title": "账号信息",
-        "app": appRoute.userOptionPage,
+        "app": appRoute.userEditPage,
       },
       {
         "title": "势力信息",
@@ -43,29 +43,28 @@ class AccountPage extends StatelessWidget {
                 width: 60,
                 height: 50,
                 alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 child: Image.asset(
                   Imgs.avatar,
-                  // 你可以根据需要设置其他属性，比如fit、alignment等
                 ),
               ),
               Container(
                 width: 200,
                 height: 50,
                 alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10),
                 // child: Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "${gc.userDisplayName}, 您好!",
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       "登录账号: ${gc.username}",
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
@@ -77,13 +76,12 @@ class AccountPage extends StatelessWidget {
           Expanded(
               child: ListView.builder(
             itemBuilder: (ctx, index) {
-              Map<String, dynamic> tempUser = MenuList[index];
-              // String? username = tempUser["用户名"];
+              Map<String, dynamic> tempUser = menuList[index];
               return Column(
                 children: [
                   Container(
                     height: 70,
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     color: Colors.black12,
                     child: Row(
                       children: [
@@ -113,7 +111,7 @@ class AccountPage extends StatelessWidget {
                 ],
               );
             },
-            itemCount: MenuList.length,
+            itemCount: menuList.length,
           )),
         ],
       ),

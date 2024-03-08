@@ -6,11 +6,10 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class UserOptionPage extends GetView<UserOptionController> {
   String? userId;
-  String? isSelf; // 是否是自己的账号
+
   UserOptionPage({
     Key? key,
     userId,
-    isSelf,
   }) : super(key: key);
 
   @override
@@ -18,13 +17,10 @@ class UserOptionPage extends GetView<UserOptionController> {
     return GetBuilder<UserOptionController>(builder: (controller) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        // appBar: AppBar(
-        //   automaticallyImplyLeading: false,
-        //   title: Text('${controller.userDisplayName}, 您好!'),
-        // ),
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          // title: const Text('返回势力列表'),
+          title: const Text('用户详情'),
+          centerTitle: true,
         ),
         body: Column(
           children: [
@@ -207,22 +203,21 @@ class UserOptionPage extends GetView<UserOptionController> {
             Container(
               height: 200,
               child: GridView.builder(
-                padding: EdgeInsets.all(8),
-                itemCount: controller.userData?.options?.length ?? 0,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                padding: const EdgeInsets.all(8),
+                itemCount: controller.validOptions.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 5, // 交叉轴方向上的间距
                   childAspectRatio: 4,
                   mainAxisSpacing: 5, // 主轴方向上的间距
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  final option = controller.userData?.options![index];
+                  final option = controller.validOptions[index];
                   return ElevatedButton(
                     onPressed: () {
-                      // 处理按钮点击事件
-                      print('${option?.name ?? ""} button pressed');
+                      controller.onOption(option);
                     },
-                    child: Text(option?.name ?? ""),
+                    child: Text(option.name ?? ""),
                   );
                 },
               ),

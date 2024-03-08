@@ -128,4 +128,14 @@ class ApiService extends GetxService {
       rethrow;
     }
   }
+
+  Future<dio.Response?> deleteRequest(
+      String url, Map<String, dynamic>? data) async {
+    try {
+      final response = await _dio.delete(url, data: data);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

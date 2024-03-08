@@ -1,10 +1,12 @@
 class OptionModel {
   String? code;
   String? name;
+  String? title;
 
   OptionModel.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     name = json['name'];
+    title = json['title'];
   }
 
   static List<OptionModel> fromJsonToList(List<dynamic>? list) {

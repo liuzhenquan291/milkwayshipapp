@@ -1,4 +1,4 @@
-const myIp = "192.168.162.62";
+const myIp = "192.168.1.7";
 
 _ApiUrl apiUrl = _ApiUrl();
 
@@ -17,6 +17,8 @@ class _ApiUrl {
   late final String userApprove;
 // 管理员禁用用户
   late final String userForbidden;
+  // 管理员降级用户
+  late final String userDemote;
 // 设置用户身份
   late final String userSetRole;
 
@@ -66,6 +68,7 @@ class _ApiUrl {
     userRetriveUpdateDestroyPath = "$_userAppPath/users/%s/";
     userApprove = "$_userAppPath/approve/";
     userForbidden = "$_userAppPath/forbidden/";
+    userDemote = "$_userAppPath/demote/";
     userSetRole = "$_userAppPath/set_role/";
     shipUserListCreatePath = "$_shipAppPath/shipusers/";
     shipUserRetriveUpdateDestroyPath = "$_shipAppPath/shipusers/%s/";

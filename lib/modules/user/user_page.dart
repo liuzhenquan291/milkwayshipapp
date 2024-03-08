@@ -26,7 +26,8 @@ class UserListPage extends GetView<UserListController> {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          // title: const Text('返回首页'),
+          title: const Text('用户列表'),
+          centerTitle: true,
         ),
         body: Column(
           children: [
@@ -121,12 +122,9 @@ class UserListPage extends GetView<UserListController> {
                                         Expanded(
                                           child: InkWell(
                                             onTap: () {
-                                              Get.toNamed(
-                                                appRoute.userOptionPage,
-                                                parameters: {
-                                                  'userId': tempUser['userId']
-                                                },
-                                              );
+                                              String userId =
+                                                  tempUser['userId'];
+                                              _tapOnUser(userId);
                                             },
                                             child: Text(
                                               tempUser["用户名"],
@@ -136,12 +134,6 @@ class UserListPage extends GetView<UserListController> {
                                             ),
                                           ),
                                         ),
-                                        // Expanded(
-                                        //   child: Text(tempUser["用户名"]),
-                                        //   // child: Container(
-                                        //   //   child: Text(tempUser["用户名"]),
-                                        //   // ),
-                                        // ),
                                         Expanded(
                                           child: Text(tempUser["用户昵称"]),
                                           // child: Container(
@@ -177,5 +169,22 @@ class UserListPage extends GetView<UserListController> {
         ),
       );
     });
+  }
+
+  // 点击用户名时 跳转
+  // 如果点的是自己进入编辑页
+  // 如果点的是别人进入用户操作页
+  void _tapOnUser(String userId) {
+    final gc = Get.find<GlobalController>();
+    if (userId == gc.userId) {
+      Get.toNamed(
+        appRoute.userEditPage,
+      );
+    } else {
+      Get.toNamed(
+        appRoute.userOptionPage,
+        parameters: {'userId': userId},
+      );
+    }
   }
 }

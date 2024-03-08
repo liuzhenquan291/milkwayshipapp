@@ -14,6 +14,8 @@ import 'package:milkwayshipapp/modules/ships/cornucopia_list_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_option_controller.dart';
+import 'package:milkwayshipapp/modules/user/user_edit_controller.dart';
+import 'package:milkwayshipapp/modules/user/user_edit_page.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_page.dart';
@@ -106,6 +108,14 @@ class MyApp extends StatelessWidget {
             Get.lazyPut(() => UserOptionController());
           }),
         ),
+        // 用户信息编辑页-- 编辑自己;
+        GetPage(
+            name: appRoute.userEditPage,
+            page: () => UserEditPage(),
+            binding: BindingsBuilder(() {
+              Get.lazyPut(() => UserEditController());
+              Get.lazyPut(() => EncrypterController());
+            })),
         // 势力管理页
         GetPage(
           name: appRoute.regionPage,
@@ -135,6 +145,7 @@ class MyApp extends StatelessWidget {
             Get.lazyPut(() => ShipuserListController());
           }),
         ),
+        // 游戏角色操作页
         GetPage(
             name: appRoute.shipUserOptionsPage,
             page: () => ShipUserOptionPage(),
