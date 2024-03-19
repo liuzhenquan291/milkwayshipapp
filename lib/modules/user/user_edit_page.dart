@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/custom_text_field.dart';
+import 'package:sprintf/sprintf.dart';
+import 'package:dio/dio.dart' as dio;
 
 import '../../core/apps.dart';
 import '../../core/models/user_model.dart';
+import '../../core/server.dart';
+import '../../core/urls.dart';
 import '../../core/utils.dart';
+import '../login/global_controller.dart';
 import './user_edit_controller.dart';
 
 class UserEditPage extends StatefulWidget {
@@ -136,20 +141,51 @@ class _UserEditState extends State<UserEditPage> {
                 Row(
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
+                  // TODO: 后续再添加修改信息、修改密码功能
                   children: [
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   child: const Text(
+                    //     '确认修改',
+                    //   ),
+                    // ),
+                    // const SizedBox(width: 16.0),
+                    // ElevatedButton(
+                    //   onPressed: () async {
+                    //     Get.offAllNamed(appRoute.loginPage);
+                    //   },
+                    //   child: const Text(
+                    //     '修改密码',
+                    //   ),
+                    // ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        // // 退出登录
+                        // void onOptionLogoff(OptionModel? option) {
+                        final gc = Get.find<GlobalController>;
+                        Get.find<GlobalController>().userId = "";
+                        Get.find<GlobalController>().token = "";
+                        Get.find<GlobalController>().username = "";
+                        Get.find<GlobalController>().userDisplayName = "";
+                        Get.find<GlobalController>().userRole = "";
+                        Get.find<GlobalController>().isLogin = false;
+
+                        //   Get.offAllNamed(appRoute.rootPage);
+                        // }
+                        Get.offAllNamed(appRoute.loginPage);
+                      },
                       child: const Text(
-                        '确认修改',
+                        '退出登录',
                       ),
                     ),
                     const SizedBox(width: 16.0),
                     ElevatedButton(
                       onPressed: () async {
+                        onOptionLogout(controller.userData as UserModel);
                         Get.offAllNamed(appRoute.loginPage);
                       },
                       child: const Text(
-                        '修改密码',
+                        '注销账号',
                       ),
                     ),
                   ],
@@ -160,5 +196,67 @@ class _UserEditState extends State<UserEditPage> {
         ),
       );
     });
+  }
+
+// 注销账号
+  void onOptionLogout(UserModel userData) {
+    final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userData.id]);
+    _defaultDeleteOption(userData, "注销账号", url, null);
+  }
+
+  void _defaultDeleteOption(UserModel userData, String title, String optionUrl,
+      Map<String, dynamic>? payload) {
+    Get.defaultDialog(
+      title: title,
+      middleText: '确定要执行该操作吗？',
+      textConfirm: '确认',
+      textCancel: '取消',
+      confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
+      onCancel: () {
+        Get.back();
+      },
+      onConfirm: () {
+        final apiService = Get.find<ApiService>();
+        late Map<String, dynamic> myPayload;
+        if (payload != null) {
+          myPayload = payload;
+        }
+
+        myPayload["user_id"] = userData.id;
+        myPayload["user_updated_time"] = userData.updatedTime;
+
+        // Map<String, dynamic> =
+        // final Map<String, dynamic> payload = {
+        //   "user_id": userId,
+        //   "user_updated_time": userData?.updatedTime,
+        // };
+        final response =
+            apiService.deleteRequest(optionUrl, myPayload) as dio.Response;
+        final responseData = ResponseData.fromJson(response.data);
+        if (responseData.code != 0) {
+          Get.defaultDialog(
+            title: '操作失败',
+            content: Text(responseData.message as String),
+            confirm: TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text('操作失败'),
+            ),
+          );
+        } else {
+          Get.defaultDialog(
+            title: '操作成功',
+            // content: Text(""),
+            confirm: TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text('操作成功'),
+            ),
+          );
+        }
+      },
+    );
   }
 }

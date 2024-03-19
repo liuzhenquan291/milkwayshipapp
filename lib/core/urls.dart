@@ -1,4 +1,4 @@
-const myIp = "192.168.1.7";
+const myIp = "192.168.162.64";
 
 _ApiUrl apiUrl = _ApiUrl();
 
