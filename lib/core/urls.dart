@@ -58,9 +58,7 @@ class _ApiUrl {
 // 管理员审核通过新势力申请
   late final String regionsApprovePath;
 // 设置势力管理员
-  late final String regionsAddManagerPath;
-// 移除势力管理员
-  late final String regionsRemoveManagerPath;
+  late final String regionsSetManagerPath;
 
   _ApiUrl() {
     userLoginPath = "$_userAppPath/login/";
@@ -84,8 +82,7 @@ class _ApiUrl {
     regionsCreateListPath = "$_regionAppPath/regions/";
     regionsRetrieveUpdateDestroyPath = "$_regionAppPath/regions/%s/";
     regionsApprovePath = "$_regionAppPath/approve/";
-    regionsAddManagerPath = "$_regionAppPath/add_manager/";
-    regionsRemoveManagerPath = "$_regionAppPath/remove_manager/";
+    regionsSetManagerPath = "$_regionAppPath/set_manager/";
     regionByUser = "$_regionAppPath/regions/byuser/";
   }
 }

@@ -233,27 +233,21 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
               Container(
                 height: 200,
                 child: GridView.builder(
-                  itemCount: controller.regionData?.options?.length ?? 0,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 2, // 交叉轴方向上的间距
+                  padding: const EdgeInsets.all(8),
+                  itemCount: controller.validOptions.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5, // 交叉轴方向上的间距
                     childAspectRatio: 4,
-                    mainAxisSpacing: 2, // 主轴方向上的间距
+                    mainAxisSpacing: 5, // 主轴方向上的间距
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    final option = controller.regionData?.options![index];
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // 处理按钮点击事件
-                            print('${option?.name ?? ""} button pressed');
-                          },
-                          child: Text(option?.name ?? ""),
-                        ),
-                      ],
+                    final option = controller.validOptions[index];
+                    return ElevatedButton(
+                      onPressed: () {
+                        controller.onOption(option);
+                      },
+                      child: Text(option.name ?? ""),
                     );
                   },
                 ),
