@@ -18,7 +18,8 @@ class ShipuserListPage extends GetView<ShipuserListController> {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          // title: const Text('返回首页'),
+          title: const Text('角色列表'),
+          centerTitle: true,
         ),
         body: Column(
           children: [

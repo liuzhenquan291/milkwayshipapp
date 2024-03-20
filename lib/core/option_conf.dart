@@ -1,10 +1,8 @@
 // 本文件将所有可执行操作保存下来, 且配置各个页面的可用操作
-
-final optionConf = _OptionsConf();
-
-class _OptionsConf {
-  final UserOptionConf userOptionConf = UserOptionConf();
-}
+final UserOptionConf userOptionConf = UserOptionConf();
+final RegionsOptionConf regionsOptionConf = RegionsOptionConf();
+final ShipuserOptionConf shipuserOptionConf = ShipuserOptionConf();
+final CornucopaOptionConf cornucopaOptionConf = CornucopaOptionConf();
 
 // 对用户可执行的操作
 class UserOptionConf {
@@ -60,7 +58,8 @@ class RegionsOptionConf {
   static const String UPDATE = 'update';
   static const String SET_MANAGER = 'set_manager';
   static const String JOIN = 'join';
-  // 用户管理页可执行操作
+
+  // 势力管理页可执行操作
   static const List<String> _userOptionPageOptions = [
     APPROVE,
     REFUSE,
@@ -78,3 +77,43 @@ class RegionsOptionConf {
     return _userEditPageOptions.contains(option);
   }
 }
+
+// 对角色可执行的操作
+class ShipuserOptionConf {
+  // APPROVE = 'approve'  # 管理员审核通过新角色
+  // DEMOTE = 'demote'  # 降为不活跃角色
+  // FORBIDDEN = 'forbidden'  # 禁用角色
+  // LOGOUT = 'logout'  # 用户注销
+  // DESIGNATE = 'designate'  # 任命
+  // UPDATE = 'update'  # 编辑信息
+  // REMARK = 'remark'  # 标记
+  static const APPROVE = 'approve';
+  static const DEMOTE = 'demote';
+  static const FORBIDDEN = 'forbidden';
+  static const LOGOUT = 'logout';
+  static const DESIGNATE = 'designate';
+  static const UPDATE = 'update';
+  static const REMARK = 'remark';
+
+  // 角色管理页可执行操作
+  static const List<String> _userOptionPageOptions = [
+    APPROVE,
+    DEMOTE,
+    FORBIDDEN,
+    DESIGNATE,
+    REMARK,
+  ];
+  // 角色编辑页可执行操作
+  static const List<String> _userEditPageOptions = [UPDATE, LOGOUT];
+
+  bool optionInOptionPage(String option) {
+    return _userOptionPageOptions.contains(option);
+  }
+
+  bool optionInEditPage(String option) {
+    return _userEditPageOptions.contains(option);
+  }
+}
+
+// 对聚宝盆可执行的操作
+class CornucopaOptionConf {}

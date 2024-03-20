@@ -49,12 +49,11 @@ class RegionOptionsController extends GetxController {
             hasUser = true;
           }
           final options = regionData?.options ?? [];
-          print('options: $options');
           if (options.isNotEmpty) {
             for (OptionModel option in options) {
               String code = option.code ?? "";
 
-              if (optionConf.userOptionConf.optionInOptionPage(code)) {
+              if (regionsOptionConf.optionInOptionPage(code)) {
                 validOptions.add(option);
                 hasOptions = true;
               }
@@ -172,7 +171,7 @@ class RegionOptionsController extends GetxController {
       textCancel: '取消',
       confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
       onCancel: () {
-        Get.back();
+        // Get.back();
       },
       onConfirm: () {
         final apiService = Get.find<ApiService>();
@@ -223,7 +222,7 @@ class RegionOptionsController extends GetxController {
       textCancel: '取消',
       confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
       onCancel: () {
-        Get.back();
+        // Get.back();
       },
       onConfirm: () {
         final apiService = Get.find<ApiService>();

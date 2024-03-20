@@ -54,7 +54,7 @@ class UserOptionController extends GetxController {
           for (OptionModel option in options) {
             String code = option.code ?? "";
 
-            if (optionConf.userOptionConf.optionInOptionPage(code)) {
+            if (userOptionConf.optionInOptionPage(code)) {
               validOptions.add(option);
               hasOptions = true;
             }
@@ -164,7 +164,7 @@ class UserOptionController extends GetxController {
       textCancel: '取消',
       confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
       onCancel: () {
-        Get.back();
+        // Get.back();
       },
       onConfirm: () {
         final apiService = Get.find<ApiService>();
@@ -220,7 +220,7 @@ class UserOptionController extends GetxController {
       textCancel: '取消',
       confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
       onCancel: () {
-        Get.back();
+        // Get.back();
       },
       onConfirm: () {
         final apiService = Get.find<ApiService>();

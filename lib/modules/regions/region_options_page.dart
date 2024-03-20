@@ -20,7 +20,8 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          title: const Text('返回势力列表'),
+          title: const Text('势力信息'),
+          centerTitle: true,
         ),
         body: Container(
           child: Column(

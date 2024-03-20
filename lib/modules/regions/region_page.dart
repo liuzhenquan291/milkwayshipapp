@@ -27,7 +27,8 @@ class RegionPage extends GetView<RegionListController> {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          // title: const Text('返回首页'),
+          title: const Text('势力列表'),
+          centerTitle: true,
         ),
         body: Column(
           children: [

@@ -20,7 +20,8 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
         // ),
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          // title: const Text('返回势力列表'),
+          title: const Text('角色信息'),
+          centerTitle: true,
         ),
         body: Column(
           children: [
@@ -128,21 +129,21 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
             Container(
               height: 200,
               child: GridView.builder(
-                itemCount: controller.shipUserData?.options?.length ?? 0,
+                padding: const EdgeInsets.all(8),
+                itemCount: controller.validOptions.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 2, // 交叉轴方向上的间距
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5, // 交叉轴方向上的间距
                   childAspectRatio: 4,
-                  mainAxisSpacing: 2, // 主轴方向上的间距
+                  mainAxisSpacing: 5, // 主轴方向上的间距
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  final option = controller.shipUserData?.options![index];
+                  final option = controller.validOptions[index];
                   return ElevatedButton(
                     onPressed: () {
-                      // 处理按钮点击事件
-                      print('${option?.name ?? ""} button pressed');
+                      controller.onOption(option);
                     },
-                    child: Text(option?.name ?? ""),
+                    child: Text(option.name ?? ""),
                   );
                 },
               ),

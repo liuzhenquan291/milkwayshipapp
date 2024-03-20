@@ -30,10 +30,14 @@ class _ApiUrl {
   late final String shipUserRetriveUpdateDestroyPath;
 // 管理员审核通过游戏角色
   late final String shipUserApprovePath;
+// 设置为不活跃角色
+  late final String shipUserDemotePath;
 // 管理员禁用游戏角色
   late final String shipUserForbiddenPath;
 // 管理员设置游戏角色身份
-  late final String shipUserSetRolePath;
+  late final String shipUserDesignatePath;
+  // 设置用户标签
+  late final String shipUserRemarkPath;
 // 新建开盆计划、开盆计划列表
   late final String cornucopiasListCreatePath;
 // 开盆计划  详情、更新、废除
@@ -71,8 +75,10 @@ class _ApiUrl {
     shipUserListCreatePath = "$_shipAppPath/shipusers/";
     shipUserRetriveUpdateDestroyPath = "$_shipAppPath/shipusers/%s/";
     shipUserApprovePath = "$_shipAppPath/approve/";
+    shipUserDemotePath = "$_shipAppPath/demote/";
     shipUserForbiddenPath = "$_shipAppPath/forbidden/";
-    shipUserSetRolePath = "$_shipAppPath/set_role/";
+    shipUserDesignatePath = "$_shipAppPath/designate/";
+    shipUserRemarkPath = "$_shipAppPath/remark/";
     cornucopiasListCreatePath = "$_shipAppPath/cornucopias/";
     cornucopiasRetrieveUpdateDestroyPath = "$_shipAppPath/cornucopias/%s/";
     cornucopiasOpenedPath = "$_shipAppPath/cornucopias/opened/";
