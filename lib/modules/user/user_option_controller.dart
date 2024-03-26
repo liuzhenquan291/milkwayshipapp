@@ -36,7 +36,7 @@ class UserOptionController extends GetxController {
   // dio.Response? response;
   Future<void> _loadData() async {
     final apiService = Get.find<ApiService>();
-    String userId = Get.parameters['userId'] ?? "";
+    userId = Get.parameters['userId'] ?? "";
 
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userId]);
     final response = await apiService.getRequest(url, null);
@@ -110,9 +110,9 @@ class UserOptionController extends GetxController {
   void onOptionApprove(OptionModel? option) {
     final Map<String, dynamic> myPayload = {
       "refused": false,
-      "refused_reason": null,
+      "refused_reason": "",
     };
-    _defaultPostOption(option?.title ?? "", apiUrl.userDemote, myPayload);
+    _defaultPostOption(option?.title ?? "", apiUrl.userApprove, myPayload);
   }
 
   void onOptionRefuse(OptionModel? option) {
@@ -167,10 +167,13 @@ class UserOptionController extends GetxController {
         // Get.back();
       },
       onConfirm: () {
+        Get.back();
         final apiService = Get.find<ApiService>();
         late Map<String, dynamic> myPayload;
         if (payload != null) {
           myPayload = payload;
+        } else {
+          myPayload = {};
         }
 
         myPayload["user_id"] = userId;
@@ -223,6 +226,7 @@ class UserOptionController extends GetxController {
         // Get.back();
       },
       onConfirm: () {
+        Get.back();
         final apiService = Get.find<ApiService>();
         late Map<String, dynamic> myPayload;
         if (payload != null) {

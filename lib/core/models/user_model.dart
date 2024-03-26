@@ -6,13 +6,16 @@ class UserModel {
   DateTime? lastLogin;
   String number;
   DateTime createdTime;
-  DateTime updatedTime;
+  String updatedTime;
   bool deleted;
   String status;
+  String statusName;
   String username;
   String displayName;
   String wechatName;
   String wcqName;
+  String role;
+  String roleName;
   List<ShipUserModel>? shipUsers;
   List<OptionModel>? options;
 
@@ -24,10 +27,13 @@ class UserModel {
     required this.updatedTime,
     required this.deleted,
     required this.status,
+    required this.statusName,
     required this.username,
     required this.displayName,
     required this.wechatName,
     required this.wcqName,
+    required this.role,
+    required this.roleName,
     this.shipUsers,
     this.options,
   });
@@ -40,13 +46,16 @@ class UserModel {
           : null,
       number: json['number'] ?? '',
       createdTime: DateTime.parse(json['created_time']),
-      updatedTime: DateTime.parse(json['updated_time']),
+      updatedTime: json['updated_time'] ?? "",
       deleted: json['deleted'] ?? false,
       status: json['status'] ?? '',
+      statusName: json['status_name'] ?? '',
       username: json['username'] ?? '',
       displayName: json['display_name'] ?? '',
       wechatName: json['wechat_name'] ?? '',
       wcqName: json['wcq_name'] ?? '',
+      role: json['role'] ?? '',
+      roleName: json['role_name'] ?? '',
       shipUsers: json['ship_users'] != null
           ? ShipUserModel.fromJsonToList(json['ship_users'] ?? [])
           : [],
@@ -54,5 +63,16 @@ class UserModel {
           ? OptionModel.fromJsonToList(json['options'] ?? [])
           : [],
     );
+  }
+
+  static List<UserModel> fromJsonToList(List<dynamic>? list) {
+    if (list == null || list.isEmpty) {
+      return [];
+    }
+    List<UserModel> lst = [];
+    list.forEach((element) {
+      lst.add(UserModel.fromJson(element));
+    });
+    return lst;
   }
 }

@@ -59,7 +59,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                         ),
                         Expanded(
                           child: Text(
-                              "司令: ${controller.regionData?.commander ?? ''}"),
+                              "司令: ${controller.regionData?.commander?.mksName ?? ''}"),
                         ),
                       ],
                     ),
@@ -211,7 +211,8 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                                tempUser?.regionsRole ?? ""),
+                                                tempUser?.regionsRoleName ??
+                                                    ""),
                                             // child: Container(
                                             //   child: Text(tempUser["用户状态"]),
                                             // ),

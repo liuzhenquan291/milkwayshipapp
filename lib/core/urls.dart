@@ -1,4 +1,4 @@
-const myIp = "192.168.162.64";
+const myIp = "192.168.162.104";
 
 _ApiUrl apiUrl = _ApiUrl();
 
@@ -21,6 +21,8 @@ class _ApiUrl {
   late final String userDemote;
 // 设置用户身份
   late final String userSetRole;
+// 获取用户的身份和对用户可执行的操作
+  late final String userTotalOptions;
 
 //// 连接后端 ship 应用
   late final String _shipAppPath = "/ship";
@@ -39,7 +41,7 @@ class _ApiUrl {
   // 设置用户标签
   late final String shipUserRemarkPath;
 // 新建开盆计划、开盆计划列表
-  late final String cornucopiasListCreatePath;
+  late final String cornListCreatePath;
 // 开盆计划  详情、更新、废除
   late final String cornucopiasRetrieveUpdateDestroyPath;
 // 设置开盆计划已开盆
@@ -72,6 +74,7 @@ class _ApiUrl {
     userForbidden = "$_userAppPath/forbidden/";
     userDemote = "$_userAppPath/demote/";
     userSetRole = "$_userAppPath/set_role/";
+    userTotalOptions = "$_userAppPath/total_options/";
     shipUserListCreatePath = "$_shipAppPath/shipusers/";
     shipUserRetriveUpdateDestroyPath = "$_shipAppPath/shipusers/%s/";
     shipUserApprovePath = "$_shipAppPath/approve/";
@@ -79,7 +82,7 @@ class _ApiUrl {
     shipUserForbiddenPath = "$_shipAppPath/forbidden/";
     shipUserDesignatePath = "$_shipAppPath/designate/";
     shipUserRemarkPath = "$_shipAppPath/remark/";
-    cornucopiasListCreatePath = "$_shipAppPath/cornucopias/";
+    cornListCreatePath = "$_shipAppPath/cornucopias/";
     cornucopiasRetrieveUpdateDestroyPath = "$_shipAppPath/cornucopias/%s/";
     cornucopiasOpenedPath = "$_shipAppPath/cornucopias/opened/";
     cornucopiasJoinPath = "$_shipAppPath/cornucopias/join/";

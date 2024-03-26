@@ -35,6 +35,8 @@ class AppRoute {
   String cornucopiaNewPage = '/ship/cornucopiaNew';
   // 编辑开盆计划页
   String cornucopiaEditPage = '/ship/cornucopiaEdit';
+  // 编辑开盆计划页
+  String cornucopiaOptionPage = '/ship/cornucopiaOption';
   // 自己的所有角色的开盆情况
   String cornucopiaSelfPage = '/ship/cornucopiaSelf';
   // 攻略页

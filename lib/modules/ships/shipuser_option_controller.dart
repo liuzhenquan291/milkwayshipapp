@@ -32,7 +32,7 @@ class ShipUserOptionController extends GetxController {
   // dio.Response? response;
   Future<void> _loadData() async {
     final apiService = Get.find<ApiService>();
-    String? shipUserId = Get.parameters['userId'];
+    shipUserId = Get.parameters['shipuser_id'];
     final url = sprintf(apiUrl.shipUserRetriveUpdateDestroyPath, [shipUserId]);
     final response = await apiService.getRequest(url, null);
 
@@ -102,6 +102,13 @@ class ShipUserOptionController extends GetxController {
       // case UserOptionConf.LOGOFF:
       //   onOptionLogoff(option);
       //   break;
+      // 创建开盆计划
+      case ShipuserOptionConf.OPEN_CORNUCOPIA:
+        onOptionOpenCornucopia(option);
+        break;
+      case ShipuserOptionConf.JOIN_CORNUCOPIA:
+        onOptionJoinCornucopia(option);
+        break;
     }
   }
 
@@ -131,7 +138,7 @@ class ShipUserOptionController extends GetxController {
   // 编辑信息
   void onOptionUpdate(OptionModel? option) {
     Get.toNamed(appRoute.userEditPage,
-        parameters: {"user_id": shipUserId ?? ""});
+        parameters: {"shipuser_id": shipUserId ?? ""});
   }
 
   // TODO: 标签
@@ -152,6 +159,15 @@ class ShipUserOptionController extends GetxController {
   //   Get.offAllNamed(appRoute.rootPage);
   // }
 
+  void onOptionOpenCornucopia(OptionModel? option) {
+    Get.toNamed(appRoute.cornucopiaNewPage,
+        parameters: {"shipuser_id": shipUserId ?? ""});
+  }
+
+  void onOptionJoinCornucopia(OptionModel? option) {
+    _defaultPostOption(option?.title ?? "", apiUrl.cornListCreatePath, null);
+  }
+
   void _defaultPostOption(
       String title, String optionUrl, Map<String, dynamic>? payload) {
     Get.defaultDialog(
@@ -170,8 +186,8 @@ class ShipUserOptionController extends GetxController {
           myPayload = payload;
         }
 
-        myPayload["user_id"] = shipUserId;
-        myPayload["user_updated_time"] = shipUserData?.updatedTime;
+        myPayload["ship_user_id"] = shipUserId;
+        myPayload["updated_time"] = shipUserData?.updatedTime;
 
         // Map<String, dynamic> =
         // final Map<String, dynamic> payload = {

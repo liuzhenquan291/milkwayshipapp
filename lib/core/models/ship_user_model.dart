@@ -14,11 +14,13 @@ class ShipUserModel {
   DateTime updatedTime;
   bool deleted;
   String status;
+  String statusName;
   String userId;
   String mksUuid;
   String mksName;
   String regionsId;
   String regionsRole;
+  String? regionsRoleName;
   DateTime? lastJoinRegionTime;
   DateTime? lastOpenRegionTime;
 
@@ -38,11 +40,13 @@ class ShipUserModel {
     required this.updatedTime,
     required this.deleted,
     required this.status,
+    required this.statusName,
     required this.userId,
     required this.mksUuid,
     required this.mksName,
     required this.regionsId,
     required this.regionsRole,
+    this.regionsRoleName,
     this.lastJoinRegionTime,
     this.lastOpenRegionTime,
     this.user,
@@ -63,11 +67,13 @@ class ShipUserModel {
       updatedTime: DateTime.parse(json['updated_time']),
       deleted: json['deleted'] ?? false,
       status: json['status'] ?? '',
+      statusName: json['status_name'] ?? '',
       userId: json['user_id'] ?? '',
       mksUuid: json['mks_uuid'] ?? '',
       mksName: json['mks_name'] ?? '',
       regionsId: json['regions_id'] ?? '',
       regionsRole: json['regions_role'] ?? '',
+      regionsRoleName: json['regions_role_name'] ?? '',
       region: json['region'] != null
           ? RegionModel.fromJson(json['region'] ?? {})
           : null,

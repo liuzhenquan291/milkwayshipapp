@@ -34,7 +34,7 @@ class UserOptionPage extends GetView<UserOptionController> {
               ),
             ),
             Container(
-              height: 100,
+              height: 125,
               padding: EdgeInsets.all(10),
               color: Colors.black12,
               alignment: Alignment.centerLeft,
@@ -69,6 +69,14 @@ class UserOptionPage extends GetView<UserOptionController> {
                       Expanded(
                         child: Text(
                             "群  昵  称:   ${controller.userData?.wcqName ?? ''}"),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                            "用户状态:   ${controller.userData?.statusName ?? ''}"),
                       ),
                     ],
                   ),
@@ -180,7 +188,7 @@ class UserOptionPage extends GetView<UserOptionController> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        tempUser?.regionsRole ?? "",
+                                        tempUser?.regionsRoleName ?? "",
                                       ),
                                       // child: Container(
                                       //   child: Text(tempUser["用户状态"]),

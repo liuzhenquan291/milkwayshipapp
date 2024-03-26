@@ -84,7 +84,7 @@ class _RegisterState extends State<RegisterPage> {
               const SizedBox(height: 16.0),
               TextField(
                 controller: displayNameController,
-                obscureText: true,
+                // obscureText: true,
                 decoration: const InputDecoration(
                   labelText: '用户昵称',
                 ),
@@ -92,7 +92,7 @@ class _RegisterState extends State<RegisterPage> {
               const SizedBox(height: 16.0),
               TextField(
                 controller: wxDisNameController,
-                obscureText: true,
+                // obscureText: true,
                 decoration: const InputDecoration(
                   labelText: '微信昵称',
                 ),
@@ -100,7 +100,7 @@ class _RegisterState extends State<RegisterPage> {
               const SizedBox(height: 16.0),
               TextField(
                 controller: wxGNameController,
-                obscureText: true,
+                // obscureText: true,
                 decoration: const InputDecoration(
                   labelText: '微信群昵称',
                 ),

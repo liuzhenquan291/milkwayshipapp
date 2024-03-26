@@ -79,10 +79,14 @@ class ApiService extends GetxService {
           } else if (dioError.response?.statusCode != 200) {
             String message = '服务器错误...';
             try {
-              final data = dioError.response?.data as Map<String, dynamic>;
-              message = data['message'];
+              final data = dioError.response?.data;
+              if (data == null) {
+                message = "";
+              } else {
+                message = data['message'];
+              }
             } catch (e) {
-              print(e);
+              rethrow;
             }
             print(message);
             Get.defaultDialog(
@@ -119,7 +123,7 @@ class ApiService extends GetxService {
     }
   }
 
-  Future<dio.Response?> postRequest(
+  Future<dio.Response> postRequest(
       String url, Map<String, dynamic>? data) async {
     try {
       final response = await _dio.post(url, data: data);

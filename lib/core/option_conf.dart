@@ -87,6 +87,8 @@ class ShipuserOptionConf {
   // DESIGNATE = 'designate'  # 任命
   // UPDATE = 'update'  # 编辑信息
   // REMARK = 'remark'  # 标记
+  // OPEN_CORNUCOPIA 创建开盆计划
+  // JOIN_CORNUCOPIA 加入开盆计划
   static const APPROVE = 'approve';
   static const DEMOTE = 'demote';
   static const FORBIDDEN = 'forbidden';
@@ -94,6 +96,8 @@ class ShipuserOptionConf {
   static const DESIGNATE = 'designate';
   static const UPDATE = 'update';
   static const REMARK = 'remark';
+  static const OPEN_CORNUCOPIA = 'open_cornucopia';
+  static const JOIN_CORNUCOPIA = 'join_cornucopia';
 
   // 角色管理页可执行操作
   static const List<String> _userOptionPageOptions = [
@@ -102,6 +106,8 @@ class ShipuserOptionConf {
     FORBIDDEN,
     DESIGNATE,
     REMARK,
+    OPEN_CORNUCOPIA,
+    JOIN_CORNUCOPIA,
   ];
   // 角色编辑页可执行操作
   static const List<String> _userEditPageOptions = [UPDATE, LOGOUT];
@@ -116,4 +122,19 @@ class ShipuserOptionConf {
 }
 
 // 对聚宝盆可执行的操作
-class CornucopaOptionConf {}
+class CornucopaOptionConf {
+  // DISUSE = 'disuse'  # 废除开盆计划
+  // OPEN = 'open'  # 执行开盆
+  // END = 'end'  # 开盆7天后自动结束
+  // JOIN = 'join'  # 参盆
+  static const DISUSE = 'disuse';
+  static const OPEN = 'open';
+  static const END = 'end';
+  static const JOIN = 'join';
+
+  static const List<String> _all = [DISUSE, OPEN, END, JOIN];
+
+  bool optionIsValid(String option) {
+    return _all.contains(option);
+  }
+}

@@ -4,17 +4,11 @@ import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
+import '../../core/models/user_model.dart';
 import '../login/global_controller.dart';
 
-// class UserPage extends StatefulWidget {
-//   UserPage({
-//     Key? key,
-//   }) : super(key: key);
-//   @override
-//   State<StatefulWidget> createState() {
-//     return _UserState();
-//   }
-// }
+const userNameExpandedFlex = 5;
+const otherExpandedFlex = 3;
 
 class UserListPage extends GetView<UserListController> {
   final GlobalController gc = Get.find<GlobalController>();
@@ -38,7 +32,8 @@ class UserListPage extends GetView<UserListController> {
                   // width: double.infinity,
                   padding: const EdgeInsets.all(16.0),
                   color: Colors.black12,
-                  child: const Text("您的身份是: 管理员, 您可对用户审核、禁用、设置管理员"),
+                  child: Text(
+                      "您的身份是: ${controller.userRole}, 您可对用户执行${controller.totalOptions}等操作。"),
                 ),
               )
             ]),
@@ -74,39 +69,35 @@ class UserListPage extends GetView<UserListController> {
                           ),
                         ),
                         child: Row(
-                          children: [
-                            const Expanded(
-                              child: Text("用户名"),
-                              // child: Container(
-
-                              // ),
-                            ),
-                            const Expanded(
-                              child: Text("用户昵称"),
-                              // child: Container(
-                              //   child: Text("用户昵称"),
-                              // ),
+                          children: const [
+                            Expanded(
+                              flex: userNameExpandedFlex,
+                              child: Text("手机号"),
                             ),
                             Expanded(
+                              flex: otherExpandedFlex,
+                              child: Text("昵称"),
+                            ),
+                            Expanded(
+                              flex: otherExpandedFlex,
                               child: Text("微信昵称"),
-                              // child: Container(
-                              //   child: Text("微信昵称"),
-                              // ),
                             ),
                             Expanded(
-                              child: Container(
-                                child: Text("用户状态"),
-                              ),
+                              flex: otherExpandedFlex,
+                              child: Text("用户状态"),
+                            ),
+                            Expanded(
+                              flex: otherExpandedFlex,
+                              child: Text("用户身份"),
                             ),
                           ],
                         ),
                       ),
                       Expanded(
-                        child: controller.userList.isNotEmpty != false
+                        child: controller.hasUser
                             ? ListView.builder(
                                 itemBuilder: (ctx, index) {
-                                  Map<String, dynamic> tempUser =
-                                      controller.userList[index];
+                                  UserModel user = controller.userList[index];
                                   // String? username = tempUser["用户名"];
                                   return Container(
                                     height: 50,
@@ -120,14 +111,14 @@ class UserListPage extends GetView<UserListController> {
                                     child: Row(
                                       children: [
                                         Expanded(
+                                          flex: userNameExpandedFlex,
                                           child: InkWell(
                                             onTap: () {
-                                              String userId =
-                                                  tempUser['userId'];
+                                              String userId = user.id;
                                               _tapOnUser(userId);
                                             },
                                             child: Text(
-                                              tempUser["用户名"],
+                                              user.username,
                                               style: const TextStyle(
                                                 color: Colors.blue,
                                               ),
@@ -135,22 +126,22 @@ class UserListPage extends GetView<UserListController> {
                                           ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["用户昵称"]),
-                                          // child: Container(
-                                          //   child: Text(tempUser["用户昵称"]),
-                                          // ),
+                                          flex: otherExpandedFlex,
+                                          child: Text(user.displayName),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["微信昵称"]),
-                                          // child: Container(
-                                          //   child: Text(tempUser["微信昵称"]),
-                                          // ),
+                                          flex: otherExpandedFlex,
+                                          child: Text(user.wechatName),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["用户状态"]),
-                                          // child: Container(
-                                          //   child: Text(tempUser["用户状态"]),
-                                          // ),
+                                          flex: otherExpandedFlex,
+                                          child: Text(
+                                            user.statusName,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: otherExpandedFlex,
+                                          child: Text(user.roleName),
                                         ),
                                       ],
                                     ),
@@ -158,9 +149,7 @@ class UserListPage extends GetView<UserListController> {
                                 },
                                 itemCount: controller.userList.length,
                               )
-                            : Container(
-                                child: Text("暂无数据"),
-                              ),
+                            : const Text("暂无数据"),
                       ),
                     ]),
               ),

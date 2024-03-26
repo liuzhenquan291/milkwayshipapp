@@ -127,7 +127,8 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                               Get.toNamed(
                                                 appRoute.shipUserOptionsPage,
                                                 parameters: {
-                                                  'userId': tempUser?.id ?? "",
+                                                  'shipuser_id':
+                                                      tempUser?.id ?? "",
                                                 },
                                               );
                                             },
@@ -154,8 +155,8 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                               tempUser?.region?.name ?? ""),
                                         ),
                                         Expanded(
-                                          child:
-                                              Text(tempUser?.regionsRole ?? ""),
+                                          child: Text(
+                                              tempUser?.regionsRoleName ?? ""),
                                         ),
                                       ],
                                     ),

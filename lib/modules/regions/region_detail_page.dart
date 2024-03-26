@@ -207,9 +207,9 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                                   // ),
                                                 ),
                                                 Expanded(
-                                                  child: Text(
-                                                      tempUser?.regionsRole ??
-                                                          ""),
+                                                  child: Text(tempUser
+                                                          ?.regionsRoleName ??
+                                                      ""),
                                                   // child: Container(
                                                   //   child: Text(tempUser["用户状态"]),
                                                   // ),

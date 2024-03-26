@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
 
+import '../../core/apps.dart';
 import '../../core/models/ship_user_model.dart';
 
 class CornucopiaListPage extends GetView<CornucopiaListController> {
@@ -13,16 +14,10 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
   Widget build(BuildContext context) {
     return GetBuilder<CornucopiaListController>(builder: (controller) {
       return Scaffold(
-        // appBar: AppBar(
-        //   automaticallyImplyLeading: false,
-        //   title: Text('${controller.userDisplayName}, 您好!'),
-        // ),
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          // title: const Text(
-          //   '返回首页',
-          //   style: TextStyle(fontSize: 14),
-          // ),
+          title: const Text('本势力聚宝盆信息'),
+          centerTitle: true,
         ),
         body: Column(
           children: [
@@ -81,7 +76,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                      "职务: ${shipUser?.regionsRole ?? ''}"),
+                                      "职务: ${shipUser?.regionsRoleName ?? ''}"),
                                 ),
                               ],
                             ),
@@ -182,8 +177,8 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                           as String),
                                     ),
                                     Expanded(
-                                      child:
-                                          Text(tempUser?.regionsRole as String),
+                                      child: Text(
+                                          tempUser?.regionsRoleName as String),
                                     ),
                                     Expanded(
                                       child: Text(tempUser?.status as String),
@@ -266,8 +261,8 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                           as String),
                                     ),
                                     Expanded(
-                                      child:
-                                          Text(tempUser?.regionsRole as String),
+                                      child: Text(
+                                          tempUser?.regionsRoleName as String),
                                     ),
                                     Expanded(
                                       child: Text(tempUser?.status as String),
@@ -342,7 +337,19 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      child: Text(tempObj?.number as String),
+                                      child: InkWell(
+                                        onTap: () {
+                                          String cornucopiaId =
+                                              tempObj?.id as String;
+                                          _tapOnCornucopia(cornucopiaId);
+                                        },
+                                        child: Text(
+                                          tempObj?.number as String,
+                                          style: const TextStyle(
+                                            color: Colors.blue,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                     Expanded(
                                       child: Text(
@@ -465,5 +472,15 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
         // ),
       );
     });
+  }
+
+  // 点击用户名时 跳转
+  // 如果点的是自己进入编辑页
+  // 如果点的是别人进入用户操作页
+  void _tapOnCornucopia(String cornucopiaId) {
+    Get.toNamed(
+      appRoute.cornucopiaOptionPage,
+      parameters: {'cornucopiaId': cornucopiaId},
+    );
   }
 }

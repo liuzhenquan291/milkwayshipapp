@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_option_controller.dart';
 
 class ShipUserOptionPage extends GetView<ShipUserOptionController> {
-  String? userId;
+  String? shipUserId;
   ShipUserOptionPage({
     Key? key,
     shipUserId,

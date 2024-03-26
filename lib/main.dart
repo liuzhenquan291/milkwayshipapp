@@ -11,6 +11,9 @@ import 'package:milkwayshipapp/modules/register/register_page.dart';
 import 'package:milkwayshipapp/modules/root/settings_page.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_page.dart';
+import 'package:milkwayshipapp/modules/ships/cornucopia_option_page.dart';
+import 'package:milkwayshipapp/modules/ships/create_cornucopia_controller.dart';
+import 'package:milkwayshipapp/modules/ships/create_cornucopia_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_option_controller.dart';
@@ -19,14 +22,17 @@ import 'package:milkwayshipapp/modules/user/user_edit_page.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_page.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'core/apps.dart';
+import 'core/common_controller.dart';
 import 'core/utils.dart';
 import 'modules/regions/region_detail_page.dart';
 import 'modules/regions/region_options_controller.dart';
 import 'modules/regions/region_page.dart';
 import 'modules/regions/regions_new_page.dart';
 import 'modules/root/index_page.dart';
+import 'modules/ships/cornucopia_option_controller.dart';
 import 'modules/ships/cornucopia_self_controller.dart';
 import 'modules/ships/cornucopia_self_page.dart';
 import 'modules/ships/shipuser_option_page.dart';
@@ -169,6 +175,20 @@ class MyApp extends StatelessWidget {
             Get.lazyPut(() => CornucopiaSelfController());
           }),
         ),
+        GetPage(
+          name: appRoute.cornucopiaOptionPage,
+          page: () => CornucopiaOptionPage(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => CornucopiaOptionController());
+          }),
+        ),
+        GetPage(
+            name: appRoute.cornucopiaNewPage,
+            page: () => CreateCornucopiaPage(),
+            binding: BindingsBuilder(() {
+              Get.lazyPut(() => CreateCornucopiaController());
+              Get.lazyPut(() => TimePickerController());
+            })),
       ],
     );
   }
