@@ -88,7 +88,6 @@ class ApiService extends GetxService {
             } catch (e) {
               rethrow;
             }
-            print(message);
             Get.defaultDialog(
               title: '服务器错误',
               content: Text(message),

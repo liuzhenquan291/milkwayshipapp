@@ -9,11 +9,13 @@ import 'package:milkwayshipapp/modules/login/login_page.dart';
 import 'package:milkwayshipapp/modules/root/app_bindings.dart';
 import 'package:milkwayshipapp/modules/register/register_page.dart';
 import 'package:milkwayshipapp/modules/root/settings_page.dart';
+import 'package:milkwayshipapp/modules/ships/corn_join_controller.dart';
+import 'package:milkwayshipapp/modules/ships/corn_join_page.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_page.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_option_page.dart';
-import 'package:milkwayshipapp/modules/ships/create_cornucopia_controller.dart';
-import 'package:milkwayshipapp/modules/ships/create_cornucopia_page.dart';
+import 'package:milkwayshipapp/modules/ships/corn_create_controller.dart';
+import 'package:milkwayshipapp/modules/ships/corn_create_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_list_page.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_option_controller.dart';
@@ -22,7 +24,6 @@ import 'package:milkwayshipapp/modules/user/user_edit_page.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
 import 'package:milkwayshipapp/modules/user/user_option_page.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'core/apps.dart';
 import 'core/common_controller.dart';
@@ -63,8 +64,6 @@ class MyApp extends StatelessWidget {
           middlewares: [AuthMiddleware(priority: 0)],
           binding: BindingsBuilder(() {
             Get.lazyPut(() => RegionDetailController());
-            // Get.lazyPut(() => MarqueeController());
-            // Get.lazyPut(() => ScrollController());
           }),
           children: [
             GetPage(
@@ -86,7 +85,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: appRoute.loginPage,
           binding: BindingsBuilder(() {
-            Get.lazyPut(() => EncrypterController());
+            // Get.lazyPut(() => EncrypterController());
           }),
           page: () => LoginPage(),
         ),
@@ -95,7 +94,7 @@ class MyApp extends StatelessWidget {
           name: appRoute.registerPage,
           page: () => RegisterPage(),
           binding: BindingsBuilder(() {
-            Get.lazyPut(() => EncrypterController());
+            // Get.lazyPut(() => EncrypterController());
           }),
         ),
         // 用户管理页
@@ -183,12 +182,20 @@ class MyApp extends StatelessWidget {
           }),
         ),
         GetPage(
-            name: appRoute.cornucopiaNewPage,
-            page: () => CreateCornucopiaPage(),
-            binding: BindingsBuilder(() {
-              Get.lazyPut(() => CreateCornucopiaController());
-              Get.lazyPut(() => TimePickerController());
-            })),
+          name: appRoute.cornucopiaNewPage,
+          page: () => CreateCornucopiaPage(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => CornCreateController());
+            Get.lazyPut(() => TimePickerController());
+          }),
+        ),
+        GetPage(
+          name: appRoute.cornJoinPage,
+          page: () => JoinCornPage(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => CornJoinController());
+          }),
+        ),
       ],
     );
   }

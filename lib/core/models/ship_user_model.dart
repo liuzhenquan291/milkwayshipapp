@@ -28,6 +28,7 @@ class ShipUserModel {
   RegionModel? region; // 势力
   List<OptionModel>? options; // 可执行的操作
   List<ShipCornucopiaModel>? cornucopias; // 开盆/投盆记录
+  List<ShipCornucopiaModel>? toJoinCornucopias; // 可参加的聚宝盆
 
   ShipUserModel({
     required this.id,
@@ -53,6 +54,7 @@ class ShipUserModel {
     this.region,
     this.options,
     this.cornucopias,
+    this.toJoinCornucopias,
   });
 
   factory ShipUserModel.fromJson(Map<String, dynamic> json) {
@@ -90,6 +92,9 @@ class ShipUserModel {
           : [],
       cornucopias: json['cornucopias'] != null
           ? ShipCornucopiaModel.fromJsonToList(json['cornucopias'] ?? [])
+          : [],
+      toJoinCornucopias: json['to_join_options'] != null
+          ? ShipCornucopiaModel.fromJsonToList(json['to_join_options'] ?? [])
           : [],
     );
   }

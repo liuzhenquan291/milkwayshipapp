@@ -94,16 +94,15 @@ class _LoginState extends State<LoginPage> {
 
     try {
       ApiService apiService = Get.find<ApiService>();
-      final EncrypterController encrypterController =
-          Get.find<EncrypterController>();
-      final passwdEnc = encrypterController.encryptMd5(password);
+      final EncrypterController enc = Get.find<EncrypterController>();
+      final passwdEnc = enc.encryptMd5(password);
       final data = {'username': username, 'password': passwdEnc};
       final response = await apiService.postRequest(apiUrl.userLoginPath, data);
 
       // 检查登录成功与否
-      if (response?.statusCode == 200) {
+      if (response.statusCode == 200) {
         // 模拟登录成功后更新token
-        ResponseData responseData = ResponseData.fromJson(response?.data);
+        ResponseData responseData = ResponseData.fromJson(response.data);
         if (responseData.code == 0) {
           UserModel user =
               UserModel.fromJson(responseData.data as Map<String, dynamic>);

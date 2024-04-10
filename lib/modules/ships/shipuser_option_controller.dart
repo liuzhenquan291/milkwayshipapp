@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio;
+import 'package:milkwayshipapp/core/custom_option_widget.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
@@ -11,7 +11,6 @@ import '../../core/models/ship_user_model.dart';
 import '../../core/option_conf.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
-// import '../login/global_controller.dart';
 
 class ShipUserOptionController extends GetxController {
   String? shipUserId;
@@ -106,6 +105,7 @@ class ShipUserOptionController extends GetxController {
       case ShipuserOptionConf.OPEN_CORNUCOPIA:
         onOptionOpenCornucopia(option);
         break;
+      // 加入开盆计划
       case ShipuserOptionConf.JOIN_CORNUCOPIA:
         onOptionJoinCornucopia(option);
         break;
@@ -130,9 +130,21 @@ class ShipUserOptionController extends GetxController {
     _defaultDeleteOption(option?.title ?? "", url, null);
   }
 
-  // TODO: 职位
   void onOptionDesignate(OptionModel? option) {
-    _defaultPostOption(option?.title ?? "", apiUrl.shipUserDesignatePath, null);
+    late Map<String, dynamic> myPayload = {};
+    final TextEditingController tc = TextEditingController();
+
+    myPayload["ship_user_id"] = shipUserId;
+    myPayload["updated_time"] = shipUserData?.updatedTime;
+
+    editablePostOption(
+      option?.title ?? "",
+      apiUrl.shipUserDesignatePath,
+      "请设置角色职位: 司令/副司令/军神/军长/成员",
+      "label",
+      tc,
+      myPayload,
+    );
   }
 
   // 编辑信息
@@ -141,9 +153,22 @@ class ShipUserOptionController extends GetxController {
         parameters: {"shipuser_id": shipUserId ?? ""});
   }
 
-  // TODO: 标签
   void onOptionRemark(OptionModel? option) {
-    _defaultPostOption(option?.title ?? "", apiUrl.shipUserRemarkPath, null);
+    late Map<String, dynamic> myPayload = {};
+    final TextEditingController tc = TextEditingController();
+
+    myPayload["ship_user_id"] = shipUserId;
+    myPayload["updated_time"] = shipUserData?.updatedTime;
+
+    editablePostOption(
+      option?.title ?? "",
+      apiUrl.shipUserRemarkPath,
+      "请为角色打标签: 10字以内",
+      "label",
+      tc,
+      myPayload,
+    );
+    tc.dispose();
   }
 
   // // 退出登录
@@ -165,118 +190,31 @@ class ShipUserOptionController extends GetxController {
   }
 
   void onOptionJoinCornucopia(OptionModel? option) {
-    _defaultPostOption(option?.title ?? "", apiUrl.cornListCreatePath, null);
+    Get.toNamed(appRoute.cornJoinPage,
+        parameters: {"shipuser_id": shipUserId ?? ""});
   }
 
   void _defaultPostOption(
       String title, String optionUrl, Map<String, dynamic>? payload) {
-    Get.defaultDialog(
-      title: title,
-      middleText: '确定要执行该操作吗？',
-      textConfirm: '确认',
-      textCancel: '取消',
-      confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
-      onCancel: () {
-        // Get.back();
-      },
-      onConfirm: () {
-        final apiService = Get.find<ApiService>();
-        late Map<String, dynamic> myPayload;
-        if (payload != null) {
-          myPayload = payload;
-        }
+    late Map<String, dynamic> myPayload;
+    if (payload != null) {
+      myPayload = payload;
+    }
 
-        myPayload["ship_user_id"] = shipUserId;
-        myPayload["updated_time"] = shipUserData?.updatedTime;
-
-        // Map<String, dynamic> =
-        // final Map<String, dynamic> payload = {
-        //   "user_id": userId,
-        //   "user_updated_time": userData?.updatedTime,
-        // };
-        final response =
-            apiService.postRequest(optionUrl, myPayload) as dio.Response;
-        final responseData = ResponseData.fromJson(response.data);
-        if (responseData.code != 0) {
-          Get.defaultDialog(
-            title: '操作失败',
-            content: Text(responseData.message as String),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作失败'),
-            ),
-          );
-        } else {
-          Get.defaultDialog(
-            title: '操作成功',
-            // content: Text(""),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作成功'),
-            ),
-          );
-        }
-      },
-    );
+    myPayload["ship_user_id"] = shipUserId;
+    myPayload["updated_time"] = shipUserData?.updatedTime;
+    customePostOption(title, optionUrl, myPayload);
   }
 
   void _defaultDeleteOption(
       String title, String optionUrl, Map<String, dynamic>? payload) {
-    Get.defaultDialog(
-      title: title,
-      middleText: '确定要执行该操作吗？',
-      textConfirm: '确认',
-      textCancel: '取消',
-      confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
-      onCancel: () {
-        // Get.back();
-      },
-      onConfirm: () {
-        final apiService = Get.find<ApiService>();
-        late Map<String, dynamic> myPayload;
-        if (payload != null) {
-          myPayload = payload;
-        }
+    late Map<String, dynamic> myPayload;
+    if (payload != null) {
+      myPayload = payload;
+    }
 
-        myPayload["user_id"] = shipUserId;
-        myPayload["user_updated_time"] = shipUserData?.updatedTime;
-
-        // Map<String, dynamic> =
-        // final Map<String, dynamic> payload = {
-        //   "user_id": userId,
-        //   "user_updated_time": userData?.updatedTime,
-        // };
-        final response =
-            apiService.deleteRequest(optionUrl, myPayload) as dio.Response;
-        final responseData = ResponseData.fromJson(response.data);
-        if (responseData.code != 0) {
-          Get.defaultDialog(
-            title: '操作失败',
-            content: Text(responseData.message as String),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作失败'),
-            ),
-          );
-        } else {
-          Get.defaultDialog(
-            title: '操作成功',
-            // content: Text(""),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作成功'),
-            ),
-          );
-        }
-      },
-    );
+    myPayload["ship_user_id"] = shipUserId;
+    myPayload["updated_time"] = shipUserData?.updatedTime;
+    customeDeleteOption(title, optionUrl, myPayload);
   }
 }

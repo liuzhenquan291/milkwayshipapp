@@ -16,18 +16,24 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          title: const Text('本势力聚宝盆信息'),
+          title: const Text('聚宝盆综合信息'),
           centerTitle: true,
         ),
         body: Column(
           children: [
-            SizedBox(
-              height: 16,
+            const SizedBox(height: 24),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.all(6),
+              child: const Text(
+                "势力信息",
+                style: TextStyle(fontSize: 16),
+              ),
             ),
             Container(
               height: 70 + 80 * controller.userDataLength,
               padding: EdgeInsets.all(16.0),
-              color: Colors.yellow[100],
+              color: Colors.orange[100],
               child: Column(
                 children: [
                   Row(

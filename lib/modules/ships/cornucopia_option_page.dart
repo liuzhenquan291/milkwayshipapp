@@ -35,7 +35,7 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
               ),
             ),
             Container(
-              color: Colors.green[200],
+              color: Colors.orange[100],
               padding: const EdgeInsets.all(10),
               child: Column(
                 children: [

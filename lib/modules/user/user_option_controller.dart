@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio;
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
@@ -11,6 +10,7 @@ import '../../core/models/user_model.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
 import '../../core/option_conf.dart';
+import '../../core/custom_option_widget.dart';
 
 class UserOptionController extends GetxController {
   String? userId;
@@ -21,8 +21,7 @@ class UserOptionController extends GetxController {
   bool hasOptions = false;
   List<OptionModel> validOptions = [];
   final RefreshController refreshController = RefreshController();
-  // bool hasRegion = false;
-  // bool ifSelfRegion = false; // 通过 token 查询 势力
+  final TextEditingController txc = TextEditingController();
 
   @override
   void onInit() {
@@ -31,6 +30,12 @@ class UserOptionController extends GetxController {
     // regionId = Get.arguments;
 
     _loadData();
+  }
+
+  @override
+  void dispose() {
+    txc.dispose();
+    super.dispose();
   }
 
   // dio.Response? response;
@@ -111,24 +116,56 @@ class UserOptionController extends GetxController {
     final Map<String, dynamic> myPayload = {
       "refused": false,
       "refused_reason": "",
+      "user_id": userId,
+      "updated_time": userData?.updatedTime,
     };
-    _defaultPostOption(option?.title ?? "", apiUrl.userApprove, myPayload);
+    customePostOption(
+      option?.title ?? "",
+      apiUrl.userApprove,
+      myPayload,
+    );
   }
 
   void onOptionRefuse(OptionModel? option) {
     final Map<String, dynamic> myPayload = {
       "refused": true,
-      "refused_reason": null, // TODO: 拒绝原因
+      "user_id": userId,
+      "updated_time": userData?.updatedTime,
+      // "refused_reason": "拒绝用户申请", 在弹窗中填入
     };
-    _defaultPostOption(option?.title ?? "", apiUrl.userDemote, myPayload);
+    editablePostOption(
+      option?.title ?? "",
+      apiUrl.userApprove,
+      "拒绝用户申请原因",
+      "refused_reason",
+      txc,
+      myPayload,
+    );
   }
 
   void onOptionDemote(OptionModel? option) {
-    _defaultPostOption(option?.title ?? "", apiUrl.userDemote, null);
+    final Map<String, dynamic> myPayload = {
+      "user_id": userId,
+      "updated_time": userData?.updatedTime,
+    };
+    customePostOption(
+      option?.title ?? "",
+      apiUrl.userDemote,
+      myPayload,
+    );
   }
 
+  // TODO: 禁用原因??
   void onOptionForbidden(OptionModel? option) {
-    _defaultPostOption(option?.title ?? "", apiUrl.userForbidden, null);
+    final Map<String, dynamic> myPayload = {
+      "user_id": userId,
+      "updated_time": userData?.updatedTime,
+    };
+    customePostOption(
+      option?.title ?? "",
+      apiUrl.userForbidden,
+      myPayload,
+    );
   }
 
 // 编辑信息
@@ -152,122 +189,14 @@ class UserOptionController extends GetxController {
   // 注销账号
   void onOptionLogout(OptionModel? option) {
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userId]);
-    _defaultDeleteOption(option?.title ?? "", url, null);
-  }
-
-  void _defaultPostOption(
-      String title, String optionUrl, Map<String, dynamic>? payload) {
-    Get.defaultDialog(
-      title: title,
-      middleText: '确定要执行该操作吗？',
-      textConfirm: '确认',
-      textCancel: '取消',
-      confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
-      onCancel: () {
-        // Get.back();
-      },
-      onConfirm: () {
-        Get.back();
-        final apiService = Get.find<ApiService>();
-        late Map<String, dynamic> myPayload;
-        if (payload != null) {
-          myPayload = payload;
-        } else {
-          myPayload = {};
-        }
-
-        myPayload["user_id"] = userId;
-        myPayload["user_updated_time"] = userData?.updatedTime;
-
-        // Map<String, dynamic> =
-        // final Map<String, dynamic> payload = {
-        //   "user_id": userId,
-        //   "user_updated_time": userData?.updatedTime,
-        // };
-        final response =
-            apiService.postRequest(optionUrl, myPayload) as dio.Response;
-        final responseData = ResponseData.fromJson(response.data);
-        if (responseData.code != 0) {
-          Get.defaultDialog(
-            title: '操作失败',
-            content: Text(responseData.message as String),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作失败'),
-            ),
-          );
-        } else {
-          Get.defaultDialog(
-            title: '操作成功',
-            // content: Text(""),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作成功'),
-            ),
-          );
-        }
-      },
-    );
-  }
-
-  void _defaultDeleteOption(
-      String title, String optionUrl, Map<String, dynamic>? payload) {
-    Get.defaultDialog(
-      title: title,
-      middleText: '确定要执行该操作吗？',
-      textConfirm: '确认',
-      textCancel: '取消',
-      confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
-      onCancel: () {
-        // Get.back();
-      },
-      onConfirm: () {
-        Get.back();
-        final apiService = Get.find<ApiService>();
-        late Map<String, dynamic> myPayload;
-        if (payload != null) {
-          myPayload = payload;
-        }
-
-        myPayload["user_id"] = userId;
-        myPayload["user_updated_time"] = userData?.updatedTime;
-
-        // Map<String, dynamic> =
-        // final Map<String, dynamic> payload = {
-        //   "user_id": userId,
-        //   "user_updated_time": userData?.updatedTime,
-        // };
-        final response =
-            apiService.deleteRequest(optionUrl, myPayload) as dio.Response;
-        final responseData = ResponseData.fromJson(response.data);
-        if (responseData.code != 0) {
-          Get.defaultDialog(
-            title: '操作失败',
-            content: Text(responseData.message as String),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作失败'),
-            ),
-          );
-        } else {
-          Get.defaultDialog(
-            title: '操作成功',
-            // content: Text(""),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作成功'),
-            ),
-          );
-        }
-      },
+    final Map<String, dynamic> myPayload = {
+      "user_id": userId,
+      "updated_time": userData?.updatedTime,
+    };
+    customeDeleteOption(
+      option?.title ?? "",
+      url,
+      myPayload,
     );
   }
 }

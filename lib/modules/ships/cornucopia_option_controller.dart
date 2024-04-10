@@ -145,12 +145,12 @@ class CornucopiaOptionController extends GetxController {
         // }
 
         // myPayload["user_id"] = shipUserId;
-        // myPayload["user_updated_time"] = shipUserData?.updatedTime;
+        // myPayload["updated_time"] = shipUserData?.updatedTime;
 
         // // Map<String, dynamic> =
         // // final Map<String, dynamic> payload = {
         // //   "user_id": userId,
-        // //   "user_updated_time": userData?.updatedTime,
+        // //   "updated_time": userData?.updatedTime,
         // // };
         // final response =
         //     apiService.postRequest(optionUrl, myPayload) as dio.Response;

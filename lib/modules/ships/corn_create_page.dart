@@ -2,9 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/ships/create_cornucopia_controller.dart';
 
-class CreateCornucopiaPage extends GetView<CreateCornucopiaController> {
+import 'corn_create_controller.dart';
+
+class CreateCornucopiaPage extends GetView<CornCreateController> {
   String? shipuserId;
   CreateCornucopiaPage({
     Key? key,
@@ -12,7 +13,7 @@ class CreateCornucopiaPage extends GetView<CreateCornucopiaController> {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CreateCornucopiaController>(builder: (controller) {
+    return GetBuilder<CornCreateController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('创建开盆计划'),
@@ -60,7 +61,7 @@ class CreateCornucopiaPage extends GetView<CreateCornucopiaController> {
                 const SizedBox(height: 16.0),
                 Row(
                   children: [
-                    const Text("开盆时间:"),
+                    const Text("计划开盆时间:"),
                     const SizedBox(width: 10),
                     ElevatedButton(
                       onPressed: () {
@@ -69,8 +70,6 @@ class CreateCornucopiaPage extends GetView<CreateCornucopiaController> {
                           showTitleActions: true,
                           locale: LocaleType.zh,
                           onChanged: (time) {
-                            // controller.tc.update();
-                            // controller.update();
                             controller.setTime(time.toString());
                           },
                           onConfirm: (time) {
@@ -85,12 +84,34 @@ class CreateCornucopiaPage extends GetView<CreateCornucopiaController> {
                   ],
                 ),
                 const SizedBox(height: 16.0),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    const Text("自己是否加入?:"),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: DropdownButtonFormField(
+                        value: controller.join,
+                        items: controller.options
+                            .map((option) => DropdownMenuItem(
+                                  child: Text(option),
+                                  value: option,
+                                ))
+                            .toList(),
+                        onChanged: (newValue) {
+                          controller.setSelfJoin(newValue);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () async {
                     controller.onCreate();
                   },
                   child: const Text(
-                    '返回登录',
+                    '确认创建开盆计划',
                   ),
                 ),
               ],

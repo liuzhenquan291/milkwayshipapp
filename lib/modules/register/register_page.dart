@@ -207,7 +207,7 @@ class _RegisterState extends State<RegisterPage> {
 
       final data = {
         "username": username,
-        "password": password,
+        "password": passwdEnc,
         "display_name": displayname,
         "wechat_name": wxDisplayName,
         "wcq_name": wxGname,

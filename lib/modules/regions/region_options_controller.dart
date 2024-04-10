@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/custom_option_widget.dart';
 import 'package:milkwayshipapp/core/models/region_model.dart';
 import 'package:milkwayshipapp/core/option_conf.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
-import 'package:dio/dio.dart' as dio;
 
 import '../../core/models/options_model.dart';
 import '../../core/server.dart';
@@ -30,7 +30,6 @@ class RegionOptionsController extends GetxController {
     _loadData();
   }
 
-  // dio.Response? response;
   Future<void> _loadData() async {
     final apiService = Get.find<ApiService>();
     String? regionId = Get.parameters['regionId'];
@@ -108,16 +107,29 @@ class RegionOptionsController extends GetxController {
       "refused_reason": null,
     };
     _defaultPostOption(
-        option?.title ?? "", apiUrl.regionsApprovePath, myPayload);
+      option?.title ?? "",
+      apiUrl.regionsApprovePath,
+      myPayload,
+    );
   }
 
   void onOptionRefuse(OptionModel? option) {
+    final TextEditingController tc = TextEditingController();
     final Map<String, dynamic> myPayload = {
-      "refused": true,
-      "refused_reason": null, // TODO: 拒绝原因
+      "refused": false,
+      "refused_reason": null,
+      "region_id": regionData?.id,
+      "updated_time": regionData?.updatedTime,
     };
-    _defaultPostOption(
-        option?.title ?? "", apiUrl.regionsApprovePath, myPayload);
+
+    editablePostOption(
+      option?.title ?? "",
+      apiUrl.regionsApprovePath,
+      "请输入拒绝申请原因",
+      "refused_reason",
+      tc,
+      myPayload,
+    );
   }
 
   // TODO: 设置管理员或者移除管理员
@@ -156,111 +168,39 @@ class RegionOptionsController extends GetxController {
   //   Get.offAllNamed(appRoute.rootPage);
   // }
 
-  // 注销账号
+  // 注销势力
   void onOptionLogout(OptionModel? option) {
     final url = sprintf(apiUrl.regionsRetrieveUpdateDestroyPath, [regionId]);
     _defaultDeleteOption(option?.title ?? "", url, null);
   }
 
   void _defaultPostOption(
-      String title, String optionUrl, Map<String, dynamic>? payload) {
-    Get.defaultDialog(
-      title: title,
-      middleText: '确定要执行该操作吗？',
-      textConfirm: '确认',
-      textCancel: '取消',
-      confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
-      onCancel: () {
-        // Get.back();
-      },
-      onConfirm: () {
-        final apiService = Get.find<ApiService>();
-        late Map<String, dynamic> myPayload;
-        if (payload != null) {
-          myPayload = payload;
-        }
+    String title,
+    String optionUrl,
+    Map<String, dynamic>? payload,
+  ) {
+    late Map<String, dynamic> myPayload;
+    if (payload != null) {
+      myPayload = payload;
+    }
 
-        myPayload["region_id"] = regionData?.id;
-        myPayload["user_updated_time"] = regionData?.updatedTime;
-
-        final response =
-            apiService.postRequest(optionUrl, myPayload) as dio.Response;
-        final responseData = ResponseData.fromJson(response.data);
-        if (responseData.code != 0) {
-          Get.defaultDialog(
-            title: '操作失败',
-            content: Text(responseData.message as String),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作失败'),
-            ),
-          );
-        } else {
-          Get.defaultDialog(
-            title: '操作成功',
-            // content: Text(""),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作成功'),
-            ),
-          );
-        }
-      },
-    );
+    myPayload["region_id"] = regionData?.id;
+    myPayload["updated_time"] = regionData?.updatedTime;
+    customePostOption(title, optionUrl, myPayload);
   }
 
   void _defaultDeleteOption(
-      String title, String optionUrl, Map<String, dynamic>? payload) {
-    Get.defaultDialog(
-      title: title,
-      middleText: '确定要执行该操作吗？',
-      textConfirm: '确认',
-      textCancel: '取消',
-      confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
-      onCancel: () {
-        // Get.back();
-      },
-      onConfirm: () {
-        final apiService = Get.find<ApiService>();
-        late Map<String, dynamic> myPayload;
-        if (payload != null) {
-          myPayload = payload;
-        }
+    String title,
+    String optionUrl,
+    Map<String, dynamic>? payload,
+  ) {
+    late Map<String, dynamic> myPayload;
+    if (payload != null) {
+      myPayload = payload;
+    }
 
-        myPayload["region_id"] = regionData?.id;
-        myPayload["user_updated_time"] = regionData?.updatedTime;
-
-        final response =
-            apiService.deleteRequest(optionUrl, myPayload) as dio.Response;
-        final responseData = ResponseData.fromJson(response.data);
-        if (responseData.code != 0) {
-          Get.defaultDialog(
-            title: '操作失败',
-            content: Text(responseData.message as String),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作失败'),
-            ),
-          );
-        } else {
-          Get.defaultDialog(
-            title: '操作成功',
-            // content: Text(""),
-            confirm: TextButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('操作成功'),
-            ),
-          );
-        }
-      },
-    );
+    myPayload["region_id"] = regionData?.id;
+    myPayload["updated_time"] = regionData?.updatedTime;
+    customeDeleteOption(title, optionUrl, myPayload);
   }
 }

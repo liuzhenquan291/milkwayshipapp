@@ -22,6 +22,9 @@ class ShipCornucopiaModel {
   int? joinedCount;
   ShipUserModel? shipuser;
   RegionModel? regions;
+  String? appliTime; // 申请加入时间--- //TODO: 是否建一个 cornucopiaRecordModel
+  bool ifJoined;
+  bool ifMissed;
   List<ShipUserModel>? joinedShipUsers; // 已参盆角色
   List<ShipUserModel>? toJoinShipUsers; // 可参盆角色
   List<OptionModel>? options; // TODO: options
@@ -45,6 +48,9 @@ class ShipCornucopiaModel {
     this.joinedCount,
     this.shipuser,
     this.regions,
+    this.appliTime,
+    required this.ifJoined,
+    required this.ifMissed,
     this.joinedShipUsers,
     this.toJoinShipUsers,
     this.options,
@@ -68,7 +74,7 @@ class ShipCornucopiaModel {
       endTime:
           json['end_time'] != null ? DateTime.parse(json['end_time']) : null,
       operateUserId: json['operate_user_id'] ?? '',
-      operateShipUserId: json['operate_ship_user_id'] ?? '',
+      operateShipUserId: json['ship_user_id'] ?? '',
       regionsId: json['regions_id'] ?? '',
       action: json['action'] ?? '',
       appliCount: json['appli_count'] ?? 0,
@@ -79,6 +85,9 @@ class ShipCornucopiaModel {
       regions: json['regions'] != null
           ? RegionModel.fromJson(json['regions'] ?? {})
           : null,
+      appliTime: json['appli_time'],
+      ifJoined: json['if_joined'] ?? false,
+      ifMissed: json['if_missed'] ?? false,
       joinedShipUsers: json['joined_shipusers'] != null
           ? ShipUserModel.fromJsonToList(json['joined_shipusers'] ?? {})
           : [],

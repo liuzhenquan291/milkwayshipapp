@@ -33,6 +33,8 @@ class AppRoute {
   String cornucopiaPage = '/ship/cornucopia';
   // 新建开盆计划页
   String cornucopiaNewPage = '/ship/cornucopiaNew';
+  // 加入开盆计划页
+  String cornJoinPage = '/ship/cornJoin';
   // 编辑开盆计划页
   String cornucopiaEditPage = '/ship/cornucopiaEdit';
   // 编辑开盆计划页

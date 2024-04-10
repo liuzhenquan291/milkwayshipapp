@@ -223,12 +223,12 @@ class _UserEditState extends State<UserEditPage> {
         }
 
         myPayload["user_id"] = userData.id;
-        myPayload["user_updated_time"] = userData.updatedTime;
+        myPayload["updated_time"] = userData.updatedTime;
 
         // Map<String, dynamic> =
         // final Map<String, dynamic> payload = {
         //   "user_id": userId,
-        //   "user_updated_time": userData?.updatedTime,
+        //   "updated_time": userData?.updatedTime,
         // };
         final response =
             apiService.deleteRequest(optionUrl, myPayload) as dio.Response;
