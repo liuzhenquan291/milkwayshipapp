@@ -18,11 +18,11 @@ class UserModel {
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    userId = json['user_id'];
-    username = json['username'];
-    token = json['token'];
-    userDisplayName = json['user_displayname'];
-    userRole = json['user_role'];
+    userId = json['user_id'] ?? "";
+    username = json['username'] ?? "";
+    token = json['token'] ?? "";
+    userDisplayName = json['user_displayname'] ?? "";
+    userRole = json['user_role'] ?? "";
     isLogin = true;
   }
 

@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: appRoute.loginPage,
           binding: BindingsBuilder(() {
-            // Get.lazyPut(() => EncrypterController());
+            Get.lazyPut(() => EncrypterController());
           }),
           page: () => const LoginPage(),
         ),
@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
           name: appRoute.registerPage,
           page: () => const RegisterPage(),
           binding: BindingsBuilder(() {
-            // Get.lazyPut(() => EncrypterController());
+            Get.lazyPut(() => EncrypterController());
           }),
         ),
         // 用户管理页

@@ -203,7 +203,7 @@ class _RegisterState extends State<RegisterPage> {
     } else {
       // 去注册
       final passwdEnc = EncrypterController().encryptMd5(password);
-      final apiService = Get.find<ApiService>();
+      final as = Get.find<ApiService>();
 
       final data = {
         "username": username,
@@ -213,29 +213,26 @@ class _RegisterState extends State<RegisterPage> {
         "wcq_name": wxGname,
       };
       try {
-        final response =
-            await apiService.postRequest(apiUrl.useListCreatePath, data);
+        final response = await as.postRequest(apiUrl.useListCreatePath, data);
 
         // 检查登录成功与否
         if (response.statusCode == 200) {
           // 模拟登录成功后更新token
-          ResponseData responseData = ResponseData.fromJson(response.data);
-          if (responseData.code == 0) {
-            UserModel user =
-                UserModel.fromJson(responseData.data as Map<String, dynamic>);
-            Get.find<GlobalController>().userId = user.userId as String;
-            Get.find<GlobalController>().token = user.token as String;
-            Get.find<GlobalController>().username = user.username as String;
-            Get.find<GlobalController>().userDisplayName =
-                user.userDisplayName as String;
-            Get.find<GlobalController>().userRole = user.userRole as String;
+          ResponseData resData = ResponseData.fromJson(response.data);
+          if (resData.code == 0) {
+            UserModel user = UserModel.fromJson(resData.data);
+            Get.find<GlobalController>().userId = user.userId;
+            Get.find<GlobalController>().token = user.token;
+            Get.find<GlobalController>().username = user.username;
+            Get.find<GlobalController>().userDisplayName = user.userDisplayName;
+            Get.find<GlobalController>().userRole = user.userRole;
             Get.find<GlobalController>().isLogin = true;
 
             Get.offAllNamed(appRoute.rootPage);
           } else {
             Get.snackbar(
               "注册异常",
-              responseData.message.toString(),
+              resData.message.toString(),
               backgroundColor: Colors.red,
               colorText: Colors.white,
             );

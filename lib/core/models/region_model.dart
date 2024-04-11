@@ -10,6 +10,7 @@ class RegionModel {
   DateTime updatedTime;
   bool deleted;
   String status;
+  String statusName;
   String name;
   String nameFmt;
   String zoneInfo;
@@ -32,6 +33,7 @@ class RegionModel {
     required this.zoneInfo,
     required this.desc,
     required this.createUserId,
+    required this.statusName,
     this.commander,
     this.shipUsers,
     this.options,
@@ -52,6 +54,7 @@ class RegionModel {
       desc: json['desc'] ?? '',
       createUserId: json['create_user_id'] ?? '',
       color: json['color'] ?? "红色",
+      statusName: json['status_name'] ?? "",
       commander: json['commander'] != null
           ? ShipUserModel.fromJson(json['commander'] ?? {})
           : null,

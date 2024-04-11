@@ -5,6 +5,7 @@ import 'package:milkwayshipapp/modules/regions/region_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
+import '../../core/models/region_model.dart';
 import '../login/global_controller.dart';
 
 // class UserPage extends StatefulWidget {
@@ -96,9 +97,7 @@ class RegionPage extends GetView<RegionListController> {
                         child: ctl.regionList.isNotEmpty != false
                             ? ListView.builder(
                                 itemBuilder: (ctx, index) {
-                                  Map<String, dynamic> tempUser =
-                                      ctl.regionList[index];
-                                  // String? username = tempUser["用户名"];
+                                  RegionModel tmp = ctl.regionList[index];
                                   return Container(
                                     height: 50,
                                     decoration: const BoxDecoration(
@@ -114,14 +113,13 @@ class RegionPage extends GetView<RegionListController> {
                                           child: InkWell(
                                             onTap: () {
                                               Get.toNamed(
-                                                appRoute.regionOptionsPage,
-                                                parameters: {
-                                                  'regionId': tempUser['id']
-                                                },
-                                              );
+                                                  appRoute.regionOptionsPage,
+                                                  parameters: {
+                                                    'regionId': tmp.id
+                                                  });
                                             },
                                             child: Text(
-                                              tempUser["势力名称"],
+                                              tmp.name,
                                               style: const TextStyle(
                                                 color: Colors.blue,
                                               ),
@@ -129,19 +127,19 @@ class RegionPage extends GetView<RegionListController> {
                                           ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["成员格式"]),
+                                          child: Text(tmp.nameFmt),
                                           // child: Container(
                                           //   child: Text(tempUser["用户昵称"]),
                                           // ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["战区信息"]),
+                                          child: Text(tmp.zoneInfo),
                                           // child: Container(
                                           //   child: Text(tempUser["微信昵称"]),
                                           // ),
                                         ),
                                         Expanded(
-                                          child: Text(tempUser["势力状态"]),
+                                          child: Text(tmp.statusName),
                                           // child: Container(
                                           //   child: Text(tempUser["用户状态"]),
                                           // ),
