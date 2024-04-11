@@ -15,7 +15,7 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CornucopiaOptionController>(builder: (controller) {
+    return GetBuilder<CornucopiaOptionController>(builder: (ctl) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -42,33 +42,40 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                   Row(
                     children: [
                       Expanded(
-                        child: Text("开盆计划: ${controller.cornData?.number}"),
+                        child: Text("开盆计划: ${ctl.cornData?.number}"),
                       ),
                       Expanded(
-                        child: Text("创建人: ${controller.userData?.displayName}"),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text("势力: ${controller.regionData?.name}"),
-                      ),
-                      Expanded(
-                        child: Text(
-                            "司令: ${controller.regionData?.commander?.mksName ?? ''}"),
+                        child: Text("创建人: ${ctl.userData?.displayName}"),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "创建人角色: ${controller.cornData?.shipuser?.mksName ?? ""}"),
+                        child: Text("势力: ${ctl.regionData?.name}"),
                       ),
                       Expanded(
                         child: Text(
-                            "角色职务: ${controller.cornData?.shipuser?.regionsRoleName ?? ''}"),
+                            "司令: ${ctl.regionData?.commander?.mksName ?? ''}"),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                            "创建人角色: ${ctl.cornData?.shipuser?.mksName ?? ""}"),
+                      ),
+                      Expanded(
+                        child: Text(
+                            "角色职务: ${ctl.cornData?.shipuser?.regionsRoleName ?? ''}"),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text("创建时间: ${ctl.cornData?.getCreatedTime()}"),
                       ),
                     ],
                   ),
@@ -76,31 +83,21 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                     children: [
                       Expanded(
                         child:
-                            Text("创建时间: ${controller.cornData?.createdTime}"),
+                            Text("计划开盆时间: ${ctl.cornData?.getScheduleTime()}"),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "计划开盆时间: ${controller.cornData?.scheduleTime}"),
+                        child: Text("实际开盆时间: ${ctl.cornData?.getStartTime()}"),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "实际开盆时间: ${controller.cornData?.startTime ?? ''}"),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                            "聚宝盆状态: ${controller.cornData?.statusName ?? ''}"),
+                        child: Text("聚宝盆状态: ${ctl.cornData?.statusName ?? ''}"),
                       ),
                     ],
                   ),
@@ -118,11 +115,11 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
             ),
             Expanded(
                 child: SmartRefresher(
-                    controller: controller.refreshController,
+                    controller: ctl.refreshController,
                     enablePullDown: true,
                     enablePullUp: true,
                     onRefresh: () async {
-                      // controller._loadData();
+                      // ctl._loadData();
                     },
                     child: Column(
                         // scrollDirection: Axis.horizontal,
@@ -145,11 +142,11 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                             ),
                           ),
                           Expanded(
-                              child: controller.hasJoined
+                              child: ctl.hasJoined
                                   ? ListView.builder(
                                       itemBuilder: (ctx, index) {
                                         ShipUserModel? tempUser =
-                                            controller.joinedShipusers?[index];
+                                            ctl.joinedShipusers?[index];
                                         return Container(
                                           height: 50,
                                           decoration: const BoxDecoration(
@@ -187,8 +184,7 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                                         );
                                       },
                                       itemCount:
-                                          controller.joinedShipusers?.length ??
-                                              0,
+                                          ctl.joinedShipusers?.length ?? 0,
                                     )
                                   : const Text("暂无数据")),
                         ]))),
@@ -203,11 +199,11 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
             ),
             Expanded(
                 child: SmartRefresher(
-                    controller: controller.refreshController2,
+                    controller: ctl.refreshController2,
                     enablePullDown: true,
                     enablePullUp: true,
                     onRefresh: () async {
-                      // controller._loadData();
+                      // ctl._loadData();
                     },
                     child: Column(
                         // scrollDirection: Axis.horizontal,
@@ -230,11 +226,11 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                             ),
                           ),
                           Expanded(
-                              child: controller.hasTojoin
+                              child: ctl.hasTojoin
                                   ? ListView.builder(
                                       itemBuilder: (ctx, index) {
                                         ShipUserModel? tempUser =
-                                            controller.toJoinShipusers?[index];
+                                            ctl.toJoinShipusers?[index];
                                         return Container(
                                           height: 50,
                                           decoration: const BoxDecoration(
@@ -272,8 +268,7 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                                         );
                                       },
                                       itemCount:
-                                          controller.toJoinShipusers?.length ??
-                                              0,
+                                          ctl.toJoinShipusers?.length ?? 0,
                                     )
                                   : const Text("暂无数据")),
                         ]))),
@@ -283,7 +278,7 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
               height: 200,
               child: GridView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: controller.validOptions.length,
+                itemCount: ctl.validOptions.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 5, // 交叉轴方向上的间距
@@ -291,10 +286,10 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                   mainAxisSpacing: 5, // 主轴方向上的间距
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  final option = controller.validOptions[index];
+                  final option = ctl.validOptions[index];
                   return ElevatedButton(
                     onPressed: () {
-                      controller.onOption(option);
+                      ctl.onOption(option);
                     },
                     child: Text(option.name ?? ""),
                   );

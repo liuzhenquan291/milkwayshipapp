@@ -3,6 +3,8 @@ import 'package:milkwayshipapp/core/models/region_model.dart';
 import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
 import 'package:milkwayshipapp/core/models/user_model.dart';
 
+import '../utils.dart';
+
 class ShipUserModel {
   String id;
   bool needCornucopia;
@@ -21,8 +23,8 @@ class ShipUserModel {
   String regionsId;
   String regionsRole;
   String? regionsRoleName;
-  DateTime? lastJoinRegionTime;
-  DateTime? lastOpenRegionTime;
+  DateTime? lastJoinCornTime;
+  DateTime? lastOpenCornTime;
 
   UserModel? user; // 用户
   RegionModel? region; // 势力
@@ -48,8 +50,8 @@ class ShipUserModel {
     required this.regionsId,
     required this.regionsRole,
     this.regionsRoleName,
-    this.lastJoinRegionTime,
-    this.lastOpenRegionTime,
+    this.lastJoinCornTime,
+    this.lastOpenCornTime,
     this.user,
     this.region,
     this.options,
@@ -79,11 +81,11 @@ class ShipUserModel {
       region: json['region'] != null
           ? RegionModel.fromJson(json['region'] ?? {})
           : null,
-      lastJoinRegionTime: json['last_join_region_time'] != null
-          ? DateTime.parse(json['last_join_region_time'])
+      lastJoinCornTime: json['last_join_corn_time'] != null
+          ? DateTime.parse(json['last_join_corn_time'])
           : null,
-      lastOpenRegionTime: json['last_open_region_time'] != null
-          ? DateTime.parse(json['last_open_region_time'])
+      lastOpenCornTime: json['last_open_corn_time'] != null
+          ? DateTime.parse(json['last_open_corn_time'])
           : null,
       user:
           json['user'] != null ? UserModel.fromJson(json['user'] ?? {}) : null,
@@ -108,5 +110,17 @@ class ShipUserModel {
       lst.add(ShipUserModel.fromJson(element));
     });
     return lst;
+  }
+
+  String getCreatedTime() {
+    return formatDateTime_1(createdTime);
+  }
+
+  String getLastJoinCornTime() {
+    return formatDateTime_1(lastJoinCornTime!);
+  }
+
+  String getLastOpenCornTime() {
+    return formatDateTime_1(lastOpenCornTime!);
   }
 }

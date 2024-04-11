@@ -1,6 +1,8 @@
 import 'package:milkwayshipapp/core/models/options_model.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 
+import '../utils.dart';
+
 class RegionModel {
   String id;
   String number;
@@ -71,5 +73,9 @@ class RegionModel {
       lst.add(RegionModel.fromJson(element));
     });
     return lst;
+  }
+
+  String getCreatedTime() {
+    return formatDateTime_1(createdTime);
   }
 }

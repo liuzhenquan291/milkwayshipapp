@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:intl/intl.dart';
 import 'package:pointycastle/asymmetric/api.dart';
 import 'package:crypto/crypto.dart';
 import 'package:path_provider/path_provider.dart';
@@ -53,4 +54,13 @@ Future<String> get _localPath async {
   final directory = await getApplicationDocumentsDirectory();
   print("应用文档路径:${directory.path}");
   return directory.path;
+}
+
+final formatter_1 = DateFormat("yyyy-MM-dd HH:mm:ss");
+
+String formatDateTime_1(DateTime? dateTime) {
+  if (dateTime == null) {
+    return "";
+  }
+  return formatter_1.format(dateTime);
 }

@@ -88,11 +88,11 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                             ),
                             Expanded(
                               child: Text(
-                                  "上次开盆时间: ${shipUser?.lastOpenRegionTime ?? ''}"),
+                                  "上次开盆时间: ${shipUser?.lastOpenCornTime ?? ''}"),
                             ),
                             Expanded(
                               child: Text(
-                                  "上次参盆时间: ${shipUser?.lastJoinRegionTime ?? ''}"),
+                                  "上次参盆时间: ${shipUser?.lastJoinCornTime ?? ''}"),
                             ),
                             Row(
                               children: [
@@ -160,10 +160,9 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                     child: controller.needCorcuCnt > 0
                         ? ListView.builder(
                             itemBuilder: (ctx, index) {
-                              ShipUserModel? tempUser = controller
-                                  .cornucopiaInfos
+                              ShipUserModel? tmp = controller.cornucopiaInfos
                                   ?.needCorcuShipUserList?[index];
-                              // String? username = tempUser["用户名"];
+                              // String? username = tmp["用户名"];
                               return Container(
                                 height: 20,
                                 decoration: const BoxDecoration(
@@ -176,18 +175,18 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      child: Text(tempUser?.mksName as String),
-                                    ),
-                                    Expanded(
-                                      child: Text(tempUser?.user?.displayName
-                                          as String),
+                                      child: Text(tmp?.mksName as String),
                                     ),
                                     Expanded(
                                       child: Text(
-                                          tempUser?.regionsRoleName as String),
+                                          tmp?.user?.displayName as String),
                                     ),
                                     Expanded(
-                                      child: Text(tempUser?.status as String),
+                                      child:
+                                          Text(tmp?.regionsRoleName as String),
+                                    ),
+                                    Expanded(
+                                      child: Text(tmp?.statusName as String),
                                     ),
                                   ],
                                 ),
@@ -244,10 +243,9 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                     child: controller.canCorcuCnt > 0
                         ? ListView.builder(
                             itemBuilder: (ctx, index) {
-                              ShipUserModel? tempUser = controller
-                                  .cornucopiaInfos
+                              ShipUserModel? tmp = controller.cornucopiaInfos
                                   ?.canOpenCorcuShipUserList?[index];
-                              // String? username = tempUser["用户名"];
+                              // String? username = tmp["用户名"];
                               return Container(
                                 height: 20,
                                 decoration: const BoxDecoration(
@@ -260,18 +258,18 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      child: Text(tempUser?.mksName as String),
-                                    ),
-                                    Expanded(
-                                      child: Text(tempUser?.user?.displayName
-                                          as String),
+                                      child: Text(tmp?.mksName as String),
                                     ),
                                     Expanded(
                                       child: Text(
-                                          tempUser?.regionsRoleName as String),
+                                          tmp?.user?.displayName as String),
                                     ),
                                     Expanded(
-                                      child: Text(tempUser?.status as String),
+                                      child:
+                                          Text(tmp?.regionsRoleName as String),
+                                    ),
+                                    Expanded(
+                                      child: Text(tmp?.status as String),
                                     ),
                                   ],
                                 ),
@@ -281,19 +279,17 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                           )
                         : Container(
                             height: 20,
-                            child: Text("暂无数据"),
+                            child: const Text("暂无数据"),
                           ),
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 8,
-            ),
+            const SizedBox(height: 8),
             Container(
               height: 20,
               alignment: Alignment.centerLeft,
-              child: Text("本势力开盆计划:"),
+              child: const Text("本势力开盆计划:"),
             ),
             Expanded(
               child: Column(
@@ -330,7 +326,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                             itemBuilder: (ctx, index) {
                               ShipCornucopiaModel? tempObj = controller
                                   .cornucopiaInfos?.toOpenCorcuDataList?[index];
-                              // String? username = tempUser["用户名"];
+                              // String? username = tmp["用户名"];
                               return Container(
                                 height: 20,
                                 decoration: const BoxDecoration(
@@ -362,12 +358,12 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                           tempObj?.shipuser?.mksName as String),
                                     ),
                                     Expanded(
-                                      child: Text(tempObj?.scheduleTime
-                                          .toString() as String),
+                                      child: Text(
+                                          tempObj?.getScheduleTime() ?? ""),
                                     ),
                                     Expanded(
-                                      child: Text(tempObj?.createdTime
-                                          .toString() as String),
+                                      child:
+                                          Text(tempObj?.getCreatedTime() ?? ""),
                                     ),
                                   ],
                                 ),
@@ -377,19 +373,17 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                           )
                         : Container(
                             height: 20,
-                            child: Text("暂无数据"),
+                            child: const Text("暂无数据"),
                           ),
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 8,
-            ),
+            const SizedBox(height: 8),
             Container(
               height: 20,
               alignment: Alignment.centerLeft,
-              child: Text("本势力进行中的盆:"),
+              child: const Text("本势力进行中的盆:"),
             ),
             Expanded(
               child: Column(
@@ -427,7 +421,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                               ShipCornucopiaModel? tempObj = controller
                                   .cornucopiaInfos
                                   ?.processingCorcuDataList?[index];
-                              // String? username = tempUser["用户名"];
+                              // String? username = tmp["用户名"];
                               return Container(
                                 height: 20,
                                 decoration: const BoxDecoration(
@@ -447,12 +441,12 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                           tempObj?.shipuser?.mksName as String),
                                     ),
                                     Expanded(
-                                      child: Text(tempObj?.scheduleTime
-                                          .toString() as String),
+                                      child: Text(
+                                          tempObj?.getScheduleTime() ?? ""),
                                     ),
                                     Expanded(
-                                      child: Text(tempObj?.createdTime
-                                          .toString() as String),
+                                      child:
+                                          Text(tempObj?.getCreatedTime() ?? ""),
                                     ),
                                   ],
                                 ),
@@ -462,7 +456,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                           )
                         : Container(
                             height: 20,
-                            child: Text("暂无数据"),
+                            child: const Text("暂无数据"),
                           ),
                   ),
                 ],

@@ -46,10 +46,16 @@ class _ApiUrl {
   late final String cornucopiasRetrieveUpdateDestroyPath;
 // 设置开盆计划已开盆
   late final String cornucopiasOpenedPath;
+// 废除开盆计划
+  late final String cornDisusePath;
 // 申请加入开盆计划
   late final String cornucopiasJoinPath;
 // 设置错过开盆
   late final String cornucopiasMissPath;
+  // 成功参盆
+  late final String cornJoinedPath;
+  // 补参盆
+  late final String cornLateJoinedPath;
 // 聚宝盆综合信息
   late final String cornucopiaInfosPath;
 
@@ -84,9 +90,12 @@ class _ApiUrl {
     shipUserRemarkPath = "$_shipAppPath/remark/";
     cornListCreatePath = "$_shipAppPath/cornucopias/";
     cornucopiasRetrieveUpdateDestroyPath = "$_shipAppPath/cornucopias/%s/";
-    cornucopiasOpenedPath = "$_shipAppPath/cornucopias/opened/";
+    cornucopiasOpenedPath = "$_shipAppPath/cornucopias/open/";
+    cornDisusePath = "$_shipAppPath/cornucopias/disuse/";
     cornucopiasJoinPath = "$_shipAppPath/cornucopias/join/";
     cornucopiasMissPath = "$_shipAppPath/cornucopias/miss/";
+    cornJoinedPath = "$_shipAppPath/cornucopias/joined/";
+    cornLateJoinedPath = "$_shipAppPath/cornucopias/late_joined/";
     cornucopiaInfosPath = "$_shipAppPath/cornucopia_infos/";
     regionsCreateListPath = "$_regionAppPath/regions/";
     regionsRetrieveUpdateDestroyPath = "$_regionAppPath/regions/%s/";

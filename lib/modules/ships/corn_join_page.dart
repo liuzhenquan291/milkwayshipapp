@@ -68,11 +68,11 @@ class JoinCornPage extends GetView<CornJoinController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "上次开盆时间: ${controller.shipUserData?.lastOpenRegionTime}"),
+                            "上次开盆时间: ${controller.shipUserData?.lastOpenCornTime}"),
                       ),
                       Expanded(
                         child: Text(
-                            "上次参盆时间: ${controller.shipUserData?.lastJoinRegionTime}"),
+                            "上次参盆时间: ${controller.shipUserData?.lastJoinCornTime}"),
                       ),
                     ],
                   ),
@@ -158,11 +158,10 @@ class JoinCornPage extends GetView<CornJoinController> {
                                         ),
                                       ),
                                       Expanded(
-                                          child: Text(
-                                              corn.createdTime.toString())),
+                                          child: Text(corn.getCreatedTime())),
                                       Expanded(
                                         child: Text(
-                                          corn.scheduleTime.toString(),
+                                          corn.getScheduleTime(),
                                         ),
                                       ),
                                       Expanded(
@@ -252,8 +251,8 @@ class JoinCornPage extends GetView<CornJoinController> {
                                                 ),
                                               ),
                                               Expanded(
-                                                  child: Text(recd.scheduleTime
-                                                      .toString())),
+                                                  child: Text(
+                                                      recd.getScheduleTime())),
                                               Expanded(
                                                 child: Text(
                                                   recd.appliTime ?? "",

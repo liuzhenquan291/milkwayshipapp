@@ -140,8 +140,8 @@ class ShipUserOptionController extends GetxController {
     editablePostOption(
       option?.title ?? "",
       apiUrl.shipUserDesignatePath,
-      "请设置角色职位: 司令/副司令/军神/军长/成员",
-      "label",
+      "请设置职位: 司令/副司令/军神/军长/成员",
+      "ship_user_role",
       tc,
       myPayload,
     );
@@ -168,7 +168,7 @@ class ShipUserOptionController extends GetxController {
       tc,
       myPayload,
     );
-    tc.dispose();
+    // tc.dispose();
   }
 
   // // 退出登录

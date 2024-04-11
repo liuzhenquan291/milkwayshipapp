@@ -1,6 +1,7 @@
 import 'package:milkwayshipapp/core/models/region_model.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 
+import '../utils.dart';
 import 'options_model.dart';
 
 class ShipCornucopiaModel {
@@ -109,5 +110,21 @@ class ShipCornucopiaModel {
       lst.add(ShipCornucopiaModel.fromJson(element));
     });
     return lst;
+  }
+
+  String getCreatedTime() {
+    return formatDateTime_1(createdTime);
+  }
+
+  String getStartTime() {
+    return formatDateTime_1(startTime);
+  }
+
+  String getEndTime() {
+    return formatDateTime_1(endTime);
+  }
+
+  String getScheduleTime() {
+    return formatDateTime_1(scheduleTime);
   }
 }

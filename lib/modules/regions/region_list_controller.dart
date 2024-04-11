@@ -30,20 +30,7 @@ class RegionListController extends GetxController {
     }
     final responseData = ResponseData.fromJson(response.data);
     final regionInfos = responseData.data as List<dynamic>;
-    /*
-"id" -> "de5e285673d041dba520dfef1338a40f"
-"password" -> "123456"
-"last_login" -> null
-"is_superuser" -> false
-"number" -> "U2311215823"
-"created_time" -> "2023-11-21T17:27:42.221159"
-"updated_time" -> "2023-11-21T17:27:42.221180"
-"deleted" -> false
-"status" -> "init"
-"username" -> "18575546060"
-"display_name" -> "蒙蕤"
-"wechat_name" -> "蒙蕤"
-*/
+
     List<Map<String, String>> newData =
         List.generate(regionInfos.length, (index) {
       var item = regionInfos[index] as Map<String, dynamic>;
@@ -52,7 +39,7 @@ class RegionListController extends GetxController {
         '势力名称': item['name'],
         '成员格式': item['name_fmt'],
         '战区信息': item['zone_info'],
-        '势力状态': item['status'],
+        '势力状态': item['status_name'],
       };
     });
     regionList.addAll(newData);
