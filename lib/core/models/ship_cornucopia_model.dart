@@ -106,9 +106,9 @@ class ShipCornucopiaModel {
       return [];
     }
     List<ShipCornucopiaModel> lst = [];
-    list.forEach((element) {
+    for (var element in list) {
       lst.add(ShipCornucopiaModel.fromJson(element));
-    });
+    }
     return lst;
   }
 

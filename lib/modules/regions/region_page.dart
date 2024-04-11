@@ -20,10 +20,11 @@ import '../login/global_controller.dart';
 class RegionPage extends GetView<RegionListController> {
   final GlobalController gc = Get.find<GlobalController>();
 
+  RegionPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    String userDisplayName = gc.userDisplayName as String;
-    return GetBuilder<RegionListController>(builder: (controller) {
+    return GetBuilder<RegionListController>(builder: (ctl) {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
@@ -58,11 +59,11 @@ class RegionPage extends GetView<RegionListController> {
             ),
             Expanded(
               child: SmartRefresher(
-                controller: controller.refreshController,
+                controller: ctl.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
                 onRefresh: () async {
-                  // controller._loadData();
+                  // ctl._loadData();
                 },
                 child: Column(
                     // scrollDirection: Axis.horizontal,
@@ -92,11 +93,11 @@ class RegionPage extends GetView<RegionListController> {
                         ),
                       ),
                       Expanded(
-                        child: controller.regionList.isNotEmpty != false
+                        child: ctl.regionList.isNotEmpty != false
                             ? ListView.builder(
                                 itemBuilder: (ctx, index) {
                                   Map<String, dynamic> tempUser =
-                                      controller.regionList[index];
+                                      ctl.regionList[index];
                                   // String? username = tempUser["用户名"];
                                   return Container(
                                     height: 50,
@@ -149,11 +150,9 @@ class RegionPage extends GetView<RegionListController> {
                                     ),
                                   );
                                 },
-                                itemCount: controller.regionList.length,
+                                itemCount: ctl.regionList.length,
                               )
-                            : Container(
-                                child: Text("暂无数据"),
-                              ),
+                            : const Text("暂无数据"),
                       ),
                     ]),
               ),

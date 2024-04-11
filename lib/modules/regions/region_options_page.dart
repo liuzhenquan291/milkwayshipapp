@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
@@ -14,8 +16,8 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RegionOptionsController>(builder: (controller) {
-      controller.regionId = regionId;
+    return GetBuilder<RegionOptionsController>(builder: (ctl) {
+      ctl.regionId = regionId;
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -31,7 +33,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.all(6),
                 child: Text(
-                  "势力: ${controller.regionData?.name}",
+                  "势力: ${ctl.regionData?.name}",
                   style: const TextStyle(fontSize: 16),
                 ),
               ),
@@ -43,35 +45,32 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                     Row(
                       children: [
                         Expanded(
-                          child: Text("势力名称: ${controller.regionData?.name}"),
+                          child: Text("势力名称: ${ctl.regionData?.name}"),
                         ),
                         Expanded(
-                          child:
-                              Text("昵称缩写: ${controller.regionData?.nameFmt}"),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                              "势力人数: ${controller.regionData?.shipUsers?.length}"),
-                        ),
-                        Expanded(
-                          child: Text(
-                              "司令: ${controller.regionData?.commander?.mksName ?? ''}"),
+                          child: Text("昵称缩写: ${ctl.regionData?.nameFmt}"),
                         ),
                       ],
                     ),
                     Row(
                       children: [
                         Expanded(
-                          child:
-                              Text("当前战区: ${controller.regionData?.zoneInfo}"),
+                          child: Text(
+                              "势力人数: ${ctl.regionData?.shipUsers?.length}"),
                         ),
                         Expanded(
                           child: Text(
-                              "当前颜色: ${controller.regionData?.color ?? ''}"),
+                              "司令: ${ctl.regionData?.commander?.mksName ?? ''}"),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text("当前战区: ${ctl.regionData?.zoneInfo}"),
+                        ),
+                        Expanded(
+                          child: Text("当前颜色: ${ctl.regionData?.color ?? ''}"),
                         ),
                       ],
                     ),
@@ -96,8 +95,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                     Row(
                       children: [
                         Expanded(
-                          child:
-                              Text("     ${controller.regionData?.desc ?? ''}"),
+                          child: Text("     ${ctl.regionData?.desc ?? ''}"),
                         ),
                       ],
                     ),
@@ -115,11 +113,11 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
               ),
               Expanded(
                 child: SmartRefresher(
-                  controller: controller.refreshController,
+                  controller: ctl.refreshController,
                   enablePullDown: true,
                   enablePullUp: true,
                   onRefresh: () async {
-                    // controller._loadData();
+                    // ctl._loadData();
                   },
                   child: Column(
                       // scrollDirection: Axis.horizontal,
@@ -152,7 +150,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                           ),
                         ),
                         Expanded(
-                          child: controller.hasUser
+                          child: ctl.hasUser
                               ? ListView.builder(
                                   itemBuilder: (ctx, index) {
                                     ShipUserModel? tempUser = controller
@@ -221,22 +219,19 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                                       ),
                                     );
                                   },
-                                  itemCount:
-                                      controller.regionData?.shipUsers?.length,
+                                  itemCount: ctl.regionData?.shipUsers?.length,
                                 )
-                              : Container(
-                                  child: Text("暂无数据"),
-                                ),
+                              : const Text("暂无数据"),
                         ),
                       ]),
                 ),
               ),
               const SizedBox(height: 24),
-              Container(
+              SizedBox(
                 height: 200,
                 child: GridView.builder(
                   padding: const EdgeInsets.all(8),
-                  itemCount: controller.validOptions.length,
+                  itemCount: ctl.validOptions.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 5, // 交叉轴方向上的间距
@@ -244,10 +239,10 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                     mainAxisSpacing: 5, // 主轴方向上的间距
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    final option = controller.validOptions[index];
+                    final option = ctl.validOptions[index];
                     return ElevatedButton(
                       onPressed: () {
-                        controller.onOption(option);
+                        ctl.onOption(option);
                       },
                       child: Text(option.name ?? ""),
                     );

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
@@ -14,7 +16,7 @@ class UserOptionPage extends GetView<UserOptionController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserOptionController>(builder: (controller) {
+    return GetBuilder<UserOptionController>(builder: (ctl) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -35,7 +37,7 @@ class UserOptionPage extends GetView<UserOptionController> {
             ),
             Container(
               height: 125,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               color: Colors.black12,
               alignment: Alignment.centerLeft,
               child: Column(
@@ -43,40 +45,39 @@ class UserOptionPage extends GetView<UserOptionController> {
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "账        号:   ${controller.userData?.username}"),
+                        child: Text("账        号:   ${ctl.userData?.username}"),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "昵        称:   ${controller.userData?.displayName}"),
+                        child:
+                            Text("昵        称:   ${ctl.userData?.displayName}"),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "微信昵称:   ${controller.userData?.wechatName ?? ''}"),
+                        child:
+                            Text("微信昵称:   ${ctl.userData?.wechatName ?? ''}"),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "群  昵  称:   ${controller.userData?.wcqName ?? ''}"),
+                        child:
+                            Text("群  昵  称:   ${ctl.userData?.wcqName ?? ''}"),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "用户状态:   ${controller.userData?.statusName ?? ''}"),
+                        child:
+                            Text("用户状态:   ${ctl.userData?.statusName ?? ''}"),
                       ),
                     ],
                   ),
@@ -94,7 +95,7 @@ class UserOptionPage extends GetView<UserOptionController> {
             ),
             Expanded(
               child: SmartRefresher(
-                controller: controller.refreshController,
+                controller: ctl.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
                 onRefresh: () async {},
@@ -127,11 +128,11 @@ class UserOptionPage extends GetView<UserOptionController> {
                     ),
                   ),
                   Expanded(
-                    child: controller.hasUser
+                    child: ctl.hasUser
                         ? ListView.builder(
                             itemBuilder: (ctx, index) {
                               ShipUserModel? tempUser =
-                                  controller.userData?.shipUsers?[index];
+                                  ctl.userData?.shipUsers?[index];
                               return Container(
                                 height: 50,
                                 decoration: const BoxDecoration(
@@ -198,21 +199,19 @@ class UserOptionPage extends GetView<UserOptionController> {
                                 ),
                               );
                             },
-                            itemCount: controller.userData?.shipUsers?.length,
+                            itemCount: ctl.userData?.shipUsers?.length,
                           )
-                        : Container(
-                            child: Text("暂无数据"),
-                          ),
+                        : const Text("暂无数据"),
                   ),
                 ]),
               ),
             ),
             const SizedBox(height: 24),
-            Container(
+            SizedBox(
               height: 200,
               child: GridView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: controller.validOptions.length,
+                itemCount: ctl.validOptions.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 5, // 交叉轴方向上的间距
@@ -220,10 +219,10 @@ class UserOptionPage extends GetView<UserOptionController> {
                   mainAxisSpacing: 5, // 主轴方向上的间距
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  final option = controller.validOptions[index];
+                  final option = ctl.validOptions[index];
                   return ElevatedButton(
                     onPressed: () {
-                      controller.onOption(option);
+                      ctl.onOption(option);
                     },
                     child: Text(option.name ?? ""),
                   );

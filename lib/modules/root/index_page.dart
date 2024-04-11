@@ -9,7 +9,7 @@ import 'package:milkwayshipapp/modules/root/home_page.dart';
 import '../../core/edum_wrapper.dart';
 
 class IndexPage extends StatefulWidget {
-  IndexPage({Key? key}) : super(key: key);
+  const IndexPage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -19,10 +19,10 @@ class IndexPage extends StatefulWidget {
 
 class _IndexState extends State<IndexPage> {
   final List<Widget> tabs = [
-    HomePage(),
-    EdenKeepAliveWrapper(child: RegionDetailPage()),
-    InstructionPage(),
-    AccountPage(),
+    const HomePage(),
+    const EdenKeepAliveWrapper(child: RegionDetailPage()),
+    const InstructionPage(),
+    const AccountPage(),
   ];
   // 添加 key 参数
   // HomePage() {
@@ -52,8 +52,8 @@ class _IndexState extends State<IndexPage> {
             _selectedIndex = index;
             setState(() {});
           },
+          physics: const NeverScrollableScrollPhysics(),
           children: tabs,
-          physics: NeverScrollableScrollPhysics(),
         ),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

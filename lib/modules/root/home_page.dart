@@ -1,12 +1,12 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/login/global_controller.dart';
 
-import '../../components/marquee.dart';
 import '../../core/apps.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -22,13 +22,8 @@ class _HomeState extends State<HomePage> {
   //   _checkLoginStatus();
   // }
 
-  int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
-    final GlobalController gc = Get.find<GlobalController>();
-    String userDisplayName = gc.userDisplayName as String;
-
     List<Map<String, String>> grandItems = [
       {
         "title": "用户\n管理",
@@ -113,12 +108,12 @@ class _HomeState extends State<HomePage> {
             // Container(
             //   child: GetBuilder<MarqueeController>(
             //     init: MarqueeController(),
-            //     builder: (controller) {
+            //     builder: (ctl) {
             //       return SingleChildScrollView(
             //         scrollDirection: Axis.vertical,
-            //         // controller: controller.scrollController,
+            //         // controller: ctl.scrollController,
             //         child: Column(
-            //           children: controller.messages
+            //           children: ctl.messages
             //               .map((message) => Padding(
             //                   padding: EdgeInsets.symmetric(horizontal: 16.0),
             //                   child: Row(

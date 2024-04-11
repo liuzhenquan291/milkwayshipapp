@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/modules/ships/shipuser_option_controller.dart';
@@ -11,12 +13,12 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ShipUserOptionController>(builder: (controller) {
+    return GetBuilder<ShipUserOptionController>(builder: (ctl) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         // appBar: AppBar(
         //   automaticallyImplyLeading: false,
-        //   title: Text('${controller.userDisplayName}, 您好!'),
+        //   title: Text('${ctl.userDisplayName}, 您好!'),
         // ),
         appBar: AppBar(
           automaticallyImplyLeading: true,
@@ -36,7 +38,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
             ),
             Container(
               height: 230,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               color: Colors.black12,
               alignment: Alignment.centerLeft,
               child: Column(
@@ -45,7 +47,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "账        号:   ${controller.shipUserData?.user?.username}"),
+                            "账        号:   ${ctl.shipUserData?.user?.username}"),
                       ),
                     ],
                   ),
@@ -53,7 +55,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "昵        称:   ${controller.shipUserData?.user?.displayName}"),
+                            "昵        称:   ${ctl.shipUserData?.user?.displayName}"),
                       ),
                     ],
                   ),
@@ -61,7 +63,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "微信昵称:   ${controller.shipUserData?.user?.wechatName ?? ''}"),
+                            "微信昵称:   ${ctl.shipUserData?.user?.wechatName ?? ''}"),
                       ),
                     ],
                   ),
@@ -69,7 +71,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "群  昵  称:   ${controller.shipUserData?.user?.wcqName ?? ''}"),
+                            "群  昵  称:   ${ctl.shipUserData?.user?.wcqName ?? ''}"),
                       ),
                     ],
                   ),
@@ -78,7 +80,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "角  色  名:   ${controller.shipUserData?.mksName ?? ''}"),
+                            "角  色  名:   ${ctl.shipUserData?.mksName ?? ''}"),
                       ),
                     ],
                   ),
@@ -86,7 +88,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "所属势力:   ${controller.shipUserData?.region?.name ?? ''}"),
+                            "所属势力:   ${ctl.shipUserData?.region?.name ?? ''}"),
                       ),
                     ],
                   ),
@@ -94,7 +96,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "可  开  盆:   ${controller.shipUserData?.canCornucopia ?? true ? '是' : '否'}"),
+                            "可  开  盆:   ${ctl.shipUserData?.canCornucopia ?? true ? '是' : '否'}"),
                       ),
                     ],
                   ),
@@ -102,7 +104,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "需  参  盆:   ${controller.shipUserData?.needCornucopia ?? true ? '是' : '否'}"),
+                            "需  参  盆:   ${ctl.shipUserData?.needCornucopia ?? true ? '是' : '否'}"),
                       ),
                     ],
                   ),
@@ -110,7 +112,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "可开盆时间:   ${controller.shipUserData?.canCornucopiaTime ?? ''}"),
+                            "可开盆时间:   ${ctl.shipUserData?.canCornucopiaTime ?? ''}"),
                       ),
                     ],
                   ),
@@ -118,7 +120,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "需参盆时间:   ${controller.shipUserData?.needCornucopiaTime ?? ''}"),
+                            "需参盆时间:   ${ctl.shipUserData?.needCornucopiaTime ?? ''}"),
                       ),
                     ],
                   ),
@@ -126,11 +128,11 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
               ),
             ),
             const SizedBox(height: 24),
-            Container(
+            SizedBox(
               height: 200,
               child: GridView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: controller.validOptions.length,
+                itemCount: ctl.validOptions.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 5, // 交叉轴方向上的间距
@@ -138,10 +140,10 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                   mainAxisSpacing: 5, // 主轴方向上的间距
                 ),
                 itemBuilder: (BuildContext context, int index) {
-                  final option = controller.validOptions[index];
+                  final option = ctl.validOptions[index];
                   return ElevatedButton(
                     onPressed: () {
-                      controller.onOption(option);
+                      ctl.onOption(option);
                     },
                     child: Text(option.name ?? ""),
                   );

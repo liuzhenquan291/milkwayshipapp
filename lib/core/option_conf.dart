@@ -1,4 +1,6 @@
 // 本文件将所有可执行操作保存下来, 且配置各个页面的可用操作
+// ignore_for_file: constant_identifier_names
+
 final UserOptionConf userOptionConf = UserOptionConf();
 final RegionsOptionConf regionsOptionConf = RegionsOptionConf();
 final ShipuserOptionConf shipuserOptionConf = ShipuserOptionConf();

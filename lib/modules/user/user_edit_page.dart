@@ -13,7 +13,7 @@ import '../login/global_controller.dart';
 import './user_edit_controller.dart';
 
 class UserEditPage extends StatefulWidget {
-  UserEditPage({
+  const UserEditPage({
     Key? key,
   }) : super(key: key);
   @override
@@ -58,10 +58,10 @@ class _UserEditState extends State<UserEditPage> {
   @override
   Widget build(BuildContext context) {
     // String captcha = _generateCaptcha();
-    return GetBuilder<UserEditController>(builder: (controller) {
-      displayNameController.text = controller.userData?.displayName ?? "";
-      wxDisNameController.text = controller.userData?.wechatName ?? "";
-      wxGNameController.text = controller.userData?.wcqName ?? "";
+    return GetBuilder<UserEditController>(builder: (ctl) {
+      displayNameController.text = ctl.userData?.displayName ?? "";
+      wxDisNameController.text = ctl.userData?.wechatName ?? "";
+      wxGNameController.text = ctl.userData?.wcqName ?? "";
       return Scaffold(
         // appBar: AppBar(
         //   title: const Text('用户信息'),
@@ -71,7 +71,7 @@ class _UserEditState extends State<UserEditPage> {
           title: const Text('个人信息'),
           // centerTitle: true,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               // 在这里调用 Get.back() 实现返回上一个页面
               Get.back();
@@ -91,7 +91,7 @@ class _UserEditState extends State<UserEditPage> {
                       width: 10,
                     ),
                     Expanded(
-                      child: Text(controller.userData?.username ?? ""),
+                      child: Text(ctl.userData?.username ?? ""),
                     )
                   ],
                 ),
@@ -162,7 +162,6 @@ class _UserEditState extends State<UserEditPage> {
                       onPressed: () async {
                         // // 退出登录
                         // void onOptionLogoff(OptionModel? option) {
-                        final gc = Get.find<GlobalController>;
                         Get.find<GlobalController>().userId = "";
                         Get.find<GlobalController>().token = "";
                         Get.find<GlobalController>().username = "";
@@ -181,7 +180,7 @@ class _UserEditState extends State<UserEditPage> {
                     const SizedBox(width: 16.0),
                     ElevatedButton(
                       onPressed: () async {
-                        onOptionLogout(controller.userData as UserModel);
+                        onOptionLogout(ctl.userData as UserModel);
                         Get.offAllNamed(appRoute.loginPage);
                       },
                       child: const Text(

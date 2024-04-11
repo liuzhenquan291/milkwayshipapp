@@ -9,7 +9,7 @@ import 'package:milkwayshipapp/core/urls.dart';
 import 'package:milkwayshipapp/modules/login/user_model.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({
+  const LoginPage({
     Key? key,
   }) : super(key: key);
   @override

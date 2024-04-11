@@ -16,7 +16,7 @@ class JoinCornPage extends GetView<CornJoinController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CornJoinController>(builder: (controller) {
+    return GetBuilder<CornJoinController>(builder: (ctl) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -43,12 +43,22 @@ class JoinCornPage extends GetView<CornJoinController> {
                   Row(
                     children: [
                       Expanded(
+                        child: Text("当前角色: ${ctl.shipUserData?.mksName}"),
+                      ),
+                      Expanded(
                         child:
-                            Text("当前角色: ${controller.shipUserData?.mksName}"),
+                            Text("创建人: ${ctl.shipUserData?.user?.displayName}"),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text("势力: ${ctl.shipUserData?.region?.name}"),
                       ),
                       Expanded(
-                        child: Text(
-                            "创建人: ${controller.shipUserData?.user?.displayName}"),
+                        child:
+                            Text("角色职务: ${ctl.shipUserData?.regionsRoleName}"),
                       ),
                     ],
                   ),
@@ -56,39 +66,27 @@ class JoinCornPage extends GetView<CornJoinController> {
                     children: [
                       Expanded(
                         child: Text(
-                            "势力: ${controller.shipUserData?.region?.name}"),
+                            "上次开盆时间: ${ctl.shipUserData?.lastOpenCornTime}"),
                       ),
                       Expanded(
                         child: Text(
-                            "角色职务: ${controller.shipUserData?.regionsRoleName}"),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                            "上次开盆时间: ${controller.shipUserData?.lastOpenCornTime}"),
-                      ),
-                      Expanded(
-                        child: Text(
-                            "上次参盆时间: ${controller.shipUserData?.lastJoinCornTime}"),
+                            "上次参盆时间: ${ctl.shipUserData?.lastJoinCornTime}"),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "是否可开盆: ${controller.shipUserData?.canCornucopia}"),
+                        child:
+                            Text("是否可开盆: ${ctl.shipUserData?.canCornucopia}"),
                       ),
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                            "是否需参盆: ${controller.shipUserData?.needCornucopia}"),
+                        child:
+                            Text("是否需参盆: ${ctl.shipUserData?.needCornucopia}"),
                       ),
                     ],
                   ),
@@ -106,11 +104,11 @@ class JoinCornPage extends GetView<CornJoinController> {
             ),
             Expanded(
               child: SmartRefresher(
-                controller: controller.refreshController,
+                controller: ctl.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
                 onRefresh: () async {
-                  // controller._loadData();
+                  // ctl._loadData();
                 },
                 child: Column(
                   // scrollDirection: Axis.horizontal,
@@ -134,11 +132,11 @@ class JoinCornPage extends GetView<CornJoinController> {
                       ),
                     ),
                     Expanded(
-                      child: controller.hasTojoin
+                      child: ctl.hasTojoin
                           ? ListView.builder(
                               itemBuilder: (ctx, index) {
                                 ShipCornucopiaModel? corn =
-                                    controller.toJoinCors[index];
+                                    ctl.toJoinCors[index];
                                 return Container(
                                   height: 50,
                                   decoration: const BoxDecoration(
@@ -175,7 +173,7 @@ class JoinCornPage extends GetView<CornJoinController> {
                                   ),
                                 );
                               },
-                              itemCount: controller.toJoinCors.length,
+                              itemCount: ctl.toJoinCors.length,
                             )
                           : const Text("暂无数据"),
                     ),
@@ -194,11 +192,11 @@ class JoinCornPage extends GetView<CornJoinController> {
             ),
             Expanded(
                 child: SmartRefresher(
-                    controller: controller.refreshController2,
+                    controller: ctl.refreshController2,
                     enablePullDown: true,
                     enablePullUp: true,
                     onRefresh: () async {
-                      // controller._loadData();
+                      // ctl._loadData();
                     },
                     child: Column(
                         // scrollDirection: Axis.horizontal,
@@ -224,11 +222,11 @@ class JoinCornPage extends GetView<CornJoinController> {
                             ),
                           ),
                           Expanded(
-                              child: controller.hasCornRecords
+                              child: ctl.hasCornRecords
                                   ? ListView.builder(
                                       itemBuilder: (ctx, index) {
                                         ShipCornucopiaModel? recd =
-                                            controller.cornRecords[index];
+                                            ctl.cornRecords[index];
                                         return Container(
                                           height: 50,
                                           decoration: const BoxDecoration(
@@ -268,7 +266,7 @@ class JoinCornPage extends GetView<CornJoinController> {
                                                   recd.ifMissed ? "已错过" : "已加入",
                                                 ),
                                               ),
-                                              Expanded(
+                                              const Expanded(
                                                 child: Text(
                                                   "操作",
                                                 ), // TODO
@@ -277,7 +275,7 @@ class JoinCornPage extends GetView<CornJoinController> {
                                           ),
                                         );
                                       },
-                                      itemCount: controller.cornRecords.length,
+                                      itemCount: ctl.cornRecords.length,
                                     )
                                   : const Text("暂无数据")),
                         ]))),

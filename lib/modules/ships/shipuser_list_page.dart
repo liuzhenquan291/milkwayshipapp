@@ -11,10 +11,11 @@ import '../login/global_controller.dart';
 class ShipuserListPage extends GetView<ShipuserListController> {
   final GlobalController gc = Get.find<GlobalController>();
 
+  ShipuserListPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    String userDisplayName = gc.userDisplayName as String;
-    return GetBuilder<ShipuserListController>(builder: (controller) {
+    return GetBuilder<ShipuserListController>(builder: (ctl) {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
@@ -49,11 +50,11 @@ class ShipuserListPage extends GetView<ShipuserListController> {
             ),
             Expanded(
               child: SmartRefresher(
-                controller: controller.refreshController,
+                controller: ctl.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
                 onRefresh: () async {
-                  // controller._loadData();
+                  // ctl._loadData();
                 },
                 child: Column(
                     // scrollDirection: Axis.horizontal,
@@ -66,14 +67,14 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                           ),
                         ),
                         child: Row(
-                          children: [
-                            const Expanded(
+                          children: const [
+                            Expanded(
                               child: Text("用户"),
                               // child: Container(
 
                               // ),
                             ),
-                            const Expanded(
+                            Expanded(
                               child: Text("微信昵称"),
                               // child: Container(
                               //   child: Text("用户昵称"),
@@ -85,30 +86,20 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                               //   child: Text("微信昵称"),
                               // ),
                             ),
+                            Expanded(child: Text("所属势力")),
+                            Expanded(child: Text("势力职务")),
                             Expanded(
-                              child: Container(
-                                child: Text("所属势力"),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Text("势力职务"),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Text("角色状态"),
-                              ),
+                              child: Text("角色状态"),
                             ),
                           ],
                         ),
                       ),
                       Expanded(
-                        child: controller.hasUsers
+                        child: ctl.hasUsers
                             ? ListView.builder(
                                 itemBuilder: (ctx, index) {
                                   ShipUserModel? tempUser =
-                                      controller.shipUsers?[index];
+                                      ctl.shipUsers?[index];
                                   // String? username = tempUser["用户名"];
                                   return Container(
                                     height: 50,
@@ -162,11 +153,9 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                     ),
                                   );
                                 },
-                                itemCount: controller.shipUsers?.length ?? 0,
+                                itemCount: ctl.shipUsers?.length ?? 0,
                               )
-                            : Container(
-                                child: Text("暂无数据"),
-                              ),
+                            : const Text("暂无数据"),
                       ),
                     ]),
               ),

@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: appRoute.rootPage,
           // page: () => HomePage(),
-          page: () => IndexPage(),
+          page: () => const IndexPage(),
           middlewares: [AuthMiddleware(priority: 0)],
           binding: BindingsBuilder(() {
             Get.lazyPut(() => RegionDetailController());
@@ -68,18 +68,18 @@ class MyApp extends StatelessWidget {
           children: [
             GetPage(
               name: appRoute.homePage,
-              page: () => HomePage(),
+              page: () => const HomePage(),
             ),
             // 势力详情页
             GetPage(
               name: appRoute.regionDetailPage,
-              page: () => RegionDetailPage(),
+              page: () => const RegionDetailPage(),
             ),
           ],
         ),
         GetPage(
           name: appRoute.settingsPage,
-          page: () => SettingsPage(),
+          page: () => const SettingsPage(),
         ),
         // 登录页
         GetPage(
@@ -87,12 +87,12 @@ class MyApp extends StatelessWidget {
           binding: BindingsBuilder(() {
             // Get.lazyPut(() => EncrypterController());
           }),
-          page: () => LoginPage(),
+          page: () => const LoginPage(),
         ),
         // 注册页
         GetPage(
           name: appRoute.registerPage,
-          page: () => RegisterPage(),
+          page: () => const RegisterPage(),
           binding: BindingsBuilder(() {
             // Get.lazyPut(() => EncrypterController());
           }),
@@ -116,7 +116,7 @@ class MyApp extends StatelessWidget {
         // 用户信息编辑页-- 编辑自己;
         GetPage(
             name: appRoute.userEditPage,
-            page: () => UserEditPage(),
+            page: () => const UserEditPage(),
             binding: BindingsBuilder(() {
               Get.lazyPut(() => UserEditController());
               Get.lazyPut(() => EncrypterController());
@@ -132,7 +132,7 @@ class MyApp extends StatelessWidget {
         // 新建势力页
         GetPage(
           name: appRoute.regionNewPage,
-          page: () => RegionNewPage(),
+          page: () => const RegionNewPage(),
         ),
         // 势力操作页
         GetPage(
@@ -160,7 +160,7 @@ class MyApp extends StatelessWidget {
         // 聚宝盆管理页
         GetPage(
           name: appRoute.cornucopiaPage,
-          page: () => CornucopiaListPage(),
+          page: () => const CornucopiaListPage(),
           binding: BindingsBuilder(
             () {
               Get.lazyPut(() => CornucopiaListController());
@@ -169,7 +169,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: appRoute.cornucopiaSelfPage,
-          page: () => CornucopiaSelfPage(),
+          page: () => const CornucopiaSelfPage(),
           binding: BindingsBuilder(() {
             Get.lazyPut(() => CornucopiaSelfController());
           }),

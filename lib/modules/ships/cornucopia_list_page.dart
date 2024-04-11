@@ -1,5 +1,4 @@
 // 游戏角色管理页
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,9 +9,11 @@ import '../../core/apps.dart';
 import '../../core/models/ship_user_model.dart';
 
 class CornucopiaListPage extends GetView<CornucopiaListController> {
+  const CornucopiaListPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CornucopiaListController>(builder: (controller) {
+    return GetBuilder<CornucopiaListController>(builder: (ctl) {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
@@ -31,8 +32,8 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
               ),
             ),
             Container(
-              height: 70 + 80 * controller.userDataLength,
-              padding: EdgeInsets.all(16.0),
+              height: 70 + 80 * ctl.userDataLength,
+              padding: const EdgeInsets.all(16.0),
               color: Colors.orange[100],
               child: Column(
                 children: [
@@ -40,32 +41,30 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                     children: [
                       Expanded(
                         child: Text(
-                          "当前势力: ${controller.cornucopiaInfos?.regionData?.name ?? ''}",
+                          "当前势力: ${ctl.cornucopiaInfos?.regionData?.name ?? ''}",
                         ),
                       ),
                       Expanded(
                         child: Text(
-                          "势力司令: ${controller.cornucopiaInfos?.regionData?.commander?.mksName ?? ''}",
+                          "势力司令: ${ctl.cornucopiaInfos?.regionData?.commander?.mksName ?? ''}",
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 8,
-                  ),
+                  const SizedBox(height: 8),
                   Container(
                     height: 30,
                     alignment: Alignment.centerLeft,
-                    child: Text("您在本势力的角色:"),
+                    child: const Text("您在本势力的角色:"),
                   ),
                   Expanded(
                       child: ListView.builder(
                     itemBuilder: (ctx, index) {
                       ShipUserModel? shipUser =
-                          controller.cornucopiaInfos?.shipUserData?[index];
+                          ctl.cornucopiaInfos?.shipUserData?[index];
                       return Container(
                         height: 50,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           border: Border(
                             top: BorderSide(
                               color: Colors.black38, // 顶部边框颜色
@@ -106,26 +105,21 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 8,
-                            ),
+                            const SizedBox(height: 8),
                           ],
                         ),
                       );
                     },
-                    itemCount:
-                        controller.cornucopiaInfos?.shipUserData?.length ?? 0,
+                    itemCount: ctl.cornucopiaInfos?.shipUserData?.length ?? 0,
                   )),
                 ],
               ),
             ),
-            SizedBox(
-              height: 8,
-            ),
+            const SizedBox(height: 8),
             Container(
               height: 20,
               alignment: Alignment.centerLeft,
-              child: Text("本势力需参盆角色:"),
+              child: const Text("本势力需参盆角色:"),
             ),
             Expanded(
               child: Column(
@@ -157,10 +151,10 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                     ),
                   ),
                   Expanded(
-                    child: controller.needCorcuCnt > 0
+                    child: ctl.needCorcuCnt > 0
                         ? ListView.builder(
                             itemBuilder: (ctx, index) {
-                              ShipUserModel? tmp = controller.cornucopiaInfos
+                              ShipUserModel? tmp = ctl.cornucopiaInfos
                                   ?.needCorcuShipUserList?[index];
                               // String? username = tmp["用户名"];
                               return Container(
@@ -192,9 +186,9 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                 ),
                               );
                             },
-                            itemCount: controller.needCorcuCnt,
+                            itemCount: ctl.needCorcuCnt,
                           )
-                        : Container(
+                        : const SizedBox(
                             height: 20,
                             child: Text("暂无数据"),
                           ),
@@ -202,13 +196,13 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Container(
               height: 20,
               alignment: Alignment.centerLeft,
-              child: Text("本势力可开盆角色:"),
+              child: const Text("本势力可开盆角色:"),
             ),
             Expanded(
               child: Column(
@@ -240,10 +234,10 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                     ),
                   ),
                   Expanded(
-                    child: controller.canCorcuCnt > 0
+                    child: ctl.canCorcuCnt > 0
                         ? ListView.builder(
                             itemBuilder: (ctx, index) {
-                              ShipUserModel? tmp = controller.cornucopiaInfos
+                              ShipUserModel? tmp = ctl.cornucopiaInfos
                                   ?.canOpenCorcuShipUserList?[index];
                               // String? username = tmp["用户名"];
                               return Container(
@@ -275,11 +269,11 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                 ),
                               );
                             },
-                            itemCount: controller.canCorcuCnt,
+                            itemCount: ctl.canCorcuCnt,
                           )
-                        : Container(
+                        : const SizedBox(
                             height: 20,
-                            child: const Text("暂无数据"),
+                            child: Text("暂无数据"),
                           ),
                   ),
                 ],
@@ -321,7 +315,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                     ),
                   ),
                   Expanded(
-                    child: controller.toCorcuCnt > 0
+                    child: ctl.toCorcuCnt > 0
                         ? ListView.builder(
                             itemBuilder: (ctx, index) {
                               ShipCornucopiaModel? tempObj = controller
@@ -369,11 +363,11 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                 ),
                               );
                             },
-                            itemCount: controller.toCorcuCnt,
+                            itemCount: ctl.toCorcuCnt,
                           )
-                        : Container(
+                        : const SizedBox(
                             height: 20,
-                            child: const Text("暂无数据"),
+                            child: Text("暂无数据"),
                           ),
                   ),
                 ],
@@ -415,7 +409,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                     ),
                   ),
                   Expanded(
-                    child: controller.processingCorcuCnt > 0
+                    child: ctl.processingCorcuCnt > 0
                         ? ListView.builder(
                             itemBuilder: (ctx, index) {
                               ShipCornucopiaModel? tempObj = controller
@@ -452,11 +446,11 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                 ),
                               );
                             },
-                            itemCount: controller.processingCorcuCnt,
+                            itemCount: ctl.processingCorcuCnt,
                           )
-                        : Container(
+                        : const SizedBox(
                             height: 20,
-                            child: const Text("暂无数据"),
+                            child: Text("暂无数据"),
                           ),
                   ),
                 ],

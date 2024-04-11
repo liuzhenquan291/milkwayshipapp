@@ -69,9 +69,9 @@ class RegionModel {
       return [];
     }
     List<RegionModel> lst = [];
-    list.forEach((element) {
+    for (var element in list) {
       lst.add(RegionModel.fromJson(element));
-    });
+    }
     return lst;
   }
 

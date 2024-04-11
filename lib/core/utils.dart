@@ -12,8 +12,6 @@ class EncrypterController extends GetxController {
 
   // final RSAPublicKey publicKey = parsePublicKeyFromPemFile() as RSAPublicKey;
 
-  dynamic _rsa;
-
   encryptRSA(String plainText) async {
     // 非对称加密
     // if (_rsa == null) {
@@ -40,7 +38,7 @@ class EncrypterController extends GetxController {
 
 Future<RSAPublicKey> parsePublicKeyFromPemFile() async {
   final directory = await getApplicationDocumentsDirectory();
-  String path = "${directory.path}";
+  String path = directory.path;
   final File file = File('$path/.pub.pem');
   final String pemString = file.readAsStringSync();
 
@@ -48,12 +46,6 @@ Future<RSAPublicKey> parsePublicKeyFromPemFile() async {
   final RSAPublicKey publicKey = parser.parse(pemString) as RSAPublicKey;
 
   return publicKey;
-}
-
-Future<String> get _localPath async {
-  final directory = await getApplicationDocumentsDirectory();
-  print("应用文档路径:${directory.path}");
-  return directory.path;
 }
 
 final formatter_1 = DateFormat("yyyy-MM-dd HH:mm:ss");

@@ -5,7 +5,7 @@ import 'package:milkwayshipapp/modules/login/global_controller.dart';
 
 class AuthMiddleware extends GetMiddleware {
   @override
-  int? priority = 0;
+  int? priority = 1;
 
   AuthMiddleware({required this.priority});
 

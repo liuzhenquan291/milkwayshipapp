@@ -152,10 +152,11 @@ class CustomTextField extends StatelessWidget {
             height: 1.3,
           ),
           // 给输入框内容添加内边距可以使内容居中
-          contentPadding: contentPadding ?? EdgeInsets.fromLTRB(10, 0, 5, 0),
+          contentPadding:
+              contentPadding ?? const EdgeInsets.fromLTRB(10, 0, 5, 0),
           // contentPadding: contentPadding ?? EdgeInsets.all(10.rpx),
           border: showBorder == false
-              ? OutlineInputBorder(
+              ? const OutlineInputBorder(
                   borderSide: BorderSide.none,
                 )
               : null,

@@ -10,7 +10,7 @@ import '../login/global_controller.dart';
 import '../login/user_model.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({
+  const RegisterPage({
     Key? key,
   }) : super(key: key);
   @override
@@ -217,9 +217,9 @@ class _RegisterState extends State<RegisterPage> {
             await apiService.postRequest(apiUrl.useListCreatePath, data);
 
         // 检查登录成功与否
-        if (response?.statusCode == 200) {
+        if (response.statusCode == 200) {
           // 模拟登录成功后更新token
-          ResponseData responseData = ResponseData.fromJson(response?.data);
+          ResponseData responseData = ResponseData.fromJson(response.data);
           if (responseData.code == 0) {
             UserModel user =
                 UserModel.fromJson(responseData.data as Map<String, dynamic>);

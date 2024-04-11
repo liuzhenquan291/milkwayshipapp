@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
-import 'package:intl/intl.dart';
 
 import '../../core/models/ship_cornucopia_model.dart';
 import '../../core/server.dart';
@@ -22,7 +21,6 @@ class CornJoinController extends GetxController {
 
   @override
   void onInit() {
-    final formater = DateFormat('yyyy-MM-dd HH:mm:ss');
     super.onInit();
     _loadData();
   }

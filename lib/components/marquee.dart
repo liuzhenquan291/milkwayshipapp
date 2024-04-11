@@ -21,7 +21,7 @@ class MarqueeController extends GetxController {
 
   // 开始滚动
   void startScroll() {
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
         duration: Duration(

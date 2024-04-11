@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'package:milkwayshipapp/core/models/options_model.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
@@ -274,7 +276,7 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                         ]))),
             const SizedBox(height: 24),
             const SizedBox(height: 24),
-            Container(
+            SizedBox(
               height: 200,
               child: GridView.builder(
                 padding: const EdgeInsets.all(8),

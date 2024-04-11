@@ -1,9 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:milkwayshipapp/core/utils.dart';
 
 import '../../core/apps.dart';
 import '../../core/server.dart';
@@ -12,7 +8,7 @@ import '../login/global_controller.dart';
 import '../login/user_model.dart';
 
 class RegionNewPage extends StatefulWidget {
-  RegionNewPage({Key? key}) : super(key: key);
+  const RegionNewPage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -178,9 +174,9 @@ class _RegionNewPageState extends State<RegionNewPage> {
             await apiService.postRequest(apiUrl.regionsCreateListPath, data);
 
         // 检查登录成功与否
-        if (response?.statusCode == 200) {
+        if (response.statusCode == 200) {
           // 模拟登录成功后更新token
-          ResponseData responseData = ResponseData.fromJson(response?.data);
+          ResponseData responseData = ResponseData.fromJson(response.data);
           if (responseData.code == 0) {
             UserModel user =
                 UserModel.fromJson(responseData.data as Map<String, dynamic>);

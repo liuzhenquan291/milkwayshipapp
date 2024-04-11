@@ -13,10 +13,11 @@ const otherExpandedFlex = 3;
 class UserListPage extends GetView<UserListController> {
   final GlobalController gc = Get.find<GlobalController>();
 
+  UserListPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    String userDisplayName = gc.userDisplayName as String;
-    return GetBuilder<UserListController>(builder: (controller) {
+    return GetBuilder<UserListController>(builder: (ctl) {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
@@ -33,7 +34,7 @@ class UserListPage extends GetView<UserListController> {
                   padding: const EdgeInsets.all(16.0),
                   color: Colors.black12,
                   child: Text(
-                      "您的身份是: ${controller.userRole}, 您可对用户执行${controller.totalOptions}等操作。"),
+                      "您的身份是: ${ctl.userRole}, 您可对用户执行${ctl.totalOptions}等操作。"),
                 ),
               )
             ]),
@@ -52,11 +53,11 @@ class UserListPage extends GetView<UserListController> {
             ),
             Expanded(
               child: SmartRefresher(
-                controller: controller.refreshController,
+                controller: ctl.refreshController,
                 enablePullDown: true,
                 enablePullUp: true,
                 onRefresh: () async {
-                  // controller._loadData();
+                  // ctl._loadData();
                 },
                 child: Column(
                     // scrollDirection: Axis.horizontal,
@@ -94,10 +95,10 @@ class UserListPage extends GetView<UserListController> {
                         ),
                       ),
                       Expanded(
-                        child: controller.hasUser
+                        child: ctl.hasUser
                             ? ListView.builder(
                                 itemBuilder: (ctx, index) {
-                                  UserModel user = controller.userList[index];
+                                  UserModel user = ctl.userList[index];
                                   // String? username = tempUser["用户名"];
                                   return Container(
                                     height: 50,
@@ -147,7 +148,7 @@ class UserListPage extends GetView<UserListController> {
                                     ),
                                   );
                                 },
-                                itemCount: controller.userList.length,
+                                itemCount: ctl.userList.length,
                               )
                             : const Text("暂无数据"),
                       ),

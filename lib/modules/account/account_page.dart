@@ -6,6 +6,9 @@ import '../../core/apps.dart';
 import '../login/global_controller.dart';
 
 class AccountPage extends StatelessWidget {
+  const AccountPage({super.key});
+
+  @override
   Widget build(BuildContext context) {
     final gc = Get.find<GlobalController>();
 

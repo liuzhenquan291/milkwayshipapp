@@ -57,7 +57,7 @@ void editablePostOption(
   String optionUrl,
   String infoCue, // 提示词
   String infoName, // 传参名称
-  TextEditingController controller,
+  TextEditingController ctl,
   Map<String, dynamic>? payload,
 ) {
   Get.defaultDialog(
@@ -70,7 +70,7 @@ void editablePostOption(
       children: [
         Text("$infoCue: "),
         TextField(
-          controller: controller,
+          controller: ctl,
           keyboardType: TextInputType.text,
           decoration: const InputDecoration(hintText: "请输入"),
         ),
@@ -82,7 +82,7 @@ void editablePostOption(
     onConfirm: () {
       Get.back();
 
-      payload?[infoName] = controller.text;
+      payload?[infoName] = ctl.text;
 
       final as = Get.find<ApiService>();
       final response = as.postRequest(optionUrl, payload) as dio.Response;

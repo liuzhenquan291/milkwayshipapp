@@ -4,22 +4,22 @@ import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'cornucopia_self_controller.dart';
 
 class CornucopiaSelfPage extends GetView<CornucopiaSelfController> {
+  const CornucopiaSelfPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CornucopiaSelfController>(builder: (controller) {
+    return GetBuilder<CornucopiaSelfController>(builder: (ctl) {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: true,
         ),
         body: Column(children: [
-          SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           Expanded(
-            child: controller.dataLength > 0
+            child: ctl.dataLength > 0
                 ? ListView.builder(
                     itemBuilder: (ctx, index) {
-                      ShipUserModel tempUser = controller.shipUsers![index];
+                      ShipUserModel tempUser = ctl.shipUsers![index];
                       // String? username = tempUser["用户名"];
                       return Column(
                         children: [
@@ -32,7 +32,7 @@ class CornucopiaSelfPage extends GetView<CornucopiaSelfController> {
                           ),
                           Container(
                             height: 230,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             alignment: Alignment.centerLeft,
                             child: Column(
                               children: [
@@ -123,7 +123,7 @@ class CornucopiaSelfPage extends GetView<CornucopiaSelfController> {
                         ],
                       );
                     },
-                    itemCount: controller.dataLength,
+                    itemCount: ctl.dataLength,
                   )
                 : const SizedBox(
                     height: 16,

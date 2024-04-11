@@ -1,4 +1,6 @@
 // 创建开盆计划
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
@@ -13,7 +15,7 @@ class CreateCornucopiaPage extends GetView<CornCreateController> {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CornCreateController>(builder: (controller) {
+    return GetBuilder<CornCreateController>(builder: (ctl) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('创建开盆计划'),
@@ -27,8 +29,7 @@ class CreateCornucopiaPage extends GetView<CornCreateController> {
                 Row(
                   children: [
                     Expanded(
-                      child:
-                          Text("要开盆角色:   ${controller.shipUserData?.mksName}"),
+                      child: Text("要开盆角色:   ${ctl.shipUserData?.mksName}"),
                     ),
                   ],
                 ),
@@ -37,15 +38,14 @@ class CreateCornucopiaPage extends GetView<CornCreateController> {
                 //   children: [
                 //     Expanded(
                 //       child: Text(
-                //           "游戏uuid:   ${controller.shipUserData?.mksUuid ?? '暂未支持'}"),
+                //           "游戏uuid:   ${ctl.shipUserData?.mksUuid ?? '暂未支持'}"),
                 //     ),
                 //   ],
                 // ),
                 Row(
                   children: [
                     Expanded(
-                      child: Text(
-                          "角色状态:   ${controller.shipUserData?.statusName}"),
+                      child: Text("角色状态:   ${ctl.shipUserData?.statusName}"),
                     ),
                   ],
                 ),
@@ -53,8 +53,7 @@ class CreateCornucopiaPage extends GetView<CornCreateController> {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(
-                          "所属势力:   ${controller.shipUserData?.region?.name}"),
+                      child: Text("所属势力:   ${ctl.shipUserData?.region?.name}"),
                     ),
                   ],
                 ),
@@ -70,16 +69,16 @@ class CreateCornucopiaPage extends GetView<CornCreateController> {
                           showTitleActions: true,
                           locale: LocaleType.zh,
                           onChanged: (time) {
-                            controller.setTime(time.toString());
+                            ctl.setTime(time.toString());
                           },
                           onConfirm: (time) {
                             // Update state when time is confirmed
-                            controller.tc.selectTime(time);
+                            ctl.tc.selectTime(time);
                           },
                           currentTime: DateTime.now(),
                         );
                       },
-                      child: Text("${controller.time}"),
+                      child: Text("${ctl.time}"),
                     ),
                   ],
                 ),
@@ -91,15 +90,15 @@ class CreateCornucopiaPage extends GetView<CornCreateController> {
                     const SizedBox(width: 20),
                     Expanded(
                       child: DropdownButtonFormField(
-                        value: controller.join,
-                        items: controller.options
+                        value: ctl.join,
+                        items: ctl.options
                             .map((option) => DropdownMenuItem(
-                                  child: Text(option),
                                   value: option,
+                                  child: Text(option),
                                 ))
                             .toList(),
                         onChanged: (newValue) {
-                          controller.setSelfJoin(newValue);
+                          ctl.setSelfJoin(newValue);
                         },
                       ),
                     ),
@@ -108,7 +107,7 @@ class CreateCornucopiaPage extends GetView<CornCreateController> {
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () async {
-                    controller.onCreate();
+                    ctl.onCreate();
                   },
                   child: const Text(
                     '确认创建开盆计划',
