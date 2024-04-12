@@ -8,7 +8,7 @@ class ShipCornucopiaModel {
   String id;
   String number;
   DateTime createdTime;
-  DateTime updatedTime;
+  String updatedTime;
   // bool deleted;
   String status;
   String? statusName;
@@ -62,7 +62,7 @@ class ShipCornucopiaModel {
       id: json['id'] ?? '',
       number: json['number'] ?? '',
       createdTime: DateTime.parse(json['created_time']),
-      updatedTime: DateTime.parse(json['updated_time']),
+      updatedTime: json['updated_time'],
       // deleted: json['deleted'] ?? false,
       status: json['status'] ?? '',
       statusName: json['status_name'] ?? '',

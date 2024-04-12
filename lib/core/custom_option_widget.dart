@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart' as dio;
 
 import 'package:milkwayshipapp/core/server.dart';
 
@@ -18,11 +17,11 @@ void customePostOption(
     onCancel: () {
       // Get.back();
     },
-    onConfirm: () {
+    onConfirm: () async {
       Get.back();
 
       final as = Get.find<ApiService>();
-      final response = as.postRequest(optionUrl, payload) as dio.Response;
+      final response = await as.postRequest(optionUrl, payload);
       final responseData = ResponseData.fromJson(response.data);
 
       if (responseData.code != 0) {
@@ -79,13 +78,13 @@ void editablePostOption(
     onCancel: () {
       // Get.back();
     },
-    onConfirm: () {
+    onConfirm: () async {
       Get.back();
 
       payload?[infoName] = ctl.text;
 
       final as = Get.find<ApiService>();
-      final response = as.postRequest(optionUrl, payload) as dio.Response;
+      final response = await as.postRequest(optionUrl, payload);
       final responseData = ResponseData.fromJson(response.data);
 
       if (responseData.code != 0) {
@@ -128,12 +127,12 @@ void customeDeleteOption(
     onCancel: () {
       // Get.back();
     },
-    onConfirm: () {
+    onConfirm: () async {
       Get.back();
 
       final as = Get.find<ApiService>();
-      final response = as.deleteRequest(optionUrl, payload) as dio.Response;
-      final responseData = ResponseData.fromJson(response.data);
+      final response = await as.deleteRequest(optionUrl, payload);
+      final responseData = ResponseData.fromJson(response?.data);
 
       if (responseData.code != 0) {
         Get.defaultDialog(

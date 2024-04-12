@@ -32,7 +32,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
               ),
             ),
             Container(
-              height: 70 + 80 * ctl.userDataLength,
+              height: 100 + 80 * ctl.userDataLength,
               padding: const EdgeInsets.all(16.0),
               color: Colors.orange[100],
               child: Column(
