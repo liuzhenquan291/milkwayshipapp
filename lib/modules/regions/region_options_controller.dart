@@ -13,7 +13,7 @@ import '../../core/urls.dart';
 class RegionOptionsController extends GetxController {
   String? regionId;
   RegionModel? regionData;
-  // String? userDisplayName;
+  // String? displayName;
   bool hasUser = false;
   bool hasOptions = false;
   List<OptionModel> validOptions = [];
@@ -152,7 +152,7 @@ class RegionOptionsController extends GetxController {
 
   // // 编辑信息
   // void onOptionUpdate(OptionModel? option) {
-  //   Get.toNamed(appRoute.userEditPage, parameters: {"user_id": userId ?? ""});
+  //   Get.toNamed(AppRoute.userEditPage, parameters: {"user_id": userId ?? ""});
   // }
 
   // // 退出登录
@@ -161,11 +161,11 @@ class RegionOptionsController extends GetxController {
   //   Get.find<GlobalController>().userId = "";
   //   Get.find<GlobalController>().token = "";
   //   Get.find<GlobalController>().username = "";
-  //   Get.find<GlobalController>().userDisplayName = "";
+  //   Get.find<GlobalController>().displayName = "";
   //   Get.find<GlobalController>().userRole = "";
   //   Get.find<GlobalController>().isLogin = false;
 
-  //   Get.offAllNamed(appRoute.rootPage);
+  //   Get.offAllNamed(AppRoute.rootPage);
   // }
 
   // 注销势力

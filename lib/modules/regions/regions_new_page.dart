@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../core/apps.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
-import '../login/global_controller.dart';
 import '../login/user_model.dart';
 
 class RegionNewPage extends StatefulWidget {
@@ -178,16 +177,10 @@ class _RegionNewPageState extends State<RegionNewPage> {
           // 模拟登录成功后更新token
           ResponseData responseData = ResponseData.fromJson(response.data);
           if (responseData.code == 0) {
-            UserModel user =
-                UserModel.fromJson(responseData.data as Map<String, dynamic>);
-            Get.find<GlobalController>().token = user.token as String;
-            Get.find<GlobalController>().username = user.username as String;
-            Get.find<GlobalController>().userDisplayName =
-                user.userDisplayName as String;
-            Get.find<GlobalController>().userRole = user.userRole as String;
-            Get.find<GlobalController>().isLogin = true;
+            // UserModel user = UserModel.fromJson(responseData.data);
+            // TODO: 注册角色成功后的操作
 
-            Get.offAllNamed(appRoute.rootPage);
+            Get.offAllNamed(AppRoute.rootPage);
           } else {
             Get.snackbar(
               "注册异常",

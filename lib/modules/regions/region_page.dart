@@ -6,7 +6,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
 import '../../core/models/region_model.dart';
-import '../login/global_controller.dart';
 
 // class UserPage extends StatefulWidget {
 //   UserPage({
@@ -19,9 +18,7 @@ import '../login/global_controller.dart';
 // }
 
 class RegionPage extends GetView<RegionListController> {
-  final GlobalController gc = Get.find<GlobalController>();
-
-  RegionPage({super.key});
+  const RegionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +110,7 @@ class RegionPage extends GetView<RegionListController> {
                                           child: InkWell(
                                             onTap: () {
                                               Get.toNamed(
-                                                  appRoute.regionOptionsPage,
+                                                  AppRoute.regionOptionsPage,
                                                   parameters: {
                                                     'regionId': tmp.id
                                                   });

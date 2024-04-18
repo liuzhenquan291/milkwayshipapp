@@ -1,54 +1,260 @@
-AppRoute appRoute = AppRoute();
+import 'package:get/get.dart';
 
-class AppRoute {
+import '../modules/regions/region_detail_congroller.dart';
+import '../modules/regions/region_join_controller.dart';
+import '../modules/regions/region_join_page.dart';
+import '../modules/regions/region_list_controller.dart';
+import '../modules/regions/region_options_page.dart';
+import '../modules/root/home_page.dart';
+import '../modules/login/login_page.dart';
+import '../modules/register/register_page.dart';
+import '../modules/root/settings_page.dart';
+import '../modules/ships/corn_join_controller.dart';
+import '../modules/ships/corn_join_page.dart';
+import '../modules/ships/cornucopia_list_controller.dart';
+import '../modules/ships/cornucopia_list_page.dart';
+import '../modules/ships/cornucopia_option_page.dart';
+import '../modules/ships/corn_create_controller.dart';
+import '../modules/ships/corn_create_page.dart';
+import '../modules/ships/shipuser_list_controller.dart';
+import '../modules/ships/shipuser_list_page.dart';
+import '../modules/ships/shipuser_option_controller.dart';
+import '../modules/user/user_edit_controller.dart';
+import '../modules/user/user_edit_page.dart';
+import '../modules/user/user_list_controller.dart';
+import '../modules/user/user_option_controller.dart';
+import '../modules/user/user_option_page.dart';
+import '../modules/regions/region_detail_page.dart';
+import '../modules/regions/region_options_controller.dart';
+import '../modules/regions/region_page.dart';
+import '../modules/regions/regions_new_page.dart';
+import '../modules/root/index_page.dart';
+import '../modules/ships/cornucopia_option_controller.dart';
+import '../modules/ships/cornucopia_self_controller.dart';
+import '../modules/ships/cornucopia_self_page.dart';
+import '../modules/ships/shipuser_option_page.dart';
+import '../modules/user/user_page.dart';
+import 'common_controller.dart';
+import 'auth_controller.dart';
+import 'middlewares.dart';
+import 'utils.dart';
+
+// AppRoute AppRoute = AppRoute();
+
+abstract class AppRoute {
   // 导航页
-  String rootPage = '/';
+  static String rootPage = '/';
   // 首页
-  String homePage = '/home';
+  static String homePage = '/home';
   // 登录页
-  String loginPage = '/login';
+  static String loginPage = '/login';
   // 注册页
-  String registerPage = '/register';
+  static String registerPage = '/register';
   // 用户管理页
-  String userPage = '/user';
+  static String userPage = '/user';
   // 势力管理页
-  String regionPage = '/region';
+  static String regionPage = '/region';
   // 势力详情页
-  String regionDetailPage = '/regionDetail';
+  static String regionDetailPage = '/regionDetail';
   // 势力编辑页
-  String regionEditPage = '/regionEdit';
+  static String regionEditPage = '/regionEdit';
   // 新建势力页
-  String regionNewPage = '/regionNew';
+  static String regionNewPage = '/regionNew';
   // 势力操作页
-  String regionOptionsPage = '/regionOptions';
+  static String regionOptionsPage = '/regionOptions';
+  // 加入势力页
+  static String regionJoin = '/regionJoin';
   // 角色管理页
-  String shipUserPage = '/ship/user';
+  static String shipUserPage = '/ship/user';
   // 角色编辑页
-  String shipUserEditPage = '/ship/userEdit';
+  static String shipUserEditPage = '/ship/userEdit';
   // 角色操作页
-  String shipUserOptionsPage = '/shipUserOptions';
+  static String shipUserOptionsPage = '/shipUserOptions';
   // 新建角色页
-  String shipUserNewPage = '/ship/userNew';
+  static String shipUserNewPage = '/ship/userNew';
   // 聚宝盆管理页
-  String cornucopiaPage = '/ship/cornucopia';
+  static String cornucopiaPage = '/ship/cornucopia';
   // 新建开盆计划页
-  String cornucopiaNewPage = '/ship/cornucopiaNew';
+  static String cornucopiaNewPage = '/ship/cornucopiaNew';
   // 加入开盆计划页
-  String cornJoinPage = '/ship/cornJoin';
+  static String cornJoinPage = '/ship/cornJoin';
   // 编辑开盆计划页
-  String cornucopiaEditPage = '/ship/cornucopiaEdit';
+  static String cornucopiaEditPage = '/ship/cornucopiaEdit';
   // 编辑开盆计划页
-  String cornucopiaOptionPage = '/ship/cornucopiaOption';
+  static String cornucopiaOptionPage = '/ship/cornucopiaOption';
   // 自己的所有角色的开盆情况
-  String cornucopiaSelfPage = '/ship/cornucopiaSelf';
+  static String cornucopiaSelfPage = '/ship/cornucopiaSelf';
   // 攻略页
-  String instructionPage = '/instruction';
+  static String instructionPage = '/instruction';
   // 个人信息页
-  String accountInfoPage = '/account';
+  static String accountInfoPage = '/account';
   // 对用户进行操作页
-  String userOptionPage = '/userOptions';
+  static String userOptionPage = '/userOptions';
   // 用户信息编辑页
-  String userEditPage = '/userEdit';
+  static String userEditPage = '/userEdit';
   // 设置
-  String settingsPage = '/settings';
+  static String settingsPage = '/settings';
+
+  static List<GetPage> getPages2() {
+    return [];
+  }
+
+  static List<GetPage> getPages() {
+    return [
+      // 首页
+      GetPage(
+        name: AppRoute.rootPage,
+        // page: () => HomePage(),
+        page: () => const IndexPage(),
+        middlewares: [AuthMiddleware(priority: 0)],
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => RegionDetailController());
+          Get.lazyPut(() => AuthController());
+        }),
+        children: [
+          GetPage(
+            name: AppRoute.homePage,
+            page: () => const HomePage(),
+          ),
+          // 势力详情页
+          GetPage(
+            name: AppRoute.regionDetailPage,
+            page: () => const RegionDetailPage(),
+          ),
+        ],
+      ),
+      GetPage(
+        name: AppRoute.settingsPage,
+        page: () => const SettingsPage(),
+      ),
+      // 登录页
+      GetPage(
+        name: AppRoute.loginPage,
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => EncrypterController());
+          Get.lazyPut(() => AuthController());
+        }),
+        page: () => const LoginPage(),
+      ),
+      // 注册页
+      GetPage(
+        name: AppRoute.registerPage,
+        page: () => const RegisterPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => EncrypterController());
+          Get.lazyPut(() => AuthController());
+        }),
+      ),
+      // 用户管理页
+      GetPage(
+        name: AppRoute.userPage,
+        page: () => UserListPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => UserListController());
+        }),
+      ),
+      // 用户操作页
+      GetPage(
+        name: AppRoute.userOptionPage,
+        page: () => UserOptionPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => UserOptionController());
+          Get.lazyPut(() => AuthController());
+        }),
+      ),
+      // 用户信息编辑页-- 编辑自己;
+      GetPage(
+          name: AppRoute.userEditPage,
+          page: () => const UserEditPage(),
+          binding: BindingsBuilder(() {
+            Get.lazyPut(() => UserEditController());
+            Get.lazyPut(() => EncrypterController());
+            Get.lazyPut(() => AuthController());
+          })),
+      // 势力管理页
+      GetPage(
+        name: AppRoute.regionPage,
+        page: () => const RegionPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => RegionListController());
+        }),
+      ),
+      // 新建势力页
+      GetPage(
+        name: AppRoute.regionNewPage,
+        page: () => const RegionNewPage(),
+      ),
+      // 势力操作页
+      GetPage(
+        name: AppRoute.regionOptionsPage,
+        page: () => RegionOptionsPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => RegionOptionsController());
+        }),
+      ),
+      // 游戏角色管理页
+      GetPage(
+        name: AppRoute.shipUserPage,
+        page: () => const ShipuserListPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => ShipuserListController());
+        }),
+      ),
+      // 游戏角色操作页
+      GetPage(
+        name: AppRoute.shipUserOptionsPage,
+        page: () => ShipUserOptionPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => ShipUserOptionController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.regionJoin,
+        page: () => RegoinJoinPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => RegionJoinController());
+          Get.lazyPut(() => TimePickerController());
+        }),
+      ),
+      // 聚宝盆管理页
+      GetPage(
+        name: AppRoute.cornucopiaPage,
+        page: () => const CornucopiaListPage(),
+        binding: BindingsBuilder(
+          () {
+            Get.lazyPut(() => CornucopiaListController());
+          },
+        ),
+      ),
+      GetPage(
+        name: AppRoute.cornucopiaSelfPage,
+        page: () => const CornucopiaSelfPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => CornucopiaSelfController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.cornucopiaOptionPage,
+        page: () => CornucopiaOptionPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => CornucopiaOptionController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.cornucopiaNewPage,
+        page: () => CreateCornucopiaPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => CornCreateController());
+          Get.lazyPut(() => TimePickerController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.cornJoinPage,
+        page: () => JoinCornPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => CornJoinController());
+        }),
+      ),
+    ];
+  }
 }

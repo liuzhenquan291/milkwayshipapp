@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth_controller.dart';
 
 import '../../core/apps.dart';
-import 'global_controller.dart';
-import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/utils.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 import 'package:milkwayshipapp/modules/login/user_model.dart';
+
+import '../../core/server.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -69,7 +70,7 @@ class _LoginState extends State<LoginPage> {
                 const SizedBox(width: 32),
                 ElevatedButton(
                   onPressed: () {
-                    Get.offAllNamed(appRoute.registerPage);
+                    Get.offAllNamed(AppRoute.registerPage);
                   },
                   child: const Text('注册'),
                 ),
@@ -94,6 +95,7 @@ class _LoginState extends State<LoginPage> {
 
     try {
       ApiService apiService = Get.find<ApiService>();
+      AuthController authCtl = Get.find<AuthController>();
       final EncrypterController enc = Get.find<EncrypterController>();
       final passwdEnc = enc.encryptMd5(password);
       final data = {'username': username, 'password': passwdEnc};
@@ -102,23 +104,23 @@ class _LoginState extends State<LoginPage> {
       // 检查登录成功与否
       if (response.statusCode == 200) {
         // 模拟登录成功后更新token
-        ResponseData responseData = ResponseData.fromJson(response.data);
-        if (responseData.code == 0) {
-          UserModel user =
-              UserModel.fromJson(responseData.data as Map<String, dynamic>);
-          Get.find<GlobalController>().userId = user.userId as String;
-          Get.find<GlobalController>().token = user.token as String;
-          Get.find<GlobalController>().username = user.username as String;
-          Get.find<GlobalController>().userDisplayName =
-              user.userDisplayName as String;
-          Get.find<GlobalController>().userRole = user.userRole as String;
-          Get.find<GlobalController>().isLogin = true;
+        ResponseData respData = ResponseData.fromJson(response.data);
+        if (respData.code == 0) {
+          UserModel user = UserModel.fromJson(respData.data);
 
-          Get.offAllNamed(appRoute.rootPage);
+          await authCtl.onLogin(
+            user.userId,
+            user.username,
+            user.displayName,
+            user.userRole,
+            user.token ?? "",
+          );
+
+          Get.offAllNamed(AppRoute.rootPage);
         } else {
           Get.snackbar(
             "登录异常",
-            responseData.message.toString(),
+            respData.message.toString(),
             backgroundColor: Colors.red,
             colorText: Colors.white,
           );

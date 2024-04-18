@@ -27,19 +27,19 @@ class _HomeState extends State<HomePage> {
     List<Map<String, String>> grandItems = [
       {
         "title": "用户\n管理",
-        "app": appRoute.userPage,
+        "app": AppRoute.userPage,
       },
       {
         "title": "势力\n管理",
-        "app": appRoute.regionPage,
+        "app": AppRoute.regionPage,
       },
       {
         "title": "角色\n管理",
-        "app": appRoute.shipUserPage,
+        "app": AppRoute.shipUserPage,
       },
       {
         "title": "聚宝\n  盆",
-        "app": appRoute.cornucopiaPage,
+        "app": AppRoute.cornucopiaPage,
       },
     ];
     // List<String> scrollMessages = [

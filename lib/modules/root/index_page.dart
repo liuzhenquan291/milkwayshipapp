@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/modules/account/account_page.dart';
 import 'package:milkwayshipapp/modules/instruction/instruction_page.dart';
-import 'package:milkwayshipapp/modules/login/global_controller.dart';
 import 'package:milkwayshipapp/modules/regions/region_detail_page.dart';
 import 'package:milkwayshipapp/modules/root/home_page.dart';
 
@@ -37,14 +37,12 @@ class _IndexState extends State<IndexPage> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalController gc = Get.find<GlobalController>();
-    String userDisplayName = gc.userDisplayName as String;
-    // final HomeController controller = Get.put(HomeController());
+    String displayName = Get.find<AuthService>().displayName as String;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('$userDisplayName, 您好!'),
+          title: Text('$displayName, 您好!'),
         ),
         body: PageView(
           controller: _pageController, // 可以添加参数配置

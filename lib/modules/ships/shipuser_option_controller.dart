@@ -149,7 +149,7 @@ class ShipUserOptionController extends GetxController {
 
   // 编辑信息
   void onOptionUpdate(OptionModel? option) {
-    Get.toNamed(appRoute.userEditPage,
+    Get.toNamed(AppRoute.userEditPage,
         parameters: {"shipuser_id": shipUserId ?? ""});
   }
 
@@ -177,20 +177,20 @@ class ShipUserOptionController extends GetxController {
   //   Get.find<GlobalController>().userId = "";
   //   Get.find<GlobalController>().token = "";
   //   Get.find<GlobalController>().username = "";
-  //   Get.find<GlobalController>().userDisplayName = "";
+  //   Get.find<GlobalController>().displayName = "";
   //   Get.find<GlobalController>().userRole = "";
   //   Get.find<GlobalController>().isLogin = false;
 
-  //   Get.offAllNamed(appRoute.rootPage);
+  //   Get.offAllNamed(AppRoute.rootPage);
   // }
 
   void onOptionOpenCornucopia(OptionModel? option) {
-    Get.toNamed(appRoute.cornucopiaNewPage,
+    Get.toNamed(AppRoute.cornucopiaNewPage,
         parameters: {"shipuser_id": shipUserId ?? ""});
   }
 
   void onOptionJoinCornucopia(OptionModel? option) {
-    Get.toNamed(appRoute.cornJoinPage,
+    Get.toNamed(AppRoute.cornJoinPage,
         parameters: {"shipuser_id": shipUserId ?? ""});
   }
 

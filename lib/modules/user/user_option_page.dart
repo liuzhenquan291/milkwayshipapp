@@ -148,7 +148,7 @@ class UserOptionPage extends GetView<UserOptionController> {
                                       // child: InkWell(
                                       //   onTap: () {
                                       //     Get.toNamed(
-                                      //       appRoute.userOptionPage,
+                                      //       AppRoute.userOptionPage,
                                       //       parameters: {
                                       //         'regionId': tempUser['id']
                                       //       },

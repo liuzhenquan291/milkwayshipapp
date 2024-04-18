@@ -1,16 +1,16 @@
 // app_bindings.dart
 
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/login/global_controller.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/server.dart';
-// import 'package:milkwayshipapp/core/utils.dart';
+import 'package:milkwayshipapp/modules/root/splash_service.dart';
 
 class AppBindings extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => GlobalController());
+    Get.putAsync(() => AuthService().init());
     Get.lazyPut(() => ApiService());
-    // Get.lazyPut(() => EncrypterController());
+    Get.lazyPut(() => SplashService());
 
     // 初始化其他控制器
     // 添加其他控制器的初始化...

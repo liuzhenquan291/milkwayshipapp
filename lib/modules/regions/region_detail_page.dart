@@ -169,7 +169,7 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                                   child: InkWell(
                                                     // onTap: () {
                                                     //   Get.toNamed(
-                                                    //     appRoute.regionOptionsPage,
+                                                    //     AppRoute.regionOptionsPage,
                                                     //     parameters: {
                                                     //       'regionId': tempUser['id']
                                                     //     },
@@ -247,14 +247,14 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                       children: [
                         ElevatedButton(
                           onPressed: () async {
-                            Get.toNamed(appRoute.regionNewPage);
+                            Get.toNamed(AppRoute.regionNewPage);
                           },
                           child: const Text('创建势力'),
                         ),
                         const SizedBox(width: 32),
                         ElevatedButton(
                           onPressed: () {
-                            Get.toNamed(appRoute.regionPage);
+                            Get.toNamed(AppRoute.regionJoin);
                           },
                           child: const Text('加入势力'),
                         ),

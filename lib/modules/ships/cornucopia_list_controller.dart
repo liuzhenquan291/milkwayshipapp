@@ -1,19 +1,19 @@
 // 聚宝盆管理页的聚宝盆列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
-import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 
 import '../../core/models/region_model.dart';
-import '../login/global_controller.dart';
+import '../../core/server.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class CornucopiaListController extends GetxController {
   // final RefreshController refreshController = RefreshController();
   CornucopiaInfosModel? cornucopiaInfos;
-  String? userDisplayName;
+  String? displayName;
   bool hasData = false;
   double userDataLength = 0.0;
   int needCorcuCnt = 0; // 需开盆角色数量
@@ -51,8 +51,7 @@ class CornucopiaListController extends GetxController {
     processingCorcuCnt =
         cornucopiaInfos?.processingCorcuDataList?.length as int;
 
-    final GlobalController gc = Get.find<GlobalController>();
-    userDisplayName = gc.userDisplayName as String;
+    displayName = Get.find<AuthService>().displayName as String;
 
     update();
   }

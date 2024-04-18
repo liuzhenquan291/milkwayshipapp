@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
 import '../../core/models/user_model.dart';
-import '../login/global_controller.dart';
+import '../../core/server.dart';
 
 const userNameExpandedFlex = 5;
 const otherExpandedFlex = 3;
 
 class UserListPage extends GetView<UserListController> {
-  final GlobalController gc = Get.find<GlobalController>();
+  final ApiService gc = Get.find<ApiService>();
 
   UserListPage({super.key});
 
@@ -165,14 +166,14 @@ class UserListPage extends GetView<UserListController> {
   // 如果点的是自己进入编辑页
   // 如果点的是别人进入用户操作页
   void _tapOnUser(String userId) {
-    final gc = Get.find<GlobalController>();
+    final gc = Get.find<AuthService>();
     if (userId == gc.userId) {
       Get.toNamed(
-        appRoute.userEditPage,
+        AppRoute.userEditPage,
       );
     } else {
       Get.toNamed(
-        appRoute.userOptionPage,
+        AppRoute.userOptionPage,
         parameters: {'userId': userId},
       );
     }

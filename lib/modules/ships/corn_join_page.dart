@@ -6,6 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../core/models/ship_cornucopia_model.dart';
 import 'corn_join_controller.dart';
 
+// ignore: must_be_immutable
 class JoinCornPage extends GetView<CornJoinController> {
   String? shipUserId;
 

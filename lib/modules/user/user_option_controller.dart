@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth_controller.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
@@ -16,7 +17,7 @@ class UserOptionController extends GetxController {
   String? userId;
 
   UserModel? userData;
-  String? userDisplayName;
+  String? displayName;
   bool hasUser = false;
   bool hasOptions = false;
   List<OptionModel> validOptions = [];
@@ -170,7 +171,7 @@ class UserOptionController extends GetxController {
 
 // 编辑信息
   void onOptionUpdate(OptionModel? option) {
-    Get.toNamed(appRoute.userEditPage, parameters: {"user_id": userId ?? ""});
+    Get.toNamed(AppRoute.userEditPage, parameters: {"user_id": userId ?? ""});
   }
 
   // // 退出登录
@@ -179,11 +180,11 @@ class UserOptionController extends GetxController {
   //   Get.find<GlobalController>().userId = "";
   //   Get.find<GlobalController>().token = "";
   //   Get.find<GlobalController>().username = "";
-  //   Get.find<GlobalController>().userDisplayName = "";
+  //   Get.find<GlobalController>().displayName = "";
   //   Get.find<GlobalController>().userRole = "";
   //   Get.find<GlobalController>().isLogin = false;
 
-  //   Get.offAllNamed(appRoute.rootPage);
+  //   Get.offAllNamed(AppRoute.rootPage);
   // }
 
   // 注销账号
@@ -198,5 +199,6 @@ class UserOptionController extends GetxController {
       url,
       myPayload,
     );
+    Get.find<AuthController>().clearToken();
   }
 }

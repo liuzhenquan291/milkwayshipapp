@@ -170,7 +170,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                                             child: InkWell(
                                               // onTap: () {
                                               //   Get.toNamed(
-                                              //     appRoute.regionOptionsPage,
+                                              //     AppRoute.regionOptionsPage,
                                               //     parameters: {
                                               //       'regionId': tempUser['id']
                                               //     },

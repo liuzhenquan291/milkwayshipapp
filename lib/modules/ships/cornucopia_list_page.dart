@@ -473,7 +473,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
   // 如果点的是别人进入用户操作页
   void _tapOnCornucopia(String cornucopiaId) {
     Get.toNamed(
-      appRoute.cornucopiaOptionPage,
+      AppRoute.cornucopiaOptionPage,
       parameters: {'cornucopiaId': cornucopiaId},
     );
   }

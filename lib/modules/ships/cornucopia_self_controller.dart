@@ -1,12 +1,11 @@
 // 聚宝盆管理页的聚宝盆列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
-import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 
-import '../login/global_controller.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../../core/server.dart';
 
 class CornucopiaSelfController extends GetxController {
   List<ShipUserModel>? shipUsers;
@@ -20,9 +19,8 @@ class CornucopiaSelfController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final gc = Get.find<GlobalController>();
-    String userId = gc.userId as String;
     final apiService = Get.find<ApiService>();
+    String userId = Get.find<AuthService>().userId ?? "";
     final response = await apiService
         .getRequest(apiUrl.shipUserListCreatePath, {'user_id': userId});
     if (response.statusCode != 200) {
@@ -41,7 +39,7 @@ class CornucopiaSelfController extends GetxController {
     dataLength = shipUsers?.length ?? 0;
 
     // final GlobalController gc = Get.find<GlobalController>();
-    // userDisplayName = gc.userDisplayName as String;
+    // displayName = gc.displayName as String;
 
     update();
   }

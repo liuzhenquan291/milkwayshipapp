@@ -1,11 +1,12 @@
 // 势力管理页的势力列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/models/region_model.dart';
-import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
-import 'package:milkwayshipapp/modules/login/global_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import '../../core/server.dart';
 
 class RegionListController extends GetxController {
   final RefreshController refreshController = RefreshController();
@@ -20,10 +21,11 @@ class RegionListController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final gc = Get.find<GlobalController>();
-    String isSelf = Get.parameters['isSelf'] ?? "";
-    String userId = isSelf != "" ? gc.userId as String : "";
     final apiService = Get.find<ApiService>();
+    final AuthService authCtl = Get.find<AuthService>();
+    String isSelf = Get.parameters['isSelf'] ?? "";
+    String userId = isSelf != "" ? authCtl.userId as String : "";
+
     final response = await apiService.getRequest(
         apiUrl.regionsCreateListPath, {'page': page, 'user_id': userId});
     if (response.statusCode != 200) {

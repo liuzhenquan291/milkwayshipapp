@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 
 import '../../core/models/user_model.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
-import '../login/global_controller.dart';
 
 class UserEditController extends GetxController {
   String? userId;
-  String? isSelf;
+  // String? isSelf;
   UserModel? userData;
   final RefreshController refreshController = RefreshController();
 
@@ -24,13 +24,17 @@ class UserEditController extends GetxController {
 
   Future<void> _loadData() async {
     final apiService = Get.find<ApiService>();
-    String userId = Get.parameters['userId'] ?? "";
-    String isSelf = Get.parameters['isSelf'] ?? "";
+    // 只有自己才能到这个页面
+    // String userId = Get.parameters['userId'] ?? "";
+    // String isSelf = Get.parameters['isSelf'] ?? "";
 
-    if (isSelf == 'true') {
-      final gc = Get.find<GlobalController>();
-      userId = gc.userId ?? "";
-    }
+    // if (isSelf == 'true') {
+    //   final gc = Get.find<GlobalController>();
+    //   userId = gc.userId ?? "";
+    // }
+    final gc = Get.find<AuthController>();
+    userId = gc.userId ?? "";
+
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userId]);
     final response = await apiService.getRequest(url, null);
     final responseData = ResponseData.fromJson(response.data);

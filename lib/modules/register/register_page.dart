@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/utils.dart';
 
 import '../../core/apps.dart';
+import '../../core/auth_controller.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
-import '../login/global_controller.dart';
 import '../login/user_model.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -141,7 +141,7 @@ class _RegisterState extends State<RegisterPage> {
                   const SizedBox(width: 16.0),
                   ElevatedButton(
                     onPressed: () async {
-                      Get.offAllNamed(appRoute.loginPage);
+                      Get.offAllNamed(AppRoute.loginPage);
                     },
                     child: const Text(
                       '返回登录',
@@ -204,6 +204,7 @@ class _RegisterState extends State<RegisterPage> {
       // 去注册
       final passwdEnc = EncrypterController().encryptMd5(password);
       final as = Get.find<ApiService>();
+      final AuthController authCtl = Get.find<AuthController>();
 
       final data = {
         "username": username,
@@ -221,14 +222,15 @@ class _RegisterState extends State<RegisterPage> {
           ResponseData resData = ResponseData.fromJson(response.data);
           if (resData.code == 0) {
             UserModel user = UserModel.fromJson(resData.data);
-            Get.find<GlobalController>().userId = user.userId;
-            Get.find<GlobalController>().token = user.token;
-            Get.find<GlobalController>().username = user.username;
-            Get.find<GlobalController>().userDisplayName = user.userDisplayName;
-            Get.find<GlobalController>().userRole = user.userRole;
-            Get.find<GlobalController>().isLogin = true;
+            await authCtl.onLogin(
+              user.userId,
+              user.username,
+              user.displayName,
+              user.userRole,
+              user.token ?? "",
+            );
 
-            Get.offAllNamed(appRoute.rootPage);
+            Get.offAllNamed(AppRoute.rootPage);
           } else {
             Get.snackbar(
               "注册异常",

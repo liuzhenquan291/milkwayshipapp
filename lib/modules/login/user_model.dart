@@ -1,10 +1,10 @@
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class UserModel {
   String? userId;
   String? username;
   String? token;
-  String? userDisplayName;
+  String? displayName;
   String? userRole;
   bool? isLogin;
 
@@ -12,7 +12,7 @@ class UserModel {
     this.userId,
     this.username,
     this.token,
-    this.userDisplayName,
+    this.displayName,
     this.userRole,
     this.isLogin,
   });
@@ -21,18 +21,18 @@ class UserModel {
     userId = json['user_id'] ?? "";
     username = json['username'] ?? "";
     token = json['token'] ?? "";
-    userDisplayName = json['user_displayname'] ?? "";
+    displayName = json['displayname'] ?? "";
     userRole = json['user_role'] ?? "";
     isLogin = true;
   }
 
-  void setToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('userId', userId ?? "");
-    await prefs.setString('token', token ?? "");
-    await prefs.setString('username', username ?? "");
-    await prefs.setString('userDisplayName', userDisplayName ?? "");
-    await prefs.setString('userRole', userRole ?? "");
-    await prefs.setBool('isLogin', isLogin ?? false);
-  }
+  // void setToken() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString('userId', userId ?? "");
+  //   await prefs.setString('token', token ?? "");
+  //   await prefs.setString('username', username ?? "");
+  //   await prefs.setString('displayName', displayName ?? "");
+  //   await prefs.setString('userRole', userRole ?? "");
+  //   await prefs.setBool('isLogin', isLogin ?? false);
+  // }
 }

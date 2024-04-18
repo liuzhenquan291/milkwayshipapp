@@ -1,11 +1,12 @@
 // 游戏角色管理的游戏角色列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
-import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
-import 'package:milkwayshipapp/modules/login/global_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import '../../core/server.dart';
 
 class ShipuserListController extends GetxController {
   final RefreshController refreshController = RefreshController();
@@ -21,10 +22,11 @@ class ShipuserListController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final gc = Get.find<GlobalController>();
-    isSelf = Get.parameters['isSelf'] ?? "";
-    String userId = isSelf == "" ? "" : gc.userId as String;
     final apiService = Get.find<ApiService>();
+    final AuthService authCtl = Get.find<AuthService>();
+    isSelf = Get.parameters['isSelf'] ?? "";
+    String userId = isSelf == "" ? "" : authCtl.userId ?? "";
+
     final response = await apiService.getRequest(
         apiUrl.shipUserListCreatePath, {'page': page, 'user_id': userId});
 

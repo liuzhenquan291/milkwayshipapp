@@ -1,10 +1,10 @@
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/server.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/models/user_model.dart';
+import '../../core/server.dart';
 
 class UserListController extends GetxController {
   final RefreshController refreshController = RefreshController();

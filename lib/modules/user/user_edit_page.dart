@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth_controller.dart';
 import 'package:milkwayshipapp/core/custom_text_field.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:dio/dio.dart' as dio;
@@ -9,7 +10,6 @@ import '../../core/models/user_model.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
 import '../../core/utils.dart';
-import '../login/global_controller.dart';
 import './user_edit_controller.dart';
 
 class UserEditPage extends StatefulWidget {
@@ -36,8 +36,7 @@ class _UserEditState extends State<UserEditPage> {
   final TextEditingController rePasswdController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final EncrypterController encrypterController =
-      Get.find<EncrypterController>();
+  final EncrypterController enc = Get.find<EncrypterController>();
   @override
   void initState() {
     super.initState();
@@ -152,7 +151,7 @@ class _UserEditState extends State<UserEditPage> {
                     // const SizedBox(width: 16.0),
                     // ElevatedButton(
                     //   onPressed: () async {
-                    //     Get.offAllNamed(appRoute.loginPage);
+                    //     Get.offAllNamed(AppRoute.loginPage);
                     //   },
                     //   child: const Text(
                     //     '修改密码',
@@ -161,17 +160,8 @@ class _UserEditState extends State<UserEditPage> {
                     ElevatedButton(
                       onPressed: () async {
                         // // 退出登录
-                        // void onOptionLogoff(OptionModel? option) {
-                        Get.find<GlobalController>().userId = "";
-                        Get.find<GlobalController>().token = "";
-                        Get.find<GlobalController>().username = "";
-                        Get.find<GlobalController>().userDisplayName = "";
-                        Get.find<GlobalController>().userRole = "";
-                        Get.find<GlobalController>().isLogin = false;
-
-                        //   Get.offAllNamed(appRoute.rootPage);
-                        // }
-                        Get.offAllNamed(appRoute.loginPage);
+                        await Get.find<AuthController>().clearToken();
+                        Get.offAllNamed(AppRoute.loginPage);
                       },
                       child: const Text(
                         '退出登录',
@@ -181,7 +171,7 @@ class _UserEditState extends State<UserEditPage> {
                     ElevatedButton(
                       onPressed: () async {
                         onOptionLogout(ctl.userData as UserModel);
-                        Get.offAllNamed(appRoute.loginPage);
+                        Get.offAllNamed(AppRoute.loginPage);
                       },
                       child: const Text(
                         '注销账号',
@@ -201,6 +191,7 @@ class _UserEditState extends State<UserEditPage> {
   void onOptionLogout(UserModel userData) {
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userData.id]);
     _defaultDeleteOption(userData, "注销账号", url, null);
+    Get.find<AuthController>().clearToken();
   }
 
   void _defaultDeleteOption(UserModel userData, String title, String optionUrl,

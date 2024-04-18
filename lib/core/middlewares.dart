@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-
-import 'package:milkwayshipapp/modules/login/global_controller.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 
 class AuthMiddleware extends GetMiddleware {
   @override
@@ -11,8 +10,9 @@ class AuthMiddleware extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
-    GlobalController c = Get.find<GlobalController>();
-    if (c.isLogin == true) {
+    // Get.putAsync(() => AuthService().init());
+    AuthService as = Get.find<AuthService>();
+    if (as.isLogin == true) {
       return super.redirect(route);
     } else {
       Future.delayed(

@@ -18,7 +18,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
         resizeToAvoidBottomInset: false,
         // appBar: AppBar(
         //   automaticallyImplyLeading: false,
-        //   title: Text('${ctl.userDisplayName}, 您好!'),
+        //   title: Text('${ctl.displayName}, 您好!'),
         // ),
         appBar: AppBar(
           automaticallyImplyLeading: true,

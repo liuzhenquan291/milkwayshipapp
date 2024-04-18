@@ -6,12 +6,9 @@ import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
-import '../login/global_controller.dart';
 
 class ShipuserListPage extends GetView<ShipuserListController> {
-  final GlobalController gc = Get.find<GlobalController>();
-
-  ShipuserListPage({super.key});
+  const ShipuserListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +113,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                           child: InkWell(
                                             onTap: () {
                                               Get.toNamed(
-                                                appRoute.shipUserOptionsPage,
+                                                AppRoute.shipUserOptionsPage,
                                                 parameters: {
                                                   'shipuser_id':
                                                       tempUser?.id ?? "",

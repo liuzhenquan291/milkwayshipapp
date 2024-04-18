@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 
 import '../../asserts/imgs.dart';
 import '../../core/apps.dart';
-import '../login/global_controller.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final gc = Get.find<GlobalController>();
+    final AuthService as = Get.find<AuthService>();
 
     final menuList = [
       {
         "title": "账号信息",
-        "app": appRoute.userEditPage,
+        "app": AppRoute.userEditPage,
       },
       {
         "title": "势力信息",
-        "app": appRoute.regionPage,
+        "app": AppRoute.regionPage,
       },
       {
         "title": "角色信息",
-        "app": appRoute.shipUserPage,
+        "app": AppRoute.shipUserPage,
       },
       {
         "title": "聚宝盆信息",
-        "app": appRoute.cornucopiaSelfPage,
+        "app": AppRoute.cornucopiaSelfPage,
       },
       {
         "title": "设置",
-        "app": appRoute.settingsPage,
+        "app": AppRoute.settingsPage,
       }
     ];
 
@@ -61,12 +61,12 @@ class AccountPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${gc.userDisplayName}, 您好!",
+                      "${as.displayName}, 您好!",
                       style: const TextStyle(fontSize: 16),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "登录账号: ${gc.username}",
+                      "登录账号: ${as.username}",
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],
