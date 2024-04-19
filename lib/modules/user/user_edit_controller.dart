@@ -23,7 +23,7 @@ class UserEditController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     // 只有自己才能到这个页面
     // String userId = Get.parameters['userId'] ?? "";
     // String isSelf = Get.parameters['isSelf'] ?? "";
@@ -32,8 +32,7 @@ class UserEditController extends GetxController {
     //   final gc = Get.find<GlobalController>();
     //   userId = gc.userId ?? "";
     // }
-    final gc = Get.find<AuthController>();
-    userId = gc.userId ?? "";
+    userId = await StorageHelper.get(StorageKeys.userIdKey);
 
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userId]);
     final response = await apiService.getRequest(url, null);

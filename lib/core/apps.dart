@@ -35,7 +35,6 @@ import '../modules/ships/cornucopia_self_page.dart';
 import '../modules/ships/shipuser_option_page.dart';
 import '../modules/user/user_page.dart';
 import 'common_controller.dart';
-import 'auth_controller.dart';
 import 'middlewares.dart';
 import 'utils.dart';
 
@@ -109,7 +108,6 @@ abstract class AppRoute {
         middlewares: [AuthMiddleware(priority: 0)],
         binding: BindingsBuilder(() {
           Get.lazyPut(() => RegionDetailController());
-          Get.lazyPut(() => AuthController());
         }),
         children: [
           GetPage(
@@ -132,7 +130,6 @@ abstract class AppRoute {
         name: AppRoute.loginPage,
         binding: BindingsBuilder(() {
           Get.lazyPut(() => EncrypterController());
-          Get.lazyPut(() => AuthController());
         }),
         page: () => const LoginPage(),
       ),
@@ -142,7 +139,6 @@ abstract class AppRoute {
         page: () => const RegisterPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => EncrypterController());
-          Get.lazyPut(() => AuthController());
         }),
       ),
       // 用户管理页
@@ -159,7 +155,6 @@ abstract class AppRoute {
         page: () => UserOptionPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => UserOptionController());
-          Get.lazyPut(() => AuthController());
         }),
       ),
       // 用户信息编辑页-- 编辑自己;
@@ -169,7 +164,6 @@ abstract class AppRoute {
           binding: BindingsBuilder(() {
             Get.lazyPut(() => UserEditController());
             Get.lazyPut(() => EncrypterController());
-            Get.lazyPut(() => AuthController());
           })),
       // 势力管理页
       GetPage(

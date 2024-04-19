@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/auth_controller.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -41,7 +42,7 @@ class UserOptionController extends GetxController {
 
   // dio.Response? response;
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     userId = Get.parameters['userId'] ?? "";
 
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userId]);
@@ -188,7 +189,7 @@ class UserOptionController extends GetxController {
   // }
 
   // 注销账号
-  void onOptionLogout(OptionModel? option) {
+  void onOptionLogout(OptionModel? option) async {
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userId]);
     final Map<String, dynamic> myPayload = {
       "user_id": userId,
@@ -199,6 +200,7 @@ class UserOptionController extends GetxController {
       url,
       myPayload,
     );
-    Get.find<AuthController>().clearToken();
+    await StorageHelper.removeAll();
+    await Get.find<AuthService>().clearToken();
   }
 }

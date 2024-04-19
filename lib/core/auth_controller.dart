@@ -1,63 +1,53 @@
-import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthController extends GetxController {
-  String? userId = '';
-  String token = '';
-  bool _isLogin = false;
-  String? username = '';
-  String? displayName = '';
-  String? userRole = '';
-  bool get isLogin => _isLogin;
-
+class StorageKeys {
   static String tokenKey = 'token';
-  String userIdKey = 'userId';
-  String usernameKey = 'username';
-  String displayNameKey = 'displayName';
-  String userRoleKey = 'userRole';
+  static String userIdKey = 'userId';
+  static String usernameKey = 'username';
+  static String displayNameKey = 'displayName';
+  static String userRoleKey = 'userRole';
+}
 
-  Future<AuthController> init() async {
-    final SharedPreferences preferences = await SharedPreferences.getInstance();
-    userId = preferences.getString(userIdKey);
-    token = preferences.getString(tokenKey) ?? "";
-    username = preferences.getString(usernameKey);
-    displayName = preferences.getString(displayNameKey);
-    userRole = preferences.getString(userRoleKey);
-    if (token.isNotEmpty) {
-      _isLogin = true;
-    }
-    return this;
+class StorageHelper {
+  static SharedPreferences? _prefs;
+
+  static Future<dynamic> _getInstance() async =>
+      _prefs = await SharedPreferences.getInstance();
+
+  static void set(String key, dynamic value) async {
+    await _getInstance();
+    _prefs?.setString(key, value);
   }
 
-  // 登录
-  Future<void> onLogin(
+  static Future<String?> get(String key) async {
+    await _getInstance();
+    return _prefs?.getString(key);
+  }
+
+  static void remove(String key) async {
+    await _getInstance();
+    _prefs?.remove(key);
+  }
+
+  static Future<void> setAll(
     String? userId,
     String? username,
     String? displayName,
     String? userRole,
     String token,
   ) async {
-    final preferences = await SharedPreferences.getInstance();
-    preferences.setString(userIdKey, this.userId ?? "");
-    preferences.setString(usernameKey, this.username ?? "");
-    preferences.setString(displayNameKey, this.displayName ?? "");
-    preferences.setString(userRoleKey, this.userRole ?? "");
-    preferences.setString(tokenKey, this.token);
-    await init();
-
-    update();
+    set(StorageKeys.userIdKey, userId);
+    set(StorageKeys.usernameKey, username);
+    set(StorageKeys.displayNameKey, displayName);
+    set(StorageKeys.userRoleKey, userRole);
+    set(StorageKeys.tokenKey, token);
   }
 
-  // 登出
-  Future<void> clearToken() async {
-    final preferences = await SharedPreferences.getInstance();
-    preferences.remove(userIdKey);
-    preferences.remove(usernameKey);
-    preferences.remove(displayNameKey);
-    preferences.remove(userRoleKey);
-    preferences.remove(tokenKey);
-
-    await init();
-    update();
+  static Future<void> removeAll() async {
+    remove(StorageKeys.userIdKey);
+    remove(StorageKeys.usernameKey);
+    remove(StorageKeys.displayNameKey);
+    remove(StorageKeys.userRoleKey);
+    remove(StorageKeys.tokenKey);
   }
 }

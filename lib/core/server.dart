@@ -92,7 +92,7 @@ class ApiService {
   set token(String? newToken) {
     _token = newToken;
     if (_token != null) {
-      _dio.options.headers['Authorization'] = 'Bearer $_token';
+      _dio.options.headers['Authorization'] = 'Token $_token';
     } else {
       _dio.options.headers.remove('Authorization');
     }

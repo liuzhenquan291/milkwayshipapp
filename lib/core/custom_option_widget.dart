@@ -19,7 +19,7 @@ void customePostOption(
     onConfirm: () async {
       Get.back();
 
-      final as = Get.find<ApiService>();
+      final as = ApiService();
       final response = await as.postRequest(optionUrl, payload);
       final responseData = ResponseData.fromJson(response.data);
 
@@ -83,7 +83,7 @@ void editablePostOption(
 
       payload?[infoName] = ctl.text;
 
-      final as = Get.find<ApiService>();
+      final as = ApiService();
       final response = await as.postRequest(optionUrl, payload);
       final responseData = ResponseData.fromJson(response.data);
 
@@ -130,7 +130,7 @@ void customeDeleteOption(
     onConfirm: () async {
       Get.back();
 
-      final as = Get.find<ApiService>();
+      final as = ApiService();
       final response = await as.deleteRequest(optionUrl, payload);
       final responseData = ResponseData.fromJson(response?.data);
 
@@ -179,7 +179,7 @@ ResponseData? customePostOptionWithResp(
     onConfirm: () async {
       Get.back();
 
-      final as = Get.find<ApiService>();
+      final as = ApiService();
       final response = await as.postRequest(optionUrl, payload);
       final responseData = ResponseData.fromJson(response.data);
 

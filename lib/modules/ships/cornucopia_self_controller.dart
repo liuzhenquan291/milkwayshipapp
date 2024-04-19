@@ -19,7 +19,7 @@ class CornucopiaSelfController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     String userId = Get.find<AuthService>().userId ?? "";
     final response = await apiService
         .getRequest(apiUrl.shipUserListCreatePath, {'user_id': userId});

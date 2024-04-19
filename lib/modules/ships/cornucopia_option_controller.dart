@@ -36,7 +36,7 @@ class CornucopiaOptionController extends GetxController {
 
   Future<void> _loadData() async {
     String cornucopiaId = Get.parameters['cornucopiaId'] ?? "";
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     final url =
         sprintf(apiUrl.cornucopiasRetrieveUpdateDestroyPath, [cornucopiaId]);
     final response = await apiService.getRequest(url, null);
@@ -138,7 +138,7 @@ class CornucopiaOptionController extends GetxController {
         // Get.back();
       },
       onConfirm: () {
-        // final apiService = Get.find<ApiService>();
+        // final apiService = ApiService();
         // late Map<String, dynamic> myPayload;
         // if (payload != null) {
         //   myPayload = payload;

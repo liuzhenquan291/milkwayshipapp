@@ -21,7 +21,7 @@ class RegionListController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     final AuthService authCtl = Get.find<AuthService>();
     String isSelf = Get.parameters['isSelf'] ?? "";
     String userId = isSelf != "" ? authCtl.userId as String : "";

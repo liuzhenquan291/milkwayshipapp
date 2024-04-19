@@ -28,7 +28,7 @@ class CornucopiaListController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     final response =
         await apiService.getRequest(apiUrl.cornucopiaInfosPath, null);
     if (response.statusCode != 200) {

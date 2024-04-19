@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../core/apps.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
-import '../login/user_model.dart';
 
 class RegionNewPage extends StatefulWidget {
   const RegionNewPage({Key? key}) : super(key: key);
@@ -160,7 +159,7 @@ class _RegionNewPageState extends State<RegionNewPage> {
       );
     } else {
       // 去注册
-      final apiService = Get.find<ApiService>();
+      final apiService = ApiService();
 
       final data = {
         "name": name,

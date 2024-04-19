@@ -20,7 +20,7 @@ class RegionDetailController extends GetxController {
 
   // dio.Response? response;
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     final response = await apiService.getRequest(apiUrl.regionByUser, null);
     if (response.statusCode != 200) {
       // TODO: 弹窗

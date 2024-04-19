@@ -4,34 +4,29 @@ import 'package:get/get.dart';
 import 'splash_service.dart';
 
 class SplashView extends GetView<SplashService> {
-  SplashView({Key? key}) : super(key: key);
+  const SplashView({Key? key}) : super(key: key);
 
-  // @override
-  // String toolbarTitle() {
-  //   return "";
-  // }
+  String toolbarTitle() {
+    return "";
+  }
 
-  // @override
-  // bool hideToolbar() {
-  //   return true;
-  // }
+  bool hideToolbar() {
+    return true;
+  }
 
-  @override
-  Widget buildBody(BuildContext context, SplashService _controller) {
-    return Container(
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Obx(
-              () => Text(
-                _controller.welcomeStr[_controller.activeStr.value],
-                style: const TextStyle(fontSize: 20),
-              ),
+  Widget buildBody(BuildContext context, SplashService controller) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Obx(
+            () => Text(
+              controller.welcomeStr[controller.activeStr.value],
+              style: const TextStyle(fontSize: 20),
             ),
-            const CircularProgressIndicator(),
-          ],
-        ),
+          ),
+          const CircularProgressIndicator(),
+        ],
       ),
     );
   }
@@ -41,7 +36,7 @@ class SplashView extends GetView<SplashService> {
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: true,
-        title: const Text('闪屏'),
+        title: const Text('正在启动, 请稍后'),
         // centerTitle: true,
       ),
       body: buildBody(context, controller),

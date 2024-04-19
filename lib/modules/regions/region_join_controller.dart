@@ -43,7 +43,7 @@ class RegionJoinController extends GetxController {
 
   // dio.Response? response;
   Future<void> _loadData() async {
-    final as = Get.find<ApiService>();
+    final as = ApiService();
     final params = {'can_join': true};
     final response = await as.getRequest(apiUrl.regionsCreateListPath, params);
     final resData = ResponseData.fromJson(response.data);

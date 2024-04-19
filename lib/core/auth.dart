@@ -27,24 +27,14 @@ class AuthService extends GetxService {
     userRole = preferences.getString(userRoleKey);
     if (token.isNotEmpty) {
       _isLogin = true;
+      final ApiService as = ApiService();
+      as.token = token;
     }
     return this;
   }
 
   // 登录
-  Future<void> onLogin(
-    String? userId,
-    String? username,
-    String? displayName,
-    String? userRole,
-    String token,
-  ) async {
-    final preferences = await SharedPreferences.getInstance();
-    preferences.setString(userIdKey, this.userId ?? "");
-    preferences.setString(usernameKey, this.username ?? "");
-    preferences.setString(displayNameKey, this.displayName ?? "");
-    preferences.setString(userRoleKey, this.userRole ?? "");
-    preferences.setString(tokenKey, this.token);
+  Future<void> onLogin() async {
     await init();
   }
 

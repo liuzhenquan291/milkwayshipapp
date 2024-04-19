@@ -40,11 +40,11 @@ class MyApp extends StatelessWidget {
           key: const ValueKey('initFuture'),
           future: Get.find<SplashService>().init(),
           builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-            print("snapshot=${snapshot.connectionState}");
+            // print("snapshot=${snapshot.connectionState}");
             if (snapshot.connectionState == ConnectionState.done) {
               return child ?? const SizedBox.shrink();
             }
-            return SplashView();
+            return const SplashView();
           },
         );
       },

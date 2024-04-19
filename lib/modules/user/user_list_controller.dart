@@ -28,7 +28,7 @@ class UserListController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     final totalOptionsResponse =
         await apiService.getRequest(apiUrl.userTotalOptions, null);
     if (totalOptionsResponse.statusCode != 200) {

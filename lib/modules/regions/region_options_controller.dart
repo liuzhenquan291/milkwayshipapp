@@ -31,7 +31,7 @@ class RegionOptionsController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     String? regionId = Get.parameters['regionId'];
     final url = sprintf(apiUrl.regionsRetrieveUpdateDestroyPath, [regionId]);
     final response = await apiService.getRequest(url, null);

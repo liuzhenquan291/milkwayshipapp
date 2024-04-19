@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/auth_controller.dart';
 
 import '../../core/apps.dart';
@@ -94,8 +95,8 @@ class _LoginState extends State<LoginPage> {
     }
 
     try {
-      ApiService apiService = Get.find<ApiService>();
-      AuthController authCtl = Get.find<AuthController>();
+      ApiService apiService = ApiService();
+      final AuthService au = Get.find<AuthService>();
       final EncrypterController enc = Get.find<EncrypterController>();
       final passwdEnc = enc.encryptMd5(password);
       final data = {'username': username, 'password': passwdEnc};
@@ -108,7 +109,7 @@ class _LoginState extends State<LoginPage> {
         if (respData.code == 0) {
           UserModel user = UserModel.fromJson(respData.data);
 
-          await authCtl.onLogin(
+          await StorageHelper.setAll(
             user.userId,
             user.username,
             user.displayName,
@@ -116,6 +117,7 @@ class _LoginState extends State<LoginPage> {
             user.token ?? "",
           );
 
+          await au.onLogin();
           Get.offAllNamed(AppRoute.rootPage);
         } else {
           Get.snackbar(

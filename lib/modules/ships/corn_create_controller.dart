@@ -42,7 +42,7 @@ class CornCreateController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     shipUserId = Get.parameters['shipuser_id'];
     final url = sprintf(apiUrl.shipUserRetriveUpdateDestroyPath, [shipUserId]);
     final response = await apiService.getRequest(url, null);
@@ -59,7 +59,7 @@ class CornCreateController extends GetxController {
   }
 
   void onCreate() {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     var toJoin = false;
     if (join == '是') {
       toJoin = true;

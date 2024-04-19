@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 
 import 'package:milkwayshipapp/core/utils.dart';
 
@@ -203,8 +204,8 @@ class _RegisterState extends State<RegisterPage> {
     } else {
       // 去注册
       final passwdEnc = EncrypterController().encryptMd5(password);
-      final as = Get.find<ApiService>();
-      final AuthController authCtl = Get.find<AuthController>();
+      final as = ApiService();
+      final au = Get.find<AuthService>();
 
       final data = {
         "username": username,
@@ -222,13 +223,15 @@ class _RegisterState extends State<RegisterPage> {
           ResponseData resData = ResponseData.fromJson(response.data);
           if (resData.code == 0) {
             UserModel user = UserModel.fromJson(resData.data);
-            await authCtl.onLogin(
+
+            await StorageHelper.setAll(
               user.userId,
               user.username,
               user.displayName,
               user.userRole,
               user.token ?? "",
             );
+            await au.onLogin();
 
             Get.offAllNamed(AppRoute.rootPage);
           } else {

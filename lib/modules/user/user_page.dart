@@ -12,7 +12,7 @@ const userNameExpandedFlex = 5;
 const otherExpandedFlex = 3;
 
 class UserListPage extends GetView<UserListController> {
-  final ApiService gc = Get.find<ApiService>();
+  final ApiService gc = ApiService();
 
   UserListPage({super.key});
 

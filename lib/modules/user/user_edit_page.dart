@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/auth_controller.dart';
 import 'package:milkwayshipapp/core/custom_text_field.dart';
 import 'package:sprintf/sprintf.dart';
@@ -160,7 +161,8 @@ class _UserEditState extends State<UserEditPage> {
                     ElevatedButton(
                       onPressed: () async {
                         // // 退出登录
-                        await Get.find<AuthController>().clearToken();
+                        await StorageHelper.removeAll();
+                        await Get.find<AuthService>().clearToken();
                         Get.offAllNamed(AppRoute.loginPage);
                       },
                       child: const Text(
@@ -171,7 +173,6 @@ class _UserEditState extends State<UserEditPage> {
                     ElevatedButton(
                       onPressed: () async {
                         onOptionLogout(ctl.userData as UserModel);
-                        Get.offAllNamed(AppRoute.loginPage);
                       },
                       child: const Text(
                         '注销账号',
@@ -188,10 +189,11 @@ class _UserEditState extends State<UserEditPage> {
   }
 
 // 注销账号
-  void onOptionLogout(UserModel userData) {
+  void onOptionLogout(UserModel userData) async {
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userData.id]);
     _defaultDeleteOption(userData, "注销账号", url, null);
-    Get.find<AuthController>().clearToken();
+    await StorageHelper.removeAll();
+    await Get.find<AuthService>().clearToken();
   }
 
   void _defaultDeleteOption(UserModel userData, String title, String optionUrl,
@@ -206,7 +208,7 @@ class _UserEditState extends State<UserEditPage> {
         Get.back();
       },
       onConfirm: () {
-        final apiService = Get.find<ApiService>();
+        final apiService = ApiService();
         late Map<String, dynamic> myPayload;
         if (payload != null) {
           myPayload = payload;

@@ -26,7 +26,7 @@ class CornJoinController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    final apiService = Get.find<ApiService>();
+    final apiService = ApiService();
     shipUserId = Get.parameters['shipuser_id'];
     final url = sprintf(apiUrl.shipUserRetriveUpdateDestroyPath, [shipUserId]);
     final response = await apiService.getRequest(url, null);
