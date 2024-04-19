@@ -71,10 +71,10 @@ class ApiUrl {
   String regionsCreateListPath = "$_regionApp/regions/";
 // 势力详情、更新、注销
   String regionsRetrieveUpdateDestroyPath = "$_regionApp/regions/%s/";
-// 根据 token 查询对应用户的势力信息
-  String regionByUser = "$_regionApp/approve/";
-// 管理员审核通过新势力申请
-  String regionsApprovePath = "$_regionApp/set_manager/";
-// 设置势力管理员
-  String regionsSetManagerPath = "$_regionApp/regions/byuser/";
+  // 管理员审核通过新势力申请
+  String regionsApprovePath = "$_regionApp/approve/";
+  // 设置势力管理员
+  String regionsSetManagerPath = "$_regionApp/set_manager/";
+  // 根据 token 查询对应用户的势力信息
+  String regionByUser = "$_regionApp/regions/byuser/";
 }

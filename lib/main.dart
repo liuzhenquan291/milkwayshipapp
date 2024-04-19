@@ -33,9 +33,6 @@ class MyApp extends StatelessWidget {
       initialRoute: initialRoute,
       getPages: onGetPages == null ? [] : onGetPages!(),
       builder: (context, child) {
-        // final botToastBuilder = BotToastInit();
-        // child = botToastBuilder(context, child);
-
         return FutureBuilder<void>(
           key: const ValueKey('initFuture'),
           future: Get.find<SplashService>().init(),
