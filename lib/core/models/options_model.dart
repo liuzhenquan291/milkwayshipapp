@@ -22,3 +22,19 @@ class OptionModel {
     return lst;
   }
 }
+
+class TotalOptionModel {
+  String? userId;
+  String? userRole;
+  String? optionsStr;
+  List<OptionModel>? options;
+
+  TotalOptionModel.fromJson(Map<String, dynamic> json) {
+    userId = json['user_id'];
+    userRole = json['user_role'];
+    optionsStr = json['options_str'];
+    options = json['options'] != null
+        ? OptionModel.fromJsonToList(json['options'] ?? {})
+        : [];
+  }
+}

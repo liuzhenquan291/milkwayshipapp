@@ -1,4 +1,7 @@
-const myIp = "192.168.162.74";
+const myIp = "192.168.162.100";
+const myPort = 8008;
+// const myIp = "59.110.1.208";
+// const myPort = 8002;
 
 ApiUrl apiUrl = ApiUrl();
 
@@ -10,7 +13,7 @@ const _shipApp = "/ship";
 const _regionApp = "/region";
 
 class ApiUrl {
-  final baseUrl = "http://$myIp:8008";
+  final baseUrl = "http://$myIp:$myPort";
 
   //// 访问后端 user 应用
   // 登录
@@ -77,4 +80,6 @@ class ApiUrl {
   String regionsSetManagerPath = "$_regionApp/set_manager/";
   // 根据 token 查询对应用户的势力信息
   String regionByUser = "$_regionApp/regions/byuser/";
+  // 根据用户身份获取可对势力执行的所有操作
+  String regionTotalOptions = "$_regionApp/total_options/";
 }

@@ -67,6 +67,9 @@ class _IndexState extends State<IndexPage> {
           onTap: (index) {
             if (_selectedIndex == index) return;
             _selectedIndex = index;
+            // if (_selectedIndex == 1) {
+            //   tabs[_selectedIndex].update();
+            // }
             _pageController.jumpToPage(index);
             setState(() {});
           },

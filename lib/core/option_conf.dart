@@ -60,6 +60,7 @@ class RegionsOptionConf {
   static const String UPDATE = 'update';
   static const String SET_MANAGER = 'set_manager';
   static const String JOIN = 'join';
+  static const String Add = 'new_add';
 
   // 势力管理页可执行操作
   static const List<String> _userOptionPageOptions = [
