@@ -34,6 +34,13 @@ class UserOptionController extends GetxController {
     _loadData();
   }
 
+  void reloadData() async {
+    hasUser = false;
+    hasOptions = false;
+    validOptions = [];
+    _loadData();
+  }
+
   @override
   void dispose() {
     txc.dispose();
@@ -110,7 +117,7 @@ class UserOptionController extends GetxController {
       //   break;
     }
     if (result == true) {
-      _loadData();
+      reloadData();
     }
   }
 

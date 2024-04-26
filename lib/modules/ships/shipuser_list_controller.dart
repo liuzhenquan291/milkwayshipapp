@@ -18,10 +18,17 @@ class ShipuserListController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadData();
+    _loadData();
   }
 
-  Future<void> loadData() async {
+  void reload() async {
+    page = 1;
+    hasUsers = false;
+    shipUsers = [];
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
     final apiService = ApiService();
     final AuthService authCtl = Get.find<AuthService>();
     isSelf = Get.parameters['isSelf'] ?? "";

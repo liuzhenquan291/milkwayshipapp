@@ -28,18 +28,18 @@ class UserListPage extends GetView<UserListController> {
           ),
           body: Column(
             children: [
-              Row(children: [
-                Expanded(
-                  child: Container(
-                    height: 100,
-                    // width: double.infinity,
-                    padding: const EdgeInsets.all(16.0),
-                    color: Colors.black12,
-                    child: Text(
-                        "您的身份是: ${ctl.userRole}, 您可对用户执行${ctl.totalOptions}等操作。"),
-                  ),
-                )
-              ]),
+              // Row(children: [
+              //   Expanded(
+              //     child: Container(
+              //       height: 100,
+              //       // width: double.infinity,
+              //       padding: const EdgeInsets.all(16.0),
+              //       color: Colors.black12,
+              //       child: Text(
+              //           "您的身份是: ${ctl.userRole}, 您可对用户执行${ctl.totalOptions}等操作。"),
+              //     ),
+              //   )
+              // ]),
               const SizedBox(height: 16),
               Row(
                 children: const [
@@ -181,7 +181,7 @@ class UserListPage extends GetView<UserListController> {
       );
     }
     if (result == true) {
-      controller.loadData();
+      controller.reloadData();
     }
   }
 }

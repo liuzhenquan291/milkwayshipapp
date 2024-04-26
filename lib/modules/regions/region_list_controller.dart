@@ -17,10 +17,16 @@ class RegionListController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadData();
+    _loadData();
   }
 
-  Future<void> loadData() async {
+  void reloadData() async {
+    regionList = [];
+    page = 1;
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
     final apiService = ApiService();
     final AuthService authCtl = Get.find<AuthService>();
     String isSelf = Get.parameters['isSelf'] ?? "";

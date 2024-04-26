@@ -31,17 +31,17 @@ class RegionPage extends GetView<RegionListController> {
         ),
         body: Column(
           children: [
-            Row(children: [
-              Expanded(
-                child: Container(
-                  height: 100,
-                  // width: double.infinity,
-                  padding: const EdgeInsets.all(16.0),
-                  color: Colors.black12,
-                  child: const Text("您的身份是: 管理员, 您可对势力审核、禁用、设置管理员"),
-                ),
-              )
-            ]),
+            // Row(children: [
+            //   Expanded(
+            //     child: Container(
+            //       height: 100,
+            //       // width: double.infinity,
+            //       padding: const EdgeInsets.all(16.0),
+            //       color: Colors.black12,
+            //       child: const Text("您的身份是: 管理员, 您可对势力审核、禁用、设置管理员"),
+            //     ),
+            //   )
+            // ]),
             const SizedBox(height: 16),
             Row(
               children: const [
@@ -169,7 +169,7 @@ class RegionPage extends GetView<RegionListController> {
       parameters: {'regionId': regionId},
     );
     if (result == true) {
-      controller.loadData();
+      controller.reloadData();
     }
   }
 }

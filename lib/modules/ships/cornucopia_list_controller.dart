@@ -42,6 +42,9 @@ class CornucopiaListController extends GetxController {
       return;
     }
 
+    if (responseData.data == null) {
+      return;
+    }
     hasData = true;
     cornucopiaInfos = CornucopiaInfosModel.fromJson(responseData.data);
     userDataLength = cornucopiaInfos?.shipUserData?.length.toDouble() as double;

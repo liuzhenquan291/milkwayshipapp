@@ -18,10 +18,19 @@ class UserListController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    loadData();
+    _loadData();
   }
 
-  Future<void> loadData() async {
+  void reloadData() async {
+    userList = [];
+    hasUser = false;
+    userRole = '';
+    totalOptions = '';
+    page = 1;
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
     final apiService = ApiService();
     final totalOptionsResponse =
         await apiService.getRequest(apiUrl.userTotalOptions, null);

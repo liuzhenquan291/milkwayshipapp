@@ -28,6 +28,12 @@ class ShipUserOptionController extends GetxController {
     _loadData();
   }
 
+  void _reloadData() async {
+    hasOptions = false;
+    validOptions = [];
+    _loadData();
+  }
+
   // dio.Response? response;
   Future<void> _loadData() async {
     final apiService = ApiService();
@@ -233,7 +239,7 @@ class ShipUserOptionController extends GetxController {
     myPayload["updated_time"] = shipUserData?.updatedTime;
     bool result = await customePostOption(title, optionUrl, myPayload);
     if (result == true) {
-      _loadData();
+      _reloadData();
     }
     return result;
   }
@@ -249,7 +255,7 @@ class ShipUserOptionController extends GetxController {
     myPayload["updated_time"] = shipUserData?.updatedTime;
     bool result = await customeDeleteOption(title, optionUrl, myPayload);
     if (result == true) {
-      _loadData();
+      _reloadData();
     }
     return result;
   }

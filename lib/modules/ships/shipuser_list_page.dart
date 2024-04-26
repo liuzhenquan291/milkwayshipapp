@@ -21,17 +21,17 @@ class ShipuserListPage extends GetView<ShipuserListController> {
         ),
         body: Column(
           children: [
-            Row(children: [
-              Expanded(
-                child: Container(
-                  height: 100,
-                  // width: double.infinity,
-                  padding: const EdgeInsets.all(16.0),
-                  color: Colors.black12,
-                  child: const Text("您的身份是: 管理员, 您可对角色审核、禁用、设置管理员"),
-                ),
-              )
-            ]),
+            // Row(children: [
+            //   Expanded(
+            //     child: Container(
+            //       height: 100,
+            //       // width: double.infinity,
+            //       padding: const EdgeInsets.all(16.0),
+            //       color: Colors.black12,
+            //       child: const Text("您的身份是: 管理员, 您可对角色审核、禁用、设置管理员"),
+            //     ),
+            //   )
+            // ]),
             const SizedBox(height: 16),
             Row(
               children: const [
@@ -120,7 +120,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                                 },
                                               );
                                               if (result == true) {
-                                                controller.loadData();
+                                                controller.reload();
                                               }
                                             },
                                             child: Text(

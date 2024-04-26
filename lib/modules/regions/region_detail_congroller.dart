@@ -27,6 +27,16 @@ class RegionDetailController extends GetxController {
     _loadData();
   }
 
+  void _reloadData() async {
+    listOptions = [];
+    hasRegion = false;
+    hasUser = false;
+    hasTotalOption = false;
+    bool hasAddRegionOption = false;
+    bool hasJoinRegionOption = false;
+    _loadData();
+  }
+
   // dio.Response? response;
   Future<void> _loadData() async {
     final apiService = ApiService();
@@ -69,7 +79,7 @@ class RegionDetailController extends GetxController {
           onPressed: () async {
             bool result = await Get.toNamed(AppRoute.regionNewPage);
             if (result == true) {
-              _loadData();
+              _reloadData();
             }
           },
           child: const Text('创建势力'),
@@ -85,7 +95,7 @@ class RegionDetailController extends GetxController {
           onPressed: () async {
             bool result = await Get.toNamed(AppRoute.regionJoin);
             if (result == true) {
-              _loadData();
+              _reloadData();
             }
           },
           child: const Text('加入势力'),
