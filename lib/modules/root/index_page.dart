@@ -67,9 +67,10 @@ class _IndexState extends State<IndexPage> {
           onTap: (index) {
             if (_selectedIndex == index) return;
             _selectedIndex = index;
-            // if (_selectedIndex == 1) {
-            //   tabs[_selectedIndex].update();
-            // }
+            if (_selectedIndex == 1) {
+              tabs[_selectedIndex] =
+                  const EdenKeepAliveWrapper(child: RegionDetailPage());
+            }
             _pageController.jumpToPage(index);
             setState(() {});
           },

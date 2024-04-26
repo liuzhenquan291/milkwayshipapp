@@ -108,12 +108,9 @@ class RegionPage extends GetView<RegionListController> {
                                       children: [
                                         Expanded(
                                           child: InkWell(
-                                            onTap: () {
-                                              Get.toNamed(
-                                                  AppRoute.regionOptionsPage,
-                                                  parameters: {
-                                                    'regionId': tmp.id
-                                                  });
+                                            onTap: () async {
+                                              String regionId = tmp.id;
+                                              _tapOnRegion(regionId);
                                             },
                                             child: Text(
                                               tmp.name,
@@ -162,5 +159,17 @@ class RegionPage extends GetView<RegionListController> {
         // ),
       );
     });
+  }
+
+  // 点击势力是
+  void _tapOnRegion(String regionId) async {
+    bool? result = false;
+    result = await Get.toNamed(
+      AppRoute.regionOptionsPage,
+      parameters: {'regionId': regionId},
+    );
+    if (result == true) {
+      controller.loadData();
+    }
   }
 }

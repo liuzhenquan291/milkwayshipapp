@@ -18,16 +18,10 @@ class UserListController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _loadData();
-    // scrollController.addListener(() {
-    //   if (scrollController.position.pixels ==
-    //       scrollController.position.maxScrollExtent) {
-    //     _loadData();
-    //   }
-    // });
+    loadData();
   }
 
-  Future<void> _loadData() async {
+  Future<void> loadData() async {
     final apiService = ApiService();
     final totalOptionsResponse =
         await apiService.getRequest(apiUrl.userTotalOptions, null);
@@ -38,8 +32,10 @@ class UserListController extends GetxController {
     userRole = res1Data.data["user_role"] as String;
     totalOptions = res1Data.data["options_str"] as String;
 
-    final response =
-        await apiService.getRequest(apiUrl.useListCreatePath, {'page': page});
+    final response = await apiService.getRequest(
+      apiUrl.useListCreatePath,
+      {'page': page},
+    );
     if (response.statusCode != 200) {
       return;
     }

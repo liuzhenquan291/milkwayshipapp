@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/server.dart';
 
-void customePostOption(
+Future<bool> customePostOption(
   String title,
   String optionUrl,
   Map<String, dynamic>? payload,
-) {
+) async {
+  bool result = false;
   Get.defaultDialog(
     title: title,
     middleText: '确定要执行该操作吗？',
@@ -45,20 +46,23 @@ void customePostOption(
             child: const Text('关闭'),
           ),
         );
+        result = true;
       }
     },
   );
+  return result;
 }
 
 // 可输入额外信息的 option
-void editablePostOption(
+Future<bool> editablePostOption(
   String title,
   String optionUrl,
   String infoCue, // 提示词
   String infoName, // 传参名称
   TextEditingController ctl,
   Map<String, dynamic>? payload,
-) {
+) async {
+  bool result = false;
   Get.defaultDialog(
     title: title,
     middleText: '确定要执行该操作吗？',
@@ -108,16 +112,19 @@ void editablePostOption(
             child: const Text('关闭'),
           ),
         );
+        result = true;
       }
     },
   );
+  return result;
 }
 
-void customeDeleteOption(
+Future<bool> customeDeleteOption(
   String title,
   String optionUrl,
   Map<String, dynamic>? payload,
-) {
+) async {
+  bool result = false;
   Get.defaultDialog(
     title: title,
     middleText: '确定要执行该操作吗？',
@@ -156,9 +163,11 @@ void customeDeleteOption(
             child: const Text('关闭'),
           ),
         );
+        result = true;
       }
     },
   );
+  return result;
 }
 
 ResponseData? customePostOptionWithResp(

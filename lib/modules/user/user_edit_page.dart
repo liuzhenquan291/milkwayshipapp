@@ -24,6 +24,7 @@ class UserEditPage extends StatefulWidget {
 }
 
 class _UserEditState extends State<UserEditPage> {
+  bool ifEdited = false;
   final TextEditingController displayNameController = TextEditingController();
   final TextEditingController wxDisNameController = TextEditingController();
   final TextEditingController wxGNameController = TextEditingController();
@@ -62,125 +63,131 @@ class _UserEditState extends State<UserEditPage> {
       displayNameController.text = ctl.userData?.displayName ?? "";
       wxDisNameController.text = ctl.userData?.wechatName ?? "";
       wxGNameController.text = ctl.userData?.wcqName ?? "";
-      return Scaffold(
-        // appBar: AppBar(
-        //   title: const Text('用户信息'),
-        // ),
-        appBar: AppBar(
-          // automaticallyImplyLeading: true,
-          title: const Text('个人信息'),
-          // centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              // 在这里调用 Get.back() 实现返回上一个页面
-              Get.back();
-            },
+      return WillPopScope(
+        onWillPop: () async {
+          Get.back(result: ifEdited);
+          return true;
+        },
+        child: Scaffold(
+          // appBar: AppBar(
+          //   title: const Text('用户信息'),
+          // ),
+          appBar: AppBar(
+            // automaticallyImplyLeading: true,
+            title: const Text('个人信息'),
+            // centerTitle: true,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                // 在这里调用 Get.back() 实现返回上一个页面
+                Get.back();
+              },
+            ),
           ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    const Text("账        号："),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: Text(ctl.userData?.username ?? ""),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 16.0),
-                Row(
-                  children: [
-                    const Text("用户昵称："),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: CustomTextField(
-                        controller: displayNameController,
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      const Text("账        号："),
+                      const SizedBox(
+                        width: 10,
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16.0),
-                Row(
-                  children: [
-                    const Text("微信昵称："),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: CustomTextField(
-                        controller: wxDisNameController,
+                      Expanded(
+                        child: Text(ctl.userData?.username ?? ""),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    children: [
+                      const Text("用户昵称："),
+                      const SizedBox(
+                        width: 10,
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16.0),
-                Row(
-                  children: [
-                    const Text("群  昵  称："),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: CustomTextField(
-                        controller: wxGNameController,
+                      Expanded(
+                        child: CustomTextField(
+                          controller: displayNameController,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16.0),
-                Row(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  // TODO: 后续再添加修改信息、修改密码功能
-                  children: [
-                    // ElevatedButton(
-                    //   onPressed: () {},
-                    //   child: const Text(
-                    //     '确认修改',
-                    //   ),
-                    // ),
-                    // const SizedBox(width: 16.0),
-                    // ElevatedButton(
-                    //   onPressed: () async {
-                    //     Get.offAllNamed(AppRoute.loginPage);
-                    //   },
-                    //   child: const Text(
-                    //     '修改密码',
-                    //   ),
-                    // ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        // // 退出登录
-                        await StorageHelper.removeAll();
-                        await Get.find<AuthService>().clearToken();
-                        Get.offAllNamed(AppRoute.loginPage);
-                      },
-                      child: const Text(
-                        '退出登录',
+                    ],
+                  ),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    children: [
+                      const Text("微信昵称："),
+                      const SizedBox(
+                        width: 10,
                       ),
-                    ),
-                    const SizedBox(width: 16.0),
-                    ElevatedButton(
-                      onPressed: () async {
-                        onOptionLogout(ctl.userData as UserModel);
-                      },
-                      child: const Text(
-                        '注销账号',
+                      Expanded(
+                        child: CustomTextField(
+                          controller: wxDisNameController,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    children: [
+                      const Text("群  昵  称："),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: CustomTextField(
+                          controller: wxGNameController,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16.0),
+                  Row(
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    // TODO: 后续再添加修改信息、修改密码功能
+                    children: [
+                      // ElevatedButton(
+                      //   onPressed: () {},
+                      //   child: const Text(
+                      //     '确认修改',
+                      //   ),
+                      // ),
+                      // const SizedBox(width: 16.0),
+                      // ElevatedButton(
+                      //   onPressed: () async {
+                      //     Get.offAllNamed(AppRoute.loginPage);
+                      //   },
+                      //   child: const Text(
+                      //     '修改密码',
+                      //   ),
+                      // ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          // // 退出登录
+                          await StorageHelper.removeAll();
+                          await Get.find<AuthService>().clearToken();
+                          Get.offAllNamed(AppRoute.loginPage);
+                        },
+                        child: const Text(
+                          '退出登录',
+                        ),
+                      ),
+                      const SizedBox(width: 16.0),
+                      ElevatedButton(
+                        onPressed: () async {
+                          onOptionLogout(ctl.userData as UserModel);
+                        },
+                        child: const Text(
+                          '注销账号',
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -194,6 +201,7 @@ class _UserEditState extends State<UserEditPage> {
     _defaultDeleteOption(userData, "注销账号", url, null);
     await StorageHelper.removeAll();
     await Get.find<AuthService>().clearToken();
+    ifEdited = true;
   }
 
   void _defaultDeleteOption(UserModel userData, String title, String optionUrl,

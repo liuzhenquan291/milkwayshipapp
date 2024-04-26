@@ -111,14 +111,17 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                       children: [
                                         Expanded(
                                           child: InkWell(
-                                            onTap: () {
-                                              Get.toNamed(
+                                            onTap: () async {
+                                              bool result = await Get.toNamed(
                                                 AppRoute.shipUserOptionsPage,
                                                 parameters: {
                                                   'shipuser_id':
                                                       tempUser?.id ?? "",
                                                 },
                                               );
+                                              if (result == true) {
+                                                controller.loadData();
+                                              }
                                             },
                                             child: Text(
                                               tempUser?.user?.displayName ?? "",

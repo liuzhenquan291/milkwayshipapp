@@ -1,7 +1,4 @@
-const myIp = "192.168.162.100";
-const myPort = 8008;
-// const myIp = "59.110.1.208";
-// const myPort = 8002;
+import 'host.dart';
 
 ApiUrl apiUrl = ApiUrl();
 
@@ -13,7 +10,7 @@ const _shipApp = "/ship";
 const _regionApp = "/region";
 
 class ApiUrl {
-  final baseUrl = "http://$myIp:$myPort";
+  final baseUrl = myHost.baseUrl;
 
   //// 访问后端 user 应用
   // 登录

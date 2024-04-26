@@ -73,69 +73,70 @@ class UserOptionController extends GetxController {
     update();
   }
 
-  void onOption(OptionModel? option) {
+  void onOption(OptionModel? option) async {
+    bool result = false;
     switch (option?.code) {
       // 通过新用户申请
       case UserOptionConf.APPROVE:
-        onOptionApprove(option);
-        update();
+        result = await onOptionApprove(option);
         break;
 
       // 拒绝新用户申请
       case UserOptionConf.REFUSE:
-        onOptionRefuse(option);
-        update();
+        result = await onOptionRefuse(option);
         break;
 
       // 置为不活跃用户
       case UserOptionConf.DEMOTE:
-        onOptionDemote(option);
-        update();
+        result = await onOptionDemote(option);
         break;
 
       // 禁用用户
       case UserOptionConf.FORBIDDEN:
-        onOptionForbidden(option);
-        update();
+        result = await onOptionForbidden(option);
         break;
 
       // 编辑信息
       case UserOptionConf.UPDATE:
-        onOptionUpdate(option);
+        result = await onOptionUpdate(option);
         break;
       // 注销账号
       case UserOptionConf.LOGOUT:
-        onOptionLogout(option);
+        result = await onOptionLogout(option);
         break;
       // 退出登录
       // case UserOptionConf.LOGOFF:
       //   onOptionLogoff(option);
       //   break;
     }
+    if (result == true) {
+      _loadData();
+    }
   }
 
-  void onOptionApprove(OptionModel? option) {
+  Future<bool> onOptionApprove(OptionModel? option) async {
     final Map<String, dynamic> myPayload = {
       "refused": false,
       "refused_reason": "",
       "user_id": userId,
       "updated_time": userData?.updatedTime,
     };
-    customePostOption(
+    bool result = await customePostOption(
       option?.title ?? "",
       apiUrl.userApprove,
       myPayload,
     );
+    return result;
   }
 
-  void onOptionRefuse(OptionModel? option) {
+  Future<bool> onOptionRefuse(OptionModel? option) async {
     final Map<String, dynamic> myPayload = {
       "refused": true,
       "user_id": userId,
       "updated_time": userData?.updatedTime,
       // "refused_reason": "拒绝用户申请", 在弹窗中填入
     };
-    editablePostOption(
+    bool result = await editablePostOption(
       option?.title ?? "",
       apiUrl.userApprove,
       "拒绝用户申请原因",
@@ -143,36 +144,43 @@ class UserOptionController extends GetxController {
       txc,
       myPayload,
     );
+    return result;
   }
 
-  void onOptionDemote(OptionModel? option) {
+  Future<bool> onOptionDemote(OptionModel? option) async {
     final Map<String, dynamic> myPayload = {
       "user_id": userId,
       "updated_time": userData?.updatedTime,
     };
-    customePostOption(
+    bool result = await customePostOption(
       option?.title ?? "",
       apiUrl.userDemote,
       myPayload,
     );
+    return result;
   }
 
   // TODO: 禁用原因??
-  void onOptionForbidden(OptionModel? option) {
+  Future<bool> onOptionForbidden(OptionModel? option) async {
     final Map<String, dynamic> myPayload = {
       "user_id": userId,
       "updated_time": userData?.updatedTime,
     };
-    customePostOption(
+    bool result = await customePostOption(
       option?.title ?? "",
       apiUrl.userForbidden,
       myPayload,
     );
+    return result;
   }
 
 // 编辑信息
-  void onOptionUpdate(OptionModel? option) {
-    Get.toNamed(AppRoute.userEditPage, parameters: {"user_id": userId ?? ""});
+  Future<bool> onOptionUpdate(OptionModel? option) async {
+    bool result = await Get.toNamed(
+      AppRoute.userEditPage,
+      parameters: {"user_id": userId ?? ""},
+    );
+    return result;
   }
 
   // // 退出登录
@@ -189,18 +197,19 @@ class UserOptionController extends GetxController {
   // }
 
   // 注销账号
-  void onOptionLogout(OptionModel? option) async {
+  Future<bool> onOptionLogout(OptionModel? option) async {
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userId]);
     final Map<String, dynamic> myPayload = {
       "user_id": userId,
       "updated_time": userData?.updatedTime,
     };
-    customeDeleteOption(
+    bool result = await customeDeleteOption(
       option?.title ?? "",
       url,
       myPayload,
     );
     await StorageHelper.removeAll();
     await Get.find<AuthService>().clearToken();
+    return result;
   }
 }

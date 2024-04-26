@@ -24,7 +24,10 @@ class _RegionNewPageState extends State<RegionNewPage> {
 // class RegisterPage extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController nameFmtController = TextEditingController();
+  final TextEditingController seasonNameController = TextEditingController();
+  final TextEditingController colorNameController = TextEditingController();
   final TextEditingController zoneNameController = TextEditingController();
+  final TextEditingController opponentNameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
   @override
@@ -56,10 +59,31 @@ class _RegionNewPageState extends State<RegionNewPage> {
               ),
               const SizedBox(height: 16.0),
               TextField(
+                controller: seasonNameController,
+                // obscureText: true,
+                decoration: const InputDecoration(
+                    labelText: '当前赛季', hintText: '赛季信息, 如 "第三十五赛季"'),
+              ),
+              const SizedBox(height: 16.0),
+              TextField(
+                controller: colorNameController,
+                // obscureText: true,
+                decoration: const InputDecoration(
+                    labelText: '当前颜色', hintText: '颜色信息, 如 "红色/绿色/蓝色"'),
+              ),
+              const SizedBox(height: 16.0),
+              TextField(
                 controller: zoneNameController,
                 // obscureText: true,
                 decoration: const InputDecoration(
-                    labelText: '当前战区', hintText: '请输入战区信息, 如 "第7战区"'),
+                    labelText: '当前战区', hintText: '战区信息, 如 "第7战区"'),
+              ),
+              const SizedBox(height: 16.0),
+              TextField(
+                controller: opponentNameController,
+                // obscureText: true,
+                decoration: const InputDecoration(
+                    labelText: '当前对手', hintText: '对手信息, 如 "绿色-逍遥游, 绿色-星盟"'),
               ),
               const SizedBox(height: 16.0),
               Container(
@@ -84,7 +108,10 @@ class _RegionNewPageState extends State<RegionNewPage> {
                   await _create(
                     nameController.text,
                     nameFmtController.text,
+                    seasonNameController.text,
+                    colorNameController.text,
                     zoneNameController.text,
+                    opponentNameController.text,
                     descriptionController.text,
                   );
                 },
@@ -92,34 +119,6 @@ class _RegionNewPageState extends State<RegionNewPage> {
                   '确认创建',
                 ),
               ),
-              // Row(
-              //   // crossAxisAlignment: CrossAxisAlignment.center,
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     ElevatedButton(
-              //       onPressed: () async {
-              //         await _create(
-              //           nameController.text,
-              //           nameFmtController.text,
-              //           zoneNameController.text,
-              //           descriptionController.text,
-              //         );
-              //       },
-              //       child: const Text(
-              //         '确认创建',
-              //       ),
-              //     ),
-              //     const SizedBox(width: 16.0),
-              //     ElevatedButton(
-              //       onPressed: () async {
-              //         Get.back();
-              //       },
-              //       child: const Text(
-              //         '返回上一页',
-              //       ),
-              //     ),
-              //   ],
-              // ),
             ],
           ),
         ),
@@ -128,7 +127,14 @@ class _RegionNewPageState extends State<RegionNewPage> {
   }
 
   _create(
-      String name, String nameFmt, String zoneName, String description) async {
+    String name,
+    String nameFmt,
+    String seasonName,
+    String colorName,
+    String zoneName,
+    String opponentInfo,
+    String description,
+  ) async {
     if (name.isEmpty) {
       Get.snackbar(
         "创建势力异常",
@@ -143,10 +149,31 @@ class _RegionNewPageState extends State<RegionNewPage> {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
+    } else if (seasonName.isEmpty) {
+      Get.snackbar(
+        "创建势力异常",
+        "赛季信息",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } else if (colorName.isEmpty) {
+      Get.snackbar(
+        "创建势力异常",
+        "颜色信息",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     } else if (zoneName.isEmpty) {
       Get.snackbar(
         "创建势力异常",
         "战区信息",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } else if (opponentInfo.isEmpty) {
+      Get.snackbar(
+        "创建势力异常",
+        "对手信息",
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
@@ -164,7 +191,10 @@ class _RegionNewPageState extends State<RegionNewPage> {
       final data = {
         "name": name,
         "name_fmt": nameFmt,
+        "season_name": seasonName,
+        "color_name": colorName,
         "zone_info": zoneName,
+        "opponent_info": opponentInfo,
         "desc": description,
       };
       try {
@@ -176,9 +206,6 @@ class _RegionNewPageState extends State<RegionNewPage> {
           // 模拟登录成功后更新token
           ResponseData responseData = ResponseData.fromJson(response.data);
           if (responseData.code == 0) {
-            // UserModel user = UserModel.fromJson(responseData.data);
-            // TODO: 注册角色成功后的操作
-
             Get.offAllNamed(AppRoute.rootPage);
           } else {
             Get.snackbar(

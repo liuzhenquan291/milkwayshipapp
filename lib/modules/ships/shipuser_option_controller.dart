@@ -57,45 +57,42 @@ class ShipUserOptionController extends GetxController {
     update();
   }
 
-  void onOption(OptionModel? option) {
+  Future<bool> onOption(OptionModel? option) async {
+    bool result = false;
     switch (option?.code) {
       // 通过新用户申请
       case ShipuserOptionConf.APPROVE:
-        onOptionApprove(option);
-        update();
+        result = await onOptionApprove(option);
         break;
 
       // 设为不活跃角色
       case ShipuserOptionConf.DEMOTE:
-        onOptionDemote(option);
-        update();
+        result = await onOptionDemote(option);
         break;
 
       // 禁用角色
       case ShipuserOptionConf.FORBIDDEN:
-        onOptionForbidden(option);
-        update();
+        result = await onOptionForbidden(option);
         break;
 
       // 注销角色
       case ShipuserOptionConf.LOGOUT:
-        onOptionLogout(option);
+        result = await onOptionLogout(option);
         break;
 
       // 设置角色职位
       case ShipuserOptionConf.DESIGNATE:
-        onOptionDesignate(option);
-        update();
+        result = await onOptionDesignate(option);
         break;
 
       // 编辑角色信息
       case ShipuserOptionConf.UPDATE:
-        onOptionUpdate(option);
+        result = await onOptionUpdate(option);
         break;
 
       // 给角色打标签
       case ShipuserOptionConf.REMARK:
-        onOptionRemark(option);
+        result = await onOptionRemark(option);
         break;
       // 退出登录
       // case UserOptionConf.LOGOFF:
@@ -103,41 +100,62 @@ class ShipUserOptionController extends GetxController {
       //   break;
       // 创建开盆计划
       case ShipuserOptionConf.OPEN_CORNUCOPIA:
-        onOptionOpenCornucopia(option);
+        result = await onOptionOpenCornucopia(option);
         break;
       // 加入开盆计划
       case ShipuserOptionConf.JOIN_CORNUCOPIA:
-        onOptionJoinCornucopia(option);
+        result = await onOptionJoinCornucopia(option);
         break;
     }
+    return result;
   }
 
-  void onOptionApprove(OptionModel? option) {
-    _defaultPostOption(option?.title ?? "", apiUrl.shipUserApprovePath, null);
+  Future<bool> onOptionApprove(OptionModel? option) async {
+    final result = await _defaultPostOption(
+      option?.title ?? "",
+      apiUrl.shipUserApprovePath,
+      null,
+    );
+    return result;
   }
 
-  void onOptionDemote(OptionModel? option) {
-    _defaultPostOption(option?.title ?? "", apiUrl.shipUserDemotePath, null);
+  Future<bool> onOptionDemote(OptionModel? option) async {
+    final result = await _defaultPostOption(
+      option?.title ?? "",
+      apiUrl.shipUserDemotePath,
+      null,
+    );
+    return result;
   }
 
-  void onOptionForbidden(OptionModel? option) {
-    _defaultPostOption(option?.title ?? "", apiUrl.shipUserForbiddenPath, null);
+  Future<bool> onOptionForbidden(OptionModel? option) async {
+    final result = await _defaultPostOption(
+      option?.title ?? "",
+      apiUrl.shipUserForbiddenPath,
+      null,
+    );
+    return result;
   }
 
   // 注销账号
-  void onOptionLogout(OptionModel? option) {
+  Future<bool> onOptionLogout(OptionModel? option) async {
     final url = sprintf(apiUrl.shipUserRetriveUpdateDestroyPath, [shipUserId]);
-    _defaultDeleteOption(option?.title ?? "", url, null);
+    final result = await _defaultDeleteOption(
+      option?.title ?? "",
+      url,
+      null,
+    );
+    return result;
   }
 
-  void onOptionDesignate(OptionModel? option) {
+  Future<bool> onOptionDesignate(OptionModel? option) async {
     late Map<String, dynamic> myPayload = {};
     final TextEditingController tc = TextEditingController();
 
     myPayload["ship_user_id"] = shipUserId;
     myPayload["updated_time"] = shipUserData?.updatedTime;
 
-    editablePostOption(
+    final result = await editablePostOption(
       option?.title ?? "",
       apiUrl.shipUserDesignatePath,
       "请设置职位: 司令/副司令/军神/军长/成员",
@@ -145,22 +163,26 @@ class ShipUserOptionController extends GetxController {
       tc,
       myPayload,
     );
+    return result;
   }
 
   // 编辑信息
-  void onOptionUpdate(OptionModel? option) {
-    Get.toNamed(AppRoute.userEditPage,
-        parameters: {"shipuser_id": shipUserId ?? ""});
+  Future<bool> onOptionUpdate(OptionModel? option) async {
+    final result = await Get.toNamed(
+      AppRoute.userEditPage,
+      parameters: {"shipuser_id": shipUserId ?? ""},
+    );
+    return result;
   }
 
-  void onOptionRemark(OptionModel? option) {
+  Future<bool> onOptionRemark(OptionModel? option) async {
     late Map<String, dynamic> myPayload = {};
     final TextEditingController tc = TextEditingController();
 
     myPayload["ship_user_id"] = shipUserId;
     myPayload["updated_time"] = shipUserData?.updatedTime;
 
-    editablePostOption(
+    final result = await editablePostOption(
       option?.title ?? "",
       apiUrl.shipUserRemarkPath,
       "请为角色打标签: 10字以内",
@@ -168,7 +190,7 @@ class ShipUserOptionController extends GetxController {
       tc,
       myPayload,
     );
-    // tc.dispose();
+    return result;
   }
 
   // // 退出登录
@@ -184,18 +206,24 @@ class ShipUserOptionController extends GetxController {
   //   Get.offAllNamed(AppRoute.rootPage);
   // }
 
-  void onOptionOpenCornucopia(OptionModel? option) {
-    Get.toNamed(AppRoute.cornucopiaNewPage,
-        parameters: {"shipuser_id": shipUserId ?? ""});
+  Future<bool> onOptionOpenCornucopia(OptionModel? option) async {
+    final result = await Get.toNamed(
+      AppRoute.cornucopiaNewPage,
+      parameters: {"shipuser_id": shipUserId ?? ""},
+    );
+    return result;
   }
 
-  void onOptionJoinCornucopia(OptionModel? option) {
-    Get.toNamed(AppRoute.cornJoinPage,
-        parameters: {"shipuser_id": shipUserId ?? ""});
+  Future<bool> onOptionJoinCornucopia(OptionModel? option) async {
+    final result = await Get.toNamed(
+      AppRoute.cornJoinPage,
+      parameters: {"shipuser_id": shipUserId ?? ""},
+    );
+    return result;
   }
 
-  void _defaultPostOption(
-      String title, String optionUrl, Map<String, dynamic>? payload) {
+  Future<bool> _defaultPostOption(
+      String title, String optionUrl, Map<String, dynamic>? payload) async {
     late Map<String, dynamic> myPayload;
     if (payload != null) {
       myPayload = payload;
@@ -203,11 +231,15 @@ class ShipUserOptionController extends GetxController {
 
     myPayload["ship_user_id"] = shipUserId;
     myPayload["updated_time"] = shipUserData?.updatedTime;
-    customePostOption(title, optionUrl, myPayload);
+    bool result = await customePostOption(title, optionUrl, myPayload);
+    if (result == true) {
+      _loadData();
+    }
+    return result;
   }
 
-  void _defaultDeleteOption(
-      String title, String optionUrl, Map<String, dynamic>? payload) {
+  Future<bool> _defaultDeleteOption(
+      String title, String optionUrl, Map<String, dynamic>? payload) async {
     late Map<String, dynamic> myPayload;
     if (payload != null) {
       myPayload = payload;
@@ -215,6 +247,10 @@ class ShipUserOptionController extends GetxController {
 
     myPayload["ship_user_id"] = shipUserId;
     myPayload["updated_time"] = shipUserData?.updatedTime;
-    customeDeleteOption(title, optionUrl, myPayload);
+    bool result = await customeDeleteOption(title, optionUrl, myPayload);
+    if (result == true) {
+      _loadData();
+    }
+    return result;
   }
 }

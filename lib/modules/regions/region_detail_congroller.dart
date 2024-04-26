@@ -67,7 +67,10 @@ class RegionDetailController extends GetxController {
       listOptions.add(
         ElevatedButton(
           onPressed: () async {
-            Get.toNamed(AppRoute.regionNewPage);
+            bool result = await Get.toNamed(AppRoute.regionNewPage);
+            if (result == true) {
+              _loadData();
+            }
           },
           child: const Text('创建势力'),
         ),
@@ -80,7 +83,10 @@ class RegionDetailController extends GetxController {
       listOptions.add(
         ElevatedButton(
           onPressed: () async {
-            Get.toNamed(AppRoute.regionJoin);
+            bool result = await Get.toNamed(AppRoute.regionJoin);
+            if (result == true) {
+              _loadData();
+            }
           },
           child: const Text('加入势力'),
         ),
