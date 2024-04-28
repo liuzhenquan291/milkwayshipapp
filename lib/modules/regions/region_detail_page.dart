@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/custome_table_field.dart';
 import '../../core/models/ship_user_model.dart';
 import '../../modules/regions/region_detail_congroller.dart';
 
@@ -129,24 +130,9 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                               color: Colors.black, width: 1),
                                         ),
                                       ),
-                                      child: Row(
-                                        children: const [
-                                          Expanded(
-                                            child: Text("角色名"),
-                                          ),
-                                          Expanded(
-                                            child: Text("用户名"),
-                                          ),
-                                          Expanded(
-                                            child: Text("微信昵称"),
-                                          ),
-                                          Expanded(
-                                            child: Text("群昵称"),
-                                          ),
-                                          Expanded(
-                                            child: Text("职务"),
-                                          ),
-                                        ],
+                                      child: getTableHead(
+                                        ["角色名", "用户名", "微信昵称", "群昵称", "职务"],
+                                        null,
                                       ),
                                     ),
                                     Expanded(

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/custome_table_field.dart';
 import 'cornucopia_option_controller.dart';
 
 class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
@@ -134,13 +135,14 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                                     BorderSide(color: Colors.black, width: 1),
                               ),
                             ),
-                            child: Row(
-                              children: const [
-                                Expanded(child: Text("用户")),
-                                Expanded(child: Text("微信昵称")),
-                                Expanded(child: Text("角色")),
-                                Expanded(child: Text("职务")),
+                            child: getTableHead(
+                              [
+                                "用户",
+                                "微信昵称",
+                                "角色",
+                                "职务",
                               ],
+                              null,
                             ),
                           ),
                           Expanded(
@@ -218,13 +220,14 @@ class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
                                     BorderSide(color: Colors.black, width: 1),
                               ),
                             ),
-                            child: Row(
-                              children: const [
-                                Expanded(child: Text("用户")),
-                                Expanded(child: Text("微信昵称")),
-                                Expanded(child: Text("角色")),
-                                Expanded(child: Text("职务")),
+                            child: getTableHead(
+                              [
+                                "用户",
+                                "微信昵称",
+                                "角色",
+                                "职务",
                               ],
+                              null,
                             ),
                           ),
                           Expanded(

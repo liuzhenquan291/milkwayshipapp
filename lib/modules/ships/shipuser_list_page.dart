@@ -6,6 +6,7 @@ import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
+import '../../core/custome_table_field.dart';
 
 class ShipuserListPage extends GetView<ShipuserListController> {
   const ShipuserListPage({super.key});
@@ -63,32 +64,9 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                             bottom: BorderSide(color: Colors.black, width: 1),
                           ),
                         ),
-                        child: Row(
-                          children: const [
-                            Expanded(
-                              child: Text("用户"),
-                              // child: Container(
-
-                              // ),
-                            ),
-                            Expanded(
-                              child: Text("微信昵称"),
-                              // child: Container(
-                              //   child: Text("用户昵称"),
-                              // ),
-                            ),
-                            Expanded(
-                              child: Text("角色"),
-                              // child: Container(
-                              //   child: Text("微信昵称"),
-                              // ),
-                            ),
-                            Expanded(child: Text("所属势力")),
-                            Expanded(child: Text("势力职务")),
-                            Expanded(
-                              child: Text("角色状态"),
-                            ),
-                          ],
+                        child: getTableHead(
+                          ["用户", "微信昵称", "角色", "所属势力", "势力职务", "角色状态"],
+                          null,
                         ),
                       ),
                       Expanded(

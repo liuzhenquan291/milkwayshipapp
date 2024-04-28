@@ -5,6 +5,7 @@ import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
+import '../../core/custome_table_field.dart';
 import '../../core/models/user_model.dart';
 import '../../core/server.dart';
 
@@ -71,29 +72,9 @@ class UserListPage extends GetView<UserListController> {
                               bottom: BorderSide(color: Colors.black, width: 1),
                             ),
                           ),
-                          child: Row(
-                            children: const [
-                              Expanded(
-                                flex: userNameExpandedFlex,
-                                child: Text("手机号"),
-                              ),
-                              Expanded(
-                                flex: otherExpandedFlex,
-                                child: Text("昵称"),
-                              ),
-                              Expanded(
-                                flex: otherExpandedFlex,
-                                child: Text("微信昵称"),
-                              ),
-                              Expanded(
-                                flex: otherExpandedFlex,
-                                child: Text("用户状态"),
-                              ),
-                              Expanded(
-                                flex: otherExpandedFlex,
-                                child: Text("用户身份"),
-                              ),
-                            ],
+                          child: getTableHead(
+                            ["手机号", "昵称", "微信昵称", "用户状态", "用户身份"],
+                            [5, 3, 3, 3, 3],
                           ),
                         ),
                         Expanded(

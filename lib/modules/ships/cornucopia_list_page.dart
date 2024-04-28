@@ -6,6 +6,7 @@ import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
 
 import '../../core/apps.dart';
+import '../../core/custome_table_field.dart';
 import '../../core/models/ship_user_model.dart';
 
 class CornucopiaListPage extends GetView<CornucopiaListController> {
@@ -135,21 +136,14 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                           //     bottom: BorderSide(color: Colors.black, width: 1),
                           //   ),
                           // ),
-                          child: Row(
-                            children: const [
-                              Expanded(
-                                child: Text("角色名"),
-                              ),
-                              Expanded(
-                                child: Text("用户名"),
-                              ),
-                              Expanded(
-                                child: Text("角色身份"),
-                              ),
-                              Expanded(
-                                child: Text("角色状态"),
-                              ),
+                          child: getTableHead(
+                            [
+                              "角色名",
+                              "用户名",
+                              "角色身份",
+                              "角色状态",
                             ],
+                            null,
                           ),
                         ),
                         Expanded(
@@ -219,21 +213,14 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                           //     bottom: BorderSide(color: Colors.black, width: 1),
                           //   ),
                           // ),
-                          child: Row(
-                            children: const [
-                              Expanded(
-                                child: Text("角色名"),
-                              ),
-                              Expanded(
-                                child: Text("用户名"),
-                              ),
-                              Expanded(
-                                child: Text("角色身份"),
-                              ),
-                              Expanded(
-                                child: Text("角色状态"),
-                              ),
+                          child: getTableHead(
+                            [
+                              "角色名",
+                              "用户名",
+                              "角色身份",
+                              "角色状态",
                             ],
+                            null,
                           ),
                         ),
                         Expanded(
@@ -300,21 +287,14 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                           //     bottom: BorderSide(color: Colors.black, width: 1),
                           //   ),
                           // ),
-                          child: Row(
-                            children: const [
-                              Expanded(
-                                child: Text("盆编号"),
-                              ),
-                              Expanded(
-                                child: Text("游戏角色"),
-                              ),
-                              Expanded(
-                                child: Text("计划开盆时间"),
-                              ),
-                              Expanded(
-                                child: Text("计划创建时间"),
-                              ),
+                          child: getTableHead(
+                            [
+                              "盆编号",
+                              "游戏角色",
+                              "计划开盆时间",
+                              "计划创建时间",
                             ],
+                            null,
                           ),
                         ),
                         Expanded(
@@ -397,21 +377,14 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                           //     bottom: BorderSide(color: Colors.black, width: 1),
                           //   ),
                           // ),
-                          child: Row(
-                            children: const [
-                              Expanded(
-                                child: Text("盆编号"),
-                              ),
-                              Expanded(
-                                child: Text("游戏角色"),
-                              ),
-                              Expanded(
-                                child: Text("计划开盆时间"),
-                              ),
-                              Expanded(
-                                child: Text("计划创建时间"),
-                              ),
+                          child: getTableHead(
+                            [
+                              "盆编号",
+                              "游戏角色",
+                              "计划开盆时间",
+                              "计划创建时间",
                             ],
+                            null,
                           ),
                         ),
                         Expanded(

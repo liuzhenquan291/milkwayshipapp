@@ -6,6 +6,8 @@ import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/modules/regions/region_options_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/custome_table_field.dart';
+
 class RegionOptionsPage extends GetView<RegionOptionsController> {
   String? regionId;
   String? isSelf;
@@ -135,24 +137,9 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                                     BorderSide(color: Colors.black, width: 1),
                               ),
                             ),
-                            child: Row(
-                              children: const [
-                                Expanded(
-                                  child: Text("游戏角色名"),
-                                ),
-                                Expanded(
-                                  child: Text("用户名"),
-                                ),
-                                Expanded(
-                                  child: Text("微信昵称"),
-                                ),
-                                Expanded(
-                                  child: Text("微信群昵称"),
-                                ),
-                                Expanded(
-                                  child: Text("职务"),
-                                ),
-                              ],
+                            child: getTableHead(
+                              ["角色名", "用户名", "微信昵称", "群昵称", "职务"],
+                              null,
                             ),
                           ),
                           Expanded(

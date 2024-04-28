@@ -5,6 +5,7 @@ import 'package:milkwayshipapp/modules/regions/region_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
+import '../../core/custome_table_field.dart';
 import '../../core/models/region_model.dart';
 
 // class UserPage extends StatefulWidget {
@@ -73,21 +74,9 @@ class RegionPage extends GetView<RegionListController> {
                             bottom: BorderSide(color: Colors.black, width: 1),
                           ),
                         ),
-                        child: Row(
-                          children: const [
-                            Expanded(
-                              child: Text("势力名称"),
-                            ),
-                            Expanded(
-                              child: Text("成员格式"),
-                            ),
-                            Expanded(
-                              child: Text("战区信息"),
-                            ),
-                            Expanded(
-                              child: Text("势力状态"),
-                            ),
-                          ],
+                        child: getTableHead(
+                          ["势力名称", "成员格式", "战区信息", "势力状态"],
+                          null,
                         ),
                       ),
                       Expanded(
