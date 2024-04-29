@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/apps.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
 
@@ -83,7 +82,7 @@ class _RegionNewPageState extends State<RegionNewPage> {
                 controller: opponentNameController,
                 // obscureText: true,
                 decoration: const InputDecoration(
-                    labelText: '当前对手', hintText: '对手信息, 如 "绿色-逍遥游, 绿色-星盟"'),
+                    labelText: '匹配信息', hintText: '匹配信息, 如 "绿色-逍遥游, 红色-星盟"'),
               ),
               const SizedBox(height: 16.0),
               Container(
@@ -198,15 +197,17 @@ class _RegionNewPageState extends State<RegionNewPage> {
         "desc": description,
       };
       try {
-        final response =
-            await apiService.postRequest(apiUrl.regionsCreateListPath, data);
+        final response = await apiService.postRequest(
+          apiUrl.regionsCreateListPath,
+          data,
+        );
 
         // 检查登录成功与否
         if (response.statusCode == 200) {
           // 模拟登录成功后更新token
           ResponseData responseData = ResponseData.fromJson(response.data);
           if (responseData.code == 0) {
-            Get.offAllNamed(AppRoute.rootPage);
+            Get.back(result: true);
           } else {
             Get.snackbar(
               "注册异常",

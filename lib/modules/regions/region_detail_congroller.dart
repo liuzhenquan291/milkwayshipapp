@@ -32,8 +32,8 @@ class RegionDetailController extends GetxController {
     hasRegion = false;
     hasUser = false;
     hasTotalOption = false;
-    bool hasAddRegionOption = false;
-    bool hasJoinRegionOption = false;
+    hasAddRegionOption = false;
+    hasJoinRegionOption = false;
     _loadData();
   }
 
