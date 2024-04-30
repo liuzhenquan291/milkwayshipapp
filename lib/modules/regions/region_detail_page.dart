@@ -132,7 +132,7 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                       ),
                                       child: getTableHead(
                                         ["角色名", "用户名", "微信昵称", "群昵称", "职务"],
-                                        null,
+                                        [5, 3, 3, 3, 3],
                                       ),
                                     ),
                                     Expanded(
@@ -159,6 +159,7 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                                   child: Row(
                                                     children: [
                                                       Expanded(
+                                                        flex: 5,
                                                         child: InkWell(
                                                           // onTap: () {
                                                           //   Get.toNamed(
@@ -170,30 +171,34 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                                           // },
                                                           child: Text(
                                                             tmp?.mksName ?? "",
-                                                            style:
-                                                                const TextStyle(
-                                                              color:
-                                                                  Colors.blue,
-                                                            ),
+                                                            // style:
+                                                            //     const TextStyle(
+                                                            //   color:
+                                                            //       Colors.blue,
+                                                            // ),
                                                           ),
                                                         ),
                                                       ),
                                                       Expanded(
+                                                        flex: 3,
                                                         child: Text(tmp?.user
                                                                 ?.displayName ??
                                                             ""),
                                                       ),
                                                       Expanded(
+                                                        flex: 3,
                                                         child: Text(tmp?.user
                                                                 ?.wechatName ??
                                                             ""),
                                                       ),
                                                       Expanded(
+                                                        flex: 3,
                                                         child: Text(tmp?.user
                                                                 ?.wcqName ??
                                                             ""),
                                                       ),
                                                       Expanded(
+                                                        flex: 3,
                                                         child: Text(
                                                             tmp?.regionsRoleName ??
                                                                 ""),

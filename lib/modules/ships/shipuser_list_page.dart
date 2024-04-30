@@ -65,8 +65,8 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                           ),
                         ),
                         child: getTableHead(
-                          ["用户", "微信昵称", "角色", "所属势力", "势力职务", "角色状态"],
-                          null,
+                          ["角色", "用户", "微信昵称", "所属势力", "势力职务", "角色状态"],
+                          [5, 3, 3, 3, 3, 3],
                         ),
                       ),
                       Expanded(
@@ -88,6 +88,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                     child: Row(
                                       children: [
                                         Expanded(
+                                          flex: 5,
                                           child: InkWell(
                                             onTap: () async {
                                               bool result = await Get.toNamed(
@@ -102,7 +103,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                               }
                                             },
                                             child: Text(
-                                              tempUser?.user?.displayName ?? "",
+                                              tempUser?.mksName ?? "",
                                               style: const TextStyle(
                                                 color: Colors.blue,
                                               ),
@@ -110,22 +111,31 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                           ),
                                         ),
                                         Expanded(
+                                          flex: 3,
+                                          child: Text(
+                                            tempUser?.user?.displayName ?? "",
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
                                           child: Text(
                                             tempUser?.user?.wechatName ?? "",
                                           ),
                                         ),
                                         Expanded(
-                                          child: Text(
-                                            tempUser?.mksName ?? "",
-                                          ),
-                                        ),
-                                        Expanded(
+                                          flex: 3,
                                           child: Text(
                                               tempUser?.region?.name ?? ""),
                                         ),
                                         Expanded(
+                                          flex: 3,
                                           child: Text(
                                               tempUser?.regionsRoleName ?? ""),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child:
+                                              Text(tempUser?.statusName ?? ""),
                                         ),
                                       ],
                                     ),

@@ -119,10 +119,10 @@ class ShipUserModel {
   }
 
   String getLastJoinCornTime() {
-    return formatDateTime_1(lastJoinCornTime!);
+    return formatDateTime_1(lastJoinCornTime);
   }
 
   String getLastOpenCornTime() {
-    return formatDateTime_1(lastOpenCornTime!);
+    return formatDateTime_1(lastOpenCornTime);
   }
 }

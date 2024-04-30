@@ -109,8 +109,8 @@ class ShipuserOptionConf {
     FORBIDDEN,
     DESIGNATE,
     REMARK,
-    OPEN_CORNUCOPIA,
-    JOIN_CORNUCOPIA,
+    // OPEN_CORNUCOPIA,  # 暂时不做聚宝盆数据了
+    // JOIN_CORNUCOPIA,
   ];
   // 角色编辑页可执行操作
   static const List<String> _userEditPageOptions = [UPDATE, LOGOUT];

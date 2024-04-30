@@ -65,6 +65,8 @@ class ApiUrl {
   String cornLateJoinedPath = "$_shipApp/cornucopias/late_joined/";
 // 聚宝盆综合信息
   String cornucopiaInfosPath = "$_shipApp/cornucopia_infos/";
+// 仅对角色设置开盆投盆时间
+  String cornSetOnlyPath = "$_shipApp/cornucopias/set_only/";
 
 //// 连接后端 region 应用
 // 注册势力、势力列表

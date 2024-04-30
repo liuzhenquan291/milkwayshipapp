@@ -2,10 +2,11 @@
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
+// import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 
+import '../../core/custom_option_widget.dart';
 import '../../core/models/region_model.dart';
 import '../../core/server.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -18,13 +19,48 @@ class CornucopiaListController extends GetxController {
   double userDataLength = 0.0;
   int needCorcuCnt = 0; // 需开盆角色数量
   int canCorcuCnt = 0; // 可开盆角色数量
-  int toCorcuCnt = 0; // 开盆计划
-  int processingCorcuCnt = 0; // 进行中的盆
+  // int toCorcuCnt = 0; // 开盆计划
+  // int processingCorcuCnt = 0; // 进行中的盆
 
   @override
   void onInit() {
     super.onInit();
     _loadData();
+  }
+
+  void reloadData() async {
+    hasData = false;
+    userDataLength = 0.0;
+    needCorcuCnt = 0; // 需开盆角色数量
+    canCorcuCnt = 0; // 可开盆角色数量
+    // toCorcuCnt = 0; // 开盆计划
+    // processingCorcuCnt = 0; // 进行中的盆
+    _loadData();
+  }
+
+  void setShipUserOption(
+    String shipUserId,
+    String updatedTime,
+    String option,
+  ) async {
+    String title = "";
+    if (option == 'join') {
+      title = "参盆";
+    } else if (option == 'open') {
+      title = "开盆";
+    }
+    final result = await customePostOption(
+      title,
+      apiUrl.cornSetOnlyPath,
+      {
+        "ship_user_id": shipUserId,
+        "updated_time": updatedTime,
+        "option": option
+      },
+    );
+    if (result == true) {
+      reloadData();
+    }
   }
 
   Future<void> _loadData() async {
@@ -50,9 +86,9 @@ class CornucopiaListController extends GetxController {
     userDataLength = cornucopiaInfos?.shipUserData?.length.toDouble() as double;
     needCorcuCnt = cornucopiaInfos?.needCorcuShipUserList?.length as int;
     canCorcuCnt = cornucopiaInfos?.canOpenCorcuShipUserList?.length as int;
-    toCorcuCnt = cornucopiaInfos?.toOpenCorcuDataList?.length as int;
-    processingCorcuCnt =
-        cornucopiaInfos?.processingCorcuDataList?.length as int;
+    // toCorcuCnt = cornucopiaInfos?.toOpenCorcuDataList?.length as int;
+    // processingCorcuCnt =
+    //     cornucopiaInfos?.processingCorcuDataList?.length as int;
 
     displayName = Get.find<AuthService>().displayName as String;
 
@@ -69,8 +105,8 @@ class CornucopiaListController extends GetxController {
 class CornucopiaInfosModel {
   RegionModel? regionData;
   List<ShipUserModel>? shipUserData;
-  List<ShipCornucopiaModel>? toOpenCorcuDataList;
-  List<ShipCornucopiaModel>? processingCorcuDataList;
+  // List<ShipCornucopiaModel>? toOpenCorcuDataList;
+  // List<ShipCornucopiaModel>? processingCorcuDataList;
   List<ShipUserModel>? needCorcuShipUserList;
   List<ShipUserModel>? canOpenCorcuShipUserList;
 
@@ -79,10 +115,10 @@ class CornucopiaInfosModel {
         ? RegionModel.fromJson(json['region_data'] ?? {})
         : null;
     shipUserData = ShipUserModel.fromJsonToList(json['shipuser_data']);
-    toOpenCorcuDataList =
-        ShipCornucopiaModel.fromJsonToList(json['to_open_corcu_data_list']);
-    processingCorcuDataList =
-        ShipCornucopiaModel.fromJsonToList(json['processing_corcu_data_list']);
+    // toOpenCorcuDataList =
+    //     ShipCornucopiaModel.fromJsonToList(json['to_open_corcu_data_list']);
+    // processingCorcuDataList =
+    //     ShipCornucopiaModel.fromJsonToList(json['processing_corcu_data_list']);
     needCorcuShipUserList =
         ShipUserModel.fromJsonToList(json['need_corcu_shipuser_data_list']);
     canOpenCorcuShipUserList =

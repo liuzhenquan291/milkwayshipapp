@@ -103,6 +103,22 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                         children: [
                           Expanded(
                             child: Text(
+                                "上次开盆时间:   ${ctl.shipUserData?.getLastOpenCornTime()}"),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                                "上次参盆时间:   ${ctl.shipUserData?.getLastJoinCornTime()}"),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
                                 "可  开  盆:   ${ctl.shipUserData?.canCornucopia ?? true ? '是' : '否'}"),
                           ),
                         ],
