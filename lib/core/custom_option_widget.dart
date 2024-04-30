@@ -53,6 +53,57 @@ Future<bool> customePostOption(
   return result;
 }
 
+Future<bool> customePutOption(
+  String title,
+  String optionUrl,
+  Map<String, dynamic>? payload,
+) async {
+  bool result = false;
+  Get.defaultDialog(
+    title: title,
+    middleText: '确定要执行该操作吗？',
+    textConfirm: '确认',
+    textCancel: '取消',
+    confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
+    onCancel: () {
+      // Get.back();
+    },
+    onConfirm: () async {
+      Get.back();
+
+      final as = ApiService();
+      final response = await as.putRequest(optionUrl, payload);
+      final responseData = ResponseData.fromJson(response.data);
+
+      if (responseData.code != 0) {
+        Get.defaultDialog(
+          title: '操作失败',
+          content: Text(responseData.message as String),
+          confirm: TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('关闭'),
+          ),
+        );
+      } else {
+        Get.defaultDialog(
+          title: "",
+          content: const Text("操作成功"),
+          confirm: TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('关闭'),
+          ),
+        );
+        result = true;
+      }
+    },
+  );
+  return result;
+}
+
 // 可输入额外信息的 option
 Future<bool> editablePostOption(
   String title,
@@ -190,6 +241,57 @@ ResponseData? customePostOptionWithResp(
 
       final as = ApiService();
       final response = await as.postRequest(optionUrl, payload);
+      final responseData = ResponseData.fromJson(response.data);
+
+      if (responseData.code != 0) {
+        Get.defaultDialog(
+          title: '操作失败',
+          content: Text(responseData.message as String),
+          confirm: TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('关闭'),
+          ),
+        );
+      } else {
+        Get.defaultDialog(
+          title: "",
+          content: const Text("操作成功"),
+          confirm: TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('关闭'),
+          ),
+        );
+        resp = responseData;
+      }
+    },
+  );
+  return resp;
+}
+
+Future<ResponseData?> customePutOptionWithResp(
+  String title,
+  String optionUrl,
+  Map<String, dynamic>? payload,
+) async {
+  ResponseData? resp;
+  Get.defaultDialog(
+    title: title,
+    middleText: '确定要执行该操作吗？',
+    textConfirm: '确认',
+    textCancel: '取消',
+    confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
+    onCancel: () {
+      // Get.back();
+    },
+    onConfirm: () async {
+      Get.back();
+
+      final as = ApiService();
+      final response = await as.putRequest(optionUrl, payload);
       final responseData = ResponseData.fromJson(response.data);
 
       if (responseData.code != 0) {

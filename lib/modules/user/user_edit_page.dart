@@ -149,13 +149,19 @@ class _UserEditState extends State<UserEditPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     // TODO: 后续再添加修改信息、修改密码功能
                     children: [
-                      // ElevatedButton(
-                      //   onPressed: () {},
-                      //   child: const Text(
-                      //     '确认修改',
-                      //   ),
-                      // ),
-                      // const SizedBox(width: 16.0),
+                      ElevatedButton(
+                        onPressed: () async {
+                          ctl.onEditUserInfo(
+                            displayNameController.text,
+                            wxDisNameController.text,
+                            wxGNameController.text,
+                          );
+                        },
+                        child: const Text(
+                          '确认修改',
+                        ),
+                      ),
+                      const SizedBox(width: 16.0),
                       // ElevatedButton(
                       //   onPressed: () async {
                       //     Get.offAllNamed(AppRoute.loginPage);
@@ -164,6 +170,7 @@ class _UserEditState extends State<UserEditPage> {
                       //     '修改密码',
                       //   ),
                       // ),
+                      // const SizedBox(width: 16.0),
                       ElevatedButton(
                         onPressed: () async {
                           // // 退出登录

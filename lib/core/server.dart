@@ -131,4 +131,13 @@ class ApiService {
       rethrow;
     }
   }
+
+  Future<Response> putRequest(String url, Map<String, dynamic>? data) async {
+    try {
+      final response = await _dio.put(url, data: data);
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

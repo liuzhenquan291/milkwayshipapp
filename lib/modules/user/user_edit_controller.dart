@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/auth_controller.dart';
+import 'package:milkwayshipapp/core/custom_option_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 
@@ -45,7 +46,31 @@ class UserEditController extends GetxController {
   }
 
   // 修改用户信息
-  void onEditUserInfo(UserModel? userData) {}
+  Future<void> onEditUserInfo(
+    String displayName,
+    String wxName,
+    String wxGname,
+  ) async {
+    userData?.displayName = displayName;
+    userData?.wechatName = wxName;
+    userData?.wcqName = wxGname;
+
+    final payload = {
+      "id": userData?.id,
+      "username": userData?.username,
+      "display_name": userData?.displayName,
+      "wechat_name": userData?.wechatName,
+      "wcq_name": userData?.wcqName,
+      "updated_time": userData?.updatedTime,
+      "number": userData?.number,
+    };
+
+    final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userId]);
+    final result = await customePutOption("修改信息", url, payload);
+    if (result == true) {
+      _loadData();
+    }
+  }
 
   // 修改用户密码
   void onEditUserPassWd() {}
