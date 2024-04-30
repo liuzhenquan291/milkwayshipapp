@@ -116,7 +116,7 @@ class RegionOptionsController extends GetxController {
   void onOptionRefuse(OptionModel? option) {
     final TextEditingController tc = TextEditingController();
     final Map<String, dynamic> myPayload = {
-      "refused": false,
+      "refused": true,
       "refused_reason": null,
       "region_id": regionData?.id,
       "updated_time": regionData?.updatedTime,

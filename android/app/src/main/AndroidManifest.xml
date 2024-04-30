@@ -3,7 +3,7 @@
     <!-- 添加网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="milkwayshipapp"
+        android:label="龍魂"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
