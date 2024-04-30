@@ -29,7 +29,7 @@ Future<bool> customePostOption(
           title: '操作失败',
           content: Text(responseData.message as String),
           confirm: TextButton(
-            onPressed: () {
+            onPressed: () async {
               Get.back();
             },
             child: const Text('关闭'),
@@ -40,7 +40,7 @@ Future<bool> customePostOption(
           title: "",
           content: const Text("操作成功"),
           confirm: TextButton(
-            onPressed: () {
+            onPressed: () async {
               Get.back();
             },
             child: const Text('关闭'),
@@ -80,7 +80,7 @@ Future<bool> customePutOption(
           title: '操作失败',
           content: Text(responseData.message as String),
           confirm: TextButton(
-            onPressed: () {
+            onPressed: () async {
               Get.back();
             },
             child: const Text('关闭'),
@@ -91,7 +91,7 @@ Future<bool> customePutOption(
           title: "",
           content: const Text("操作成功"),
           confirm: TextButton(
-            onPressed: () {
+            onPressed: () async {
               Get.back();
             },
             child: const Text('关闭'),

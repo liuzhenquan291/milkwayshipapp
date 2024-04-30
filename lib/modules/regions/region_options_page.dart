@@ -128,83 +128,82 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                     // ctl.loadData();
                   },
                   child: Column(
-                      // scrollDirection: Axis.horizontal,
-                      children: [
-                        Container(
-                          height: 50,
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black, width: 1),
-                            ),
-                          ),
-                          child: getTableHead(
-                            ["角色名", "用户名", "微信昵称", "群昵称", "职务"],
-                            null,
+                    // scrollDirection: Axis.horizontal,
+                    children: [
+                      Container(
+                        height: 50,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(color: Colors.black, width: 1),
                           ),
                         ),
-                        Expanded(
-                          child: ctl.hasUser
-                              ? ListView.builder(
-                                  itemBuilder: (ctx, index) {
-                                    ShipUserModel? tempUser = controller
-                                        .regionData?.shipUsers?[index];
-                                    return Container(
-                                      height: 20,
-                                      decoration: const BoxDecoration(
-                                        border: Border(
-                                          bottom: BorderSide(
-                                              color: Colors.black26, width: 1),
-                                        ),
+                        child: getTableHead(
+                          ["角色名", "用户名", "微信昵称", "群昵称", "职务"],
+                          null,
+                        ),
+                      ),
+                      Expanded(
+                        child: ctl.hasUser
+                            ? ListView.builder(
+                                itemBuilder: (ctx, index) {
+                                  ShipUserModel? tempUser =
+                                      controller.regionData?.shipUsers?[index];
+                                  return Container(
+                                    height: 20,
+                                    decoration: const BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            color: Colors.black26, width: 1),
                                       ),
-                                      // padding: EdgeInsets.all(20),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: InkWell(
-                                              // onTap: () {
-                                              //   Get.toNamed(
-                                              //     AppRoute.regionOptionsPage,
-                                              //     parameters: {
-                                              //       'regionId': tempUser['id']
-                                              //     },
-                                              //   );
-                                              // },
-                                              child: Text(
-                                                tempUser?.mksName ?? "",
-                                                style: const TextStyle(
-                                                  color: Colors.blue,
-                                                ),
+                                    ),
+                                    // padding: EdgeInsets.all(20),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: InkWell(
+                                            // onTap: () {
+                                            //   Get.toNamed(
+                                            //     AppRoute.regionOptionsPage,
+                                            //     parameters: {
+                                            //       'regionId': tempUser['id']
+                                            //     },
+                                            //   );
+                                            // },
+                                            child: Text(
+                                              tempUser?.mksName ?? "",
+                                              style: const TextStyle(
+                                                color: Colors.blue,
                                               ),
                                             ),
                                           ),
-                                          Expanded(
-                                            child: Text(
-                                                tempUser?.user?.displayName ??
-                                                    ""),
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                                tempUser?.user?.wechatName ??
-                                                    ""),
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                                tempUser?.user?.wcqName ?? ""),
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                                tempUser?.regionsRoleName ??
-                                                    ""),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  itemCount: ctl.shipUserLength,
-                                )
-                              : const Text("暂无数据"),
-                        ),
-                      ]),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                              tempUser?.user?.displayName ??
+                                                  ""),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                              tempUser?.user?.wechatName ?? ""),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                              tempUser?.user?.wcqName ?? ""),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                              tempUser?.regionsRoleName ?? ""),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                itemCount: ctl.shipUserLength,
+                              )
+                            : const Text("暂无数据"),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 24),

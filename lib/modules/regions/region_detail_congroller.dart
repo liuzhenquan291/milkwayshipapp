@@ -16,6 +16,7 @@ class RegionDetailController extends GetxController {
   TotalOptionModel? totalOptionData;
   bool hasRegion = false;
   bool hasUser = false;
+  int shipUserCnt = 0;
   bool hasTotalOption = false;
   bool hasAddRegionOption = false;
   bool hasJoinRegionOption = false;
@@ -50,6 +51,7 @@ class RegionDetailController extends GetxController {
         regionData = RegionModel.fromJson(responseData.data);
         final userCnt = regionData?.shipUsers?.length ?? 0;
         if (userCnt > 0) {
+          shipUserCnt = userCnt;
           hasUser = true;
         }
       }

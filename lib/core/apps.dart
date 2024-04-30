@@ -200,6 +200,7 @@ abstract class AppRoute {
         page: () => ShipUserOptionPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => ShipUserOptionController());
+          Get.lazyPut(() => TimePickerController());
         }),
       ),
       GetPage(

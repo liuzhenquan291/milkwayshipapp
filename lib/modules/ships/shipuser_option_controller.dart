@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/custom_option_widget.dart';
+import 'package:milkwayshipapp/core/utils.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 
 import '../../core/apps.dart';
+import '../../core/common_controller.dart';
 import '../../core/models/options_model.dart';
 import '../../core/models/ship_user_model.dart';
 import '../../core/option_conf.dart';
@@ -16,8 +18,10 @@ class ShipUserOptionController extends GetxController {
   String? shipUserId;
   ShipUserModel? shipUserData;
   bool hasOptions = false;
+  bool hasUpdOption = false;
   List<OptionModel> validOptions = [];
   final RefreshController refreshController = RefreshController();
+  final TimePickerController timeCtl = Get.find<TimePickerController>();
 
   @override
   void onInit() {
@@ -34,6 +38,91 @@ class ShipUserOptionController extends GetxController {
     _loadData();
   }
 
+  // 上次开盆时间
+  String? lastOpenTime;
+  // 上次参盆时间
+  String? lastJoinTime;
+
+  // 距收盆还有
+  int? jd = 0;
+  List<int> jdNums = List.generate(7, (index) => index);
+  int? jh = 0;
+  List<int> jhNums = List.generate(60, (index) => index);
+  int? jm = 0;
+  List<int> jmNums = List.generate(60, (index) => index);
+
+  // 距可开盆还有
+  int? od = 0;
+  List<int> odNums = List.generate(30, (index) => index);
+  int? oh = 0;
+  List<int> ohNums = List.generate(60, (index) => index);
+  int? om = 0;
+  List<int> omNums = List.generate(60, (index) => index);
+
+  void setLastOpenTime(String? time) {
+    lastOpenTime = time;
+    update();
+  }
+
+  void setLastJoinTime(String? time) {
+    lastJoinTime = time;
+    update();
+  }
+
+  void setJd(int? _jd) {
+    jd = _jd;
+    update();
+    return;
+  }
+
+  void setJh(int? _jh) {
+    jh = _jh;
+    update();
+  }
+
+  void setJm(int? _jm) {
+    jm = _jm;
+    update();
+  }
+
+  void setod(int? _jd) {
+    od = _jd;
+    update();
+    return;
+  }
+
+  void setoh(int? _jh) {
+    oh = _jh;
+    update();
+  }
+
+  void setom(int? _jm) {
+    om = _jm;
+    update();
+  }
+
+  Future<void> reloadData() async {
+    hasOptions = false;
+    hasUpdOption = false;
+    validOptions = [];
+    // 上次开盆时间
+    lastOpenTime = null;
+    // 上次参盆时间
+    lastJoinTime = null;
+
+    // 距收盆还有
+    jd = 0;
+    jh = 0;
+    jm = 0;
+
+    // 距可开盆还有
+    od = 0;
+    oh = 0;
+    om = 0;
+    _loadData();
+    update();
+  }
+
   // dio.Response? response;
   Future<void> _loadData() async {
     final apiService = ApiService();
@@ -47,12 +136,16 @@ class ShipUserOptionController extends GetxController {
       final responseData = ResponseData.fromJson(response.data);
       if (responseData.data != null) {
         shipUserData = ShipUserModel.fromJson(responseData.data);
+        lastOpenTime = formatDateTime_1(shipUserData?.lastOpenCornTime);
+        lastJoinTime = formatDateTime_1(shipUserData?.lastJoinCornTime);
       }
       final options = shipUserData?.options ?? [];
       if (options.isNotEmpty) {
         for (OptionModel option in options) {
           String code = option.code ?? "";
-
+          if (code == ShipuserOptionConf.UPDATE) {
+            hasUpdOption = true;
+          }
           if (shipuserOptionConf.optionInOptionPage(code)) {
             validOptions.add(option);
             hasOptions = true;
@@ -92,9 +185,9 @@ class ShipUserOptionController extends GetxController {
         break;
 
       // 编辑角色信息
-      case ShipuserOptionConf.UPDATE:
-        result = await onOptionUpdate(option);
-        break;
+      // case ShipuserOptionConf.UPDATE:
+      //   result = await onOptionUpdate(option);
+      //   break;
 
       // 给角色打标签
       case ShipuserOptionConf.REMARK:
@@ -196,6 +289,47 @@ class ShipUserOptionController extends GetxController {
       tc,
       myPayload,
     );
+    return result;
+  }
+
+  Future<bool> onOptionUpdateByTimePoint() async {
+    final payload = {
+      'ship_user_id': shipUserData?.id,
+      'updated_time': shipUserData?.updatedTime,
+      'last_join_corn_time': lastJoinTime,
+      'last_open_corn_time': lastOpenTime,
+    };
+    final result = await customePostOption(
+      "设置聚宝盆时间信息",
+      apiUrl.setCornInfoByPoint,
+      payload,
+    );
+    if (result == true) {
+      await reloadData();
+    }
+    return result;
+  }
+
+  Future<bool> onOptionUpdateByRemainTime() async {
+    final payload = {
+      'ship_user_id': shipUserData?.id,
+      'updated_time': shipUserData?.updatedTime,
+      'join_remain_days': jd,
+      'join_remain_hours': jh,
+      'join_remain_minutes': jm,
+      'open_remain_days': od,
+      'open_remain_hours': oh,
+      'open_remain_minutes': om,
+    };
+    final result = await customePostOption(
+      "设置聚宝盆时间信息",
+      apiUrl.setCornInfoByRemain,
+      payload,
+    );
+    print(result);
+    if (result == true) {
+      await reloadData();
+    }
     return result;
   }
 

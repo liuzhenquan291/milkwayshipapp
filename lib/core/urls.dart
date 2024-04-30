@@ -67,6 +67,10 @@ class ApiUrl {
   String cornucopiaInfosPath = "$_shipApp/cornucopia_infos/";
 // 仅对角色设置开盆投盆时间
   String cornSetOnlyPath = "$_shipApp/cornucopias/set_only/";
+  // 根据时间点设置开盆投盆时间
+  String setCornInfoByPoint = "$_shipApp/set_corn_info_by_point/";
+  // 根据剩余时间设置开盆投盆时间
+  String setCornInfoByRemain = "$_shipApp/set_corn_info_by_remain/";
 
 //// 连接后端 region 应用
 // 注册势力、势力列表

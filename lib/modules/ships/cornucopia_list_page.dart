@@ -320,8 +320,8 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                                   as String),
                                             ),
                                             Expanded(
-                                              child:
-                                                  Text(tmp?.status as String),
+                                              child: Text(
+                                                  tmp?.statusName as String),
                                             ),
                                           ],
                                         ),
