@@ -115,6 +115,9 @@ class UserOptionController extends GetxController {
       // case UserOptionConf.LOGOFF:
       //   onOptionLogoff(option);
       //   break;
+      case UserOptionConf.SET_ROLES:
+        result = await onOptionSetRoles(option);
+        break;
     }
     if (result == true) {
       reloadData();
@@ -217,6 +220,23 @@ class UserOptionController extends GetxController {
     );
     await StorageHelper.removeAll();
     await Get.find<AuthService>().clearToken();
+    return result;
+  }
+
+  // 设置用户角色
+  Future<bool> onOptionSetRoles(OptionModel? option) async {
+    final Map<String, dynamic> myPayload = {
+      "user_id": userId,
+      "updated_time": userData?.updatedTime,
+    };
+    bool result = await editablePostOption(
+      option?.title ?? "",
+      apiUrl.userSetRole,
+      "请输入身份：管理员/普通用户",
+      "role_name",
+      txc,
+      myPayload,
+    );
     return result;
   }
 }

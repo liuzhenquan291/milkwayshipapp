@@ -20,6 +20,12 @@ class RegionListController extends GetxController {
     _loadData();
   }
 
+  void onLoadMore() async {
+    page += 1;
+    _loadData();
+    refreshController.loadComplete();
+  }
+
   void reloadData() async {
     regionList = [];
     page = 1;

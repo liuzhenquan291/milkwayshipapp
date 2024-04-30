@@ -32,7 +32,8 @@ class UserOptionConf {
     APPROVE,
     REFUSE,
     DEMOTE,
-    FORBIDDEN
+    FORBIDDEN,
+    SET_ROLES,
   ];
   // 用户编辑页可执行操作
   static const List<String> _userEditPageOptions = [LOGOFF, UPDATE, LOGOUT];

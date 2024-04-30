@@ -15,6 +15,7 @@ class RegionOptionsController extends GetxController {
   RegionModel? regionData;
   // String? displayName;
   bool hasUser = false;
+  int shipUserLength = 0;
   bool hasOptions = false;
   List<OptionModel> validOptions = [];
   final RefreshController refreshController = RefreshController();
@@ -27,10 +28,15 @@ class RegionOptionsController extends GetxController {
     // 在控制器初始化时，获取页面参数
     // regionId = Get.arguments;
 
-    _loadData();
+    loadData();
   }
 
-  Future<void> _loadData() async {
+  void onLoadMore() async {
+    loadData();
+    refreshController.loadComplete();
+  }
+
+  Future<void> loadData() async {
     final apiService = ApiService();
     String? regionId = Get.parameters['regionId'];
     final url = sprintf(apiUrl.regionsRetrieveUpdateDestroyPath, [regionId]);
@@ -46,6 +52,8 @@ class RegionOptionsController extends GetxController {
           final users = regionData?.shipUsers ?? [];
           if (users.isNotEmpty) {
             hasUser = true;
+            // num cnt = users.length;
+            shipUserLength = users.length;
           }
           final options = regionData?.options ?? [];
           if (options.isNotEmpty) {

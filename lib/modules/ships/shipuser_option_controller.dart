@@ -104,14 +104,14 @@ class ShipUserOptionController extends GetxController {
       // case UserOptionConf.LOGOFF:
       //   onOptionLogoff(option);
       //   break;
-      // 创建开盆计划
-      case ShipuserOptionConf.OPEN_CORNUCOPIA:
-        result = await onOptionOpenCornucopia(option);
-        break;
-      // 加入开盆计划
-      case ShipuserOptionConf.JOIN_CORNUCOPIA:
-        result = await onOptionJoinCornucopia(option);
-        break;
+      // // 创建开盆计划
+      // case ShipuserOptionConf.OPEN_CORNUCOPIA:
+      //   result = await onOptionOpenCornucopia(option);
+      //   break;
+      // // 加入开盆计划
+      // case ShipuserOptionConf.JOIN_CORNUCOPIA:
+      //   result = await onOptionJoinCornucopia(option);
+      //   break;
     }
     return result;
   }
@@ -230,7 +230,7 @@ class ShipUserOptionController extends GetxController {
 
   Future<bool> _defaultPostOption(
       String title, String optionUrl, Map<String, dynamic>? payload) async {
-    late Map<String, dynamic> myPayload;
+    Map<String, dynamic> myPayload = {};
     if (payload != null) {
       myPayload = payload;
     }
@@ -246,7 +246,7 @@ class ShipUserOptionController extends GetxController {
 
   Future<bool> _defaultDeleteOption(
       String title, String optionUrl, Map<String, dynamic>? payload) async {
-    late Map<String, dynamic> myPayload;
+    Map<String, dynamic> myPayload = {};
     if (payload != null) {
       myPayload = payload;
     }
