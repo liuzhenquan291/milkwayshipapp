@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/apps.dart';
+import '../../core/auth.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<HomePage> {
-  final TextEditingController usernameController = TextEditingController();
+  // final TextEditingController usernameController = TextEditingController();
 
   // 添加 key 参数
   // HomePage() {
@@ -50,6 +51,15 @@ class _HomeState extends State<HomePage> {
     // ];
 
     // Get.find<MarqueeController>().updateMessages(scrollMessages);
+
+    final au = Get.find<AuthService>();
+    final userRole = au.userRole;
+    if (userRole == 'root') {
+      grandItems.add({
+        "title": "赛季\n管理",
+        "app": AppRoute.seasonPage,
+      });
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,

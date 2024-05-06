@@ -5,6 +5,7 @@ final UserOptionConf userOptionConf = UserOptionConf();
 final RegionsOptionConf regionsOptionConf = RegionsOptionConf();
 final ShipuserOptionConf shipuserOptionConf = ShipuserOptionConf();
 final CornucopaOptionConf cornucopaOptionConf = CornucopaOptionConf();
+final SeasonOptConf seasonOptConf = SeasonOptConf();
 
 // 对用户可执行的操作
 class UserOptionConf {
@@ -141,5 +142,30 @@ class CornucopaOptionConf {
 
   bool optionIsValid(String option) {
     return _all.contains(option);
+  }
+}
+
+// 对赛季操作
+class SeasonOptConf {
+  // APPROVE = 'approve'  # 管理员审核通过新用户
+  // END = 'end'  # 赛季结束
+
+  static const String APPROVE = 'approve';
+  static const String END = 'end';
+
+  // 用户管理页可执行操作
+  static const List<String> _OptionPageOptions = [
+    APPROVE,
+    END,
+  ];
+  // 用户编辑页可执行操作
+  static const List<String> _EditPageOptions = [];
+
+  bool optionInOptionPage(String option) {
+    return _OptionPageOptions.contains(option);
+  }
+
+  bool optionInEditPage(String option) {
+    return _EditPageOptions.contains(option);
   }
 }

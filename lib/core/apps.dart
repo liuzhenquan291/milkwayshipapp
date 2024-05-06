@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 
+import '../modules/seasons/season_new_controller.dart';
+import '../modules/seasons/season_new_page.dart';
+import '../modules/seasons/season_option_controller.dart';
 import '../modules/regions/region_detail_congroller.dart';
 import '../modules/regions/region_join_controller.dart';
 import '../modules/regions/region_join_page.dart';
@@ -9,6 +12,9 @@ import '../modules/root/home_page.dart';
 import '../modules/login/login_page.dart';
 import '../modules/register/register_page.dart';
 import '../modules/root/settings_page.dart';
+import '../modules/seasons/season_controller.dart';
+import '../modules/seasons/season_option_page.dart';
+import '../modules/seasons/season_page.dart';
 import '../modules/ships/corn_join_controller.dart';
 import '../modules/ships/corn_join_page.dart';
 import '../modules/ships/cornucopia_list_controller.dart';
@@ -73,6 +79,14 @@ abstract class AppRoute {
   static String shipUserNewPage = '/ship/userNew';
   // 聚宝盆管理页
   static String cornucopiaPage = '/ship/cornucopia';
+
+  // 赛季管理页
+  static String seasonPage = '/season';
+  // 赛季新建
+  static String seasonNewPage = '/season/new';
+  // 赛季操作
+  static String seasonOptionPage = '/season/option';
+
   // 新建开盆计划页
   static String cornucopiaNewPage = '/ship/cornucopiaNew';
   // 加入开盆计划页
@@ -248,6 +262,28 @@ abstract class AppRoute {
         page: () => JoinCornPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => CornJoinController());
+        }),
+      ),
+      // 赛季操作
+      GetPage(
+        name: AppRoute.seasonPage,
+        page: () => SeasonListPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => SeasonListController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.seasonNewPage,
+        page: () => SeasonNewPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => SeasonNewController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.seasonOptionPage,
+        page: () => SeasonOptionPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => SeasonOptionController());
         }),
       ),
     ];

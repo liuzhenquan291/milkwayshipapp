@@ -85,4 +85,13 @@ class ApiUrl {
   String regionByUser = "$_regionApp/regions/byuser/";
   // 根据用户身份获取可对势力执行的所有操作
   String regionTotalOptions = "$_regionApp/total_options/";
+
+  // 赛季信息
+  String seasonListCreatePath = "$_regionApp/seasons/";
+  // 赛季详情
+  String seasonRetrieveUpdateDestoryPath = "$_regionApp/seasons/%s/";
+  // 赛季审核通过
+  String seasonApprovePath = "$_regionApp/season_approve/";
+  // 赛季结束
+  String seasonEndPath = "$_regionApp/season_end/";
 }
