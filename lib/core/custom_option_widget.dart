@@ -41,7 +41,7 @@ Future<bool> customePostOption(
           content: const Text("操作成功"),
           confirm: TextButton(
             onPressed: () async {
-              Get.back();
+              Get.back(result: true);
             },
             child: const Text('关闭'),
           ),

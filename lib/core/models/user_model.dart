@@ -20,6 +20,7 @@ class UserModel {
   String wcqName;
   String role;
   String roleName;
+  bool needInit;
   List<ShipUserModel>? shipUsers;
   List<OptionModel>? options;
 
@@ -38,6 +39,7 @@ class UserModel {
     required this.wcqName,
     required this.role,
     required this.roleName,
+    required this.needInit,
     this.shipUsers,
     this.options,
   });
@@ -60,6 +62,7 @@ class UserModel {
       wcqName: json['wcq_name'] ?? '',
       role: json['role'] ?? '',
       roleName: json['role_name'] ?? '',
+      needInit: json['need_init'] ?? false,
       shipUsers: json['ship_users'] != null
           ? ShipUserModel.fromJsonToList(json['ship_users'] ?? [])
           : [],

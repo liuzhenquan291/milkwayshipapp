@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
@@ -39,7 +38,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 8),
                   Container(
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.all(6),
@@ -60,18 +59,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                               child: Text(
                                   "账        号:   ${ctl.shipUserData?.user?.username}"),
                             ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                  "昵        称:   ${ctl.shipUserData?.user?.displayName}"),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
+                            // const SizedBox(width: 16),
                             Expanded(
                               child: Text(
                                   "微信昵称:   ${ctl.shipUserData?.user?.wechatName ?? ''}"),
@@ -82,24 +70,47 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                           children: [
                             Expanded(
                               child: Text(
-                                  "群  昵  称:   ${ctl.shipUserData?.user?.wcqName ?? ''}"),
-                            ),
-                          ],
-                        ),
-                        // 角色信息
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
                                   "角  色  名:   ${ctl.shipUserData?.mksName ?? ''}"),
                             ),
-                          ],
-                        ),
-                        Row(
-                          children: [
                             Expanded(
                               child: Text(
                                   "所属势力:   ${ctl.shipUserData?.region?.name ?? ''}"),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                  "角色类型:   ${ctl.shipUserData?.typeName ?? ''}"),
+                            ),
+                            Expanded(
+                              child: Text(
+                                  "战力:   ${ctl.shipUserData?.sword ?? ''}"),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                  "可  开  盆:   ${ctl.shipUserData?.canCornucopia ?? true ? '是' : '否'}"),
+                            ),
+                            Expanded(
+                              child: Text(
+                                  "需  参  盆:   ${ctl.shipUserData?.needCornucopia ?? true ? '是' : '否'}"),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                  "可开盆时间:   ${ctl.shipUserData?.canCornucopiaTime ?? ''}"),
+                            ),
+                            Expanded(
+                              child: Text(
+                                  "需参盆时间:   ${ctl.shipUserData?.needCornucopiaTime ?? ''}"),
                             ),
                           ],
                         ),
@@ -119,114 +130,132 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                             ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                  "可  开  盆:   ${ctl.shipUserData?.canCornucopia ?? true ? '是' : '否'}"),
-                            ),
-                          ],
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Container(
+                    color: Colors.black12,
+                    child: Column(
+                      children: [
+                        Row(children: const [
+                          Text(
+                            "更新基本信息: ",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ]),
+                        TextField(
+                          controller: ctl.mskNameCtl,
+                          decoration: InputDecoration(
+                            labelText: '角色名',
+                            hintText: ctl.shipUserData?.mksName ?? "请输入角色名",
+                          ),
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                  "需  参  盆:   ${ctl.shipUserData?.needCornucopia ?? true ? '是' : '否'}"),
-                            ),
-                          ],
+                        TextField(
+                          controller: ctl.shipUserTypeCtl,
+                          decoration: InputDecoration(
+                            labelText: '角色类型: 主号/耗兵/副号',
+                            hintText: ctl.shipUserData?.typeName ?? "请输入角色类型",
+                          ),
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                  "可开盆时间:   ${ctl.shipUserData?.canCornucopiaTime ?? ''}"),
-                            ),
-                          ],
+                        TextField(
+                          controller: ctl.swordCtl,
+                          decoration: InputDecoration(
+                            labelText: '角色当前战力',
+                            hintText: "${ctl.shipUserData?.sword ?? "请输入当前战力"}",
+                          ),
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                  "需参盆时间:   ${ctl.shipUserData?.needCornucopiaTime ?? ''}"),
-                            ),
-                          ],
+                        ElevatedButton(
+                          onPressed: () async {
+                            result = await ctl.onUpdateBasic();
+                            if (result == true) {
+                              ctl.reloadData();
+                            }
+                          },
+                          child: const Text("更新角色基本信息"),
                         ),
                       ],
                     ),
                   ),
+                  const SizedBox(height: 8),
                   ctl.hasUpdOption
                       ? Column(
                           children: [
                             const SizedBox(
-                              height: 12,
+                              height: 6,
                             ),
                             Container(
                               color: Colors.black12,
-                              child: Column(children: [
-                                Row(children: const [
-                                  Text(
-                                    "设置聚宝盆时间点: ",
-                                    style: TextStyle(fontSize: 20),
+                              child: Column(
+                                children: [
+                                  Row(children: const [
+                                    Text(
+                                      "设置聚宝盆时间点: ",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ]),
+                                  Row(
+                                    children: [
+                                      const Text("上次开盆时间："),
+                                      const SizedBox(width: 10),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          DatePicker.showDateTimePicker(
+                                            context,
+                                            showTitleActions: true,
+                                            locale: LocaleType.zh,
+                                            onChanged: (time) {
+                                              ctl.setLastOpenTime(
+                                                  formatDateTime_1(time));
+                                            },
+                                            onConfirm: (time) {
+                                              // Update state when time is confirmed
+                                              ctl.timeCtl.selectTime(time);
+                                            },
+                                            currentTime: DateTime.now(),
+                                          );
+                                        },
+                                        child: Text("${ctl.lastOpenTime}"),
+                                      ),
+                                    ],
                                   ),
-                                ]),
-                                Row(
-                                  children: [
-                                    const Text("上次开盆时间："),
-                                    const SizedBox(width: 10),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        DatePicker.showDateTimePicker(
-                                          context,
-                                          showTitleActions: true,
-                                          locale: LocaleType.zh,
-                                          onChanged: (time) {
-                                            ctl.setLastOpenTime(
-                                                formatDateTime_1(time));
-                                          },
-                                          onConfirm: (time) {
-                                            // Update state when time is confirmed
-                                            ctl.timeCtl.selectTime(time);
-                                          },
-                                          currentTime: DateTime.now(),
-                                        );
-                                      },
-                                      child: Text("${ctl.lastOpenTime}"),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Text("上次参盆时间："),
-                                    const SizedBox(width: 10),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        DatePicker.showDateTimePicker(
-                                          context,
-                                          showTitleActions: true,
-                                          locale: LocaleType.zh,
-                                          onChanged: (time) {
-                                            ctl.setLastJoinTime(
-                                                formatDateTime_1(time));
-                                          },
-                                          onConfirm: (time) {
-                                            // Update state when time is confirmed
-                                            ctl.timeCtl.selectTime(time);
-                                          },
-                                          currentTime: DateTime.now(),
-                                        );
-                                      },
-                                      child: Text("${ctl.lastJoinTime}"),
-                                    ),
-                                  ],
-                                ),
-                                ElevatedButton(
-                                  onPressed: () async {
-                                    result =
-                                        await ctl.onOptionUpdateByTimePoint();
-                                  },
-                                  child: const Text("更新聚宝盆信息"),
-                                ),
-                              ]),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      const Text("上次参盆时间："),
+                                      const SizedBox(width: 10),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          DatePicker.showDateTimePicker(
+                                            context,
+                                            showTitleActions: true,
+                                            locale: LocaleType.zh,
+                                            onChanged: (time) {
+                                              ctl.setLastJoinTime(
+                                                  formatDateTime_1(time));
+                                            },
+                                            onConfirm: (time) {
+                                              // Update state when time is confirmed
+                                              ctl.timeCtl.selectTime(time);
+                                            },
+                                            currentTime: DateTime.now(),
+                                          );
+                                        },
+                                        child: Text("${ctl.lastJoinTime}"),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 6),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      result =
+                                          await ctl.onOptionUpdateByTimePoint();
+                                    },
+                                    child: const Text("更新聚宝盆信息"),
+                                  ),
+                                  const SizedBox(height: 6),
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 8.0),
                             const Text("或"),

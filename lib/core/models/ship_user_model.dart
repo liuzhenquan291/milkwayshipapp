@@ -27,6 +27,10 @@ class ShipUserModel {
   String? regionsRoleName;
   DateTime? lastJoinCornTime;
   DateTime? lastOpenCornTime;
+  bool needInit;
+  String? type;
+  String? typeName;
+  int? sword; // 战力
 
   UserModel? user; // 用户
   RegionModel? region; // 势力
@@ -51,6 +55,7 @@ class ShipUserModel {
     required this.mksName,
     required this.regionsId,
     required this.regionsRole,
+    required this.needInit,
     this.regionsRoleName,
     this.lastJoinCornTime,
     this.lastOpenCornTime,
@@ -59,6 +64,9 @@ class ShipUserModel {
     this.options,
     this.cornucopias,
     this.toJoinCornucopias,
+    this.type,
+    this.typeName,
+    this.sword,
   });
 
   factory ShipUserModel.fromJson(Map<String, dynamic> json) {
@@ -80,6 +88,10 @@ class ShipUserModel {
       regionsId: json['regions_id'] ?? '',
       regionsRole: json['regions_role'] ?? '',
       regionsRoleName: json['regions_role_name'] ?? '',
+      needInit: json['need_init'] ?? false,
+      type: json['type'] ?? '',
+      typeName: json['type_name'] ?? '',
+      sword: json['sword'] ?? 0,
       region: json['region'] != null
           ? RegionModel.fromJson(json['region'] ?? {})
           : null,

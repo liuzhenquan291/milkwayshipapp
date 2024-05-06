@@ -15,7 +15,12 @@ import '../../core/server.dart';
 import '../../core/urls.dart';
 
 class ShipUserOptionController extends GetxController {
+  final TextEditingController mskNameCtl = TextEditingController();
+  final TextEditingController shipUserTypeCtl = TextEditingController();
+  final TextEditingController swordCtl = TextEditingController();
+
   String? shipUserId;
+  bool needInit = false; // 新赛季需要初始化战力
   ShipUserModel? shipUserData;
   bool hasOptions = false;
   bool hasUpdOption = false;
@@ -33,6 +38,7 @@ class ShipUserOptionController extends GetxController {
   }
 
   void _reloadData() async {
+    needInit = false;
     hasOptions = false;
     validOptions = [];
     _loadData();
@@ -136,8 +142,12 @@ class ShipUserOptionController extends GetxController {
       final responseData = ResponseData.fromJson(response.data);
       if (responseData.data != null) {
         shipUserData = ShipUserModel.fromJson(responseData.data);
+        mskNameCtl.text = shipUserData?.mksName ?? "";
+        shipUserTypeCtl.text = shipUserData?.typeName ?? "";
+        swordCtl.text = "${shipUserData?.sword ?? 0}";
         lastOpenTime = formatDateTime_1(shipUserData?.lastOpenCornTime);
         lastJoinTime = formatDateTime_1(shipUserData?.lastJoinCornTime);
+        needInit = shipUserData?.needInit ?? false;
       }
       final options = shipUserData?.options ?? [];
       if (options.isNotEmpty) {
@@ -392,5 +402,24 @@ class ShipUserOptionController extends GetxController {
       _reloadData();
     }
     return result;
+  }
+
+  Future<bool> onUpdateBasic(
+      // String mskName,
+      // String shipUserTypeName,
+      // String swordString,
+      ) async {
+    Map<String, dynamic> myPayload = {};
+    myPayload["ship_user_id"] = shipUserId;
+    myPayload["updated_time"] = shipUserData?.updatedTime;
+    myPayload['mks_name'] = mskNameCtl.text;
+    myPayload['type_name'] = shipUserTypeCtl.text;
+    myPayload['sword'] = swordCtl.text;
+    final res = await customePostOption(
+      "更新角色基本信息",
+      apiUrl.setShipUserBasic,
+      myPayload,
+    );
+    return res;
   }
 }
