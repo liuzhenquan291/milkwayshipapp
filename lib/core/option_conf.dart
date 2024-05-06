@@ -110,6 +110,7 @@ class ShipuserOptionConf {
     FORBIDDEN,
     DESIGNATE,
     REMARK,
+    LOGOUT,
     // OPEN_CORNUCOPIA,  # 暂时不做聚宝盆数据了
     // JOIN_CORNUCOPIA,
   ];

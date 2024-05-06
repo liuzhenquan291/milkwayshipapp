@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/custom_option_widget.dart';
 import 'package:milkwayshipapp/core/models/region_model.dart';
 import 'package:milkwayshipapp/core/option_conf.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 
 import '../../core/models/options_model.dart';
@@ -18,7 +18,7 @@ class RegionOptionsController extends GetxController {
   int shipUserLength = 0;
   bool hasOptions = false;
   List<OptionModel> validOptions = [];
-  final RefreshController refreshController = RefreshController();
+  // final RefreshController refreshController = RefreshController();
   // bool hasRegion = false;
   // bool ifSelfRegion = false; // 通过 token 查询 势力
 
@@ -33,7 +33,7 @@ class RegionOptionsController extends GetxController {
 
   void onLoadMore() async {
     loadData();
-    refreshController.loadComplete();
+    // refreshController.loadComplete();
   }
 
   Future<void> loadData() async {

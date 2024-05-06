@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/options_model.dart';
 import 'package:milkwayshipapp/core/models/region_model.dart';
 import 'package:milkwayshipapp/core/option_conf.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
 // import 'package:dio/dio.dart' as dio;
 
 import '../../core/apps.dart';
@@ -20,7 +20,7 @@ class RegionDetailController extends GetxController {
   bool hasTotalOption = false;
   bool hasAddRegionOption = false;
   bool hasJoinRegionOption = false;
-  final RefreshController refreshController = RefreshController();
+  // final RefreshController refreshController = RefreshController();
 
   @override
   void onInit() {

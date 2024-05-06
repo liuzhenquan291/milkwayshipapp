@@ -32,14 +32,14 @@ class UserListController extends GetxController {
 
   Future<void> _loadData() async {
     final apiService = ApiService();
-    final totalOptionsResponse =
-        await apiService.getRequest(apiUrl.userTotalOptions, null);
-    if (totalOptionsResponse.statusCode != 200) {
-      return;
-    }
-    final res1Data = ResponseData.fromJson(totalOptionsResponse.data);
-    userRole = res1Data.data["user_role"] as String;
-    totalOptions = res1Data.data["options_str"] as String;
+    // final totalOptionsResponse =
+    //     await apiService.getRequest(apiUrl.userTotalOptions, null);
+    // if (totalOptionsResponse.statusCode != 200) {
+    //   return;
+    // }
+    // final res1Data = ResponseData.fromJson(totalOptionsResponse.data);
+    // userRole = res1Data.data["user_role"] as String;
+    // totalOptions = res1Data.data["options_str"] as String;
 
     final response = await apiService.getRequest(
       apiUrl.useListCreatePath,

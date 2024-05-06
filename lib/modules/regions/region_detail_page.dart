@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/custome_table_field.dart';
 import '../../core/models/ship_user_model.dart';
@@ -110,104 +110,87 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
-                          SizedBox(
-                            height: 70 + 20.0 * ctl.shipUserCnt,
-                            child: SmartRefresher(
-                              controller: ctl.refreshController,
-                              enablePullDown: true,
-                              enablePullUp: true,
-                              onRefresh: () async {
-                                // ctl._loadData();
-                              },
-                              child: Column(
-                                // scrollDirection: Axis.horizontal,
-                                children: [
-                                  Container(
-                                    height: 50,
-                                    decoration: const BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                            color: Colors.black, width: 1),
-                                      ),
-                                    ),
-                                    child: getTableHead(
-                                      ["角色名", "用户名", "微信昵称", "群昵称", "职务"],
-                                      [5, 3, 3, 3, 3],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: ctl.hasUser
-                                        ? ListView.builder(
-                                            itemBuilder: (ctx, index) {
-                                              ShipUserModel? tmp = controller
-                                                  .regionData
-                                                  ?.shipUsers?[index];
-                                              return Container(
-                                                height: 20,
-                                                // padding: const EdgeInsets.only(
-                                                //     left: 6),
-                                                decoration: const BoxDecoration(
-                                                  border: Border(
-                                                    bottom: BorderSide(
-                                                        color: Colors.black26,
-                                                        width: 1),
-                                                  ),
-                                                ),
-                                                // padding: EdgeInsets.all(20),
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 5,
-                                                      child: InkWell(
-                                                        // onTap: () {
-                                                        //   Get.toNamed(
-                                                        //     AppRoute.regionOptionsPage,
-                                                        //     parameters: {
-                                                        //       'regionId': tempUser['id']
-                                                        //     },
-                                                        //   );
-                                                        // },
-                                                        child: Text(
-                                                          tmp?.mksName ?? "",
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Text(tmp?.user
-                                                              ?.displayName ??
-                                                          ""),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Text(tmp?.user
-                                                              ?.wechatName ??
-                                                          ""),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                          tmp?.user?.wcqName ??
-                                                              ""),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                          tmp?.regionsRoleName ??
-                                                              ""),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                            itemCount: controller
-                                                .regionData?.shipUsers?.length,
-                                          )
-                                        : const Text("暂无数据"),
-                                  ),
-                                ],
+                          Container(
+                            height: 50,
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom:
+                                    BorderSide(color: Colors.black, width: 1),
                               ),
                             ),
+                            child: getTableHead(
+                              ["序号", "角色名", "微信昵称", "群昵称", "职务"],
+                              [2, 4, 3, 3, 3],
+                            ),
+                          ),
+                          Expanded(
+                            child: ctl.hasUser
+                                ? ListView.builder(
+                                    itemBuilder: (ctx, index) {
+                                      ShipUserModel? tmp = controller
+                                          .regionData?.shipUsers?[index];
+                                      return Container(
+                                        // height: 20,
+                                        // padding: const EdgeInsets.only(
+                                        //     left: 6),
+                                        decoration: const BoxDecoration(
+                                          border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.black26,
+                                                width: 1),
+                                          ),
+                                        ),
+                                        // padding: EdgeInsets.all(20),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: InkWell(
+                                                // onTap: () {
+                                                //   Get.toNamed(
+                                                //     AppRoute.regionOptionsPage,
+                                                //     parameters: {
+                                                //       'regionId': tempUser['id']
+                                                //     },
+                                                //   );
+                                                // },
+                                                // child: Text(
+                                                //   tmp?.mksName ?? "",
+                                                // ),
+                                                child: Text(
+                                                  "$index",
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Text(
+                                                tmp?.mksName ?? "",
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Text(
+                                                  tmp?.user?.wechatName ?? ""),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Text(
+                                                  tmp?.user?.wcqName ?? ""),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Text(
+                                                  tmp?.regionsRoleName ?? ""),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    itemCount: controller
+                                        .regionData?.shipUsers?.length,
+                                  )
+                                : const Text("暂无数据"),
                           ),
                         ],
                       )

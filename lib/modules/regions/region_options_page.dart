@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/modules/regions/region_options_controller.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+// import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/apps.dart';
 import '../../core/custome_table_field.dart';
 
 class RegionOptionsPage extends GetView<RegionOptionsController> {
@@ -96,18 +97,13 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                 color: Colors.black12,
                 height: 100,
                 padding: const EdgeInsets.all(10),
-                child:
-                    // Column(
-                    //   children: [
-                    Row(
+                child: Row(
                   children: [
                     Expanded(
                       child: Text("     ${ctl.regionData?.desc ?? ''}"),
                     ),
                   ],
                 ),
-                //   ],
-                // ),
               ),
               const SizedBox(height: 24),
               Container(
@@ -118,93 +114,72 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                   style: TextStyle(fontSize: 16),
                 ),
               ),
-              SizedBox(
-                height: 50 + 20.0 * ctl.shipUserLength,
-                child: SmartRefresher(
-                  controller: ctl.refreshController,
-                  enablePullDown: true,
-                  enablePullUp: true,
-                  onRefresh: () async {
-                    // ctl.loadData();
-                  },
-                  child: Column(
-                    // scrollDirection: Axis.horizontal,
-                    children: [
-                      Container(
-                        height: 50,
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(color: Colors.black, width: 1),
-                          ),
-                        ),
-                        child: getTableHead(
-                          ["角色名", "用户名", "微信昵称", "群昵称", "职务"],
-                          null,
-                        ),
-                      ),
-                      Expanded(
-                        child: ctl.hasUser
-                            ? ListView.builder(
-                                itemBuilder: (ctx, index) {
-                                  ShipUserModel? tempUser =
-                                      controller.regionData?.shipUsers?[index];
-                                  return Container(
-                                    height: 20,
-                                    decoration: const BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                            color: Colors.black26, width: 1),
-                                      ),
-                                    ),
-                                    // padding: EdgeInsets.all(20),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: InkWell(
-                                            // onTap: () {
-                                            //   Get.toNamed(
-                                            //     AppRoute.regionOptionsPage,
-                                            //     parameters: {
-                                            //       'regionId': tempUser['id']
-                                            //     },
-                                            //   );
-                                            // },
-                                            child: Text(
-                                              tempUser?.mksName ?? "",
-                                              style: const TextStyle(
-                                                color: Colors.blue,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                              tempUser?.user?.displayName ??
-                                                  ""),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                              tempUser?.user?.wechatName ?? ""),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                              tempUser?.user?.wcqName ?? ""),
-                                        ),
-                                        Expanded(
-                                          child: Text(
-                                              tempUser?.regionsRoleName ?? ""),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                itemCount: ctl.shipUserLength,
-                              )
-                            : const Text("暂无数据"),
-                      ),
-                    ],
+              Container(
+                height: 50,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.black, width: 1),
                   ),
                 ),
+                child: getTableHead(
+                  ["序号", "角色名", "微信昵称", "角色状态", "职务"],
+                  null,
+                ),
+              ),
+              Expanded(
+                child: ctl.hasUser
+                    ? ListView.builder(
+                        itemBuilder: (ctx, index) {
+                          ShipUserModel? tempUser =
+                              controller.regionData?.shipUsers?[index];
+                          return Container(
+                            height: 20,
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom:
+                                    BorderSide(color: Colors.black26, width: 1),
+                              ),
+                            ),
+                            // padding: EdgeInsets.all(20),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.toNamed(
+                                        AppRoute.shipUserOptionsPage,
+                                        parameters: {
+                                          'regionId': tempUser?.id ?? "",
+                                        },
+                                      );
+                                    },
+                                    child: Text(
+                                      "  ${index + 1}",
+                                      style: const TextStyle(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(tempUser?.mksName ?? ""),
+                                ),
+                                Expanded(
+                                  child: Text(tempUser?.user?.wechatName ?? ""),
+                                ),
+                                Expanded(
+                                  child: Text(tempUser?.statusName ?? ""),
+                                ),
+                                Expanded(
+                                  child: Text(tempUser?.regionsRoleName ?? ""),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        itemCount: ctl.shipUserLength,
+                      )
+                    : const Text("暂无数据"),
               ),
               const SizedBox(height: 24),
               SizedBox(
