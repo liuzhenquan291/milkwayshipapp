@@ -73,8 +73,8 @@ class UserListPage extends GetView<UserListController> {
                             ),
                           ),
                           child: getTableHead(
-                            ["手机号", "昵称", "微信昵称", "用户状态", "用户身份"],
-                            [5, 3, 3, 3, 3],
+                            ["手机号", "微信昵称", "用户状态", "用户身份", "角色数"],
+                            [5, 3, 3, 3, 3, 2],
                           ),
                         ),
                         Expanded(
@@ -109,10 +109,10 @@ class UserListPage extends GetView<UserListController> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
-                                            flex: otherExpandedFlex,
-                                            child: Text(user.displayName),
-                                          ),
+                                          // Expanded(
+                                          //   flex: otherExpandedFlex,
+                                          //   child: Text(user.displayName),
+                                          // ),
                                           Expanded(
                                             flex: otherExpandedFlex,
                                             child: Text(user.wechatName),
@@ -126,6 +126,11 @@ class UserListPage extends GetView<UserListController> {
                                           Expanded(
                                             flex: otherExpandedFlex,
                                             child: Text(user.roleName),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child:
+                                                Text("${user.shipUserCount}"),
                                           ),
                                         ],
                                       ),

@@ -65,8 +65,8 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                           ),
                         ),
                         child: getTableHead(
-                          ["角色", "用户", "微信昵称", "所属势力", "势力职务", "角色状态"],
-                          [5, 3, 3, 3, 3, 3],
+                          ["序号", "角色", "微信昵称", "所属势力", "势力职务", "角色状态"],
+                          [2, 4, 3, 3, 3, 3],
                         ),
                       ),
                       Expanded(
@@ -88,7 +88,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                     child: Row(
                                       children: [
                                         Expanded(
-                                          flex: 5,
+                                          flex: 2,
                                           child: InkWell(
                                             onTap: () async {
                                               bool result = await Get.toNamed(
@@ -103,7 +103,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                               }
                                             },
                                             child: Text(
-                                              tempUser?.mksName ?? "",
+                                              "${index + 1}",
                                               style: const TextStyle(
                                                 color: Colors.blue,
                                               ),
@@ -111,9 +111,9 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                           ),
                                         ),
                                         Expanded(
-                                          flex: 3,
+                                          flex: 4,
                                           child: Text(
-                                            tempUser?.user?.displayName ?? "",
+                                            tempUser?.mksName ?? "",
                                           ),
                                         ),
                                         Expanded(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/custom_option_widget.dart';
 import 'package:milkwayshipapp/core/utils.dart';
 
@@ -20,6 +21,7 @@ class ShipUserOptionController extends GetxController {
   final TextEditingController swordCtl = TextEditingController();
 
   String? shipUserId;
+  bool isSelf = false;
   bool needInit = false; // 新赛季需要初始化战力
   ShipUserModel? shipUserData;
   bool hasOptions = false;
@@ -27,6 +29,7 @@ class ShipUserOptionController extends GetxController {
   List<OptionModel> validOptions = [];
   final RefreshController refreshController = RefreshController();
   final TimePickerController timeCtl = Get.find<TimePickerController>();
+  final auu = Get.find<AuthService>();
 
   @override
   void onInit() {
@@ -38,6 +41,7 @@ class ShipUserOptionController extends GetxController {
   }
 
   void _reloadData() async {
+    isSelf = false;
     needInit = false;
     hasOptions = false;
     validOptions = [];
@@ -148,6 +152,9 @@ class ShipUserOptionController extends GetxController {
         lastOpenTime = formatDateTime_1(shipUserData?.lastOpenCornTime);
         lastJoinTime = formatDateTime_1(shipUserData?.lastJoinCornTime);
         needInit = shipUserData?.needInit ?? false;
+        if (shipUserData?.userId == auu.userId) {
+          isSelf = true;
+        }
       }
       final options = shipUserData?.options ?? [];
       if (options.isNotEmpty) {

@@ -134,49 +134,54 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  Container(
-                    color: Colors.black12,
-                    child: Column(
-                      children: [
-                        Row(children: const [
-                          Text(
-                            "更新基本信息: ",
-                            style: TextStyle(fontSize: 20),
+                  ctl.isSelf
+                      ? Container(
+                          color: Colors.black12,
+                          child: Column(
+                            children: [
+                              Row(children: const [
+                                Text(
+                                  "更新基本信息: ",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ]),
+                              TextField(
+                                controller: ctl.mskNameCtl,
+                                decoration: InputDecoration(
+                                  labelText: '角色名',
+                                  hintText:
+                                      ctl.shipUserData?.mksName ?? "请输入角色名",
+                                ),
+                              ),
+                              TextField(
+                                controller: ctl.shipUserTypeCtl,
+                                decoration: InputDecoration(
+                                  labelText: '角色类型: 主号/耗兵/副号',
+                                  hintText:
+                                      ctl.shipUserData?.typeName ?? "请输入角色类型",
+                                ),
+                              ),
+                              TextField(
+                                controller: ctl.swordCtl,
+                                decoration: InputDecoration(
+                                  labelText: '角色当前战力',
+                                  hintText:
+                                      "${ctl.shipUserData?.sword ?? "请输入当前战力"}",
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  result = await ctl.onUpdateBasic();
+                                  if (result == true) {
+                                    ctl.reloadData();
+                                  }
+                                },
+                                child: const Text("更新角色基本信息"),
+                              ),
+                            ],
                           ),
-                        ]),
-                        TextField(
-                          controller: ctl.mskNameCtl,
-                          decoration: InputDecoration(
-                            labelText: '角色名',
-                            hintText: ctl.shipUserData?.mksName ?? "请输入角色名",
-                          ),
-                        ),
-                        TextField(
-                          controller: ctl.shipUserTypeCtl,
-                          decoration: InputDecoration(
-                            labelText: '角色类型: 主号/耗兵/副号',
-                            hintText: ctl.shipUserData?.typeName ?? "请输入角色类型",
-                          ),
-                        ),
-                        TextField(
-                          controller: ctl.swordCtl,
-                          decoration: InputDecoration(
-                            labelText: '角色当前战力',
-                            hintText: "${ctl.shipUserData?.sword ?? "请输入当前战力"}",
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            result = await ctl.onUpdateBasic();
-                            if (result == true) {
-                              ctl.reloadData();
-                            }
-                          },
-                          child: const Text("更新角色基本信息"),
-                        ),
-                      ],
-                    ),
-                  ),
+                        )
+                      : const SizedBox(height: 1),
                   const SizedBox(height: 8),
                   ctl.hasUpdOption
                       ? Column(

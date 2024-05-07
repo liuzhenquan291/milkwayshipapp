@@ -158,7 +158,7 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                                 //   tmp?.mksName ?? "",
                                                 // ),
                                                 child: Text(
-                                                  "$index",
+                                                  "${index + 1}",
                                                 ),
                                               ),
                                             ),

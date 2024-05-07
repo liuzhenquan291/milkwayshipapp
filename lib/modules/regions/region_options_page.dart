@@ -122,8 +122,8 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                   ),
                 ),
                 child: getTableHead(
-                  ["序号", "角色名", "微信昵称", "角色状态", "职务"],
-                  null,
+                  ["序号", "角色名", "微信昵称", "角色状态", "类型", "战力"],
+                  [2, 5, 3, 3, 3, 2],
                 ),
               ),
               Expanded(
@@ -144,6 +144,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                             child: Row(
                               children: [
                                 Expanded(
+                                  flex: 2,
                                   child: InkWell(
                                     onTap: () {
                                       Get.toNamed(
@@ -162,16 +163,24 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                                   ),
                                 ),
                                 Expanded(
+                                  flex: 5,
                                   child: Text(tempUser?.mksName ?? ""),
                                 ),
                                 Expanded(
+                                  flex: 3,
                                   child: Text(tempUser?.user?.wechatName ?? ""),
                                 ),
                                 Expanded(
+                                  flex: 3,
                                   child: Text(tempUser?.statusName ?? ""),
                                 ),
                                 Expanded(
-                                  child: Text(tempUser?.regionsRoleName ?? ""),
+                                  flex: 3,
+                                  child: Text(tempUser?.typeName ?? ""),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text("${tempUser?.swordName ?? 0}"),
                                 ),
                               ],
                             ),

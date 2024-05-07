@@ -20,6 +20,7 @@ class UserModel {
   String wcqName;
   String role;
   String roleName;
+  int? shipUserCount;
   bool needInit;
   List<ShipUserModel>? shipUsers;
   List<OptionModel>? options;
@@ -42,6 +43,7 @@ class UserModel {
     required this.needInit,
     this.shipUsers,
     this.options,
+    this.shipUserCount,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -63,6 +65,7 @@ class UserModel {
       role: json['role'] ?? '',
       roleName: json['role_name'] ?? '',
       needInit: json['need_init'] ?? false,
+      shipUserCount: json['ship_user_count'] ?? 0,
       shipUsers: json['ship_users'] != null
           ? ShipUserModel.fromJsonToList(json['ship_users'] ?? [])
           : [],

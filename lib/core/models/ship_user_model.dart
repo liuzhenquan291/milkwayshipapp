@@ -31,6 +31,7 @@ class ShipUserModel {
   String? type;
   String? typeName;
   int? sword; // 战力
+  String? swordName;
 
   UserModel? user; // 用户
   RegionModel? region; // 势力
@@ -67,6 +68,7 @@ class ShipUserModel {
     this.type,
     this.typeName,
     this.sword,
+    this.swordName,
   });
 
   factory ShipUserModel.fromJson(Map<String, dynamic> json) {
@@ -92,6 +94,7 @@ class ShipUserModel {
       type: json['type'] ?? '',
       typeName: json['type_name'] ?? '',
       sword: json['sword'] ?? 0,
+      swordName: json['sword_name'] ?? '',
       region: json['region'] != null
           ? RegionModel.fromJson(json['region'] ?? {})
           : null,
