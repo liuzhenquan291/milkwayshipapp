@@ -65,11 +65,18 @@ class RegionJoinController extends GetxController {
     toJoinRegionId = regionId;
   }
 
-  Future<void> onCreateShipUser(String? mskName, String? regionRole) async {
+  Future<void> onCreateShipUser(
+    String? mskName,
+    String? regionRole,
+    String? typeName,
+    String? swordName,
+  ) async {
     final payload = {
       "regions_id": toJoinRegionId,
       "mks_name": mskName,
       "region_role": regionRole,
+      "type_name": typeName,
+      "sword": swordName,
       "last_open_corn_time": lastOpenTime,
       "last_join_corn_time": lastJoinTime,
     };

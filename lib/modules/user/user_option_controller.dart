@@ -71,6 +71,12 @@ class UserOptionController extends GetxController {
             if (userOptionConf.optionInOptionPage(code)) {
               validOptions.add(option);
               hasOptions = true;
+            } else if (UserOptionConf.LOGOUT == option.code) {
+              final as = Get.find<AuthService>();
+              if (as.userRole == 'manager' || as.userRole == 'root') {
+                validOptions.add(option);
+                hasOptions = true;
+              }
             }
           }
         }
@@ -218,8 +224,6 @@ class UserOptionController extends GetxController {
       url,
       myPayload,
     );
-    await StorageHelper.removeAll();
-    await Get.find<AuthService>().clearToken();
     return result;
   }
 

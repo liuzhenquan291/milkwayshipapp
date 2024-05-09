@@ -156,7 +156,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                               TextField(
                                 controller: ctl.shipUserTypeCtl,
                                 decoration: InputDecoration(
-                                  labelText: '角色类型: 主号/耗兵/副号',
+                                  labelText: '角色类型: 主号/耗兵/副号/谍号/沉号',
                                   hintText:
                                       ctl.shipUserData?.typeName ?? "请输入角色类型",
                                 ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/server.dart';
@@ -29,7 +31,7 @@ Future<bool> customePostOption(
           title: '操作失败',
           content: Text(responseData.message as String),
           confirm: TextButton(
-            onPressed: () async {
+            onPressed: () {
               Get.back();
             },
             child: const Text('关闭'),
@@ -40,7 +42,7 @@ Future<bool> customePostOption(
           title: "",
           content: const Text("操作成功"),
           confirm: TextButton(
-            onPressed: () async {
+            onPressed: () {
               Get.back(result: true);
             },
             child: const Text('关闭'),
@@ -58,7 +60,8 @@ Future<bool> customePutOption(
   String optionUrl,
   Map<String, dynamic>? payload,
 ) async {
-  bool result = false;
+  Completer<bool> completer = Completer<bool>(); // 创建一个 Completer 实例
+
   Get.defaultDialog(
     title: title,
     middleText: '确定要执行该操作吗？',
@@ -66,7 +69,7 @@ Future<bool> customePutOption(
     textCancel: '取消',
     confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
     onCancel: () {
-      // Get.back();
+      completer.complete(false);
     },
     onConfirm: () async {
       Get.back();
@@ -82,6 +85,7 @@ Future<bool> customePutOption(
           confirm: TextButton(
             onPressed: () async {
               Get.back();
+              completer.complete(false);
             },
             child: const Text('关闭'),
           ),
@@ -93,15 +97,15 @@ Future<bool> customePutOption(
           confirm: TextButton(
             onPressed: () async {
               Get.back();
+              completer.complete(true);
             },
             child: const Text('关闭'),
           ),
         );
-        result = true;
       }
     },
   );
-  return result;
+  return completer.future;
 }
 
 // 可输入额外信息的 option
@@ -190,12 +194,12 @@ Future<bool> customeDeleteOption(
 
       final as = ApiService();
       final response = await as.deleteRequest(optionUrl, payload);
-      final responseData = ResponseData.fromJson(response?.data);
+      // final responseData = ResponseData.fromJson(response?.data);
 
-      if (responseData.code != 0) {
+      if (response?.statusCode != 204) {
         Get.defaultDialog(
           title: '操作失败',
-          content: Text(responseData.message ?? ""),
+          content: Text(response?.statusMessage ?? ""),
           confirm: TextButton(
             onPressed: () {
               Get.back();
@@ -208,7 +212,7 @@ Future<bool> customeDeleteOption(
           title: '',
           content: const Text('操作成功'),
           confirm: TextButton(
-            onPressed: () {
+            onPressed: () async {
               Get.back();
             },
             child: const Text('关闭'),

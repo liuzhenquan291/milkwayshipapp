@@ -35,7 +35,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
           ),
           body: Column(
             children: [
-              const SizedBox(height: 24),
+              const SizedBox(height: 8),
               Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.all(6),
@@ -62,12 +62,44 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                     Row(
                       children: [
                         Expanded(
-                          child: Text(
-                              "势力人数: ${ctl.regionData?.shipUsers?.length}"),
+                          child:
+                              Text("势力人数: ${ctl.regionData?.userCount ?? ''}"),
                         ),
                         Expanded(
                           child: Text(
                               "司令: ${ctl.regionData?.commander?.mksName ?? ''}"),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                              "总角色数: ${ctl.regionData?.shipUsers?.length ?? ''}"),
+                        ),
+                        Expanded(
+                          child: Text(
+                              "藏号数: ${ctl.regionData?.concealCount ?? ''}"),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text("主号数: ${ctl.regionData?.normalCount}"),
+                        ),
+                        Expanded(
+                          child: Text("小号数: ${ctl.regionData?.viceCount}"),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text("耗兵数: ${ctl.regionData?.drainCount}"),
+                        ),
+                        Expanded(
+                          child: Text("间谍数: ${ctl.regionData?.spyCount}"),
                         ),
                       ],
                     ),
@@ -81,31 +113,39 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 24),
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.all(6),
-                child: const Text(
-                  "势力简介",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-              Container(
-                color: Colors.black12,
-                height: 100,
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text("     ${ctl.regionData?.desc ?? ''}"),
+                    Row(
+                      children: [
+                        Text(
+                          "势力简介: ${ctl.regionData?.desc ?? ''}",
+                          // style: TextStyle(fontSize: 14),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
+              // const SizedBox(height: 24),
+              // Container(
+              //   alignment: Alignment.centerLeft,
+              //   padding: const EdgeInsets.all(6),
+              //   child: const Text(
+              //     "势力简介",
+              //     style: TextStyle(fontSize: 16),
+              //   ),
+              // ),
+              // Container(
+              //   color: Colors.black12,
+              //   height: 100,
+              //   padding: const EdgeInsets.all(10),
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //         child: Text("     ${ctl.regionData?.desc ?? ''}"),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              const SizedBox(height: 12),
               Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.all(6),
@@ -115,7 +155,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                 ),
               ),
               Container(
-                height: 50,
+                // height: 50,
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(color: Colors.black, width: 1),
@@ -123,7 +163,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                 ),
                 child: getTableHead(
                   ["序号", "角色名", "微信昵称", "角色状态", "类型", "战力"],
-                  [2, 5, 3, 3, 3, 2],
+                  [2, 5, 3, 3, 3, 3],
                 ),
               ),
               Expanded(
@@ -150,7 +190,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                                       Get.toNamed(
                                         AppRoute.shipUserOptionsPage,
                                         parameters: {
-                                          'regionId': tempUser?.id ?? "",
+                                          'shipuser_id': tempUser?.id ?? "",
                                         },
                                       );
                                     },
@@ -179,7 +219,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
                                   child: Text(tempUser?.typeName ?? ""),
                                 ),
                                 Expanded(
-                                  flex: 2,
+                                  flex: 3,
                                   child: Text("${tempUser?.swordName ?? 0}"),
                                 ),
                               ],

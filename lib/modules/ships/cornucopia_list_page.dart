@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 // import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
 import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
 
@@ -25,18 +26,18 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
           body: ctl.hasData
               ? Column(
                   children: [
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 8),
                     Container(
                       alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(4),
                       child: const Text(
                         "势力信息",
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
                     Container(
-                      height: 100 + 130 * ctl.userDataLength,
-                      padding: const EdgeInsets.all(16.0),
+                      height: 50 + 130 * ctl.userDataLength,
+                      padding: const EdgeInsets.all(8),
                       color: Colors.orange[100],
                       child: Column(
                         children: [
@@ -54,9 +55,9 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 6),
                           Container(
-                            height: 30,
+                            // height: 30,
                             alignment: Alignment.centerLeft,
                             child: const Text("您在本势力的角色:"),
                           ),
@@ -142,11 +143,14 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                             //   textStyle: ,
                                             // ),
                                             onPressed: () async {
-                                              ctl.setShipUserOption(
+                                              await ctl.setShipUserOption(
                                                 shipUser?.id ?? "",
                                                 shipUser?.updatedTime ?? "",
                                                 'open',
                                               );
+                                              if (true) {
+                                                await ctl.reloadData();
+                                              }
                                             },
                                             child: const Text(
                                               '设置开盆',
@@ -156,12 +160,15 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                           const SizedBox(width: 32),
                                           ElevatedButton(
                                             // style: ButtonStyle(),
-                                            onPressed: () {
-                                              ctl.setShipUserOption(
+                                            onPressed: () async {
+                                              await ctl.setShipUserOption(
                                                 shipUser?.id ?? "",
                                                 shipUser?.updatedTime ?? "",
                                                 'join',
                                               );
+                                              if (true) {
+                                                await ctl.reloadData();
+                                              }
                                             },
                                             child: const Text(
                                               '设置参盆',
@@ -193,7 +200,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                         // scrollDirection: Axis.horizontal,
                         children: [
                           Container(
-                            height: 50,
+                            height: 20,
                             color: Colors.blue[200],
                             // decoration: const BoxDecoration(
                             //   border: Border(
@@ -203,11 +210,14 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                             child: getTableHead(
                               [
                                 "角色名",
-                                "用户名",
-                                "角色身份",
-                                "角色状态",
+                                // "用户名",
+                                // "角色身份",
+                                // "角色状态",
+                                "微信昵称",
+                                "角色类型",
+                                "需参盆时间",
                               ],
-                              null,
+                              [5, 3, 3, 5],
                             ),
                           ),
                           Expanded(
@@ -230,20 +240,36 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                         child: Row(
                                           children: [
                                             Expanded(
+                                              flex: 5,
                                               child:
                                                   Text(tmp?.mksName as String),
                                             ),
+                                            // Expanded(
+                                            //   child: Text(tmp?.user?.displayName
+                                            //       as String),
+                                            // ),
+                                            // Expanded(
+                                            //   child: Text(tmp?.regionsRoleName
+                                            //       as String),
+                                            // ),
+                                            // Expanded(
+                                            //   child: Text(
+                                            //       tmp?.statusName as String),
+                                            // ),
                                             Expanded(
-                                              child: Text(tmp?.user?.displayName
-                                                  as String),
-                                            ),
-                                            Expanded(
-                                              child: Text(tmp?.regionsRoleName
-                                                  as String),
-                                            ),
-                                            Expanded(
+                                              flex: 3,
                                               child: Text(
-                                                  tmp?.statusName as String),
+                                                  tmp?.user?.wcqName ?? ""),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Text(tmp?.typeName ?? ""),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Text(
+                                                  tmp?.needCornucopiaTime ??
+                                                      ""),
                                             ),
                                           ],
                                         ),
@@ -259,11 +285,11 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
+                    // const SizedBox(
+                    //   height: 8,
+                    // ),
                     Container(
-                      height: 20,
+                      // height: 20,
                       alignment: Alignment.centerLeft,
                       child: const Text("本势力可开盆角色:"),
                     ),
@@ -272,7 +298,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                         // scrollDirection: Axis.horizontal,
                         children: [
                           Container(
-                            height: 50,
+                            height: 20,
                             color: Colors.blue[200],
                             // decoration: const BoxDecoration(
                             //   border: Border(
@@ -282,11 +308,14 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                             child: getTableHead(
                               [
                                 "角色名",
-                                "用户名",
-                                "角色身份",
-                                "角色状态",
+                                // "用户名",
+                                // "角色身份",
+                                // "角色状态",
+                                "微信昵称",
+                                "角色类型",
+                                "可开盆时间",
                               ],
-                              null,
+                              [5, 3, 3, 5],
                             ),
                           ),
                           Expanded(
@@ -309,19 +338,34 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                         child: Row(
                                           children: [
                                             Expanded(
+                                              flex: 5,
                                               child: Text(tmp?.mksName ?? ""),
                                             ),
+                                            // Expanded(
+                                            //   child: Text(
+                                            //       tmp?.user?.displayName ?? ""),
+                                            // ),
+                                            // Expanded(
+                                            //   child: Text(tmp?.regionsRoleName
+                                            //       as String),
+                                            // ),
+                                            // Expanded(
+                                            //   child: Text(
+                                            //       tmp?.statusName as String),
+                                            // ),
                                             Expanded(
+                                              flex: 3,
                                               child: Text(
-                                                  tmp?.user?.displayName ?? ""),
+                                                  tmp?.user?.wcqName ?? ""),
                                             ),
                                             Expanded(
-                                              child: Text(tmp?.regionsRoleName
-                                                  as String),
+                                              flex: 3,
+                                              child: Text(tmp?.typeName ?? ""),
                                             ),
                                             Expanded(
+                                              flex: 5,
                                               child: Text(
-                                                  tmp?.statusName as String),
+                                                  tmp?.canCornucopiaTime ?? ""),
                                             ),
                                           ],
                                         ),

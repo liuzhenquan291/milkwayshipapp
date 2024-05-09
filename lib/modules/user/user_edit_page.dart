@@ -205,14 +205,12 @@ class _UserEditState extends State<UserEditPage> {
 // 注销账号
   void onOptionLogout(UserModel userData) async {
     final url = sprintf(apiUrl.userRetriveUpdateDestroyPath, [userData.id]);
-    _defaultDeleteOption(userData, "注销账号", url, null);
-    await StorageHelper.removeAll();
-    await Get.find<AuthService>().clearToken();
+    await _defaultDeleteOption(userData, "注销账号", url, null);
     ifEdited = true;
   }
 
-  void _defaultDeleteOption(UserModel userData, String title, String optionUrl,
-      Map<String, dynamic>? payload) {
+  Future<void> _defaultDeleteOption(UserModel userData, String title,
+      String optionUrl, Map<String, dynamic>? payload) async {
     Get.defaultDialog(
       title: title,
       middleText: '确定要执行该操作吗？',
@@ -222,9 +220,9 @@ class _UserEditState extends State<UserEditPage> {
       onCancel: () {
         Get.back();
       },
-      onConfirm: () {
+      onConfirm: () async {
         final apiService = ApiService();
-        late Map<String, dynamic> myPayload;
+        Map<String, dynamic> myPayload = {};
         if (payload != null) {
           myPayload = payload;
         }
@@ -232,18 +230,11 @@ class _UserEditState extends State<UserEditPage> {
         myPayload["user_id"] = userData.id;
         myPayload["updated_time"] = userData.updatedTime;
 
-        // Map<String, dynamic> =
-        // final Map<String, dynamic> payload = {
-        //   "user_id": userId,
-        //   "updated_time": userData?.updatedTime,
-        // };
-        final response =
-            apiService.deleteRequest(optionUrl, myPayload) as dio.Response;
-        final responseData = ResponseData.fromJson(response.data);
-        if (responseData.code != 0) {
+        final response = await apiService.deleteRequest(optionUrl, myPayload);
+        if (response?.statusCode != 204) {
           Get.defaultDialog(
             title: '操作失败',
-            content: Text(responseData.message as String),
+            content: Text(response?.statusMessage ?? ""),
             confirm: TextButton(
               onPressed: () {
                 Get.back();
@@ -256,8 +247,10 @@ class _UserEditState extends State<UserEditPage> {
             title: '操作成功',
             // content: Text(""),
             confirm: TextButton(
-              onPressed: () {
+              onPressed: () async {
                 Get.back();
+                await StorageHelper.removeAll();
+                await Get.find<AuthService>().clearToken();
               },
               child: const Text('操作成功'),
             ),

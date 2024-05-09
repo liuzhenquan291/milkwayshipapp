@@ -10,6 +10,8 @@ class RegoinJoinPage extends GetView<RegionJoinController> {
 
   final TextEditingController mskNameCtl = TextEditingController();
   final TextEditingController regionRoleCtl = TextEditingController();
+  final TextEditingController typeCtl = TextEditingController();
+  final TextEditingController swrodCtl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +70,20 @@ class RegoinJoinPage extends GetView<RegionJoinController> {
                               labelText: '角色职务', hintText: '司令/副司令/军神/军长/成员'),
                         ),
                         const SizedBox(height: 16.0),
+                        TextField(
+                          controller: typeCtl,
+                          // obscureText: true,
+                          decoration: const InputDecoration(
+                              labelText: '角色类型', hintText: '主号/耗兵/副号/谍号/沉号'),
+                        ),
+                        const SizedBox(height: 16.0),
+                        TextField(
+                          controller: swrodCtl,
+                          // obscureText: true,
+                          decoration: const InputDecoration(
+                              labelText: '战力', hintText: '战力'),
+                        ),
+                        const SizedBox(height: 16.0),
                         Row(
                           children: [
                             const Text("上次开盆时间："),
@@ -123,6 +139,8 @@ class RegoinJoinPage extends GetView<RegionJoinController> {
                             await ctl.onCreateShipUser(
                               mskNameCtl.text,
                               regionRoleCtl.text,
+                              typeCtl.text,
+                              swrodCtl.text,
                             );
                             result = true;
                           },

@@ -66,7 +66,7 @@ class ApiUrl {
 // 聚宝盆综合信息
   String cornucopiaInfosPath = "$_shipApp/cornucopia_infos/";
 // 仅对角色设置开盆投盆时间
-  String cornSetOnlyPath = "$_shipApp/cornucopias/set_only/";
+  String cornSetOnlyPath = "$_shipApp/set_corn_info_now/";
   // 根据时间点设置开盆投盆时间
   String setCornInfoByPoint = "$_shipApp/set_corn_info_by_point/";
   // 根据剩余时间设置开盆投盆时间

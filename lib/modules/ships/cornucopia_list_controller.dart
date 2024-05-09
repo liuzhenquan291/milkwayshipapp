@@ -28,7 +28,7 @@ class CornucopiaListController extends GetxController {
     _loadData();
   }
 
-  void reloadData() async {
+  Future<void> reloadData() async {
     hasData = false;
     userDataLength = 0.0;
     needCorcuCnt = 0; // 需开盆角色数量
@@ -36,18 +36,19 @@ class CornucopiaListController extends GetxController {
     // toCorcuCnt = 0; // 开盆计划
     // processingCorcuCnt = 0; // 进行中的盆
     _loadData();
+    print('reload');
   }
 
-  void setShipUserOption(
+  Future<bool> setShipUserOption(
     String shipUserId,
     String updatedTime,
     String option,
   ) async {
     String title = "";
     if (option == 'join') {
-      title = "参盆";
+      title = "刚参盆?";
     } else if (option == 'open') {
-      title = "开盆";
+      title = "刚开盆?";
     }
     final result = await customePostOption(
       title,
@@ -58,9 +59,7 @@ class CornucopiaListController extends GetxController {
         "option": option
       },
     );
-    if (result == true) {
-      reloadData();
-    }
+    return result;
   }
 
   Future<void> _loadData() async {

@@ -18,6 +18,12 @@ class RegionModel {
   String createUserId;
   ShipUserModel? commander;
   String? color;
+  int? userCount;
+  int? normalCount;
+  int? drainCount;
+  int? viceCount;
+  int? spyCount;
+  int? concealCount;
   List<ShipUserModel>? shipUsers;
   List<OptionModel>? options; // TODO: options
 
@@ -35,9 +41,15 @@ class RegionModel {
     required this.createUserId,
     required this.statusName,
     this.commander,
+    this.color,
+    this.userCount,
+    this.normalCount,
+    this.drainCount,
+    this.viceCount,
+    this.spyCount,
+    this.concealCount,
     this.shipUsers,
     this.options,
-    this.color,
   });
 
   factory RegionModel.fromJson(Map<String, dynamic> json) {
@@ -55,6 +67,12 @@ class RegionModel {
       createUserId: json['create_user_id'] ?? '',
       color: json['color'] ?? "红色",
       statusName: json['status_name'] ?? "",
+      userCount: json['user_count'] ?? 0,
+      normalCount: json['normal_count'] ?? 0,
+      drainCount: json['drain_count'] ?? 0,
+      viceCount: json['vice_count'] ?? 0,
+      concealCount: json['conceal_count'] ?? 0,
+      spyCount: json['spy_count'] ?? 0,
       commander: json['commander'] != null
           ? ShipUserModel.fromJson(json['commander'] ?? {})
           : null,

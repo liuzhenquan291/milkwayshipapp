@@ -52,11 +52,47 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                   children: [
                                     Expanded(
                                       child: Text(
-                                          "势力人数: ${ctl.regionData?.shipUsers?.length}"),
+                                          "势力人数: ${ctl.regionData?.userCount}"),
                                     ),
                                     Expanded(
                                       child: Text(
-                                          "司令: ${ctl.regionData?.commander ?? ''}"),
+                                          "势力司令: ${ctl.regionData?.commander?.mksName ?? ''}"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                          "总角色数: ${ctl.regionData?.shipUsers?.length ?? ''}"),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                          "藏号数: ${ctl.regionData?.concealCount ?? ''}"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                          "主号数: ${ctl.regionData?.normalCount}"),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                          "小号数: ${ctl.regionData?.viceCount}"),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                          "耗兵数: ${ctl.regionData?.drainCount}"),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                          "间谍数: ${ctl.regionData?.spyCount}"),
                                     ),
                                   ],
                                 ),
@@ -72,36 +108,44 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 24),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.all(6),
-                            child: const Text(
-                              "势力简介",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Container(
-                            color: Colors.black12,
-                            height: 100,
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: Text(
-                                          "     ${ctl.regionData?.desc ?? ''}"),
+                                    Text(
+                                      "势力简介: ${ctl.regionData?.desc ?? ''}",
+                                      // style: TextStyle(fontSize: 14),
                                     ),
                                   ],
                                 ),
                               ],
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          // const SizedBox(height: 8),
+                          // Container(
+                          //   alignment: Alignment.centerLeft,
+                          //   padding: const EdgeInsets.all(6),
+                          //   child: const Text(
+                          //     "势力简介",
+                          //     style: TextStyle(fontSize: 16),
+                          //   ),
+                          // ),
+                          // Container(
+                          //   color: Colors.black12,
+                          //   // height: 100,
+                          //   padding: const EdgeInsets.all(10),
+                          //   child: Column(
+                          //     children: [
+                          //       Row(
+                          //         children: [
+                          //           Expanded(
+                          //             child: Text(
+                          //                 "     ${ctl.regionData?.desc ?? ''}"),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          const SizedBox(height: 12),
                           Container(
                             alignment: Alignment.centerLeft,
                             padding: const EdgeInsets.all(6),
@@ -111,7 +155,7 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                             ),
                           ),
                           Container(
-                            height: 50,
+                            // height: 50,
                             decoration: const BoxDecoration(
                               border: Border(
                                 bottom:
@@ -119,8 +163,8 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                               ),
                             ),
                             child: getTableHead(
-                              ["序号", "角色名", "微信昵称", "群昵称", "职务"],
-                              [2, 4, 3, 3, 3],
+                              ["序号", "角色名", "微信昵称", "职务", "类型", "战力"],
+                              [2, 4, 3, 3, 3, 3],
                             ),
                           ),
                           Expanded(
@@ -176,12 +220,15 @@ class RegionDetailPage extends GetView<RegionDetailController> {
                                             Expanded(
                                               flex: 3,
                                               child: Text(
-                                                  tmp?.user?.wcqName ?? ""),
+                                                  tmp?.regionsRoleName ?? ""),
                                             ),
                                             Expanded(
                                               flex: 3,
-                                              child: Text(
-                                                  tmp?.regionsRoleName ?? ""),
+                                              child: Text(tmp?.typeName ?? ""),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Text(tmp?.swordName ?? ""),
                                             ),
                                           ],
                                         ),
