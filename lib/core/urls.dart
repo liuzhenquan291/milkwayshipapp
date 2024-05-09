@@ -8,6 +8,8 @@ const _userApp = '/user';
 const _shipApp = "/ship";
 //// 访问后端 region 应用
 const _regionApp = "/region";
+//// 访问后端 ruins 应用
+const _ruinsApp = '/ruins';
 
 class ApiUrl {
   final baseUrl = myHost.baseUrl;
@@ -96,4 +98,16 @@ class ApiUrl {
   String seasonApprovePath = "$_regionApp/season_approve/";
   // 赛季结束
   String seasonEndPath = "$_regionApp/season_end/";
+
+  //// 链接后端 ruins
+  String ruinsListCreatePath = "$_ruinsApp/ruins/";
+  String ruinsRetrUpdDestPath = "$_ruinsApp/ruins/%s/";
+  String startRuinsPath = "$_ruinsApp/start_ruins/";
+  String endRuinsPath = "$_ruinsApp/end_ruins/";
+  String processRuinsPath = "$_ruinsApp/process_ruins/";
+  String registerListCreatePath = "$_ruinsApp/registers/";
+  String registerRetrUpdDestPath = "$_ruinsApp/registers/%s/";
+  String approveRegisterPath = "$_ruinsApp/approve_register/";
+  String completeRegisterPath = "$_ruinsApp/complete_register/";
+  String refuseRegisterPath = "$_ruinsApp/refuse_register/";
 }

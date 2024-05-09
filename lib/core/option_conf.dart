@@ -6,6 +6,8 @@ final RegionsOptionConf regionsOptionConf = RegionsOptionConf();
 final ShipuserOptionConf shipuserOptionConf = ShipuserOptionConf();
 final CornucopaOptionConf cornucopaOptionConf = CornucopaOptionConf();
 final SeasonOptConf seasonOptConf = SeasonOptConf();
+final RuinsOptConf ruinsOptConf = RuinsOptConf();
+final RuinsRegistOptConf registOptConf = RuinsRegistOptConf();
 
 // 对用户可执行的操作
 class UserOptionConf {
@@ -167,5 +169,50 @@ class SeasonOptConf {
 
   bool optionInEditPage(String option) {
     return _EditPageOptions.contains(option);
+  }
+}
+
+class RuinsOptConf {
+  // NEW_ADD = 'new_add'
+  // START = 'start'
+  // PROCESS = 'process'
+  // END = 'end'
+  // CLOSE = 'close'
+  static const START = 'start';
+  static const PROCESS = 'process';
+  static const END = 'end';
+  static const CLOSE = 'close';
+
+  static const List<String> _all_options = [
+    START,
+    PROCESS,
+    END,
+    CLOSE,
+  ];
+
+  bool optionIsValid(String option) {
+    return _all_options.contains(option);
+  }
+}
+
+class RuinsRegistOptConf {
+  // NEW_ADD = 'new_add'
+  // APPROVE = 'approve'
+  // REFUSE = 'refuse'
+  // CANCEL = 'cancel'
+  // COMPLETE = 'complete'
+  static const APPROVE = 'approve';
+  static const REFUSE = 'refuse';
+  static const CANCEL = 'cancel';
+  static const COMPLETE = 'complete';
+  static const List<String> _all_options = [
+    APPROVE,
+    REFUSE,
+    CANCEL,
+    COMPLETE,
+  ];
+
+  bool optionIsValid(String option) {
+    return _all_options.contains(option);
   }
 }
