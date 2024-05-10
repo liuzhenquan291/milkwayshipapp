@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/apps.dart';
 import '../../core/custome_table_field.dart';
 import '../../core/models/agenda_models.dart';
 import 'departal_option_controller.dart';
@@ -11,7 +12,7 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
   String? departId;
   DepartOptionsPage({
     Key? key,
-    regionId,
+    departId,
   }) : super(key: key);
 
   @override
@@ -119,28 +120,36 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                               children: [
                                 Expanded(
                                   flex: 2,
-                                  child: Text(
-                                    "  ${index + 1}",
-                                    style: const TextStyle(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                  // child: InkWell(
-                                  //   onTap: () {
-                                  //     Get.toNamed(
-                                  //       AppRoute.shipUserOptionsPage,
-                                  //       parameters: {
-                                  //         'shipuser_id': tempUser?.id ?? "",
-                                  //       },
-                                  //     );
-                                  //   },
-                                  //   child: Text(
-                                  //     "  ${index + 1}",
-                                  //     style: const TextStyle(
-                                  //       color: Colors.blue,
-                                  //     ),
-                                  //   ),
-                                  // ),
+                                  child: ctl.isManager
+                                      ? InkWell(
+                                          onTap: () async {
+                                            final result = await Get.toNamed(
+                                              AppRoute
+                                                  .departShipUserInfoEditPage,
+                                              parameters: {
+                                                'shipUserId':
+                                                    tmp?.shipUserId ?? "-1",
+                                                'departId':
+                                                    "${tmp?.agendaId ?? -1}",
+                                              },
+                                            );
+                                            if (result == true) {
+                                              await ctl.reloadData();
+                                            }
+                                          },
+                                          child: Text(
+                                            "  ${index + 1}",
+                                            style: const TextStyle(
+                                              color: Colors.blue,
+                                            ),
+                                          ),
+                                        )
+                                      : Text(
+                                          "  ${index + 1}",
+                                          style: const TextStyle(
+                                            color: Colors.blue,
+                                          ),
+                                        ),
                                 ),
                                 Expanded(
                                   flex: 4,

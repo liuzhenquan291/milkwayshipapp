@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/models/agenda_models.dart';
+import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 
@@ -9,15 +9,12 @@ import '../../core/models/options_model.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
 
-class DepartOptionsController extends GetxController {
+class DepartShipuserInfoEditController extends GetxController {
   String? departId;
+  String? shipUserId;
   DepartmentalAgendaModel? departData;
-  // String? displayName;
-  bool hasUser = false;
-  int shipUserLength = 0;
-  bool hasOptions = false;
-  bool isManager = false;
-  List<OptionModel> validOptions = [];
+  ShipuserDepartmentalInfoModel? departShipUserData;
+  ShipUserModel? shipUserData;
 
   @override
   void onInit() {
@@ -27,19 +24,16 @@ class DepartOptionsController extends GetxController {
   }
 
   Future<void> reloadData() async {
-    hasUser = false;
-    shipUserLength = 0;
-    hasOptions = false;
-    isManager = false;
-    validOptions = [];
     loadData();
   }
 
   Future<void> loadData() async {
     final apiService = ApiService();
     departId = Get.parameters['departId'];
+    shipUserId = Get.parameters['shipUserId'];
     final url = sprintf(apiUrl.departalRetrUpdDestPath, [departId]);
-    final response = await apiService.getRequest(url, null);
+    final response =
+        await apiService.getRequest(url, {'ship_user_id': shipUserId});
 
     if (response.statusCode != 200) {
       // TODO: 弹窗
@@ -50,21 +44,8 @@ class DepartOptionsController extends GetxController {
         if (departData != null) {
           final users = departData?.shipUserDatas ?? [];
           if (users.isNotEmpty) {
-            hasUser = true;
-            // num cnt = users.length;
-            shipUserLength = users.length;
-          }
-          final AuthService au = Get.find<AuthService>();
-          if (au.isManager()) {
-            isManager = true;
-            hasOptions = true;
-            validOptions = [
-              OptionModel(
-                code: "update",
-                name: "编辑议程",
-                title: "变异部门议程",
-              ),
-            ];
+            departShipUserData = users[0];
+            shipUserData = departShipUserData?.shipUser;
           }
         }
       }
@@ -80,5 +61,14 @@ class DepartOptionsController extends GetxController {
     if (result == true) {
       await reloadData();
     }
+  }
+
+  Future<bool> onOptionSave(
+    String? skillAliveText,
+    String agendaLevelText,
+    String agendaNoteText,
+    String propsLackText,
+  ) async {
+    return false;
   }
 }

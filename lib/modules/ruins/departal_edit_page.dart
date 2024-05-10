@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/apps.dart';
 import '../../core/custom_text_field.dart';
 import '../../core/server.dart';
 import 'departal_edit_controller.dart';
@@ -19,7 +18,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
 
   DepartalEditPage({
     Key? key,
-    regionId,
+    departId,
   }) : super(key: key);
 
   final ApiService gc = ApiService();

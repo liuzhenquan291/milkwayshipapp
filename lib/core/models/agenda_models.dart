@@ -1,7 +1,6 @@
-import 'package:intl/src/intl/date_format.dart';
+import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:milkwayshipapp/core/utils.dart';
 
-import 'options_model.dart';
 import 'user_model.dart';
 
 class DepartmentalAgendaModel {
@@ -91,6 +90,7 @@ class ShipuserDepartmentalInfoModel {
   DateTime createdTime;
   String updatedTime;
   bool deleted;
+  ShipUserModel? shipUser;
 
   ShipuserDepartmentalInfoModel({
     required this.id,
@@ -105,6 +105,7 @@ class ShipuserDepartmentalInfoModel {
     required this.createdTime,
     required this.updatedTime,
     required this.deleted,
+    this.shipUser,
   });
 
   factory ShipuserDepartmentalInfoModel.fromJson(Map<String, dynamic> json) {
@@ -121,6 +122,9 @@ class ShipuserDepartmentalInfoModel {
       createdTime: DateTime.parse(json['created_time']),
       updatedTime: json['updated_time'],
       deleted: json['deleted'] ?? false,
+      shipUser: json['ship_user'] != null
+          ? ShipUserModel.fromJson(json['ship_user'])
+          : null,
     );
   }
 

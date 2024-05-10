@@ -5,6 +5,8 @@ import 'package:milkwayshipapp/modules/ruins/departal_page.dart';
 import 'package:milkwayshipapp/modules/ruins/ruins_controller.dart';
 import 'package:milkwayshipapp/modules/ruins/ruins_page.dart';
 
+import '../modules/ruins/depart_shipuserinfo_edit_controller.dart';
+import '../modules/ruins/depart_shipuserinfo_edit_page.dart';
 import '../modules/ruins/departal_edit_controller.dart';
 import '../modules/ruins/departal_edit_page.dart';
 import '../modules/ruins/departal_option_page.dart';
@@ -122,6 +124,7 @@ abstract class AppRoute {
   static String departalPage = '/depart';
   static String departOptionPage = '/departOption';
   static String departEditPage = '/departEdit';
+  static String departShipUserInfoEditPage = '/departShipUserEdit';
 
   static List<GetPage> getPages2() {
     return [];
@@ -329,6 +332,13 @@ abstract class AppRoute {
         page: () => DepartOptionsPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => DepartOptionsController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.departShipUserInfoEditPage,
+        page: () => ShipUserDepartInfoEditPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => DepartShipuserInfoEditController());
         }),
       ),
     ];
