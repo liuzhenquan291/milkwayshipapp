@@ -95,8 +95,8 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                   ),
                 ),
                 child: getTableHead(
-                  ["序号", "角色名", "议程轮次", "是否激活技能", "本轮激活节点", "本轮缺少道具"],
-                  [2, 5, 3, 3, 3, 3],
+                  ["序号", "角色名", "轮次", "已激活?", "本轮节点", "本轮缺少道具"],
+                  [2, 4, 2, 2, 3, 4],
                 ),
               ),
               Expanded(
@@ -143,15 +143,15 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                                   // ),
                                 ),
                                 Expanded(
-                                  flex: 5,
+                                  flex: 4,
                                   child: Text(tmp?.shipUserMksName ?? ""),
                                 ),
                                 Expanded(
-                                  flex: 3,
-                                  child: Text(tmp?.agendaLevel ?? ""),
+                                  flex: 2,
+                                  child: Text("${tmp?.agendaLevel}"),
                                 ),
                                 Expanded(
-                                  flex: 3,
+                                  flex: 2,
                                   child: Text(skillAlive ? "是" : "否"),
                                 ),
                                 Expanded(
@@ -159,7 +159,7 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                                   child: Text("${tmp?.agendaNode}"),
                                 ),
                                 Expanded(
-                                  flex: 3,
+                                  flex: 4,
                                   child: Text("${tmp?.propsLack ?? 0}"),
                                 ),
                               ],
@@ -172,9 +172,9 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
               ),
               const SizedBox(height: 24),
               SizedBox(
-                height: 200,
+                height: 50,
                 child: GridView.builder(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(16),
                   itemCount: ctl.validOptions.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,

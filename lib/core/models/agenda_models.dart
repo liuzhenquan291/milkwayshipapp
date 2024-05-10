@@ -82,12 +82,12 @@ class ShipuserDepartmentalInfoModel {
   String id;
   String shipUserId;
   String shipUserMksName;
-  String agendaId;
+  int agendaId;
   String agendaName;
-  bool skillAlive;
-  String agendaLevel;
-  String agendaNode;
-  String propsLack;
+  bool? skillAlive;
+  int agendaLevel;
+  int agendaNode;
+  int propsLack;
   DateTime createdTime;
   String updatedTime;
   bool deleted;
@@ -98,7 +98,7 @@ class ShipuserDepartmentalInfoModel {
     required this.shipUserMksName,
     required this.agendaId,
     required this.agendaName,
-    required this.skillAlive,
+    this.skillAlive,
     required this.agendaLevel,
     required this.agendaNode,
     required this.propsLack,

@@ -59,7 +59,7 @@ class DepartOptionsController extends GetxController {
                 code: "update",
                 name: "编辑议程",
                 title: "变异部门议程",
-              )
+              ),
             ];
           }
         }
