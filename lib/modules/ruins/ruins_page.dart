@@ -1,51 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
+import 'package:milkwayshipapp/core/models/ruins_model.dart';
+import 'package:milkwayshipapp/modules/ruins/ruins_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
 import '../../core/custome_table_field.dart';
-import '../../core/models/user_model.dart';
 import '../../core/server.dart';
 
 const userNameExpandedFlex = 5;
 const otherExpandedFlex = 3;
 
-class UserListPage extends GetView<UserListController> {
+class RuinListPage extends GetView<RuinsListController> {
   final ApiService gc = ApiService();
 
-  UserListPage({super.key});
+  RuinListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserListController>(
+    return GetBuilder<RuinsListController>(
       builder: (ctl) {
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: true,
-            title: const Text('用户列表'),
+            title: const Text('废墟任务列表'),
             centerTitle: true,
           ),
           body: Column(
             children: [
-              // Row(children: [
-              //   Expanded(
-              //     child: Container(
-              //       height: 100,
-              //       // width: double.infinity,
-              //       padding: const EdgeInsets.all(16.0),
-              //       color: Colors.black12,
-              //       child: Text(
-              //           "您的身份是: ${ctl.userRole}, 您可对用户执行${ctl.totalOptions}等操作。"),
-              //     ),
-              //   )
-              // ]),
               const SizedBox(height: 16),
               Row(
                 children: const [
                   Text(
-                    "用户列表",
+                    "废墟任务列表",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 20.0, // 设置字体大小为20
@@ -73,15 +60,15 @@ class UserListPage extends GetView<UserListController> {
                             ),
                           ),
                           child: getTableHead(
-                            ["手机号", "微信昵称", "用户状态", "用户身份", "角色数"],
-                            [5, 3, 3, 3, 3, 2],
+                            ["序号", "编号", "创建人", "外环", "中环", "占据废墟", "目标", "成果"],
+                            [2, 3, 3, 2, 2, 2, 2, 2],
                           ),
                         ),
                         Expanded(
-                          child: ctl.hasUser
+                          child: ctl.hasData
                               ? ListView.builder(
                                   itemBuilder: (ctx, index) {
-                                    UserModel user = ctl.userList[index];
+                                    RuinsModel tmp = ctl.ruinsList[index];
                                     return Container(
                                       height: 50,
                                       decoration: const BoxDecoration(
@@ -93,52 +80,86 @@ class UserListPage extends GetView<UserListController> {
                                       child: Row(
                                         children: [
                                           Expanded(
-                                            flex: userNameExpandedFlex,
+                                            flex: 2,
                                             child: InkWell(
                                               onTap: () async {
-                                                String userId = user.id;
-                                                _tapOnUser(userId);
+                                                _tapOnRuin(tmp.id);
                                               },
                                               child: Text(
-                                                user.username,
+                                                " ${index + 1}",
                                                 style: const TextStyle(
                                                   color: Colors.blue,
                                                 ),
                                               ),
                                             ),
                                           ),
-                                          // Expanded(
-                                          //   flex: otherExpandedFlex,
-                                          //   child: Text(user.displayName),
-                                          // ),
                                           Expanded(
-                                            flex: otherExpandedFlex,
-                                            child: Text(user.wechatName),
+                                            flex: 3,
+                                            child: Text(tmp.number),
                                           ),
                                           Expanded(
-                                            flex: otherExpandedFlex,
+                                            flex: 3,
                                             child: Text(
-                                              user.statusName,
+                                              tmp.creator?.wechatName ?? "",
                                             ),
                                           ),
                                           Expanded(
-                                            flex: otherExpandedFlex,
-                                            child: Text(user.roleName),
+                                            flex: 2,
+                                            child: Text("${tmp.outerCnt}"),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text("${tmp.middleCnt}"),
                                           ),
                                           Expanded(
                                             flex: 2,
                                             child:
-                                                Text("${user.shipUserCount}"),
+                                                Text(tmp.ruinOwner ? "是" : "否"),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                                "${tmp.targetShipUserCnt}"),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                                "${tmp.actualShipUserCnt}"),
                                           ),
                                         ],
                                       ),
                                     );
                                   },
-                                  itemCount: ctl.userList.length,
+                                  itemCount: ctl.ruinsList.length,
                                 )
                               : const Text("暂无数据"),
                         ),
                       ]),
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              SizedBox(
+                height: 200,
+                child: GridView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: ctl.options.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5, // 交叉轴方向上的间距
+                    childAspectRatio: 4,
+                    mainAxisSpacing: 5, // 主轴方向上的间距
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    final option = ctl.options[index];
+                    return ElevatedButton(
+                      onPressed: () async {
+                        await ctl.onOption(option);
+                      },
+                      child: Text(option.name ?? ""),
+                    );
+                  },
                 ),
               ),
             ],
@@ -151,30 +172,13 @@ class UserListPage extends GetView<UserListController> {
   // 点击用户名时 跳转
   // 如果点的是自己进入编辑页
   // 如果点的是别人进入用户操作页
-  void _tapOnUser(String userId) async {
-    final gc = Get.find<AuthService>();
+  void _tapOnRuin(String ruinId) async {
     bool? result = false;
-    // if (gc.isManager() || userId != gc.userId) {
-    //   result = await Get.toNamed(
-    //     AppRoute.userOptionPage,
-    //     parameters: {'userId': userId},
-    //   );
-    // } else {
-    //   // 非管理员如果点自己账号只能进编辑页
-    //   result = await Get.toNamed(
-    //     AppRoute.userEditPage,
-    //   );
-    // }
-    if (userId == gc.userId) {
-      result = await Get.toNamed(
-        AppRoute.userEditPage,
-      );
-    } else {
-      result = await Get.toNamed(
-        AppRoute.userOptionPage,
-        parameters: {'userId': userId},
-      );
-    }
+    result = await Get.toNamed(
+      AppRoute.ruinOptionPage,
+      parameters: {'userId': ruinId},
+    );
+
     if (result == true) {
       controller.reloadData();
     }

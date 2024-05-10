@@ -42,6 +42,14 @@ class _HomeState extends State<HomePage> {
         "title": "聚宝\n  盆",
         "app": AppRoute.cornucopiaPage,
       },
+      {
+        "title": "废墟\n管理",
+        "app": AppRoute.ruinPage,
+      },
+      {
+        "title": "部门\n议程",
+        "app": AppRoute.departalPage,
+      }
     ];
     // List<String> scrollMessages = [
     //   "喜报: 醉花荫正式更名龍魂: 因规模扩大, 醉花荫...",
@@ -82,10 +90,11 @@ class _HomeState extends State<HomePage> {
             ),
             Container(
               height: 400,
+              padding: const EdgeInsets.all(6.0),
               color: Colors.indigo[300],
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5,
+                  crossAxisCount: 4,
                   crossAxisSpacing: 6.0,
                   mainAxisSpacing: 6.0,
                 ),
@@ -115,32 +124,6 @@ class _HomeState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 24),
-            // Container(
-            //   child: GetBuilder<MarqueeController>(
-            //     init: MarqueeController(),
-            //     builder: (ctl) {
-            //       return SingleChildScrollView(
-            //         scrollDirection: Axis.vertical,
-            //         // controller: ctl.scrollController,
-            //         child: Column(
-            //           children: ctl.messages
-            //               .map((message) => Padding(
-            //                   padding: EdgeInsets.symmetric(horizontal: 16.0),
-            //                   child: Row(
-            //                     children: [
-            //                       Text(
-            //                         textAlign: TextAlign.left,
-            //                         "${message.substring(0, message.length > 17 ? 17 : message.length)}...",
-            //                         style: TextStyle(fontSize: 20.0),
-            //                       ),
-            //                     ],
-            //                   )))
-            //               .toList(),
-            //         ),
-            //       );
-            //     },
-            //   ),
-            // ),
           ],
         ),
       ),

@@ -110,4 +110,7 @@ class ApiUrl {
   String approveRegisterPath = "$_ruinsApp/approve_register/";
   String completeRegisterPath = "$_ruinsApp/complete_register/";
   String refuseRegisterPath = "$_ruinsApp/refuse_register/";
+  // 议程
+  String departalListCreatePath = "$_ruinsApp/departmentals/";
+  String departalRetrUpdDestPath = "$_regionApp/departmentals/<pk>/";
 }

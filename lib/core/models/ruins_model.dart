@@ -1,7 +1,6 @@
-import 'package:milkwayshipapp/core/models/user_model.dart';
-
 import '../utils.dart';
 import 'options_model.dart';
+import 'user_model.dart';
 
 class RuinsModel {
   String id;

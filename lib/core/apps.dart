@@ -1,4 +1,8 @@
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/modules/ruins/departal_controller.dart';
+import 'package:milkwayshipapp/modules/ruins/departal_page.dart';
+import 'package:milkwayshipapp/modules/ruins/ruins_controller.dart';
+import 'package:milkwayshipapp/modules/ruins/ruins_page.dart';
 
 import '../modules/seasons/season_new_controller.dart';
 import '../modules/seasons/season_new_page.dart';
@@ -107,6 +111,12 @@ abstract class AppRoute {
   static String userEditPage = '/userEdit';
   // 设置
   static String settingsPage = '/settings';
+
+  // 废墟和部门议程
+  static String ruinPage = '/ruin';
+  static String ruinOptionPage = '/ruinOption';
+  static String departalPage = '/depart';
+  static String departOptionPage = '/departOption';
 
   static List<GetPage> getPages2() {
     return [];
@@ -284,6 +294,22 @@ abstract class AppRoute {
         page: () => SeasonOptionPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => SeasonOptionController());
+        }),
+      ),
+      // 废墟
+      GetPage(
+        name: AppRoute.ruinPage,
+        page: () => RuinListPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => RuinsListController());
+        }),
+      ),
+      // 议程
+      GetPage(
+        name: AppRoute.departalPage,
+        page: () => DepartalListPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => DepartalListController());
         }),
       ),
     ];

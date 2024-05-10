@@ -46,7 +46,7 @@ class RuinRegisterModel {
       statusName: json['status_name'] ?? '',
       groupId: json['group_id'],
       shipuserId: json['ship_user_id'],
-      shipuserMskName: json['ship_user_msk_name'],
+      shipuserMskName: json['ship_user_mks_name'],
       score: json['score'],
       ruinGroup: json['ruin_group'] != null
           ? RuinGroupModel.fromJson(json['ruin_group'] ?? {})

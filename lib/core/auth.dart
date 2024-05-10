@@ -50,4 +50,12 @@ class AuthService extends GetxService {
     final as = ApiService();
     as.token = null;
   }
+
+  bool isManager() {
+    return userRole == 'root' || userRole == 'manager';
+  }
+
+  bool isSuper() {
+    return userRole == 'root';
+  }
 }

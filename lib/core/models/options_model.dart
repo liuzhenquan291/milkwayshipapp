@@ -5,10 +5,18 @@ class OptionModel {
   String? name;
   String? title;
 
-  OptionModel.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    name = json['name'];
-    title = json['title'];
+  OptionModel({
+    this.code,
+    this.name,
+    this.title,
+  });
+
+  factory OptionModel.fromJson(Map<String, dynamic> json) {
+    return OptionModel(
+      code: json['code'],
+      name: json['name'],
+      title: json['title'],
+    );
   }
 
   static List<OptionModel> fromJsonToList(List<dynamic>? list) {

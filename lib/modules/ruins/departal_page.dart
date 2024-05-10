@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
+import 'package:milkwayshipapp/core/models/agenda_models.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
 import '../../core/custome_table_field.dart';
-import '../../core/models/user_model.dart';
 import '../../core/server.dart';
+import 'departal_controller.dart';
 
 const userNameExpandedFlex = 5;
 const otherExpandedFlex = 3;
 
-class UserListPage extends GetView<UserListController> {
+class DepartalListPage extends GetView<DepartalListController> {
   final ApiService gc = ApiService();
 
-  UserListPage({super.key});
+  DepartalListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserListController>(
+    return GetBuilder<DepartalListController>(
       builder: (ctl) {
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: true,
-            title: const Text('用户列表'),
+            title: const Text('部门议程'),
             centerTitle: true,
           ),
           body: Column(
@@ -73,15 +72,16 @@ class UserListPage extends GetView<UserListController> {
                             ),
                           ),
                           child: getTableHead(
-                            ["手机号", "微信昵称", "用户状态", "用户身份", "角色数"],
-                            [5, 3, 3, 3, 3, 2],
+                            ["序号", "议程名字", "创建人", "议程技能", "升级道具", "创建时间"],
+                            [1, 2, 2, 2, 2, 2],
                           ),
                         ),
                         Expanded(
-                          child: ctl.hasUser
+                          child: ctl.hasData
                               ? ListView.builder(
                                   itemBuilder: (ctx, index) {
-                                    UserModel user = ctl.userList[index];
+                                    DepartmentalAgendaModel tmp =
+                                        ctl.deparList[index];
                                     return Container(
                                       height: 50,
                                       decoration: const BoxDecoration(
@@ -93,50 +93,75 @@ class UserListPage extends GetView<UserListController> {
                                       child: Row(
                                         children: [
                                           Expanded(
-                                            flex: userNameExpandedFlex,
+                                            flex: 1,
                                             child: InkWell(
                                               onTap: () async {
-                                                String userId = user.id;
-                                                _tapOnUser(userId);
+                                                _tapOnDepar(tmp.id);
                                               },
                                               child: Text(
-                                                user.username,
+                                                "  ${index + 1}",
                                                 style: const TextStyle(
                                                   color: Colors.blue,
                                                 ),
                                               ),
                                             ),
                                           ),
-                                          // Expanded(
-                                          //   flex: otherExpandedFlex,
-                                          //   child: Text(user.displayName),
-                                          // ),
                                           Expanded(
-                                            flex: otherExpandedFlex,
-                                            child: Text(user.wechatName),
+                                            flex: 2,
+                                            child: Text(tmp.name),
                                           ),
                                           Expanded(
-                                            flex: otherExpandedFlex,
+                                            flex: 2,
                                             child: Text(
-                                              user.statusName,
+                                              tmp.creator?.wechatName ?? '',
                                             ),
                                           ),
                                           Expanded(
-                                            flex: otherExpandedFlex,
-                                            child: Text(user.roleName),
+                                            flex: 2,
+                                            child: Text(tmp.skill),
                                           ),
                                           Expanded(
                                             flex: 2,
                                             child:
-                                                Text("${user.shipUserCount}"),
+                                                Text("${tmp.upgradePropsName}"),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text("${tmp.createdTime}"),
                                           ),
                                         ],
                                       ),
                                     );
                                   },
-                                  itemCount: ctl.userList.length,
+                                  itemCount: ctl.deparList.length,
                                 )
                               : const Text("暂无数据"),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        SizedBox(
+                          height: 200,
+                          child: GridView.builder(
+                            padding: const EdgeInsets.all(8),
+                            itemCount: ctl.options.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 5, // 交叉轴方向上的间距
+                              childAspectRatio: 4,
+                              mainAxisSpacing: 5, // 主轴方向上的间距
+                            ),
+                            itemBuilder: (BuildContext context, int index) {
+                              final option = ctl.options[index];
+                              return ElevatedButton(
+                                onPressed: () async {
+                                  await ctl.onOption(option);
+                                },
+                                child: Text(option.name ?? ""),
+                              );
+                            },
+                          ),
                         ),
                       ]),
                 ),
@@ -148,33 +173,12 @@ class UserListPage extends GetView<UserListController> {
     );
   }
 
-  // 点击用户名时 跳转
-  // 如果点的是自己进入编辑页
-  // 如果点的是别人进入用户操作页
-  void _tapOnUser(String userId) async {
-    final gc = Get.find<AuthService>();
+  void _tapOnDepar(String departId) async {
     bool? result = false;
-    // if (gc.isManager() || userId != gc.userId) {
-    //   result = await Get.toNamed(
-    //     AppRoute.userOptionPage,
-    //     parameters: {'userId': userId},
-    //   );
-    // } else {
-    //   // 非管理员如果点自己账号只能进编辑页
-    //   result = await Get.toNamed(
-    //     AppRoute.userEditPage,
-    //   );
-    // }
-    if (userId == gc.userId) {
-      result = await Get.toNamed(
-        AppRoute.userEditPage,
-      );
-    } else {
-      result = await Get.toNamed(
-        AppRoute.userOptionPage,
-        parameters: {'userId': userId},
-      );
-    }
+    result = await Get.toNamed(
+      AppRoute.userOptionPage,
+      parameters: {'userId': departId},
+    );
     if (result == true) {
       controller.reloadData();
     }
