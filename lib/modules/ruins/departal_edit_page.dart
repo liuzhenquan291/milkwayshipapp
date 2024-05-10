@@ -10,15 +10,19 @@ const userNameExpandedFlex = 5;
 const otherExpandedFlex = 3;
 
 class DepartalEditPage extends GetView<DepartalEditController> {
+  String? departId;
   final TextEditingController nameCtl = TextEditingController();
   final TextEditingController skillCtl = TextEditingController();
   final TextEditingController skillEffectCtl = TextEditingController();
   final TextEditingController upgradePropsCtl = TextEditingController();
   final TextEditingController skillMajorCtl = TextEditingController();
 
-  final ApiService gc = ApiService();
+  DepartalEditPage({
+    Key? key,
+    regionId,
+  }) : super(key: key);
 
-  DepartalEditPage({super.key});
+  final ApiService gc = ApiService();
 
   // @override
   // void dispose() {
@@ -105,6 +109,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
                       Expanded(
                         child: CustomTextField(
                           controller: skillMajorCtl,
+                          placeholder: "全部/航母/战列舰/驱逐舰/护卫舰/巡洋舰",
                         ),
                       ),
                     ],
@@ -119,6 +124,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
                       Expanded(
                         child: CustomTextField(
                           controller: upgradePropsCtl,
+                          placeholder: "部门徽章/部门凭证",
                         ),
                       ),
                     ],

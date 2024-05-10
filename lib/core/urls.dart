@@ -112,5 +112,5 @@ class ApiUrl {
   String refuseRegisterPath = "$_ruinsApp/refuse_register/";
   // 议程
   String departalListCreatePath = "$_ruinsApp/departmentals/";
-  String departalRetrUpdDestPath = "$_regionApp/departmentals/<pk>/";
+  String departalRetrUpdDestPath = "$_ruinsApp/departmentals/%s/";
 }

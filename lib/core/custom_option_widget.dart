@@ -32,7 +32,6 @@ Future<bool> customePostOption(
           content: Text(responseData.message as String),
           confirm: TextButton(
             onPressed: () async {
-              print(7);
               Get.back();
             },
             child: const Text('关闭'),

@@ -1,8 +1,11 @@
+import 'package:intl/src/intl/date_format.dart';
+import 'package:milkwayshipapp/core/utils.dart';
+
 import 'options_model.dart';
 import 'user_model.dart';
 
 class DepartmentalAgendaModel {
-  String id;
+  int id;
   String name;
   String skill;
   String? skillEffect;
@@ -15,7 +18,7 @@ class DepartmentalAgendaModel {
   bool deleted;
   UserModel? creator;
   List<ShipuserDepartmentalInfoModel>? shipUserDatas;
-  List<OptionModel>? options;
+  // List<OptionModel>? options;
 
   DepartmentalAgendaModel({
     required this.id,
@@ -31,7 +34,7 @@ class DepartmentalAgendaModel {
     required this.deleted,
     this.creator,
     this.shipUserDatas,
-    this.options,
+    // this.options,
   });
 
   factory DepartmentalAgendaModel.fromJson(Map<String, dynamic> json) {
@@ -53,9 +56,9 @@ class DepartmentalAgendaModel {
           ? ShipuserDepartmentalInfoModel.fromJsonToList(
               json['ship_user_datas'])
           : null,
-      options: json['options'] != null
-          ? OptionModel.fromJsonToList(json['options'] ?? [])
-          : null,
+      // options: json['options'] != null
+      //     ? OptionModel.fromJsonToList(json['options'] ?? [])
+      //     : null,
     );
   }
 
@@ -68,6 +71,10 @@ class DepartmentalAgendaModel {
       lst.add(DepartmentalAgendaModel.fromJson(element));
     });
     return lst;
+  }
+
+  String getCreatedDay() {
+    return formatDateTime_2(createdTime);
   }
 }
 

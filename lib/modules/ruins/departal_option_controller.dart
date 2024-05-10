@@ -4,6 +4,7 @@ import 'package:milkwayshipapp/core/models/agenda_models.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 
+import '../../core/apps.dart';
 import '../../core/models/options_model.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
@@ -24,7 +25,10 @@ class DepartOptionsController extends GetxController {
     loadData();
   }
 
-  void onLoadMore() async {
+  Future<void> reloadData() async {
+    hasUser = false;
+    hasOptions = false;
+    validOptions = [];
     loadData();
   }
 
@@ -49,6 +53,7 @@ class DepartOptionsController extends GetxController {
           }
           final AuthService au = Get.find<AuthService>();
           if (au.isManager()) {
+            hasOptions = true;
             validOptions = [
               OptionModel(
                 code: "update",
@@ -61,5 +66,15 @@ class DepartOptionsController extends GetxController {
       }
     }
     update();
+  }
+
+  Future<void> onOption(OptionModel option) async {
+    final result = await Get.toNamed(
+      AppRoute.departEditPage,
+      parameters: {'departId': "${departData?.id ?? '-1'}"},
+    );
+    if (result == true) {
+      await reloadData();
+    }
   }
 }

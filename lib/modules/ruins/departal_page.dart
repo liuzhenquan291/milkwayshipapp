@@ -127,7 +127,7 @@ class DepartalListPage extends GetView<DepartalListController> {
                                           ),
                                           Expanded(
                                             flex: 2,
-                                            child: Text("${tmp.createdTime}"),
+                                            child: Text(tmp.getCreatedDay()),
                                           ),
                                         ],
                                       ),
@@ -173,11 +173,11 @@ class DepartalListPage extends GetView<DepartalListController> {
     );
   }
 
-  void _tapOnDepar(String departId) async {
+  void _tapOnDepar(int departId) async {
     bool? result = false;
     result = await Get.toNamed(
       AppRoute.departOptionPage,
-      parameters: {'departId': departId},
+      parameters: {'departId': "$departId"},
     );
     if (result == true) {
       controller.reloadData();

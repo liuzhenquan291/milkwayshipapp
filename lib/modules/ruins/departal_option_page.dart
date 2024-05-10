@@ -59,8 +59,8 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                     Row(
                       children: [
                         Expanded(
-                          child:
-                              Text("议程增益: ${ctl.departData?.skillMajor ?? ''}"),
+                          child: Text(
+                              "议程增益: ${ctl.departData?.skillMajorName ?? ''}"),
                         ),
                         Expanded(
                           child:
@@ -171,28 +171,28 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                     : const Text("暂无数据"),
               ),
               const SizedBox(height: 24),
-              // SizedBox(
-              //   height: ctl.hasOptions ? 200 : 0,
-              //   child: GridView.builder(
-              //     padding: const EdgeInsets.all(8),
-              //     itemCount: ctl.validOptions.length,
-              //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //       crossAxisCount: 2,
-              //       crossAxisSpacing: 5, // 交叉轴方向上的间距
-              //       childAspectRatio: 4,
-              //       mainAxisSpacing: 5, // 主轴方向上的间距
-              //     ),
-              //     itemBuilder: (BuildContext context, int index) {
-              //       final option = ctl.validOptions[index];
-              //       return ElevatedButton(
-              //         onPressed: () {
-              //           ctl.onOption(option);
-              //         },
-              //         child: Text(option.name ?? ""),
-              //       );
-              //     },
-              //   ),
-              // ),
+              SizedBox(
+                height: 200,
+                child: GridView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: ctl.validOptions.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5, // 交叉轴方向上的间距
+                    childAspectRatio: 4,
+                    mainAxisSpacing: 5, // 主轴方向上的间距
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    final option = ctl.validOptions[index];
+                    return ElevatedButton(
+                      onPressed: () async {
+                        await ctl.onOption(option);
+                      },
+                      child: Text(option.name ?? ""),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),

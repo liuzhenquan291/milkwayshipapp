@@ -49,10 +49,18 @@ Future<RSAPublicKey> parsePublicKeyFromPemFile() async {
 }
 
 final formatter_1 = DateFormat("yyyy-MM-dd HH:mm:ss");
+final formatter_2 = DateFormat("yyyy-MM-dd");
 
 String formatDateTime_1(DateTime? dateTime) {
   if (dateTime == null) {
     return "";
   }
   return formatter_1.format(dateTime);
+}
+
+String formatDateTime_2(DateTime? dateTime) {
+  if (dateTime == null) {
+    return "";
+  }
+  return formatter_2.format(dateTime);
 }

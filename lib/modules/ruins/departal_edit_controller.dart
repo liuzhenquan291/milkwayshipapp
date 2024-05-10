@@ -33,6 +33,8 @@ class DepartalEditController extends GetxController {
 
   Future<void> _loadData() async {
     departId = Get.parameters['departId'] ?? "-1";
+    print('edit');
+    print(departId);
     if (departId == '-1') {
       // 新建
     } else {
