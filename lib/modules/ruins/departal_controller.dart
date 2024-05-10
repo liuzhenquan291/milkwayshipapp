@@ -4,6 +4,7 @@ import 'package:milkwayshipapp/core/models/agenda_models.dart';
 import 'package:milkwayshipapp/core/urls.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/apps.dart';
 import '../../core/auth.dart';
 import '../../core/models/options_model.dart';
 import '../../core/server.dart';
@@ -51,8 +52,8 @@ class DepartalListController extends GetxController {
       options = [
         OptionModel(
           code: "new_add",
-          name: "新建任务",
-          title: "新建废墟任务",
+          name: "新建议程",
+          title: "新建部门议程",
         )
       ];
     }
@@ -68,5 +69,13 @@ class DepartalListController extends GetxController {
     super.onClose();
   }
 
-  Future<void> onOption(OptionModel option) async {}
+  Future<void> onOption(OptionModel option) async {
+    final result = await Get.toNamed(
+      AppRoute.departEditPage,
+      parameters: {'departId': '-1'},
+    );
+    if (result == true) {
+      reloadData();
+    }
+  }
 }

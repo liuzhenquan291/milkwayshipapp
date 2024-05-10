@@ -44,7 +44,7 @@ class DepartalListPage extends GetView<DepartalListController> {
               Row(
                 children: const [
                   Text(
-                    "用户列表",
+                    "部门议程列表",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 20.0, // 设置字体大小为20
@@ -176,8 +176,8 @@ class DepartalListPage extends GetView<DepartalListController> {
   void _tapOnDepar(String departId) async {
     bool? result = false;
     result = await Get.toNamed(
-      AppRoute.userOptionPage,
-      parameters: {'userId': departId},
+      AppRoute.departOptionPage,
+      parameters: {'departId': departId},
     );
     if (result == true) {
       controller.reloadData();

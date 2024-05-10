@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/modules/ruins/departal_controller.dart';
+import 'package:milkwayshipapp/modules/ruins/departal_option_controller.dart';
 import 'package:milkwayshipapp/modules/ruins/departal_page.dart';
 import 'package:milkwayshipapp/modules/ruins/ruins_controller.dart';
 import 'package:milkwayshipapp/modules/ruins/ruins_page.dart';
 
+import '../modules/ruins/departal_edit_controller.dart';
+import '../modules/ruins/departal_edit_page.dart';
+import '../modules/ruins/departal_option_page.dart';
 import '../modules/seasons/season_new_controller.dart';
 import '../modules/seasons/season_new_page.dart';
 import '../modules/seasons/season_option_controller.dart';
@@ -117,6 +121,7 @@ abstract class AppRoute {
   static String ruinOptionPage = '/ruinOption';
   static String departalPage = '/depart';
   static String departOptionPage = '/departOption';
+  static String departEditPage = '/departEdit';
 
   static List<GetPage> getPages2() {
     return [];
@@ -310,6 +315,20 @@ abstract class AppRoute {
         page: () => DepartalListPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => DepartalListController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.departEditPage,
+        page: () => DepartalEditPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => DepartalEditController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.departOptionPage,
+        page: () => DepartOptionsPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => DepartOptionsController());
         }),
       ),
     ];

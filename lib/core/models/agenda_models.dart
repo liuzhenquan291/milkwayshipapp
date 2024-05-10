@@ -1,3 +1,4 @@
+import 'options_model.dart';
 import 'user_model.dart';
 
 class DepartmentalAgendaModel {
@@ -13,6 +14,8 @@ class DepartmentalAgendaModel {
   String updatedTime;
   bool deleted;
   UserModel? creator;
+  List<ShipuserDepartmentalInfoModel>? shipUserDatas;
+  List<OptionModel>? options;
 
   DepartmentalAgendaModel({
     required this.id,
@@ -27,6 +30,8 @@ class DepartmentalAgendaModel {
     required this.updatedTime,
     required this.deleted,
     this.creator,
+    this.shipUserDatas,
+    this.options,
   });
 
   factory DepartmentalAgendaModel.fromJson(Map<String, dynamic> json) {
@@ -44,6 +49,13 @@ class DepartmentalAgendaModel {
       deleted: json['deleted'] ?? false,
       creator:
           json['creator'] != null ? UserModel.fromJson(json['creator']) : null,
+      shipUserDatas: json['ship_user_datas'] != null
+          ? ShipuserDepartmentalInfoModel.fromJsonToList(
+              json['ship_user_datas'])
+          : null,
+      options: json['options'] != null
+          ? OptionModel.fromJsonToList(json['options'] ?? [])
+          : null,
     );
   }
 
@@ -65,7 +77,7 @@ class ShipuserDepartmentalInfoModel {
   String shipUserMksName;
   String agendaId;
   String agendaName;
-  String skillAlive;
+  bool skillAlive;
   String agendaLevel;
   String agendaNode;
   String propsLack;
