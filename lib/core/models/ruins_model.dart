@@ -109,4 +109,22 @@ class RuinsModel {
   String getEndTime() {
     return formatDateTime_3(endTime);
   }
+
+  Map<String, dynamic> toDict() {
+    return {
+      'id': id,
+      'number': number,
+      'updated_time': updatedTime,
+      'target_shipuser_cnt': targetShipUserCnt,
+      'outer_cnt': outerCnt,
+      'middle_cnt': middleCnt,
+      'inner_cnt': innerCnt,
+      'ruin_owner': ruinOwner,
+      'start_time': startTime != null ? startTime!.toIso8601String() : null,
+      'end_time': endTime != null ? endTime!.toIso8601String() : null,
+      'groups': groups != null
+          ? groups!.map((item) => item.toDict()).toList().toList()
+          : null
+    };
+  }
 }

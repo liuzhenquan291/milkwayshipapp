@@ -19,6 +19,7 @@ class RuinRegisterModel {
   String committeeAliveName;
   int committeeLevel;
   int committeeNode;
+  int committeePropsLack;
   // RuinGroupModel? ruinGroup;
 
   List<OptionModel>? options;
@@ -39,6 +40,7 @@ class RuinRegisterModel {
     required this.committeeAliveName,
     required this.committeeLevel,
     required this.committeeNode,
+    required this.committeePropsLack,
     // this.ruinGroup,
     this.options,
   });
@@ -60,6 +62,7 @@ class RuinRegisterModel {
       committeeAliveName: json['committee_alive_name'],
       committeeLevel: json['committee_level'],
       committeeNode: json['committee_node'],
+      committeePropsLack: json['committee_props_lack'],
       // ruinGroup: json['ruin_group'] != null
       //     ? RuinGroupModel.fromJson(json['ruin_group'] ?? {})
       //     : null,
@@ -82,5 +85,20 @@ class RuinRegisterModel {
 
   String getCreatedTime() {
     return formatDateTime_1(createdTime);
+  }
+
+  Map<String, dynamic> toDict() {
+    return {
+      'id': id,
+      'updated_time': updatedTime,
+      'group_id': groupId,
+      'ship_user_id': shipuserId,
+      'ship_user_mks_name': shipuserMskName,
+      'score': score,
+      'committee_alive': committeeAlive,
+      'committee_level': committeeLevel,
+      'committee_node': committeeNode,
+      'committee_props_lack': committeePropsLack,
+    };
   }
 }

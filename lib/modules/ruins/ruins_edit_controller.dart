@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/apps.dart';
+import 'package:milkwayshipapp/core/custom_option_widget.dart';
 import 'package:milkwayshipapp/core/models/agenda_models.dart';
 import 'package:milkwayshipapp/core/models/ruins_group.dart';
 import 'package:milkwayshipapp/core/models/ruins_model.dart';
@@ -219,7 +220,21 @@ class RuinsEditController extends GetxController {
   }
 
   Future<bool> onCreateOrUpdate() async {
-    return false;
+    bool result = false;
+    String url = '';
+    String title = '';
+    Map<String, dynamic> payload = ruinData!.toDict();
+    if (ruinId == '-1') {
+      url = apiUrl.ruinsListCreatePath;
+      title = '确认创建';
+      result = await customePostOption(title, url, payload);
+    } else {
+      url = sprintf(apiUrl.ruinsRetrUpdDestPath, [ruinId]);
+      title = '确认更新';
+      result = await customePutOption(title, url, payload);
+    }
+
+    return result;
   }
 
   RuinRegisterModel trans(ShipuserDepartmentalInfoModel data) {
@@ -230,6 +245,7 @@ class RuinsEditController extends GetxController {
       committeeAliveName: data.skillAliveName ?? '',
       committeeLevel: data.agendaLevel,
       committeeNode: data.agendaNode,
+      committeePropsLack: data.propsLack,
     );
   }
 }

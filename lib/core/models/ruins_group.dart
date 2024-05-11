@@ -69,6 +69,18 @@ class RuinGroupSchedule {
     }
     return formatDateTime_3(endTime);
   }
+
+  Map<String, dynamic> toDict() {
+    return {
+      'id': id,
+      'group_id': groupId,
+      'schedule_name': scheduleName,
+      'updated_time': updatedTime,
+      'target_score': targetScore,
+      'start_time': startTime != null ? startTime!.toIso8601String() : null,
+      'end_time': endTime != null ? endTime!.toIso8601String() : null,
+    };
+  }
 }
 
 class RuinGroupModel {
@@ -97,6 +109,7 @@ class RuinGroupModel {
     this.registers,
     this.scoreDesc,
   });
+
   factory RuinGroupModel.fromJson(Map<String, dynamic> json) {
     return RuinGroupModel(
       id: json['id'] ?? '',
@@ -134,5 +147,21 @@ class RuinGroupModel {
 
   String getCreatedTime() {
     return formatDateTime_1(createdTime);
+  }
+
+  Map<String, dynamic> toDict() {
+    return {
+      'id': id,
+      'group_name': groupName,
+      'target_shipuser_cnt': targetShipuserCnt,
+      'updated_time': updatedTime,
+      'score_desc': scoreDesc,
+      'schedules': schedules != null
+          ? schedules!.map((item) => item.toDict()).toList()
+          : null,
+      'registers': registers != null
+          ? registers!.map((item) => item.toDict()).toList()
+          : null,
+    };
   }
 }
