@@ -176,7 +176,7 @@ class RuinListPage extends GetView<RuinsListController> {
     bool? result = false;
     result = await Get.toNamed(
       AppRoute.ruinOptionPage,
-      parameters: {'userId': ruinId},
+      parameters: {'ruinId': ruinId},
     );
 
     if (result == true) {

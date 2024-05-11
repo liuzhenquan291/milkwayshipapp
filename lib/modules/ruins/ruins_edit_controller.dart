@@ -98,7 +98,7 @@ class RuinsEditController extends GetxController {
       }
     } else {
       final as = ApiService();
-      final url = sprintf(apiUrl.departalRetrUpdDestPath, [ruinId]);
+      final url = sprintf(apiUrl.ruinsRetrUpdDestPath, [ruinId]);
       final response = await as.getRequest(url, null);
       if (response.statusCode != 200) {
         return;

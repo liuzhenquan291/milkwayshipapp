@@ -12,6 +12,8 @@ import '../modules/ruins/depart_shipuserinfo_edit_page.dart';
 import '../modules/ruins/departal_edit_controller.dart';
 import '../modules/ruins/departal_edit_page.dart';
 import '../modules/ruins/departal_option_page.dart';
+import '../modules/ruins/ruins_option_controller.dart';
+import '../modules/ruins/ruins_option_page.dart';
 import '../modules/ruins/ruins_regist_select_controller.dart';
 import '../modules/ruins/ruins_regist_select_page.dart';
 import '../modules/seasons/season_new_controller.dart';
@@ -323,6 +325,13 @@ abstract class AppRoute {
         page: () => RuinsEditPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => RuinsEditController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.ruinOptionPage,
+        page: () => RuinOptionPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => RuinOptionController());
         }),
       ),
       // 议程
