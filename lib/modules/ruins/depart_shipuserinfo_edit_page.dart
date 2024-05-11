@@ -8,11 +8,6 @@ import 'depart_shipuserinfo_edit_controller.dart';
 
 class ShipUserDepartInfoEditPage
     extends GetView<DepartShipuserInfoEditController> {
-  final TextEditingController skillAliveCtl = TextEditingController();
-  final TextEditingController agendaLevelCtl = TextEditingController();
-  final TextEditingController agendaNodeCtl = TextEditingController();
-  final TextEditingController propsLackCtl = TextEditingController();
-
   String? departId;
   String? shipUserId;
   ShipUserDepartInfoEditPage({
@@ -25,14 +20,6 @@ class ShipUserDepartInfoEditPage
   Widget build(BuildContext context) {
     return GetBuilder<DepartShipuserInfoEditController>(builder: (ctl) {
       ctl.departId = departId;
-      bool skillAlive = false;
-      if (ctl.departShipUserData?.skillAlive != null) {
-        skillAlive = ctl.departShipUserData?.skillAlive ?? false;
-      }
-      skillAliveCtl.text = skillAlive ? "是" : "否";
-      agendaLevelCtl.text = "${ctl.departShipUserData?.agendaLevel ?? 1}";
-      agendaNodeCtl.text = "${ctl.departShipUserData?.agendaNode ?? 0}";
-      propsLackCtl.text = "${ctl.departShipUserData?.propsLack ?? 0}";
 
       return WillPopScope(
         onWillPop: () async {
@@ -154,7 +141,7 @@ class ShipUserDepartInfoEditPage
                         ),
                         Expanded(
                           child: CustomTextField(
-                            controller: skillAliveCtl,
+                            controller: ctl.skillAliveCtl,
                             placeholder: "是/否",
                           ),
                         ),
@@ -168,7 +155,7 @@ class ShipUserDepartInfoEditPage
                         ),
                         Expanded(
                           child: CustomTextField(
-                            controller: agendaLevelCtl,
+                            controller: ctl.agendaLevelCtl,
                             placeholder: "1/2/3...",
                           ),
                         ),
@@ -182,7 +169,7 @@ class ShipUserDepartInfoEditPage
                         ),
                         Expanded(
                           child: CustomTextField(
-                            controller: agendaNodeCtl,
+                            controller: ctl.agendaNodeCtl,
                             placeholder: "1/2/3...",
                           ),
                         ),
@@ -196,7 +183,7 @@ class ShipUserDepartInfoEditPage
                         ),
                         Expanded(
                           child: CustomTextField(
-                            controller: propsLackCtl,
+                            controller: ctl.propsLackCtl,
                             placeholder: "1/2/3...",
                           ),
                         ),
@@ -211,12 +198,7 @@ class ShipUserDepartInfoEditPage
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () async {
-                    await ctl.onOptionSave(
-                      skillAliveCtl.text,
-                      agendaLevelCtl.text,
-                      agendaNodeCtl.text,
-                      propsLackCtl.text,
-                    );
+                    await ctl.onOptionSave();
                   },
                   child: const Text("保存"),
                 ),

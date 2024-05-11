@@ -107,6 +107,10 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                           ShipuserDepartmentalInfoModel? tmp =
                               controller.departData?.shipUserDatas?[index];
                           bool skillAlive = tmp?.skillAlive ?? false;
+                          bool canEdit = false;
+                          canEdit = canEdit || ctl.isManager;
+                          final thisUserId = tmp?.shipUser?.userId ?? "";
+                          canEdit = canEdit || thisUserId == ctl.userId;
                           return Container(
                             height: 20,
                             decoration: const BoxDecoration(
@@ -120,7 +124,7 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                               children: [
                                 Expanded(
                                   flex: 2,
-                                  child: ctl.isManager
+                                  child: canEdit
                                       ? InkWell(
                                           onTap: () async {
                                             final result = await Get.toNamed(

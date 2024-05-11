@@ -113,4 +113,5 @@ class ApiUrl {
   // 议程
   String departalListCreatePath = "$_ruinsApp/departmentals/";
   String departalRetrUpdDestPath = "$_ruinsApp/departmentals/%s/";
+  String departShipUserUpdPath = "$_ruinsApp/depart_shipuserinfo_update/";
 }

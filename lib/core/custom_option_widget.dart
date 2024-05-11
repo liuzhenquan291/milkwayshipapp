@@ -9,7 +9,7 @@ Future<bool> customePostOption(
   String optionUrl,
   Map<String, dynamic>? payload,
 ) async {
-  bool result = false;
+  Completer<bool> completer = Completer<bool>(); // 创建一个 Completer 实例
   Get.defaultDialog(
     title: title,
     middleText: '确定要执行该操作吗？',
@@ -43,8 +43,8 @@ Future<bool> customePostOption(
           content: const Text("操作成功"),
           confirm: TextButton(
             onPressed: () async {
-              Get.back(result: true);
-              result = true;
+              Get.back();
+              completer.complete(true);
             },
             child: const Text('关闭'),
           ),
@@ -52,7 +52,7 @@ Future<bool> customePostOption(
       }
     },
   );
-  return result;
+  return completer.future;
 }
 
 Future<bool> customePutOption(

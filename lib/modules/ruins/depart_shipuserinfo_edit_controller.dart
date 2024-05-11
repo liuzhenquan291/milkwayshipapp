@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/agenda_models.dart';
 import 'package:milkwayshipapp/core/models/ship_user_model.dart';
@@ -5,6 +6,7 @@ import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:sprintf/sprintf.dart';
 
 import '../../core/apps.dart';
+import '../../core/custom_option_widget.dart';
 import '../../core/models/options_model.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
@@ -15,6 +17,11 @@ class DepartShipuserInfoEditController extends GetxController {
   DepartmentalAgendaModel? departData;
   ShipuserDepartmentalInfoModel? departShipUserData;
   ShipUserModel? shipUserData;
+
+  final TextEditingController skillAliveCtl = TextEditingController();
+  final TextEditingController agendaLevelCtl = TextEditingController();
+  final TextEditingController agendaNodeCtl = TextEditingController();
+  final TextEditingController propsLackCtl = TextEditingController();
 
   @override
   void onInit() {
@@ -43,9 +50,18 @@ class DepartShipuserInfoEditController extends GetxController {
         departData = DepartmentalAgendaModel.fromJson(responseData.data);
         if (departData != null) {
           final users = departData?.shipUserDatas ?? [];
+          bool skillAlive = false;
+          if (departShipUserData?.skillAlive != null) {
+            skillAlive = departShipUserData?.skillAlive ?? false;
+          }
+
           if (users.isNotEmpty) {
             departShipUserData = users[0];
             shipUserData = departShipUserData?.shipUser;
+            skillAliveCtl.text = skillAlive ? "是" : "否";
+            agendaLevelCtl.text = "${departShipUserData?.agendaLevel ?? 1}";
+            agendaNodeCtl.text = "${departShipUserData?.agendaNode ?? 0}";
+            propsLackCtl.text = "${departShipUserData?.propsLack ?? 0}";
           }
         }
       }
@@ -63,12 +79,25 @@ class DepartShipuserInfoEditController extends GetxController {
     }
   }
 
-  Future<bool> onOptionSave(
-    String? skillAliveText,
-    String agendaLevelText,
-    String agendaNoteText,
-    String propsLackText,
-  ) async {
-    return false;
+  Future<bool> onOptionSave() async {
+    Map<String, dynamic> payload = {
+      // "id": departShipUserData?.id,
+      "user_id": shipUserData?.userId,
+      "ship_user_id": shipUserData?.id,
+      "ship_user_mks_name": shipUserData?.mksName,
+      "agenda_id": departData?.id,
+      "agenda_name": departData?.name,
+      "skill_alive": skillAliveCtl.text == "是",
+      "agenda_level": agendaLevelCtl.text,
+      "agenda_node": agendaNodeCtl.text,
+      "props_lack": propsLackCtl.text,
+    };
+    final result = await customePostOption(
+      "更新角色的部门议程信息",
+      apiUrl.departShipUserUpdPath,
+      payload,
+    );
+    await reloadData();
+    return result;
   }
 }

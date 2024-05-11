@@ -17,6 +17,7 @@ class DepartOptionsController extends GetxController {
   int shipUserLength = 0;
   bool hasOptions = false;
   bool isManager = false;
+  String userId = '';
   List<OptionModel> validOptions = [];
 
   @override
@@ -55,6 +56,7 @@ class DepartOptionsController extends GetxController {
             shipUserLength = users.length;
           }
           final AuthService au = Get.find<AuthService>();
+          userId = au.userId ?? '';
           if (au.isManager()) {
             isManager = true;
             hasOptions = true;
