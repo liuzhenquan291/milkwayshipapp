@@ -1,4 +1,6 @@
 // import 'package:flutter/material.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/apps.dart';
@@ -127,21 +129,75 @@ class RuinsEditController extends GetxController {
   }
 
   void ruinOwnerOnchange(String? ownerText) async {
-    ruinOwnerStr = ownerText ?? "否";
-    ruinOwner = (ruinOwnerStr == "是") ? true : false;
+    String ruinOwnerStrNew = ownerText ?? "否";
+    String ruinOwnerStrOld = ruinOwnerStr;
+    if (ruinOwnerStrNew == ruinOwnerStr) {
+      return;
+    }
+    // Get.defaultDialog(
+    //   title: "确认执行?",
+    //   middleText: '更改废墟归属将重置数据',
+    //   textConfirm: '确认',
+    //   textCancel: '取消',
+    //   confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
+    //   onCancel: () {
+    //     Get.back();
+    //   },
+    //   onConfirm: () async {
+    //     Get.back();
+    //     ruinOwnerStr = ruinOwnerStrNew;
+    //     ruinOwner = (ruinOwnerStr == "是") ? true : false;
+    //     reloadData();
+    //   },
+    // );
     reloadData();
   }
 
+  // void ruinOwnerChangeConfrim(String? ownerText) async {
+  //   String ruinOwnerStrNew = ownerText ?? "否";
+  //   String ruinOwnerStrOld = ruinOwnerStr;
+  //   if (ruinOwnerStrNew == ruinOwnerStr) {
+  //     return;
+  //   }
+  //   Get.defaultDialog(
+  //     title: "确认执行?",
+  //     middleText: '更改废墟归属将重置数据',
+  //     textConfirm: '确认',
+  //     textCancel: '取消',
+  //     confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
+  //     onCancel: () {
+  //       Get.back();
+  //     },
+  //     onConfirm: () async {
+  //       Get.back();
+  //       ruinOwnerStr = ruinOwnerStrNew;
+  //       ruinOwner = (ruinOwnerStr == "是") ? true : false;
+  //       reloadData();
+  //     },
+  //   );
+  // }
+
   Future<bool> onSelectShipUsers(String? groupName) async {
-    for (int i = 1; i < groups.length; i++) {
+    List<String> selectedShipUserIds = [];
+    for (int i = 0; i < groups.length; i++) {
       String inGroupName = groupName ?? '';
-      if (groups[i].groupName == inGroupName) {
+      String thisGroupName = groups[i].groupName!;
+      if (thisGroupName == inGroupName) {
         toAddshipUserGroupIdx = i;
+        if (groups[i].registers != null) {
+          for (int j = 0; j < groups[i].registers!.length; j++) {
+            selectedShipUserIds.add(groups[i].registers![j].shipuserId);
+          }
+        }
         break;
       }
     }
+    String jsonStr = jsonEncode(selectedShipUserIds);
 
-    await Get.toNamed(AppRoute.committeeSelectPage)?.then(
+    await Get.toNamed(
+      AppRoute.committeeSelectPage,
+      parameters: {'selectedShipUserIds': jsonStr},
+    )?.then(
       (value) {
         if (value != null) {
           List<ShipuserDepartmentalInfoModel> toAddUser = [];

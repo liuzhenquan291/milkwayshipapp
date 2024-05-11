@@ -72,15 +72,32 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                             const SizedBox(
                               width: 10,
                             ),
+                            // Expanded(
+                            //   child: CustomTextField(
+                            //     controller: ctl.ruinOwnerTextCtl,
+                            //     placeholder: "最终是否占据废墟: 是/否",
+                            //     onChanged: ctl.ruinOwnerOnchange,
+                            //     height: 20,
+                            //     borderWidth: 2,
+                            //     showBorder: true,
+                            //     prefix: const Text('请填"是"或"否"  '),
+                            //   ),
+                            // ),
                             Expanded(
-                              child: CustomTextField(
-                                controller: ctl.ruinOwnerTextCtl,
-                                placeholder: "最终是否占据废墟: 是/否",
-                                onChanged: ctl.ruinOwnerOnchange,
-                                height: 20,
-                                borderWidth: 2,
-                                showBorder: true,
-                                prefix: const Text('请填"是"或"否"  '),
+                              child: DropdownButtonFormField(
+                                value: ctl.ruinOwnerStr,
+                                items: ["是", "否"]
+                                    .map((option) => DropdownMenuItem(
+                                          value: option,
+                                          child: Text(option),
+                                        ))
+                                    .toList(),
+                                onChanged: (newValue) {
+                                  ctl.ruinOwnerOnchange(newValue);
+                                },
+                                // onSaved: (newValue) {
+                                //   ctl.ruinOwnerChangeConfrim(newValue);
+                                // },
                               ),
                             ),
                           ],

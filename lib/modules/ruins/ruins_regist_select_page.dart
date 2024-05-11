@@ -6,6 +6,13 @@ import '../../core/models/agenda_models.dart';
 import 'ruins_regist_select_controller.dart';
 
 class RuinsRegistSelectPage extends GetView<RuinsRegistSelectController> {
+  String? selectedShipUserIdsJsonStr;
+
+  RuinsRegistSelectPage({
+    Key? key,
+    selectedShipUserIdsJsonStr,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RuinsRegistSelectController>(

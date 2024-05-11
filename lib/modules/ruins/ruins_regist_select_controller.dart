@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -8,6 +10,7 @@ import '../../core/urls.dart';
 class RuinsRegistSelectController extends GetxController {
   final RefreshController refreshController = RefreshController();
   List<ShipuserDepartmentalInfoModel> committees = [];
+  List<dynamic> selectedShipUserIds = [];
   List<bool> selector = [];
 
   bool hasData = false;
@@ -36,8 +39,14 @@ class RuinsRegistSelectController extends GetxController {
             ShipuserDepartmentalInfoModel.fromJsonToList(responseData.data);
         hasData = committees.isNotEmpty;
 
+        String? jsonStr = Get.parameters['selectedShipUserIds'];
+        if (jsonStr != null) {
+          selectedShipUserIds = jsonDecode(jsonStr);
+        }
+
         for (int i = 0; i < committees.length; i++) {
-          selector.add(false);
+          bool toAdd = selectedShipUserIds.contains(committees[i].shipUserId);
+          selector.add(toAdd);
         }
       }
     }
