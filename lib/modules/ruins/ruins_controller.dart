@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/models/options_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/apps.dart';
 import '../../core/auth.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
@@ -66,5 +67,13 @@ class RuinsListController extends GetxController {
     super.onClose();
   }
 
-  Future<void> onOption(OptionModel option) async {}
+  Future<void> onOption(OptionModel option) async {
+    final result = await Get.toNamed(
+      AppRoute.ruinEditPage,
+      parameters: {'ruinId': '-1'},
+    );
+    if (result == true) {
+      reloadData();
+    }
+  }
 }

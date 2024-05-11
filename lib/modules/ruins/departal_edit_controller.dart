@@ -1,4 +1,5 @@
 // import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/custom_option_widget.dart';
 import 'package:milkwayshipapp/core/models/agenda_models.dart';
@@ -11,6 +12,11 @@ import '../../core/server.dart';
 
 class DepartalEditController extends GetxController {
   final RefreshController refreshController = RefreshController();
+  final TextEditingController nameCtl = TextEditingController();
+  final TextEditingController skillCtl = TextEditingController();
+  final TextEditingController skillEffectCtl = TextEditingController();
+  final TextEditingController upgradePropsCtl = TextEditingController();
+  final TextEditingController skillMajorCtl = TextEditingController();
   String departId = '-1';
   DepartmentalAgendaModel? departData;
   bool hasData = false;
@@ -24,6 +30,17 @@ class DepartalEditController extends GetxController {
     _loadData();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    refreshController.dispose();
+    nameCtl.dispose();
+    skillCtl.dispose();
+    skillEffectCtl.dispose();
+    upgradePropsCtl.dispose();
+    skillMajorCtl.dispose();
+  }
+
   void reloadData() async {
     hasData = false;
     // hasShipUserData = false;
@@ -33,8 +50,6 @@ class DepartalEditController extends GetxController {
 
   Future<void> _loadData() async {
     departId = Get.parameters['departId'] ?? "-1";
-    print('edit');
-    print(departId);
     if (departId == '-1') {
       // 新建
     } else {
@@ -48,9 +63,11 @@ class DepartalEditController extends GetxController {
       if (responseData.data != null) {
         departData = DepartmentalAgendaModel.fromJson(responseData.data);
         hasData = true;
-        // if (departData?.shipUserDatas != null) {
-        //   hasShipUserData = true;
-        // }
+        nameCtl.text = departData?.name ?? '';
+        skillCtl.text = departData?.skill ?? '';
+        skillEffectCtl.text = departData?.skillEffect ?? '';
+        skillMajorCtl.text = departData?.skillMajorName ?? '';
+        upgradePropsCtl.text = departData?.upgradePropsName ?? '';
       }
     }
 
@@ -64,19 +81,13 @@ class DepartalEditController extends GetxController {
     super.onClose();
   }
 
-  Future<bool> onEditOption(
-    String name,
-    String skill,
-    String skillEffect,
-    String upgradePropsName,
-    String skillMajorName,
-  ) async {
+  Future<bool> onEditOption() async {
     Map<String, dynamic> payload = {
-      'name': name,
-      'skill': skill,
-      'skill_effect': skillEffect,
-      'upgrade_props_name': upgradePropsName,
-      'skill_major_name': skillMajorName,
+      'name': nameCtl.text,
+      'skill': skillCtl.text,
+      'skill_effect': skillEffectCtl.text,
+      'upgrade_props_name': upgradePropsCtl.text,
+      'skill_major_name': skillMajorCtl.text,
     };
     String title = '';
     String url = '';

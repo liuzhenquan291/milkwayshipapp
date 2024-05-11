@@ -33,6 +33,8 @@ class ApiUrl {
   String userSetRole = "$_userApp/set_role/";
 // 获取用户的身份和对用户可执行的操作
   String userTotalOptions = "$_userApp/total_options/";
+  // 管理员重置密码
+  String resetPasswd = "$_userApp/reset_pass/";
 
 //// 连接后端 ship 应用
 // 游戏角色创建、展示
@@ -102,6 +104,7 @@ class ApiUrl {
   //// 链接后端 ruins
   String ruinsListCreatePath = "$_ruinsApp/ruins/";
   String ruinsRetrUpdDestPath = "$_ruinsApp/ruins/%s/";
+  String ruinsDefaultDataPath = "$_ruinsApp/default_ruin_data/";
   String startRuinsPath = "$_ruinsApp/start_ruins/";
   String endRuinsPath = "$_ruinsApp/end_ruins/";
   String processRuinsPath = "$_ruinsApp/process_ruins/";
@@ -114,4 +117,5 @@ class ApiUrl {
   String departalListCreatePath = "$_ruinsApp/departmentals/";
   String departalRetrUpdDestPath = "$_ruinsApp/departmentals/%s/";
   String departShipUserUpdPath = "$_ruinsApp/depart_shipuserinfo_update/";
+  String departCommProcPath = "$_ruinsApp/committees/";
 }

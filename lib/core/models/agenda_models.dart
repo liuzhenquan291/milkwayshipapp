@@ -78,33 +78,35 @@ class DepartmentalAgendaModel {
 }
 
 class ShipuserDepartmentalInfoModel {
-  String id;
+  String? id;
   String shipUserId;
   String shipUserMksName;
-  int agendaId;
-  String agendaName;
+  int? agendaId;
+  String? agendaName;
   bool? skillAlive;
+  String? skillAliveName;
   int agendaLevel;
   int agendaNode;
   int propsLack;
-  DateTime createdTime;
-  String updatedTime;
-  bool deleted;
+  DateTime? createdTime;
+  String? updatedTime;
+  bool? deleted;
   ShipUserModel? shipUser;
 
   ShipuserDepartmentalInfoModel({
-    required this.id,
+    this.id,
     required this.shipUserId,
     required this.shipUserMksName,
-    required this.agendaId,
-    required this.agendaName,
+    this.agendaId,
+    this.agendaName,
     this.skillAlive,
+    this.skillAliveName,
     required this.agendaLevel,
     required this.agendaNode,
     required this.propsLack,
-    required this.createdTime,
-    required this.updatedTime,
-    required this.deleted,
+    this.createdTime,
+    this.updatedTime,
+    this.deleted,
     this.shipUser,
   });
 
@@ -116,10 +118,13 @@ class ShipuserDepartmentalInfoModel {
       agendaId: json['agenda_id'],
       agendaName: json['agenda_name'],
       skillAlive: json['skill_alive'],
+      skillAliveName: json['skill_alive_name'],
       agendaLevel: json['agenda_level'],
       agendaNode: json['agenda_node'],
       propsLack: json['props_lack'],
-      createdTime: DateTime.parse(json['created_time']),
+      createdTime: json['created_time'] != null
+          ? DateTime.parse(json['created_time'])
+          : null,
       updatedTime: json['updated_time'],
       deleted: json['deleted'] ?? false,
       shipUser: json['ship_user'] != null

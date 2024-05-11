@@ -83,7 +83,7 @@ class RuinListPage extends GetView<RuinsListController> {
                                             flex: 2,
                                             child: InkWell(
                                               onTap: () async {
-                                                _tapOnRuin(tmp.id);
+                                                _tapOnRuin(tmp.id ?? '');
                                               },
                                               child: Text(
                                                 " ${index + 1}",
@@ -95,7 +95,7 @@ class RuinListPage extends GetView<RuinsListController> {
                                           ),
                                           Expanded(
                                             flex: 3,
-                                            child: Text(tmp.number),
+                                            child: Text(tmp.number ?? ''),
                                           ),
                                           Expanded(
                                             flex: 3,
@@ -114,7 +114,7 @@ class RuinListPage extends GetView<RuinsListController> {
                                           Expanded(
                                             flex: 2,
                                             child:
-                                                Text(tmp.ruinOwner ? "是" : "否"),
+                                                Text(tmp.ruinOwnerName ?? ''),
                                           ),
                                           Expanded(
                                             flex: 2,

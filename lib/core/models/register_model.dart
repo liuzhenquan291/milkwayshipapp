@@ -1,37 +1,45 @@
-import 'ruins_group.dart';
+// import 'ruins_group.dart';
 import '../utils.dart';
 import 'options_model.dart';
 
 class RuinRegisterModel {
-  String id;
-  String number;
-  DateTime createdTime;
-  String updatedTime;
-  bool deleted;
-  String status;
-  String statusName;
+  String? id;
+  String? number;
+  DateTime? createdTime;
+  String? updatedTime;
+  bool? deleted;
+  String? status;
+  String? statusName;
 
-  String groupId;
+  String? groupId;
   String shipuserId;
   String shipuserMskName;
-  int score;
-  RuinGroupModel? ruinGroup;
+  int? score;
+  bool committeeAlive;
+  String committeeAliveName;
+  int committeeLevel;
+  int committeeNode;
+  // RuinGroupModel? ruinGroup;
 
   List<OptionModel>? options;
 
   RuinRegisterModel({
-    required this.id,
-    required this.number,
-    required this.createdTime,
-    required this.updatedTime,
-    required this.deleted,
-    required this.status,
-    required this.statusName,
-    required this.groupId,
+    this.id,
+    this.number,
+    this.createdTime,
+    this.updatedTime,
+    this.deleted,
+    this.status,
+    this.statusName,
+    this.groupId,
     required this.shipuserId,
     required this.shipuserMskName,
-    required this.score,
-    this.ruinGroup,
+    this.score,
+    required this.committeeAlive,
+    required this.committeeAliveName,
+    required this.committeeLevel,
+    required this.committeeNode,
+    // this.ruinGroup,
     this.options,
   });
 
@@ -48,9 +56,13 @@ class RuinRegisterModel {
       shipuserId: json['ship_user_id'],
       shipuserMskName: json['ship_user_mks_name'],
       score: json['score'],
-      ruinGroup: json['ruin_group'] != null
-          ? RuinGroupModel.fromJson(json['ruin_group'] ?? {})
-          : null,
+      committeeAlive: json['committee_alive'],
+      committeeAliveName: json['committee_alive_name'],
+      committeeLevel: json['committee_level'],
+      committeeNode: json['committee_node'],
+      // ruinGroup: json['ruin_group'] != null
+      //     ? RuinGroupModel.fromJson(json['ruin_group'] ?? {})
+      //     : null,
       options: json['options'] != null
           ? OptionModel.fromJsonToList(json['options'] ?? [])
           : [],

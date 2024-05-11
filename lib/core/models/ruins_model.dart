@@ -1,60 +1,70 @@
 import '../utils.dart';
 import 'options_model.dart';
+import 'ruins_group.dart';
 import 'user_model.dart';
 
 class RuinsModel {
-  String id;
-  String number;
-  DateTime createdTime;
-  String updatedTime;
-  bool deleted;
+  String? id;
+  String? number;
+  DateTime? createdTime;
+  String? updatedTime;
+  bool? deleted;
   DateTime? startTime;
   DateTime? endTime;
-  String status;
-  String statusName;
+  String? status;
+  String? statusName;
 
-  String createUserId;
+  String? createUserId;
   int? targetShipUserCnt;
   int? actualShipUserCnt;
   int? outerCnt;
   int? middleCnt;
   int? innerCnt;
-  bool ruinOwner;
+  bool? ruinOwner;
+  String? ruinOwnerName;
 
   UserModel? creator;
 
   List<OptionModel>? options;
+  List<RuinGroupModel>? groups;
 
   RuinsModel({
-    required this.id,
-    required this.number,
-    required this.createdTime,
-    required this.updatedTime,
-    required this.deleted,
+    this.id,
+    this.number,
+    this.createdTime,
+    this.updatedTime,
+    this.deleted,
     this.startTime,
     this.endTime,
-    required this.status,
-    required this.statusName,
-    required this.createUserId,
+    this.status,
+    this.statusName,
+    this.createUserId,
     this.targetShipUserCnt,
     this.actualShipUserCnt,
     this.outerCnt,
     this.middleCnt,
     this.innerCnt,
-    required this.ruinOwner,
+    this.ruinOwner,
     this.creator,
     this.options,
+    this.groups,
+    this.ruinOwnerName,
   });
 
   factory RuinsModel.fromJson(Map<String, dynamic> json) {
     return RuinsModel(
       id: json['id'] ?? '',
       number: json['number'] ?? '',
-      createdTime: DateTime.parse(json['created_time']),
+      createdTime: json['created_time'] != null
+          ? DateTime.parse(json['created_time'])
+          : null,
       updatedTime: json['updated_time'] ?? "",
       deleted: json['deleted'] ?? false,
-      startTime: json['start_time'],
-      endTime: json['end_time'],
+      startTime: json['start_time'] != null
+          ? DateTime.parse(json['start_time'])
+          : null,
+      endTime:
+          json['end_time'] != null ? DateTime.parse(json['end_time']) : null,
       status: json['status'] ?? '',
       statusName: json['status_name'] ?? '',
       createUserId: json['create_user_id'] ?? '',
@@ -64,11 +74,15 @@ class RuinsModel {
       middleCnt: json['middle_cnt'],
       innerCnt: json['inner_cnt'],
       ruinOwner: json['ruin_owner'],
+      ruinOwnerName: json['ruin_owner_name'] ?? '',
       creator: json['creator'] != null
           ? UserModel.fromJson(json['creator'] ?? {})
           : null,
       options: json['options'] != null
           ? OptionModel.fromJsonToList(json['options'] ?? [])
+          : [],
+      groups: json['groups'] != null
+          ? RuinGroupModel.fromJsonToList(json['groups'] ?? [])
           : [],
     );
   }
@@ -86,5 +100,13 @@ class RuinsModel {
 
   String getCreatedTime() {
     return formatDateTime_1(createdTime);
+  }
+
+  String getStartTime() {
+    return formatDateTime_3(startTime);
+  }
+
+  String getEndTime() {
+    return formatDateTime_3(endTime);
   }
 }

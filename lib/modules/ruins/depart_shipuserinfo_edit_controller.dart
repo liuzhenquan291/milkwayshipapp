@@ -30,6 +30,15 @@ class DepartShipuserInfoEditController extends GetxController {
     loadData();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    skillAliveCtl.dispose();
+    agendaLevelCtl.dispose();
+    agendaNodeCtl.dispose();
+    propsLackCtl.dispose();
+  }
+
   Future<void> reloadData() async {
     loadData();
   }

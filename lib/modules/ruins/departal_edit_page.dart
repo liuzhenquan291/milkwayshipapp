@@ -10,11 +10,6 @@ const otherExpandedFlex = 3;
 
 class DepartalEditPage extends GetView<DepartalEditController> {
   String? departId;
-  final TextEditingController nameCtl = TextEditingController();
-  final TextEditingController skillCtl = TextEditingController();
-  final TextEditingController skillEffectCtl = TextEditingController();
-  final TextEditingController upgradePropsCtl = TextEditingController();
-  final TextEditingController skillMajorCtl = TextEditingController();
 
   DepartalEditPage({
     Key? key,
@@ -38,13 +33,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
   Widget build(BuildContext context) {
     return GetBuilder<DepartalEditController>(
       builder: (ctl) {
-        if (ctl.hasData) {
-          nameCtl.text = ctl.departData?.name ?? '';
-          skillCtl.text = ctl.departData?.skill ?? '';
-          skillEffectCtl.text = ctl.departData?.skillEffect ?? '';
-          skillMajorCtl.text = ctl.departData?.skillMajorName ?? '';
-          upgradePropsCtl.text = ctl.departData?.upgradePropsName ?? '';
-        }
+        if (ctl.hasData) {}
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: true,
@@ -65,7 +54,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
                       ),
                       Expanded(
                         child: CustomTextField(
-                          controller: nameCtl,
+                          controller: ctl.nameCtl,
                         ),
                       ),
                     ],
@@ -79,7 +68,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
                       ),
                       Expanded(
                         child: CustomTextField(
-                          controller: skillCtl,
+                          controller: ctl.skillCtl,
                         ),
                       ),
                     ],
@@ -93,7 +82,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
                       ),
                       Expanded(
                         child: CustomTextField(
-                          controller: skillEffectCtl,
+                          controller: ctl.skillEffectCtl,
                         ),
                       ),
                     ],
@@ -107,7 +96,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
                       ),
                       Expanded(
                         child: CustomTextField(
-                          controller: skillMajorCtl,
+                          controller: ctl.skillMajorCtl,
                           placeholder: "全部/航母/战列舰/驱逐舰/护卫舰/巡洋舰",
                         ),
                       ),
@@ -122,7 +111,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
                       ),
                       Expanded(
                         child: CustomTextField(
-                          controller: upgradePropsCtl,
+                          controller: ctl.upgradePropsCtl,
                           placeholder: "部门徽章/部门凭证",
                         ),
                       ),
@@ -135,13 +124,7 @@ class DepartalEditPage extends GetView<DepartalEditController> {
                     children: [
                       ElevatedButton(
                         onPressed: () async {
-                          final result = await ctl.onEditOption(
-                            nameCtl.text,
-                            skillCtl.text,
-                            skillEffectCtl.text,
-                            upgradePropsCtl.text,
-                            skillMajorCtl.text,
-                          );
+                          final result = await ctl.onEditOption();
                           if (result == true) {
                             Get.back(result: result);
                           }

@@ -50,6 +50,7 @@ Future<RSAPublicKey> parsePublicKeyFromPemFile() async {
 
 final formatter_1 = DateFormat("yyyy-MM-dd HH:mm:ss");
 final formatter_2 = DateFormat("yyyy-MM-dd");
+final formatter_3 = DateFormat("yy-mm-dd HH 时");
 
 String formatDateTime_1(DateTime? dateTime) {
   if (dateTime == null) {
@@ -63,4 +64,11 @@ String formatDateTime_2(DateTime? dateTime) {
     return "";
   }
   return formatter_2.format(dateTime);
+}
+
+String formatDateTime_3(DateTime? dateTime) {
+  if (dateTime == null) {
+    return "";
+  }
+  return formatter_3.format(dateTime);
 }

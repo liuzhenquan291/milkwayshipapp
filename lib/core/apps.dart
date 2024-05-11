@@ -3,6 +3,8 @@ import 'package:milkwayshipapp/modules/ruins/departal_controller.dart';
 import 'package:milkwayshipapp/modules/ruins/departal_option_controller.dart';
 import 'package:milkwayshipapp/modules/ruins/departal_page.dart';
 import 'package:milkwayshipapp/modules/ruins/ruins_controller.dart';
+import 'package:milkwayshipapp/modules/ruins/ruins_edit_controller.dart';
+import 'package:milkwayshipapp/modules/ruins/ruins_edit_page.dart';
 import 'package:milkwayshipapp/modules/ruins/ruins_page.dart';
 
 import '../modules/ruins/depart_shipuserinfo_edit_controller.dart';
@@ -10,6 +12,8 @@ import '../modules/ruins/depart_shipuserinfo_edit_page.dart';
 import '../modules/ruins/departal_edit_controller.dart';
 import '../modules/ruins/departal_edit_page.dart';
 import '../modules/ruins/departal_option_page.dart';
+import '../modules/ruins/ruins_regist_select_controller.dart';
+import '../modules/ruins/ruins_regist_select_page.dart';
 import '../modules/seasons/season_new_controller.dart';
 import '../modules/seasons/season_new_page.dart';
 import '../modules/seasons/season_option_controller.dart';
@@ -121,10 +125,12 @@ abstract class AppRoute {
   // 废墟和部门议程
   static String ruinPage = '/ruin';
   static String ruinOptionPage = '/ruinOption';
+  static String ruinEditPage = '/ruinEdit';
   static String departalPage = '/depart';
   static String departOptionPage = '/departOption';
   static String departEditPage = '/departEdit';
   static String departShipUserInfoEditPage = '/departShipUserEdit';
+  static String committeeSelectPage = '/deptCommitteeSelect';
 
   static List<GetPage> getPages2() {
     return [];
@@ -312,6 +318,13 @@ abstract class AppRoute {
           Get.lazyPut(() => RuinsListController());
         }),
       ),
+      GetPage(
+        name: AppRoute.ruinEditPage,
+        page: () => RuinsEditPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => RuinsEditController());
+        }),
+      ),
       // 议程
       GetPage(
         name: AppRoute.departalPage,
@@ -339,6 +352,13 @@ abstract class AppRoute {
         page: () => ShipUserDepartInfoEditPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => DepartShipuserInfoEditController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.committeeSelectPage,
+        page: () => RuinsRegistSelectPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => RuinsRegistSelectController());
         }),
       ),
     ];

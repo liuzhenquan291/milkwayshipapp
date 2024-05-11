@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milkwayshipapp/core/auth.dart';
 import 'package:milkwayshipapp/core/auth_controller.dart';
+import 'package:milkwayshipapp/core/custom_option_widget.dart';
 import 'package:milkwayshipapp/core/custom_text_field.dart';
 import 'package:sprintf/sprintf.dart';
-import 'package:dio/dio.dart' as dio;
 
 import '../../core/apps.dart';
 import '../../core/models/user_model.dart';
@@ -63,6 +63,8 @@ class _UserEditState extends State<UserEditPage> {
       displayNameController.text = ctl.userData?.displayName ?? "";
       wxDisNameController.text = ctl.userData?.wechatName ?? "";
       wxGNameController.text = ctl.userData?.wcqName ?? "";
+      final su = Get.find<AuthService>();
+      final isManager = su.isManager();
       return WillPopScope(
         onWillPop: () async {
           Get.back(result: ifEdited);
@@ -191,6 +193,29 @@ class _UserEditState extends State<UserEditPage> {
                           '注销账号',
                         ),
                       ),
+                      // isManager
+                      //     ? ElevatedButton(
+                      //         onPressed: () async {
+                      //           final Map<String, dynamic> payload = {
+                      //             'user_id': ctl.userData?.id,
+                      //             'updated_time': ctl.userData?.updatedTime,
+                      //           };
+                      //           final result = await editablePostOption(
+                      //             "重置用户密码",
+                      //             apiUrl.resetPasswd,
+                      //             "请输入新密码",
+                      //             "new_passwd",
+                      //             payload,
+                      //           );
+                      //           onOptionLogout(ctl.userData as UserModel);
+                      //         },
+                      //         child: const Text(
+                      //           '重置密码',
+                      //         ),
+                      //       )
+                      //     : const SizedBox(
+                      //         height: 1,
+                      //       ),
                     ],
                   ),
                 ],
