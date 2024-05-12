@@ -86,7 +86,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                             ),
                             Expanded(
                               child: Text(
-                                  "战力:   ${ctl.shipUserData?.sword ?? ''}"),
+                                  "战        力:   ${ctl.shipUserData?.swordName ?? ''}"),
                             ),
                           ],
                         ),
@@ -108,6 +108,18 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                               child: Text(
                                   "可开盆时间:   ${ctl.shipUserData?.canCornucopiaTime ?? ''}"),
                             ),
+                            // Expanded(
+                            //   child: Text(
+                            //       "需参盆时间:   ${ctl.shipUserData?.needCornucopiaTime ?? ''}"),
+                            // ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            // Expanded(
+                            //   child: Text(
+                            //       "可开盆时间:   ${ctl.shipUserData?.canCornucopiaTime ?? ''}"),
+                            // ),
                             Expanded(
                               child: Text(
                                   "需参盆时间:   ${ctl.shipUserData?.needCornucopiaTime ?? ''}"),
@@ -165,6 +177,7 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                                 controller: ctl.swordCtl,
                                 decoration: InputDecoration(
                                   labelText: '角色当前战力',
+                                  suffix: const Text("万"),
                                   hintText:
                                       "${ctl.shipUserData?.sword ?? "请输入当前战力"}",
                                 ),
