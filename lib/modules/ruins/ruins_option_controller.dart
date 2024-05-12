@@ -131,7 +131,7 @@ class RuinOptionController extends GetxController {
   }
 
   Future<void> _onUpdate(OptionModel option) async {
-    await Get.toNamed(
+    Get.toNamed(
       AppRoute.ruinEditPage,
       parameters: {'ruinId': ruinId},
     )?.then(

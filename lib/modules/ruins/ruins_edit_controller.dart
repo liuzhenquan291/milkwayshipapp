@@ -21,11 +21,13 @@ class RuinsEditController extends GetxController {
   final RefreshController refreshController = RefreshController();
 
   // 废墟信息 controller
+  final TextEditingController numberCtl = TextEditingController();
   final TextEditingController ruinOwnerTextCtl = TextEditingController();
   final TextEditingController outerCntCtl = TextEditingController();
   final TextEditingController middleCntCtl = TextEditingController();
   final TextEditingController innerCntCtl = TextEditingController();
   final TextEditingController targetCntCtl = TextEditingController();
+  Map<String, TextEditingController> groupTargetCntCtlMap = {};
 
   bool isNew = true;
   bool isManager = false;
@@ -49,10 +51,12 @@ class RuinsEditController extends GetxController {
     super.dispose();
     refreshController.dispose();
     ruinOwnerTextCtl.dispose();
+    numberCtl.dispose();
     outerCntCtl.dispose();
     innerCntCtl.dispose();
     middleCntCtl.dispose();
     targetCntCtl.dispose();
+    disposeCtlMap();
   }
 
   void reloadData() async {
@@ -63,6 +67,7 @@ class RuinsEditController extends GetxController {
     options = [];
     groups = [];
     isManager = false;
+    disposeCtlMap();
     _loadData();
   }
 
@@ -81,6 +86,7 @@ class RuinsEditController extends GetxController {
         ruinData = RuinsModel.fromJson(responseData.data);
 
         // 废墟信息 ctl 初始化
+        numberCtl.text = ruinData?.number ?? '';
         ruinOwnerTextCtl.text = ruinData?.ruinOwnerName ?? '';
         outerCntCtl.text = "${ruinData?.outerCnt ?? 0}";
         innerCntCtl.text = "${ruinData?.innerCnt ?? 0}";
@@ -89,6 +95,7 @@ class RuinsEditController extends GetxController {
 
         if (ruinData?.groups != null) {
           groups = ruinData?.groups ?? [];
+          setCtlMap();
         }
 
         final gc = Get.find<AuthService>();
@@ -116,6 +123,7 @@ class RuinsEditController extends GetxController {
         isNew = false;
         ruinData = RuinsModel.fromJson(responseData.data);
         hasData = true;
+        numberCtl.text = ruinData?.number ?? '';
         ruinOwnerTextCtl.text = ruinData?.ruinOwnerName ?? '';
         outerCntCtl.text = "${ruinData?.outerCnt ?? 0}";
         innerCntCtl.text = "${ruinData?.innerCnt ?? 0}";
@@ -123,6 +131,7 @@ class RuinsEditController extends GetxController {
         targetCntCtl.text = "${ruinData?.targetShipUserCnt ?? 0}";
         if (ruinData?.groups != null) {
           groups = ruinData?.groups ?? [];
+          setCtlMap();
         }
       }
     }
@@ -212,10 +221,10 @@ class RuinsEditController extends GetxController {
           List<ShipuserDepartmentalInfoModel> toAddUser = [];
           toAddUser = value;
           groups[toAddshipUserGroupIdx].registers = []; // 不管怎样都重置
-          // if (groups[toAddshipUserGroupIdx].registers == null) {
-          //   List<RuinRegisterModel> nulls = [];
-          //   groups[toAddshipUserGroupIdx].registers = nulls;
-          // }
+          if (groups[toAddshipUserGroupIdx].registers == null) {
+            List<RuinRegisterModel> nulls = [];
+            groups[toAddshipUserGroupIdx].registers = nulls;
+          }
           for (int i = 0; i < toAddUser.length; i++) {
             groups[toAddshipUserGroupIdx].registers?.add(trans(toAddUser[i]));
           }
@@ -231,6 +240,8 @@ class RuinsEditController extends GetxController {
     bool result = false;
     String url = '';
     String title = '';
+    getCtlMap();
+    ruinData?.groups = groups;
     Map<String, dynamic> payload = ruinData!.toDict();
     if (ruinId == '-1') {
       url = apiUrl.ruinsListCreatePath;
@@ -257,5 +268,27 @@ class RuinsEditController extends GetxController {
       committeeNode: data.agendaNode,
       committeePropsLack: data.propsLack,
     );
+  }
+
+  void disposeCtlMap() {
+    for (TextEditingController ctl in groupTargetCntCtlMap.values) {
+      ctl.dispose();
+    }
+    groupTargetCntCtlMap = {};
+  }
+
+  void setCtlMap() {
+    for (int i = 0; i < groups.length; i++) {
+      final ctl = TextEditingController();
+      ctl.text = "${groups[i].targetShipuserCnt}";
+      groupTargetCntCtlMap[groups[i].groupName!] = ctl;
+    }
+  }
+
+  void getCtlMap() {
+    for (int i = 0; i < groups.length; i++) {
+      final ctl = groupTargetCntCtlMap[groups[i].groupName!];
+      groups[i].targetShipuserCnt = int.parse(ctl?.text as String);
+    }
   }
 }

@@ -35,6 +35,7 @@ class CustomTextField extends StatelessWidget {
     this.backgroundColor,
     this.enabled = true,
     this.borderRadius,
+    this.labelText,
   }) : super(key: key);
 
   /// 输入框控制器
@@ -48,6 +49,8 @@ class CustomTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
 
   final bool? showBorder;
+
+  final String? labelText;
 
   /// 边框的宽度
   final double? borderWidth;
@@ -146,6 +149,7 @@ class CustomTextField extends StatelessWidget {
         inputFormatters: inputFormatters,
         enabled: enabled,
         decoration: InputDecoration(
+          labelText: labelText,
           counterStyle: const TextStyle(
             fontSize: 13,
             color: Color(0xFFBEBEBE),

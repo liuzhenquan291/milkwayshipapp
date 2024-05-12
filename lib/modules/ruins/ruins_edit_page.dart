@@ -5,7 +5,7 @@ import '../../core/server.dart';
 import 'ruins_edit_controller.dart';
 import '../../core/custom_text_field.dart';
 import '../../core/models/ruins_group.dart';
-import '../../core/models/register_model.dart';
+// import '../../core/models/register_model.dart';
 
 const userNameExpandedFlex = 5;
 const otherExpandedFlex = 3;
@@ -54,9 +54,40 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                     color: Colors.black12,
                     child: Column(
                       children: [
+                        // Row(
+                        //   children: [
+                        //     Text("编       号: ${ctl.ruinData?.number ?? ''}"),
+                        //   ],
+                        // ),
                         Row(
                           children: [
-                            Text("编       号: ${ctl.ruinData?.number ?? ''}"),
+                            const Text("编       号: "),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: CustomTextField(
+                                keyboardType: TextInputType.text,
+                                labelText: "废墟任务编号:  RUyyyyMMdd",
+                                controller: ctl.numberCtl,
+                                // placeholder: "废墟任务编号:  RUyyyyMMdd",
+                                height: 20,
+                                borderWidth: 2,
+                                showBorder: true,
+                                onChanged: (String value) {
+                                  String filtered = value.replaceAll(
+                                      RegExp(r'[^a-zA-Z0-9]'), '');
+                                  if (filtered != value) {
+                                    ctl.numberCtl.value = TextEditingValue(
+                                      text: filtered,
+                                      selection: TextSelection.fromPosition(
+                                          TextPosition(
+                                              offset: filtered.length)),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 6),
@@ -106,6 +137,8 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                             ),
                             Expanded(
                               child: CustomTextField(
+                                keyboardType: TextInputType.number,
+                                labelText: "占据外环数量",
                                 controller: ctl.outerCntCtl,
                                 placeholder: "外环数量: 1/2/3/4",
                                 height: 20,
@@ -124,6 +157,8 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                             ),
                             Expanded(
                               child: CustomTextField(
+                                keyboardType: TextInputType.number,
+                                labelText: "占据中环数量",
                                 controller: ctl.middleCntCtl,
                                 placeholder: "中环数量: 1/2/3/4",
                                 height: 20,
@@ -142,6 +177,8 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                             ),
                             Expanded(
                               child: CustomTextField(
+                                keyboardType: TextInputType.number,
+                                labelText: "占据内环数量",
                                 controller: ctl.innerCntCtl,
                                 placeholder: "内环数量: 1/2/3/4",
                                 height: 20,
@@ -160,6 +197,8 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                             ),
                             Expanded(
                               child: CustomTextField(
+                                keyboardType: TextInputType.number,
+                                labelText: "完成角色数",
                                 controller: ctl.targetCntCtl,
                                 placeholder: "计划最终完成人数",
                                 height: 20,
@@ -222,9 +261,27 @@ class RuinsEditPage extends GetView<RuinsEditController> {
               style: const TextStyle(fontSize: 16),
             ),
           ),
+          Row(
+            children: [
+              const Text("目标人数: "),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: CustomTextField(
+                  keyboardType: TextInputType.number,
+                  labelText: "本组安排角色数",
+                  controller: controller.groupTargetCntCtlMap[data.groupName!],
+                  height: 20,
+                  borderWidth: 2,
+                  showBorder: true,
+                ),
+              ),
+            ],
+          ),
           Row(children: [
             // Text("分组: ${data.groupName}      "),
-            Text("目标人数: ${data.targetShipuserCnt}     "),
+            // Text("目标人数: ${data.targetShipuserCnt}     "),
             Text("链接分组成:   ${data.scoreDesc}     "),
           ]),
           const SizedBox(height: 6),
