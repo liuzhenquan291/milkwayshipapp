@@ -71,6 +71,7 @@ class ShipUserDepartInfoEditPage
                         ),
                       ],
                     ),
+                    const SizedBox(height: 4),
                     Row(
                       children: [
                         Expanded(
@@ -78,6 +79,7 @@ class ShipUserDepartInfoEditPage
                         ),
                       ],
                     ),
+                    const SizedBox(height: 4),
                   ],
                 ),
               ),
@@ -101,7 +103,8 @@ class ShipUserDepartInfoEditPage
                           child: Text("游戏昵称: ${ctl.shipUserData?.mksName}"),
                         ),
                         Expanded(
-                          child: Text("战    力: ${ctl.shipUserData?.swordName}"),
+                          child:
+                              Text("战       力: ${ctl.shipUserData?.swordName}"),
                         ),
                       ],
                     ),
@@ -109,7 +112,7 @@ class ShipUserDepartInfoEditPage
                       children: [
                         Expanded(
                           child: Text(
-                              "职    务: ${ctl.shipUserData?.regionsRoleName}"),
+                              "职       务: ${ctl.shipUserData?.regionsRoleName}"),
                         ),
                         Expanded(
                           child: Text("角色状态: ${ctl.shipUserData?.statusName}"),

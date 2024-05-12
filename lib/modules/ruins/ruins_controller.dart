@@ -7,12 +7,13 @@ import '../../core/auth.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
 import '../../core/models/ruins_model.dart';
-import '../../core/models/options_model.dart';
+// import '../../core/models/options_model.dart';
 
 class RuinsListController extends GetxController {
   final RefreshController refreshController = RefreshController();
   List<RuinsModel> ruinsList = [];
-  List<OptionModel> options = [];
+  // List<OptionModel> options = [];
+  bool isManager = false;
   bool hasData = false;
   int page = 1;
 
@@ -23,9 +24,10 @@ class RuinsListController extends GetxController {
   }
 
   void reloadData() async {
+    isManager = false;
     ruinsList = [];
     hasData = false;
-    options = [];
+    // options = [];
     page = 1;
     _loadData();
   }
@@ -48,13 +50,14 @@ class RuinsListController extends GetxController {
 
     final gc = Get.find<AuthService>();
     if (gc.isManager()) {
-      options = [
-        OptionModel(
-          code: "new_add",
-          name: "新建任务",
-          title: "新建废墟任务",
-        )
-      ];
+      isManager = true;
+      // options = [
+      //   OptionModel(
+      //     code: "new_add",
+      //     name: "新建任务",
+      //     title: "新建废墟任务",
+      //   )
+      // ];
     }
 
     page++;
@@ -67,7 +70,7 @@ class RuinsListController extends GetxController {
     super.onClose();
   }
 
-  Future<void> onOption(OptionModel option) async {
+  Future<void> onOptionNewAdd() async {
     final result = await Get.toNamed(
       AppRoute.ruinEditPage,
       parameters: {'ruinId': '-1'},
@@ -76,4 +79,14 @@ class RuinsListController extends GetxController {
       reloadData();
     }
   }
+
+  // Future<void> onOption(OptionModel option) async {
+  //   final result = await Get.toNamed(
+  //     AppRoute.ruinEditPage,
+  //     parameters: {'ruinId': '-1'},
+  //   );
+  //   if (result == true) {
+  //     reloadData();
+  //   }
+  // }
 }

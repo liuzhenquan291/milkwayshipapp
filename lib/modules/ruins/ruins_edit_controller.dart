@@ -6,6 +6,7 @@ import 'package:sprintf/sprintf.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/auth.dart';
 import '../../core/urls.dart';
 import '../../core/apps.dart';
 import '../../core/server.dart';
@@ -27,6 +28,7 @@ class RuinsEditController extends GetxController {
   final TextEditingController targetCntCtl = TextEditingController();
 
   bool isNew = true;
+  bool isManager = false;
   String ruinId = '-1';
   RuinsModel? ruinData;
   List<RuinGroupModel> groups = [];
@@ -60,6 +62,7 @@ class RuinsEditController extends GetxController {
     // hasShipUserData = false;
     options = [];
     groups = [];
+    isManager = false;
     _loadData();
   }
 
@@ -88,13 +91,18 @@ class RuinsEditController extends GetxController {
           groups = ruinData?.groups ?? [];
         }
 
-        options = [
-          OptionModel(
-            code: "new_add",
-            name: "确认新建",
-            title: "新建废墟任务",
-          )
-        ];
+        final gc = Get.find<AuthService>();
+        if (gc.isManager()) {
+          isManager = true;
+        }
+
+        // options = [
+        //   OptionModel(
+        //     code: "new_add",
+        //     name: "确认新建",
+        //     title: "新建废墟任务",
+        //   )
+        // ];
       }
     } else {
       final as = ApiService();

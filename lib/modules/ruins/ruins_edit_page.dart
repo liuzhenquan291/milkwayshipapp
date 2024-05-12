@@ -190,12 +190,27 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                         .toList(), // 使用.map()来生成Text组件的列表
                   ),
                   const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await controller.onCreateOrUpdate();
-                    },
-                    child: Text(ctl.isNew ? "确认创建" : "确认更新"),
-                  ),
+                  ctl.isManager
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () async {
+                                await ctl.onCreateOrUpdate();
+                              },
+                              child: Text(ctl.isNew ? "确认创建" : "确认更新"),
+                            ),
+                          ],
+                        )
+                      : const SizedBox(
+                          height: 1,
+                        ),
+                  // ElevatedButton(
+                  //   onPressed: () async {
+                  //     await controller.onCreateOrUpdate();
+                  //   },
+                  //   child: Text(ctl.isNew ? "确认创建" : "确认更新"),
+                  // ),
                 ],
               ),
             ));
