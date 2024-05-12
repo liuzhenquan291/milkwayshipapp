@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/ruins_model.dart';
-import 'package:milkwayshipapp/modules/ruins/ruins_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
-import '../../core/custome_table_field.dart';
 import '../../core/server.dart';
+import '../../core/models/ruins_model.dart';
+import '../../core/custome_table_field.dart';
+import '../../modules/ruins/ruins_controller.dart';
 
 const userNameExpandedFlex = 5;
 const otherExpandedFlex = 3;

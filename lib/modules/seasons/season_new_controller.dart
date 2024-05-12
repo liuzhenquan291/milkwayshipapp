@@ -1,9 +1,9 @@
 // 游戏角色管理的游戏角色列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/custom_option_widget.dart';
-// import 'package:milkwayshipapp/core/models/season_model.dart';
-import 'package:milkwayshipapp/core/urls.dart';
+
+import '../../core/custom_option_widget.dart';
+import '../../core/urls.dart';
 
 // import '../../core/server.dart';
 

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/core/auth_controller.dart';
 
+import '../../core/auth.dart';
 import '../../core/apps.dart';
-import 'package:milkwayshipapp/core/utils.dart';
-import 'package:milkwayshipapp/core/urls.dart';
-import 'package:milkwayshipapp/modules/login/user_model.dart';
-
+import '../../core/urls.dart';
+import '../../core/utils.dart';
 import '../../core/server.dart';
+import '../../core/auth_controller.dart';
+import '../../modules/login/user_model.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({

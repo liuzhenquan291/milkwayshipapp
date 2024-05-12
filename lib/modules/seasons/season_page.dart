@@ -1,11 +1,11 @@
 // 游戏角色管理页
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/season_model.dart';
-import 'package:milkwayshipapp/modules/seasons/season_controller.dart';
 
 import '../../core/apps.dart';
 import '../../core/custome_table_field.dart';
+import '../../core/models/season_model.dart';
+import '../../modules/seasons/season_controller.dart';
 
 class SeasonListPage extends GetView<SeasonListController> {
   bool result = false;

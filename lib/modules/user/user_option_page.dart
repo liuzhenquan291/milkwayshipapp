@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/ship_user_model.dart';
-import 'package:milkwayshipapp/modules/user/user_option_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import '../../core/models/ship_user_model.dart';
+import '../../modules/user/user_option_controller.dart';
 
 class UserOptionPage extends GetView<UserOptionController> {
   String? userId;

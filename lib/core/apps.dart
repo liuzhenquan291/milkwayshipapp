@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/ruins/departal_controller.dart';
-import 'package:milkwayshipapp/modules/ruins/departal_option_controller.dart';
-import 'package:milkwayshipapp/modules/ruins/departal_page.dart';
-import 'package:milkwayshipapp/modules/ruins/ruins_controller.dart';
-import 'package:milkwayshipapp/modules/ruins/ruins_edit_controller.dart';
-import 'package:milkwayshipapp/modules/ruins/ruins_edit_page.dart';
-import 'package:milkwayshipapp/modules/ruins/ruins_page.dart';
 
+import '../modules/ruins/departal_controller.dart';
+import '../modules/ruins/departal_option_controller.dart';
+import '../modules/ruins/departal_page.dart';
+import '../modules/ruins/ruins_controller.dart';
+import '../modules/ruins/ruins_edit_controller.dart';
+import '../modules/ruins/ruins_edit_page.dart';
+import '../modules/ruins/ruins_page.dart';
 import '../modules/ruins/depart_shipuserinfo_edit_controller.dart';
 import '../modules/ruins/depart_shipuserinfo_edit_page.dart';
 import '../modules/ruins/departal_edit_controller.dart';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/ruins_group.dart';
 
-import '../../core/models/register_model.dart';
 import '../../core/server.dart';
 import 'ruins_option_controller.dart';
+import '../../core/models/ruins_group.dart';
+import '../../core/models/register_model.dart';
 
 const userNameExpandedFlex = 5;
 const otherExpandedFlex = 3;

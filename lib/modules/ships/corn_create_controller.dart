@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:intl/intl.dart';
 
-import '../../core/common_controller.dart';
-import '../../core/server.dart';
 import '../../core/urls.dart';
+import '../../core/server.dart';
+import '../../core/common_controller.dart';
+import '../../core/models/ship_user_model.dart';
 
 class CornCreateController extends GetxController {
   String? shipUserId;

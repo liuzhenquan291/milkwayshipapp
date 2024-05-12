@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/ships/shipuser_option_controller.dart';
 
 import '../../core/utils.dart';
+import '../../modules/ships/shipuser_option_controller.dart';
 
 class ShipUserOptionPage extends GetView<ShipUserOptionController> {
   String? shipUserId;

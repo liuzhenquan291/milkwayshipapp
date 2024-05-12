@@ -1,12 +1,12 @@
 // 游戏角色管理页
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/ship_user_model.dart';
-import 'package:milkwayshipapp/modules/ships/shipuser_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
 import '../../core/custome_table_field.dart';
+import '../../core/models/ship_user_model.dart';
+import '../../modules/ships/shipuser_list_controller.dart';
 
 class ShipuserListPage extends GetView<ShipuserListController> {
   const ShipuserListPage({super.key});

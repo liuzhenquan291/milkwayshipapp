@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/core/auth_controller.dart';
-import 'package:milkwayshipapp/core/custom_option_widget.dart';
-import 'package:milkwayshipapp/core/custom_text_field.dart';
+import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
 
 import '../../core/apps.dart';
-import '../../core/models/user_model.dart';
-import '../../core/server.dart';
+import '../../core/auth.dart';
 import '../../core/urls.dart';
 import '../../core/utils.dart';
+import '../../core/server.dart';
 import './user_edit_controller.dart';
+import '../../core/auth_controller.dart';
+import '../../core/custom_text_field.dart';
+import '../../core/models/user_model.dart';
 
 class UserEditPage extends StatefulWidget {
   const UserEditPage({

@@ -2,13 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-// import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
-import 'package:milkwayshipapp/modules/ships/cornucopia_list_controller.dart';
+// import '../../core/models/ship_cornucopia_model.dart';
 
 import '../../core/apps.dart';
 import '../../core/custome_table_field.dart';
 import '../../core/models/ship_user_model.dart';
+import '../../modules/ships/cornucopia_list_controller.dart';
 
 class CornucopiaListPage extends GetView<CornucopiaListController> {
   const CornucopiaListPage({super.key});

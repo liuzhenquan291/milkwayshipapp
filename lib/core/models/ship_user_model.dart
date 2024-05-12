@@ -1,9 +1,9 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls
 
-import 'package:milkwayshipapp/core/models/options_model.dart';
-import 'package:milkwayshipapp/core/models/region_model.dart';
-import 'package:milkwayshipapp/core/models/ship_cornucopia_model.dart';
-import 'package:milkwayshipapp/core/models/user_model.dart';
+import '../../core/models/options_model.dart';
+import '../../core/models/region_model.dart';
+import '../../core/models/ship_cornucopia_model.dart';
+import '../../core/models/user_model.dart';
 
 import '../utils.dart';
 

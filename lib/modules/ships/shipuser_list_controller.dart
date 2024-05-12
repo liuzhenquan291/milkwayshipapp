@@ -1,12 +1,12 @@
 // 游戏角色管理的游戏角色列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/core/models/ship_user_model.dart';
-import 'package:milkwayshipapp/core/urls.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/auth.dart';
+import '../../core/urls.dart';
 import '../../core/server.dart';
+import '../../core/models/ship_user_model.dart';
 
 class ShipuserListController extends GetxController {
   final RefreshController refreshController = RefreshController();

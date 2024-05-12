@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/server.dart';
+import '../core/server.dart';
 
 Future<bool> customePostOption(
   String title,

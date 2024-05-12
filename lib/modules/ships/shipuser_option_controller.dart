@@ -1,19 +1,18 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/core/custom_option_widget.dart';
-import 'package:milkwayshipapp/core/utils.dart';
-
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
+import '../../core/auth.dart';
+import '../../core/urls.dart';
+import '../../core/utils.dart';
+import '../../core/server.dart';
+import '../../core/option_conf.dart';
 import '../../core/common_controller.dart';
+import '../../core/custom_option_widget.dart';
 import '../../core/models/options_model.dart';
 import '../../core/models/ship_user_model.dart';
-import '../../core/option_conf.dart';
-import '../../core/server.dart';
-import '../../core/urls.dart';
 
 class ShipUserOptionController extends GetxController {
   final TextEditingController mskNameCtl = TextEditingController();

@@ -1,8 +1,9 @@
 // app_bindings.dart
 
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/modules/root/splash_service.dart';
+
+import '../../core/auth.dart';
+import '../../modules/root/splash_service.dart';
 
 class AppBindings extends Bindings {
   @override

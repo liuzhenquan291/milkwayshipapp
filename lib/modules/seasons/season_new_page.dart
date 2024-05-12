@@ -1,7 +1,7 @@
 // 游戏角色管理页
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/seasons/season_new_controller.dart';
+import '../../modules/seasons/season_new_controller.dart';
 
 import '../../core/apps.dart';
 

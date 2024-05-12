@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../core/custome_table_field.dart';
 import 'cornucopia_option_controller.dart';
+import '../../core/custome_table_field.dart';
+import '../../core/models/ship_user_model.dart';
 
 class CornucopiaOptionPage extends GetView<CornucopiaOptionController> {
   String? cornucopiaId;

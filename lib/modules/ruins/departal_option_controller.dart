@@ -1,13 +1,12 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/core/models/agenda_models.dart';
-// import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 
-import '../../core/apps.dart';
-import '../../core/models/options_model.dart';
-import '../../core/server.dart';
+import '../../core/auth.dart';
 import '../../core/urls.dart';
+import '../../core/apps.dart';
+import '../../core/server.dart';
+import '../../core/models/agenda_models.dart';
+import '../../core/models/options_model.dart';
 
 class DepartOptionsController extends GetxController {
   String? departId;

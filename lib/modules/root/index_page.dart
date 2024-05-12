@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/modules/account/account_page.dart';
-import 'package:milkwayshipapp/modules/instruction/instruction_page.dart';
-import 'package:milkwayshipapp/modules/regions/region_detail_page.dart';
-import 'package:milkwayshipapp/modules/root/home_page.dart';
 
+import '../../core/auth.dart';
+import '../../modules/account/account_page.dart';
+import '../../modules/instruction/instruction_page.dart';
+import '../../modules/regions/region_detail_page.dart';
+import '../../modules/root/home_page.dart';
 import '../../core/edum_wrapper.dart';
 
 class IndexPage extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:milkwayshipapp/core/auth.dart';
+import '../core/auth.dart';
 
 class AuthMiddleware extends GetMiddleware {
   @override

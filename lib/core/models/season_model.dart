@@ -1,5 +1,5 @@
-import 'package:milkwayshipapp/core/models/options_model.dart';
-import 'package:milkwayshipapp/core/models/user_model.dart';
+import '../../core/models/options_model.dart';
+import '../../core/models/user_model.dart';
 
 import '../utils.dart';
 

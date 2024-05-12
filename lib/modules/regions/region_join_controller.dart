@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/custom_option_widget.dart';
-import 'package:milkwayshipapp/core/models/ship_user_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/urls.dart';
 import '../../core/apps.dart';
+import '../../core/server.dart';
 import '../../core/common_controller.dart';
 import '../../core/models/region_model.dart';
-import '../../core/server.dart';
-import '../../core/urls.dart';
+import '../../core/custom_option_widget.dart';
+import '../../core/models/ship_user_model.dart';
 
 class RegionJoinController extends GetxController {
   final RefreshController refreshController = RefreshController();

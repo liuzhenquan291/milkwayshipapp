@@ -1,12 +1,12 @@
 // 势力管理页的势力列表 controller
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/core/models/region_model.dart';
-import 'package:milkwayshipapp/core/urls.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/auth.dart';
+import '../../core/urls.dart';
 import '../../core/server.dart';
+import '../../core/models/region_model.dart';
 
 class RegionListController extends GetxController {
   final RefreshController refreshController = RefreshController();

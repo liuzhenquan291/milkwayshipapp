@@ -1,7 +1,6 @@
-import 'package:milkwayshipapp/core/models/ship_user_model.dart';
-import 'package:milkwayshipapp/core/utils.dart';
-
+import '../../core/utils.dart';
 import 'user_model.dart';
+import 'ship_user_model.dart';
 
 class DepartmentalAgendaModel {
   int id;

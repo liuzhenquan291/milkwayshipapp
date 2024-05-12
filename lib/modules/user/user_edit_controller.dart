@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth_controller.dart';
-import 'package:milkwayshipapp/core/custom_option_widget.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../core/models/user_model.dart';
-import '../../core/server.dart';
 import '../../core/urls.dart';
+import '../../core/server.dart';
+import '../../core/auth_controller.dart';
+import '../../core/models/user_model.dart';
+import '../../core/custom_option_widget.dart';
 
 class UserEditController extends GetxController {
   String? userId;

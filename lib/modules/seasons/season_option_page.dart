@@ -1,7 +1,7 @@
 // 游戏角色管理页
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/seasons/season_option_controller.dart';
+import '../../modules/seasons/season_option_controller.dart';
 
 class SeasonOptionPage extends GetView<SeasonOptionController> {
   String? seasonId;

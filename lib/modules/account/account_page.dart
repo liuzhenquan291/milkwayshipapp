@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
 
+import '../../core/auth.dart';
 import '../../asserts/imgs.dart';
 import '../../core/apps.dart';
 

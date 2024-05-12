@@ -1,12 +1,12 @@
 // 势力管理页
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/modules/regions/region_list_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
-import '../../core/custome_table_field.dart';
 import '../../core/models/region_model.dart';
+import '../../core/custome_table_field.dart';
+import '../../modules/regions/region_list_controller.dart';
 
 // class UserPage extends StatefulWidget {
 //   UserPage({

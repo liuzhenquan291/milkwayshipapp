@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/ship_user_model.dart';
+import 'package:flutter/material.dart';
+
 import 'cornucopia_self_controller.dart';
+import '../../core/models/ship_user_model.dart';
 
 class CornucopiaSelfPage extends GetView<CornucopiaSelfController> {
   const CornucopiaSelfPage({super.key});

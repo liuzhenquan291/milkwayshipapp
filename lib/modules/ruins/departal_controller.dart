@@ -1,13 +1,13 @@
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/agenda_models.dart';
-import 'package:milkwayshipapp/core/urls.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/urls.dart';
 import '../../core/apps.dart';
 import '../../core/auth.dart';
-import '../../core/models/options_model.dart';
 import '../../core/server.dart';
+import '../../core/models/options_model.dart';
+import '../../core/models/agenda_models.dart';
 
 class DepartalListController extends GetxController {
   final RefreshController refreshController = RefreshController();

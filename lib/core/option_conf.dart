@@ -182,12 +182,16 @@ class RuinsOptConf {
   static const PROCESS = 'process';
   static const END = 'end';
   static const CLOSE = 'close';
+  static const UPDATE = 'update';
+  static const DELETE = 'delete';
 
   static const List<String> _all_options = [
     START,
     PROCESS,
     END,
     CLOSE,
+    UPDATE,
+    DELETE,
   ];
 
   bool optionIsValid(String option) {

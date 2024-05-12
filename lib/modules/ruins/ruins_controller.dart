@@ -1,6 +1,5 @@
 // import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/options_model.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/apps.dart';
@@ -8,6 +7,7 @@ import '../../core/auth.dart';
 import '../../core/server.dart';
 import '../../core/urls.dart';
 import '../../core/models/ruins_model.dart';
+import '../../core/models/options_model.dart';
 
 class RuinsListController extends GetxController {
   final RefreshController refreshController = RefreshController();

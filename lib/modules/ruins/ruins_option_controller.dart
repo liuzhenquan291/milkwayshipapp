@@ -1,14 +1,17 @@
 // import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/ruins_group.dart';
-import 'package:milkwayshipapp/core/models/ruins_model.dart';
-import 'package:milkwayshipapp/core/urls.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
 
-import '../../core/models/options_model.dart';
+import '../../core/apps.dart';
+import '../../core/urls.dart';
 import '../../core/server.dart';
+import '../../core/option_conf.dart';
+import '../../core/custom_option_widget.dart';
+import '../../core/models/ruins_group.dart';
+import '../../core/models/ruins_model.dart';
+import '../../core/models/options_model.dart';
 
 class RuinOptionController extends GetxController {
   final RefreshController refreshController = RefreshController();
@@ -70,6 +73,91 @@ class RuinOptionController extends GetxController {
   }
 
   Future<bool> onOption(OptionModel option) async {
+    switch (option.code) {
+      case RuinsOptConf.CLOSE:
+        _onClose(option);
+        break;
+      case RuinsOptConf.PROCESS:
+        _onProcess(option);
+        break;
+      case RuinsOptConf.UPDATE:
+        _onUpdate(option);
+        break;
+      case RuinsOptConf.END:
+        _onEnd(option);
+        break;
+      case RuinsOptConf.DELETE:
+        _onDelete(option);
+        break;
+    }
     return false;
+  }
+
+  Future<bool> _onClose(OptionModel option) async {
+    final Map<String, dynamic> myPayload = {
+      "ruin_id": ruinId,
+      "updated_time": ruinData?.updatedTime,
+    };
+    bool result = await customePostOption(
+      option.title ?? "",
+      apiUrl.closeRuinsPaht,
+      myPayload,
+    );
+    return result;
+  }
+
+  Future<bool> _onDelete(OptionModel option) async {
+    final Map<String, dynamic> myPayload = {
+      "ruin_id": ruinId,
+      "updated_time": ruinData?.updatedTime,
+    };
+    bool result = await customeDeleteOption(
+      option.title ?? "",
+      apiUrl.ruinsRetrUpdDestPath,
+      myPayload,
+    );
+    return result;
+  }
+
+  Future<bool> _onProcess(OptionModel option) async {
+    final Map<String, dynamic> myPayload = {
+      "ruin_id": ruinId,
+      "updated_time": ruinData?.updatedTime,
+    };
+    bool result = await customePostOption(
+      option.title ?? "",
+      apiUrl.processRuinsPath,
+      myPayload,
+    );
+    return result;
+  }
+
+  Future<void> _onUpdate(OptionModel option) async {
+    await Get.toNamed(
+      AppRoute.ruinEditPage,
+      parameters: {'ruinId': ruinId},
+    )?.then(
+      (value) {
+        if (value != null) {
+          final bool upded = value;
+          if (upded) {
+            reloadData();
+          }
+        }
+      },
+    );
+  }
+
+  Future<bool> _onEnd(OptionModel option) async {
+    final Map<String, dynamic> myPayload = {
+      "ruin_id": ruinId,
+      "updated_time": ruinData?.updatedTime,
+    };
+    bool result = await customePostOption(
+      option.title ?? "",
+      apiUrl.endRuinsPath,
+      myPayload,
+    );
+    return result;
   }
 }

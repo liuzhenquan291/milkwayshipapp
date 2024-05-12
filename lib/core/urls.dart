@@ -108,6 +108,7 @@ class ApiUrl {
   String startRuinsPath = "$_ruinsApp/start_ruins/";
   String endRuinsPath = "$_ruinsApp/end_ruins/";
   String processRuinsPath = "$_ruinsApp/process_ruins/";
+  String closeRuinsPaht = "$_ruinsApp/close_ruins/";
   String registerListCreatePath = "$_ruinsApp/registers/";
   String registerRetrUpdDestPath = "$_ruinsApp/registers/%s/";
   String approveRegisterPath = "$_ruinsApp/approve_register/";

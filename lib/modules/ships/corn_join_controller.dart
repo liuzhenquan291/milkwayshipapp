@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/models/ship_user_model.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sprintf/sprintf.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../core/models/ship_cornucopia_model.dart';
-import '../../core/server.dart';
 import '../../core/urls.dart';
+import '../../core/server.dart';
+import '../../core/models/ship_user_model.dart';
+import '../../core/models/ship_cornucopia_model.dart';
 
 class CornJoinController extends GetxController {
   String? shipUserId;

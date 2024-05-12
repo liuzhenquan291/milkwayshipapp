@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:milkwayshipapp/core/auth.dart';
-import 'package:milkwayshipapp/modules/user/user_list_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../core/auth.dart';
 import '../../core/apps.dart';
-import '../../core/custome_table_field.dart';
-import '../../core/models/user_model.dart';
 import '../../core/server.dart';
+import '../../core/models/user_model.dart';
+import '../../core/custome_table_field.dart';
+import '../../modules/user/user_list_controller.dart';
 
 const userNameExpandedFlex = 5;
 const otherExpandedFlex = 3;
