@@ -223,9 +223,9 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                             ElevatedButton(
                               onPressed: () async {
                                 result = await ctl.onCreateOrUpdate();
-                                if (result == true) {
-                                  Get.back(result: result);
-                                }
+                                // if (result == true) {
+                                //   Get.back(result: result);
+                                // }
                               },
                               child: Text(ctl.isNew ? "确认创建" : "确认更新"),
                             ),

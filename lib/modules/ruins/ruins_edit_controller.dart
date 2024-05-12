@@ -72,7 +72,10 @@ class RuinsEditController extends GetxController {
   }
 
   Future<void> _loadData() async {
+    final gc = Get.find<AuthService>();
+
     ruinId = Get.parameters['ruinId'] ?? "-1";
+
     if (ruinId == '-1') {
       // 初始化新数据
       final as = ApiService();
@@ -96,11 +99,6 @@ class RuinsEditController extends GetxController {
         if (ruinData?.groups != null) {
           groups = ruinData?.groups ?? [];
           setCtlMap();
-        }
-
-        final gc = Get.find<AuthService>();
-        if (gc.isManager()) {
-          isManager = true;
         }
 
         // options = [
@@ -134,6 +132,10 @@ class RuinsEditController extends GetxController {
           setCtlMap();
         }
       }
+    }
+
+    if (gc.isManager()) {
+      isManager = true;
     }
 
     update();
@@ -240,7 +242,8 @@ class RuinsEditController extends GetxController {
     bool result = false;
     String url = '';
     String title = '';
-    getCtlMap();
+    getCtlMap(); // 将控制器里面的数据设置到对象里
+    getRuinCtls(); // 将控制器里面的数据设置到对象里
     ruinData?.groups = groups;
     Map<String, dynamic> payload = ruinData!.toDict();
     if (ruinId == '-1') {
@@ -290,5 +293,22 @@ class RuinsEditController extends GetxController {
       final ctl = groupTargetCntCtlMap[groups[i].groupName!];
       groups[i].targetShipuserCnt = int.parse(ctl?.text as String);
     }
+  }
+
+  void getRuinCtls() {
+    /*
+      final TextEditingController numberCtl = TextEditingController();
+  final TextEditingController ruinOwnerTextCtl = TextEditingController();
+  final TextEditingController outerCntCtl = TextEditingController();
+  final TextEditingController middleCntCtl = TextEditingController();
+  final TextEditingController innerCntCtl = TextEditingController();
+  final TextEditingController targetCntCtl = TextEditingController();
+    */
+    ruinData?.number = numberCtl.text;
+    ruinData?.ruinOwner = ruinOwner;
+    ruinData?.outerCnt = int.parse(outerCntCtl.text);
+    ruinData?.middleCnt = int.parse(middleCntCtl.text);
+    ruinData?.innerCnt = int.parse(innerCntCtl.text);
+    ruinData?.targetShipUserCnt = int.parse(targetCntCtl.text);
   }
 }

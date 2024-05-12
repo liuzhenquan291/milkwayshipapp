@@ -73,7 +73,7 @@ class RuinOptionController extends GetxController {
   }
 
   Future<bool> onOption(OptionModel option) async {
-    bool result = true;
+    bool result = false;
     switch (option.code) {
       case RuinsOptConf.CLOSE:
         result = await _onClose(option);
@@ -82,7 +82,7 @@ class RuinOptionController extends GetxController {
         result = await _onProcess(option);
         break;
       case RuinsOptConf.UPDATE:
-        _onUpdate(option);
+        result = await _onUpdate(option);
         break;
       case RuinsOptConf.END:
         result = await _onEnd(option);
@@ -130,20 +130,26 @@ class RuinOptionController extends GetxController {
     return result;
   }
 
-  Future<void> _onUpdate(OptionModel option) async {
-    Get.toNamed(
+  Future<bool> _onUpdate(OptionModel option) async {
+    final result = await Get.toNamed(
       AppRoute.ruinEditPage,
       parameters: {'ruinId': ruinId},
-    )?.then(
-      (value) {
-        if (value != null) {
-          final bool upded = value;
-          if (upded) {
-            reloadData();
-          }
-        }
-      },
     );
+    // ?.then(
+    //   (value) {
+    //     if (value != null) {
+    //       final bool upded = value;
+    //       if (upded) {
+    //         reloadData();
+    //       }
+    //     }
+    //   },
+    // );
+    // Get.back(result: result);
+    if (result == true) {
+      reloadData();
+    }
+    return result;
   }
 
   Future<bool> _onEnd(OptionModel option) async {

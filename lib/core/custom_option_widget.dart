@@ -17,7 +17,8 @@ Future<bool> customePostOption(
     textCancel: '取消',
     confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
     onCancel: () async {
-      Get.back();
+      // Get.back();
+      completer.complete(false);
     },
     onConfirm: () async {
       Get.back();
