@@ -73,24 +73,25 @@ class RuinOptionController extends GetxController {
   }
 
   Future<bool> onOption(OptionModel option) async {
+    bool result = true;
     switch (option.code) {
       case RuinsOptConf.CLOSE:
-        _onClose(option);
+        result = await _onClose(option);
         break;
       case RuinsOptConf.PROCESS:
-        _onProcess(option);
+        result = await _onProcess(option);
         break;
       case RuinsOptConf.UPDATE:
         _onUpdate(option);
         break;
       case RuinsOptConf.END:
-        _onEnd(option);
+        result = await _onEnd(option);
         break;
       case RuinsOptConf.DELETE:
-        _onDelete(option);
+        result = await _onDelete(option);
         break;
     }
-    return false;
+    return result;
   }
 
   Future<bool> _onClose(OptionModel option) async {
@@ -107,14 +108,11 @@ class RuinOptionController extends GetxController {
   }
 
   Future<bool> _onDelete(OptionModel option) async {
-    final Map<String, dynamic> myPayload = {
-      "ruin_id": ruinId,
-      "updated_time": ruinData?.updatedTime,
-    };
+    final url = sprintf(apiUrl.ruinsRetrUpdDestPath, [ruinId]);
     bool result = await customeDeleteOption(
       option.title ?? "",
-      apiUrl.ruinsRetrUpdDestPath,
-      myPayload,
+      url,
+      null,
     );
     return result;
   }

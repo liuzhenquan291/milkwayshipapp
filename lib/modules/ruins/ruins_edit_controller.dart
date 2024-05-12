@@ -241,7 +241,9 @@ class RuinsEditController extends GetxController {
       title = '确认更新';
       result = await customePutOption(title, url, payload);
     }
-
+    // if (result) {
+    //   Get.back(result: result);
+    // }
     return result;
   }
 

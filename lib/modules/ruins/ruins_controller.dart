@@ -71,22 +71,13 @@ class RuinsListController extends GetxController {
   }
 
   Future<void> onOptionNewAdd() async {
-    final result = await Get.toNamed(
+    await Get.toNamed(
       AppRoute.ruinEditPage,
       parameters: {'ruinId': '-1'},
-    );
-    if (result == true) {
-      reloadData();
-    }
+    )?.then((value) => () {
+          if (value != null) {
+            reloadData();
+          }
+        });
   }
-
-  // Future<void> onOption(OptionModel option) async {
-  //   final result = await Get.toNamed(
-  //     AppRoute.ruinEditPage,
-  //     parameters: {'ruinId': '-1'},
-  //   );
-  //   if (result == true) {
-  //     reloadData();
-  //   }
-  // }
 }

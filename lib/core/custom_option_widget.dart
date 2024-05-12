@@ -16,8 +16,8 @@ Future<bool> customePostOption(
     textConfirm: '确认',
     textCancel: '取消',
     confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
-    onCancel: () {
-      // Get.back();
+    onCancel: () async {
+      Get.back();
     },
     onConfirm: () async {
       Get.back();
@@ -117,7 +117,7 @@ Future<bool> editablePostOption(
   TextEditingController ctl,
   Map<String, dynamic>? payload,
 ) async {
-  bool result = false;
+  Completer<bool> completer = Completer<bool>(); // 创建一个 Completer 实例
   Get.defaultDialog(
     title: title,
     middleText: '确定要执行该操作吗？',
@@ -167,11 +167,11 @@ Future<bool> editablePostOption(
             child: const Text('关闭'),
           ),
         );
-        result = true;
+        completer.complete(true);
       }
     },
   );
-  return result;
+  return completer.future;
 }
 
 Future<bool> customeDeleteOption(
@@ -179,7 +179,7 @@ Future<bool> customeDeleteOption(
   String optionUrl,
   Map<String, dynamic>? payload,
 ) async {
-  bool result = false;
+  Completer<bool> completer = Completer<bool>(); // 创建一个 Completer 实例
   Get.defaultDialog(
     title: title,
     middleText: '确定要执行该操作吗？',
@@ -218,11 +218,11 @@ Future<bool> customeDeleteOption(
             child: const Text('关闭'),
           ),
         );
-        result = true;
+        completer.complete(true);
       }
     },
   );
-  return result;
+  return completer.future;
 }
 
 ResponseData? customePostOptionWithResp(

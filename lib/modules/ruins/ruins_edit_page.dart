@@ -24,7 +24,13 @@ class RuinsEditPage extends GetView<RuinsEditController> {
   Widget build(BuildContext context) {
     return GetBuilder<RuinsEditController>(
       builder: (ctl) {
-        return Scaffold(
+        bool result = false;
+        return WillPopScope(
+          onWillPop: () async {
+            Get.back(result: result);
+            return true;
+          },
+          child: Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: true,
               title: const Text('废墟任务编辑页'),
@@ -177,7 +183,10 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                           children: [
                             ElevatedButton(
                               onPressed: () async {
-                                await ctl.onCreateOrUpdate();
+                                result = await ctl.onCreateOrUpdate();
+                                if (result == true) {
+                                  Get.back(result: result);
+                                }
                               },
                               child: Text(ctl.isNew ? "确认创建" : "确认更新"),
                             ),
@@ -188,7 +197,9 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                         ),
                 ],
               ),
-            ));
+            ),
+          ),
+        );
       },
     );
   }
