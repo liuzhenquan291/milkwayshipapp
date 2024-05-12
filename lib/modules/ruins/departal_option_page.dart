@@ -97,7 +97,7 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                 ),
                 child: getTableHead(
                   ["序号", "角色名", "轮次", "已激活?", "本轮节点", "本轮缺少道具"],
-                  [2, 4, 2, 2, 3, 4],
+                  [2, 4, 2, 3, 3, 4],
                 ),
               ),
               Expanded(
@@ -161,19 +161,26 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child: Text("${tmp?.agendaLevel}"),
+                                  child: Center(
+                                    child: Text("${tmp?.agendaLevel}"),
+                                  ),
                                 ),
                                 Expanded(
-                                  flex: 2,
-                                  child: Text(skillAlive ? "是" : "否"),
-                                ),
+                                    flex: 3,
+                                    child: Center(
+                                      child: Text(skillAlive ? "是" : "否"),
+                                    )),
                                 Expanded(
                                   flex: 3,
-                                  child: Text("${tmp?.agendaNode}"),
+                                  child: Center(
+                                    child: Text("${tmp?.agendaNode}"),
+                                  ),
                                 ),
                                 Expanded(
                                   flex: 4,
-                                  child: Text("${tmp?.propsLack ?? 0}"),
+                                  child: Center(
+                                    child: Text("${tmp?.propsLack ?? 0}"),
+                                  ),
                                 ),
                               ],
                             ),
@@ -183,29 +190,24 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                       )
                     : const Text("暂无数据"),
               ),
-              const SizedBox(height: 24),
-              SizedBox(
-                height: 50,
-                child: GridView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: ctl.validOptions.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 5, // 交叉轴方向上的间距
-                    childAspectRatio: 4,
-                    mainAxisSpacing: 5, // 主轴方向上的间距
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    final option = ctl.validOptions[index];
-                    return ElevatedButton(
-                      onPressed: () async {
-                        await ctl.onOption(option);
-                      },
-                      child: Text(option.name ?? ""),
-                    );
-                  },
-                ),
-              ),
+              const SizedBox(height: 12),
+              ctl.isManager
+                  ? Row(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            await ctl.onOptionUpdate();
+                          },
+                          child: const Text("编辑议程"),
+                        ),
+                        const SizedBox(width: 16.0),
+                      ],
+                    )
+                  : const SizedBox(
+                      height: 1,
+                    ),
             ],
           ),
         ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../modules/root/app_bindings.dart';
 import 'core/apps.dart';
-import 'modules/root/splash_service.dart';
 import 'modules/root/splash_view.dart';
+import 'modules/root/app_bindings.dart';
+import 'modules/root/splash_service.dart';
 
 void main() {
   runApp(MyApp(

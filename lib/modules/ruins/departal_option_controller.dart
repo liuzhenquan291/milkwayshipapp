@@ -58,14 +58,14 @@ class DepartOptionsController extends GetxController {
           userId = au.userId ?? '';
           if (au.isManager()) {
             isManager = true;
-            hasOptions = true;
-            validOptions = [
-              OptionModel(
-                code: "update",
-                name: "编辑议程",
-                title: "变异部门议程",
-              ),
-            ];
+            // hasOptions = true;
+            // validOptions = [
+            //   OptionModel(
+            //     code: "update",
+            //     name: "编辑议程",
+            //     title: "变异部门议程",
+            //   ),
+            // ];
           }
         }
       }
@@ -73,7 +73,7 @@ class DepartOptionsController extends GetxController {
     update();
   }
 
-  Future<void> onOption(OptionModel option) async {
+  Future<void> onOptionUpdate() async {
     final result = await Get.toNamed(
       AppRoute.departEditPage,
       parameters: {'departId': "${departData?.id ?? '-1'}"},
@@ -82,4 +82,14 @@ class DepartOptionsController extends GetxController {
       await reloadData();
     }
   }
+
+  // Future<void> onOption(OptionModel option) async {
+  //   final result = await Get.toNamed(
+  //     AppRoute.departEditPage,
+  //     parameters: {'departId': "${departData?.id ?? '-1'}"},
+  //   );
+  //   if (result == true) {
+  //     await reloadData();
+  //   }
+  // }
 }

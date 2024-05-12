@@ -13,6 +13,7 @@ class DepartalListController extends GetxController {
   final RefreshController refreshController = RefreshController();
   List<DepartmentalAgendaModel> deparList = [];
   bool hasData = false;
+  bool isManager = false;
 
   List<OptionModel> options = [];
   int page = 1;
@@ -24,6 +25,7 @@ class DepartalListController extends GetxController {
   }
 
   void reloadData() async {
+    isManager = false;
     deparList = [];
     hasData = false;
     options = [];
@@ -49,13 +51,14 @@ class DepartalListController extends GetxController {
 
     final gc = Get.find<AuthService>();
     if (gc.isManager()) {
-      options = [
-        OptionModel(
-          code: "new_add",
-          name: "新建议程",
-          title: "新建部门议程",
-        )
-      ];
+      isManager = true;
+      // options = [
+      //   OptionModel(
+      //     code: "new_add",
+      //     name: "新建议程",
+      //     title: "新建部门议程",
+      //   )
+      // ];
     }
 
     page++;
@@ -69,7 +72,7 @@ class DepartalListController extends GetxController {
     super.onClose();
   }
 
-  Future<void> onOption(OptionModel option) async {
+  Future<void> onOptionNewAdd() async {
     final result = await Get.toNamed(
       AppRoute.departEditPage,
       parameters: {'departId': '-1'},
@@ -78,4 +81,14 @@ class DepartalListController extends GetxController {
       reloadData();
     }
   }
+
+  // Future<void> onOption(OptionModel option) async {
+  //   final result = await Get.toNamed(
+  //     AppRoute.departEditPage,
+  //     parameters: {'departId': '-1'},
+  //   );
+  //   if (result == true) {
+  //     reloadData();
+  //   }
+  // }
 }

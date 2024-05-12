@@ -28,18 +28,6 @@ class DepartalListPage extends GetView<DepartalListController> {
           ),
           body: Column(
             children: [
-              // Row(children: [
-              //   Expanded(
-              //     child: Container(
-              //       height: 100,
-              //       // width: double.infinity,
-              //       padding: const EdgeInsets.all(16.0),
-              //       color: Colors.black12,
-              //       child: Text(
-              //           "您的身份是: ${ctl.userRole}, 您可对用户执行${ctl.totalOptions}等操作。"),
-              //     ),
-              //   )
-              // ]),
               const SizedBox(height: 16),
               Row(
                 children: const [
@@ -62,108 +50,102 @@ class DepartalListPage extends GetView<DepartalListController> {
                     // ctl._loadData();
                   },
                   child: Column(
-                      // scrollDirection: Axis.horizontal,
-                      children: [
-                        Container(
-                          height: 50,
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(color: Colors.black, width: 1),
-                            ),
-                          ),
-                          child: getTableHead(
-                            ["序号", "议程名字", "创建人", "议程技能", "升级道具", "创建时间"],
-                            [1, 2, 2, 2, 2, 2],
+                    // scrollDirection: Axis.horizontal,
+                    children: [
+                      Container(
+                        height: 50,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(color: Colors.black, width: 1),
                           ),
                         ),
-                        Expanded(
-                          child: ctl.hasData
-                              ? ListView.builder(
-                                  itemBuilder: (ctx, index) {
-                                    DepartmentalAgendaModel tmp =
-                                        ctl.deparList[index];
-                                    return Container(
-                                      height: 50,
-                                      decoration: const BoxDecoration(
-                                        border: Border(
-                                          bottom: BorderSide(
-                                              color: Colors.black26, width: 1),
-                                        ),
+                        child: getTableHead(
+                          ["序号", "议程", "创建人", "议程技能", "升级道具", "创建时间"],
+                          [2, 3, 2, 3, 3, 4],
+                        ),
+                      ),
+                      Expanded(
+                        child: ctl.hasData
+                            ? ListView.builder(
+                                itemBuilder: (ctx, index) {
+                                  DepartmentalAgendaModel tmp =
+                                      ctl.deparList[index];
+                                  return Container(
+                                    height: 50,
+                                    decoration: const BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            color: Colors.black26, width: 1),
                                       ),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: InkWell(
-                                              onTap: () async {
-                                                _tapOnDepar(tmp.id);
-                                              },
-                                              child: Text(
-                                                "  ${index + 1}",
-                                                style: const TextStyle(
-                                                  color: Colors.blue,
-                                                ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: InkWell(
+                                            onTap: () async {
+                                              _tapOnDepar(tmp.id);
+                                            },
+                                            child: Text(
+                                              "  ${index + 1}",
+                                              style: const TextStyle(
+                                                color: Colors.blue,
                                               ),
                                             ),
                                           ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Text(tmp.name),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text(tmp.name),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Text(
+                                            tmp.creator?.wechatName ?? '',
                                           ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Text(
-                                              tmp.creator?.wechatName ?? '',
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Text(tmp.skill),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child:
-                                                Text("${tmp.upgradePropsName}"),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Text(tmp.getCreatedDay()),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  itemCount: ctl.deparList.length,
-                                )
-                              : const Text("暂无数据"),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        SizedBox(
-                          height: 200,
-                          child: GridView.builder(
-                            padding: const EdgeInsets.all(8),
-                            itemCount: ctl.options.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 5, // 交叉轴方向上的间距
-                              childAspectRatio: 4,
-                              mainAxisSpacing: 5, // 主轴方向上的间距
-                            ),
-                            itemBuilder: (BuildContext context, int index) {
-                              final option = ctl.options[index];
-                              return ElevatedButton(
-                                onPressed: () async {
-                                  await ctl.onOption(option);
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Text(tmp.skill),
+                                        ),
+                                        Expanded(
+                                          flex: 3,
+                                          child:
+                                              Text("${tmp.upgradePropsName}"),
+                                        ),
+                                        Expanded(
+                                          flex: 4,
+                                          child: Text(tmp.getCreatedDay()),
+                                        ),
+                                      ],
+                                    ),
+                                  );
                                 },
-                                child: Text(option.name ?? ""),
-                              );
-                            },
-                          ),
-                        ),
-                      ]),
+                                itemCount: ctl.deparList.length,
+                              )
+                            : const Text("暂无数据"),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      ctl.isManager
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    await ctl.onOptionNewAdd();
+                                  },
+                                  child: const Text("新建议程"),
+                                ),
+                              ],
+                            )
+                          : const SizedBox(
+                              height: 1,
+                            ),
+                      // const SizedBox(width: 60.0),
+                    ],
+                  ),
                 ),
               ),
             ],
