@@ -164,11 +164,11 @@ Future<bool> editablePostOption(
           confirm: TextButton(
             onPressed: () {
               Get.back();
+              completer.complete(true);
             },
             child: const Text('关闭'),
           ),
         );
-        completer.complete(true);
       }
     },
   );
@@ -214,12 +214,12 @@ Future<bool> customeDeleteOption(
           content: const Text('操作成功'),
           confirm: TextButton(
             onPressed: () async {
+              completer.complete(true);
               Get.back();
             },
             child: const Text('关闭'),
           ),
         );
-        completer.complete(true);
       }
     },
   );
@@ -266,11 +266,11 @@ ResponseData? customePostOptionWithResp(
           confirm: TextButton(
             onPressed: () {
               Get.back();
+              resp = responseData;
             },
             child: const Text('关闭'),
           ),
         );
-        resp = responseData;
       }
     },
   );
@@ -317,11 +317,11 @@ Future<ResponseData?> customePutOptionWithResp(
           confirm: TextButton(
             onPressed: () {
               Get.back();
+              resp = responseData;
             },
             child: const Text('关闭'),
           ),
         );
-        resp = responseData;
       }
     },
   );

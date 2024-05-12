@@ -130,10 +130,7 @@ class RuinOptionPage extends GetView<RuinOptionController> {
                         final option = ctl.options[index];
                         return ElevatedButton(
                           onPressed: () async {
-                            final result = await ctl.onOption(option);
-                            if (result == true) {
-                              Get.back(result: result);
-                            }
+                            result = await ctl.onOption(option);
                           },
                           child: Text(option.name ?? ""),
                         );

@@ -44,7 +44,9 @@ class RuinOptionController extends GetxController {
   }
 
   Future<void> _loadData() async {
-    ruinId = Get.parameters['ruinId'] ?? "-1";
+    if (ruinId == '-1') {
+      ruinId = Get.parameters['ruinId'] ?? "-1";
+    }
 
     final as = ApiService();
     final url = sprintf(apiUrl.ruinsRetrUpdDestPath, [ruinId]);
@@ -104,6 +106,10 @@ class RuinOptionController extends GetxController {
       apiUrl.closeRuinsPaht,
       myPayload,
     );
+    if (result == true) {
+      // Get.back(result: result);
+      reloadData();
+    }
     return result;
   }
 
@@ -114,6 +120,9 @@ class RuinOptionController extends GetxController {
       url,
       null,
     );
+    if (result == true) {
+      Get.back(result: result);
+    }
     return result;
   }
 
@@ -127,6 +136,10 @@ class RuinOptionController extends GetxController {
       apiUrl.processRuinsPath,
       myPayload,
     );
+    if (result == true) {
+      // Get.back(result: result);
+      reloadData();
+    }
     return result;
   }
 
@@ -147,6 +160,7 @@ class RuinOptionController extends GetxController {
     // );
     // Get.back(result: result);
     if (result == true) {
+      // Get.back(result: result);
       reloadData();
     }
     return result;
@@ -162,6 +176,10 @@ class RuinOptionController extends GetxController {
       apiUrl.endRuinsPath,
       myPayload,
     );
+    if (result == true) {
+      // Get.back(result: result);
+      reloadData();
+    }
     return result;
   }
 }
