@@ -89,8 +89,8 @@ class _HomeState extends State<HomePage> {
               ],
             ),
             Container(
-              height: 400,
-              padding: const EdgeInsets.all(6.0),
+              height: 300,
+              padding: const EdgeInsets.all(10.0),
               color: Colors.indigo[300],
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -108,13 +108,17 @@ class _HomeState extends State<HomePage> {
                       Get.toNamed(item['app'] as String);
                     },
                     child: Container(
-                      color: Colors.blue,
-                      child: Center(
-                        child: Text(
-                          grandItems[index]['title'] as String,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
+                      color: Colors.indigo[300],
+                      padding: const EdgeInsets.all(5.0),
+                      child: Container(
+                        color: Colors.blue,
+                        child: Center(
+                          child: Text(
+                            grandItems[index]['title'] as String,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                            ),
                           ),
                         ),
                       ),
