@@ -60,8 +60,8 @@ class RuinListPage extends GetView<RuinsListController> {
                             ),
                           ),
                           child: getTableHead(
-                            ["序号", "编号", "创建人", "外环", "中环", "占据废墟", "目标", "成果"],
-                            [2, 3, 3, 2, 2, 2, 2, 2],
+                            ["序号", "编号", "外环", "中环", "占据废墟", "目标", "成果"],
+                            [2, 4, 2, 2, 3, 2, 2],
                           ),
                         ),
                         Expanded(
@@ -94,15 +94,15 @@ class RuinListPage extends GetView<RuinsListController> {
                                             ),
                                           ),
                                           Expanded(
-                                            flex: 3,
+                                            flex: 4,
                                             child: Text(tmp.number ?? ''),
                                           ),
-                                          Expanded(
-                                            flex: 3,
-                                            child: Text(
-                                              tmp.creator?.wechatName ?? "",
-                                            ),
-                                          ),
+                                          // Expanded(
+                                          //   flex: 3,
+                                          //   child: Text(
+                                          //     tmp.creator?.wechatName ?? "",
+                                          //   ),
+                                          // ),
                                           Expanded(
                                             flex: 2,
                                             child: Text("${tmp.outerCnt}"),
@@ -112,19 +112,25 @@ class RuinListPage extends GetView<RuinsListController> {
                                             child: Text("${tmp.middleCnt}"),
                                           ),
                                           Expanded(
-                                            flex: 2,
-                                            child:
-                                                Text(tmp.ruinOwnerName ?? ''),
+                                            flex: 3,
+                                            child: Text(
+                                              tmp.ruinOwnerName ?? '',
+                                              textAlign: TextAlign.center,
+                                            ),
                                           ),
                                           Expanded(
                                             flex: 2,
                                             child: Text(
-                                                "${tmp.targetShipUserCnt}"),
+                                              "${tmp.targetShipUserCnt}",
+                                              textAlign: TextAlign.center,
+                                            ),
                                           ),
                                           Expanded(
                                             flex: 2,
                                             child: Text(
-                                                "${tmp.actualShipUserCnt}"),
+                                              "${tmp.actualShipUserCnt}",
+                                              textAlign: TextAlign.center,
+                                            ),
                                           ),
                                         ],
                                       ),

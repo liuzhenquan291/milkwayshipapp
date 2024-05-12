@@ -98,14 +98,15 @@ class RuinOptionPage extends GetView<RuinOptionController> {
                   ),
                 ),
                 const SizedBox(height: 16.0),
-                Container(
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.all(6),
-                  child: const Text(
-                    "分组信息: ",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
+                // Container(
+                //   alignment: Alignment.centerLeft,
+                //   padding: const EdgeInsets.all(6),
+                //   child: const Text(
+                //     "分组信息: ",
+                //     style: TextStyle(fontSize: 16),
+                //   ),
+                // ),
+                // 分组信息
                 Column(
                   children: ctl.groups
                       .map((item) => buildGroup(item))
@@ -150,41 +151,130 @@ class RuinOptionPage extends GetView<RuinOptionController> {
         children: [
           Divider(
             thickness: 5,
+            height: 5,
             color: Colors.blue[300],
           ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.all(6),
+            child: Text(
+              "${data.groupName}信息: ",
+              style: const TextStyle(fontSize: 16),
+            ),
+          ),
           Row(children: [
-            Text("分组: ${data.groupName}      "),
+            // Text("分组: ${data.groupName}      "),
             Text("目标人数: ${data.targetShipuserCnt}     "),
             Text("链接分组成:   ${data.scoreDesc}     "),
           ]),
-          Row(children: const [
-            Text(
-                "任务安排:     名称     |  目标分   |         开始         |        结束        |")
-          ]),
-          // Column(
-          //   children: gs
-          //       .map((item) => buildSchedule(item))
-          //       .toList(), // 使用.map()来生成Text组件的列表
-          // ),
-          Column(
-            children: data.schedules!
-                .map((item) => Text(
-                    "${item.scheduleName} |     ${item.targetScore}     |   ${item.getStartTime()}   |   ${item.getEndTime()}   | "))
-                .toList(), // 使用.map()来生成Text组件的列表
+          const SizedBox(height: 6),
+          Row(children: const [Text("任务安排")]),
+          Table(
+            border: TableBorder.all(color: Colors.black, width: 1.0),
+            children: [
+              const TableRow(
+                children: [
+                  TableCell(child: Text("任务名称", textAlign: TextAlign.center)),
+                  TableCell(child: Text("目标分", textAlign: TextAlign.center)),
+                  TableCell(child: Text("开始", textAlign: TextAlign.center)),
+                  TableCell(child: Text("结束", textAlign: TextAlign.center)),
+                ],
+              ),
+              ...data.schedules!
+                  .map(
+                    (row) => TableRow(
+                      children: [
+                        TableCell(
+                          child: Text(
+                            "${row.scheduleName}",
+                            style: const TextStyle(fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        TableCell(
+                          child: Text(
+                            "${row.targetScore}",
+                            style: const TextStyle(fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        TableCell(
+                            child: Text(
+                          row.getStartTime(),
+                          style: const TextStyle(fontSize: 12),
+                          textAlign: TextAlign.center,
+                        )),
+                        TableCell(
+                          child: Text(
+                            row.getEndTime(),
+                            style: const TextStyle(fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  .toList(),
+            ],
           ),
-          Row(children: const [
-            Text("人员安排: 角色   |  微信  |  激活技能? | 委员会轮次 | 委员会节点 | ")
-          ]),
-          // Column(
-          //   children: rs
-          //       .map((item) => buildRegisterShipUser(item))
-          //       .toList(), // 使用.map()来生成Text组件的列表
-          // ),
-          Column(
-            children: data.registers!
-                .map((item) => Text(
-                    "    ${item.shipuserMskName}        |       等等再加         |        ${item.committeeAliveName}        |      ${item.committeeLevel}     |     ${item.committeeNode}               "))
-                .toList(), // 使用.map()来生成Text组件的列表
+          const SizedBox(height: 6),
+          Row(children: const [Text("人员安排")]),
+          Table(
+            border: TableBorder.all(color: Colors.black, width: 1.0),
+            children: [
+              const TableRow(
+                children: [
+                  TableCell(child: Text("角色", textAlign: TextAlign.center)),
+                  // TableCell(child: Text("微信")),
+                  TableCell(child: Text("激活技能?", textAlign: TextAlign.center)),
+                  TableCell(child: Text("委员会轮次", textAlign: TextAlign.center)),
+                  TableCell(child: Text("委员会节点", textAlign: TextAlign.center)),
+                ],
+              ),
+              ...data.registers!
+                  .map(
+                    (row) => TableRow(
+                      children: [
+                        TableCell(
+                          child: Text(
+                            row.shipuserMskName,
+                            style: const TextStyle(fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        // TableCell(
+                        //   child: Text(
+                        //     "以后再说",
+                        //     style: const TextStyle(fontSize: 12),
+                        //   ),
+                        // ),
+                        TableCell(
+                            child: Text(
+                          row.committeeAliveName,
+                          style: const TextStyle(
+                            fontSize: 12,
+                          ),
+                          textAlign: TextAlign.center,
+                        )),
+                        TableCell(
+                          child: Text(
+                            "${row.committeeLevel}",
+                            style: const TextStyle(fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        TableCell(
+                          child: Text(
+                            "${row.committeeNode}",
+                            style: const TextStyle(fontSize: 12),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                  .toList(),
+            ],
           ),
           // ElevatedButton(
           //   onPressed: () async {
@@ -192,30 +282,31 @@ class RuinOptionPage extends GetView<RuinOptionController> {
           //   },
           //   child: const Text("为分组选择角色"),
           // ),
+          const SizedBox(height: 20),
         ],
       ),
     );
   }
 
-  Widget buildSchedule(RuinGroupSchedule data) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(6),
-          child: Column(
-            children: [
-              Row(children: [Text("任务名称: ${data.scheduleName}")]),
-              Row(children: [Text("目标分数: ${data.targetScore}")]),
-              Row(children: [Text("开始时间:   ${data.getStartTime()}")]),
-              Row(children: [Text("结束时间:   ${data.getEndTime()}")]),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget buildSchedule(RuinGroupSchedule data) {
+  //   return Column(
+  //     children: [
+  //       Container(
+  //         padding: const EdgeInsets.all(6),
+  //         child: Column(
+  //           children: [
+  //             Row(children: [Text("任务名称: ${data.scheduleName}")]),
+  //             Row(children: [Text("目标分数: ${data.targetScore}")]),
+  //             Row(children: [Text("开始时间:   ${data.getStartTime()}")]),
+  //             Row(children: [Text("结束时间:   ${data.getEndTime()}")]),
+  //           ],
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
-  Widget buildRegisterShipUser(RuinRegisterModel data) {
-    return Column();
-  }
+  // Widget buildRegisterShipUser(RuinRegisterModel data) {
+  //   return Column();
+  // }
 }
