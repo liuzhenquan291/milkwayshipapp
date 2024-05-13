@@ -25,7 +25,7 @@ class RuinsListController extends GetxController {
   }
 
   void reloadData() async {
-    // isManager = false;
+    canCreateNew = false;
     ruinsList = [];
     hasData = false;
     // options = [];
@@ -44,12 +44,12 @@ class RuinsListController extends GetxController {
       return;
     }
     final responseData = ResponseData.fromJson(response.data);
+    if (responseData.message!.toLowerCase() == 'true') {
+      canCreateNew = true;
+    }
     ruinsList = RuinsModel.fromJsonToList(responseData.data);
     if (ruinsList.isNotEmpty) {
       hasData = true;
-      if (responseData.message!.toLowerCase() == 'true') {
-        canCreateNew = true;
-      }
     }
 
     // final gc = Get.find<AuthService>();
@@ -75,13 +75,20 @@ class RuinsListController extends GetxController {
   }
 
   Future<void> onOptionNewAdd() async {
-    await Get.toNamed(
+    // await Get.toNamed(
+    //   AppRoute.ruinEditPage,
+    //   parameters: {'ruinId': '-1'},
+    // )?.then((value) => () {
+    //       if (value != null) {
+    //         reloadData();
+    //       }
+    //     });
+    final result = await Get.toNamed(
       AppRoute.ruinEditPage,
       parameters: {'ruinId': '-1'},
-    )?.then((value) => () {
-          if (value != null) {
-            reloadData();
-          }
-        });
+    );
+    if (result == true) {
+      reloadData();
+    }
   }
 }
