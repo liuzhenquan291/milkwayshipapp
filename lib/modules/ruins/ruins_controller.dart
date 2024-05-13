@@ -13,8 +13,9 @@ class RuinsListController extends GetxController {
   final RefreshController refreshController = RefreshController();
   List<RuinsModel> ruinsList = [];
   // List<OptionModel> options = [];
-  bool isManager = false;
+  // bool isManager = false;
   bool hasData = false;
+  bool canCreateNew = false;
   int page = 1;
 
   @override
@@ -24,7 +25,7 @@ class RuinsListController extends GetxController {
   }
 
   void reloadData() async {
-    isManager = false;
+    // isManager = false;
     ruinsList = [];
     hasData = false;
     // options = [];
@@ -46,19 +47,22 @@ class RuinsListController extends GetxController {
     ruinsList = RuinsModel.fromJsonToList(responseData.data);
     if (ruinsList.isNotEmpty) {
       hasData = true;
+      if (responseData.message!.toLowerCase() == 'true') {
+        canCreateNew = true;
+      }
     }
 
-    final gc = Get.find<AuthService>();
-    if (gc.isManager()) {
-      isManager = true;
-      // options = [
-      //   OptionModel(
-      //     code: "new_add",
-      //     name: "新建任务",
-      //     title: "新建废墟任务",
-      //   )
-      // ];
-    }
+    // final gc = Get.find<AuthService>();
+    // if (gc.isManager()) {
+    //   isManager = true;
+    //   // options = [
+    //   //   OptionModel(
+    //   //     code: "new_add",
+    //   //     name: "新建任务",
+    //   //     title: "新建废墟任务",
+    //   //   )
+    //   // ];
+    // }
 
     page++;
     update();

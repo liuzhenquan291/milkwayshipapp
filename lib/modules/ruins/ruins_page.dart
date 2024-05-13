@@ -146,7 +146,7 @@ class RuinListPage extends GetView<RuinsListController> {
               const SizedBox(
                 height: 8,
               ),
-              ctl.isManager
+              ctl.canCreateNew
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -161,29 +161,6 @@ class RuinListPage extends GetView<RuinsListController> {
                   : const SizedBox(
                       height: 1,
                     ),
-              // const SizedBox(width: 60.0),
-              // SizedBox(
-              //   height: 200,
-              //   child: GridView.builder(
-              //     padding: const EdgeInsets.all(8),
-              //     itemCount: ctl.options.length,
-              //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //       crossAxisCount: 2,
-              //       crossAxisSpacing: 5, // 交叉轴方向上的间距
-              //       childAspectRatio: 4,
-              //       mainAxisSpacing: 5, // 主轴方向上的间距
-              //     ),
-              //     itemBuilder: (BuildContext context, int index) {
-              //       final option = ctl.options[index];
-              //       return ElevatedButton(
-              //         onPressed: () async {
-              //           await ctl.onOption(option);
-              //         },
-              //         child: Text(option.name ?? ""),
-              //       );
-              //     },
-              //   ),
-              // ),
             ],
           ),
         );
