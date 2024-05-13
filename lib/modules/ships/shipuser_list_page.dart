@@ -103,7 +103,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                               }
                                             },
                                             child: Text(
-                                              "${index + 1}",
+                                              "  ${index + 1}",
                                               style: const TextStyle(
                                                 color: Colors.blue,
                                               ),

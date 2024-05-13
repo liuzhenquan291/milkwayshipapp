@@ -37,6 +37,7 @@ class RuinsEditController extends GetxController {
   bool hasData = false;
   String ruinOwnerStr = '否';
   bool ruinOwner = false;
+  bool? ruinOwnerForUpdate; // 这个是为更新时存储数据本身的 ruinOwner 数据
   List<OptionModel> options = [];
   int toAddshipUserGroupIdx = 0;
 
@@ -89,47 +90,57 @@ class RuinsEditController extends GetxController {
         ruinData = RuinsModel.fromJson(responseData.data);
 
         // 废墟信息 ctl 初始化
-        numberCtl.text = ruinData?.number ?? '';
-        ruinOwnerTextCtl.text = ruinData?.ruinOwnerName ?? '';
-        outerCntCtl.text = "${ruinData?.outerCnt ?? 0}";
-        innerCntCtl.text = "${ruinData?.innerCnt ?? 0}";
-        middleCntCtl.text = "${ruinData?.middleCnt ?? 0}";
-        targetCntCtl.text = "${ruinData?.targetShipUserCnt ?? 0}";
+        setRuinCtls();
 
         if (ruinData?.groups != null) {
           groups = ruinData?.groups ?? [];
           setCtlMap();
         }
-
-        // options = [
-        //   OptionModel(
-        //     code: "new_add",
-        //     name: "确认新建",
-        //     title: "新建废墟任务",
-        //   )
-        // ];
       }
     } else {
-      final as = ApiService();
-      final url = sprintf(apiUrl.ruinsRetrUpdDestPath, [ruinId]);
-      final response = await as.getRequest(url, null);
-      if (response.statusCode != 200) {
-        return;
-      }
-      final responseData = ResponseData.fromJson(response.data);
-      if (responseData.data != null) {
-        isNew = false;
-        ruinData = RuinsModel.fromJson(responseData.data);
-        hasData = true;
-        numberCtl.text = ruinData?.number ?? '';
-        ruinOwnerTextCtl.text = ruinData?.ruinOwnerName ?? '';
-        outerCntCtl.text = "${ruinData?.outerCnt ?? 0}";
-        innerCntCtl.text = "${ruinData?.innerCnt ?? 0}";
-        middleCntCtl.text = "${ruinData?.middleCnt ?? 0}";
-        targetCntCtl.text = "${ruinData?.targetShipUserCnt ?? 0}";
-        if (ruinData?.groups != null) {
-          groups = ruinData?.groups ?? [];
-          setCtlMap();
+      isNew = false;
+      // 编辑时更改了 ruinOwner 重新加载数据
+      if (ruinData != null && ruinOwnerForUpdate != ruinOwner) {
+        final ruinDataUpdatedTime = ruinData?.updatedTime;
+        final as = ApiService();
+        final url = apiUrl.ruinsDefaultDataPath;
+        final response = await as.getRequest(url, {'ruin_owner': ruinOwner});
+        if (response.statusCode != 200) {
+          return;
+        }
+        final responseData = ResponseData.fromJson(response.data);
+        if (responseData.data != null) {
+          ruinData = RuinsModel.fromJson(responseData.data);
+          ruinData?.id = ruinId; // 重新加载数据后, 要把 ruinId 设置回去
+          ruinData?.updatedTime = ruinDataUpdatedTime; // 把更新时间设置回去
+
+          // 废墟信息 ctl 初始化
+          setRuinCtls();
+
+          if (ruinData?.groups != null) {
+            groups = ruinData?.groups ?? [];
+            setCtlMap();
+          }
+        }
+      } else {
+        final as = ApiService();
+        final url = sprintf(apiUrl.ruinsRetrUpdDestPath, [ruinId]);
+        final response = await as.getRequest(url, null);
+        if (response.statusCode != 200) {
+          return;
+        }
+        final responseData = ResponseData.fromJson(response.data);
+        if (responseData.data != null) {
+          ruinData = RuinsModel.fromJson(responseData.data);
+          hasData = true;
+          setRuinCtls();
+          if (ruinData?.groups != null) {
+            groups = ruinData?.groups ?? [];
+            setCtlMap();
+          }
+        }
+        if (ruinOwnerForUpdate == null) {
+          ruinOwnerForUpdate = ruinData?.ruinOwner;
         }
       }
     }
@@ -170,32 +181,10 @@ class RuinsEditController extends GetxController {
     //     reloadData();
     //   },
     // );
+    ruinOwnerStr = ruinOwnerStrNew;
+    ruinOwner = ruinOwnerStr == "是";
     reloadData();
   }
-
-  // void ruinOwnerChangeConfrim(String? ownerText) async {
-  //   String ruinOwnerStrNew = ownerText ?? "否";
-  //   String ruinOwnerStrOld = ruinOwnerStr;
-  //   if (ruinOwnerStrNew == ruinOwnerStr) {
-  //     return;
-  //   }
-  //   Get.defaultDialog(
-  //     title: "确认执行?",
-  //     middleText: '更改废墟归属将重置数据',
-  //     textConfirm: '确认',
-  //     textCancel: '取消',
-  //     confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
-  //     onCancel: () {
-  //       Get.back();
-  //     },
-  //     onConfirm: () async {
-  //       Get.back();
-  //       ruinOwnerStr = ruinOwnerStrNew;
-  //       ruinOwner = (ruinOwnerStr == "是") ? true : false;
-  //       reloadData();
-  //     },
-  //   );
-  // }
 
   Future<bool> onSelectShipUsers(String? groupName) async {
     List<String> selectedShipUserIds = [];
@@ -311,5 +300,16 @@ class RuinsEditController extends GetxController {
     ruinData?.middleCnt = int.parse(middleCntCtl.text);
     ruinData?.innerCnt = int.parse(innerCntCtl.text);
     ruinData?.targetShipUserCnt = int.parse(targetCntCtl.text);
+  }
+
+  void setRuinCtls() {
+    if (ruinData != null) {
+      numberCtl.text = ruinData?.number ?? '';
+      ruinOwnerTextCtl.text = ruinData?.ruinOwnerName ?? '';
+      outerCntCtl.text = "${ruinData?.outerCnt ?? 0}";
+      innerCntCtl.text = "${ruinData?.innerCnt ?? 0}";
+      middleCntCtl.text = "${ruinData?.middleCnt ?? 0}";
+      targetCntCtl.text = "${ruinData?.targetShipUserCnt ?? 0}";
+    }
   }
 }
