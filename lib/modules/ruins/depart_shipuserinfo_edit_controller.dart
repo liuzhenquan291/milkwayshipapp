@@ -3,9 +3,7 @@ import 'package:sprintf/sprintf.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../core/urls.dart';
-import '../../core/apps.dart';
 import '../../core/server.dart';
-import '../../core/models/options_model.dart';
 import '../../core/custom_option_widget.dart';
 import '../../core/models/agenda_models.dart';
 import '../../core/models/ship_user_model.dart';
@@ -13,6 +11,7 @@ import '../../core/models/ship_user_model.dart';
 class DepartShipuserInfoEditController extends GetxController {
   String? departId;
   String? shipUserId;
+  bool canSave = false;
   DepartmentalAgendaModel? departData;
   ShipuserDepartmentalInfoModel? departShipUserData;
   ShipUserModel? shipUserData;
@@ -39,21 +38,22 @@ class DepartShipuserInfoEditController extends GetxController {
   }
 
   Future<void> reloadData() async {
+    canSave = false;
     loadData();
   }
 
   Future<void> loadData() async {
-    final apiService = ApiService();
+    final as = ApiService();
     departId = Get.parameters['departId'];
     shipUserId = Get.parameters['shipUserId'];
     final url = sprintf(apiUrl.departalRetrUpdDestPath, [departId]);
-    final response =
-        await apiService.getRequest(url, {'ship_user_id': shipUserId});
+    final response = await as.getRequest(url, {'ship_user_id': shipUserId});
 
     if (response.statusCode != 200) {
       // TODO: 弹窗
     } else {
       final responseData = ResponseData.fromJson(response.data);
+      canSave = responseData.message!.toLowerCase() == 'true';
       if (responseData.data != null) {
         departData = DepartmentalAgendaModel.fromJson(responseData.data);
         if (departData != null) {
@@ -75,16 +75,6 @@ class DepartShipuserInfoEditController extends GetxController {
       }
     }
     update();
-  }
-
-  Future<void> onOption(OptionModel option) async {
-    final result = await Get.toNamed(
-      AppRoute.departEditPage,
-      parameters: {'departId': "${departData?.id ?? '-1'}"},
-    );
-    if (result == true) {
-      await reloadData();
-    }
   }
 
   Future<bool> onOptionSave() async {

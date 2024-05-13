@@ -197,15 +197,17 @@ class ShipUserDepartInfoEditPage
               ),
               // 编辑信息
               const SizedBox(height: 24),
-              SizedBox(
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    await ctl.onOptionSave();
-                  },
-                  child: const Text("保存"),
-                ),
-              ),
+              ctl.canSave
+                  ? SizedBox(
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          await ctl.onOptionSave();
+                        },
+                        child: const Text("保存"),
+                      ),
+                    )
+                  : const SizedBox(height: 1),
             ],
           ),
         ),
