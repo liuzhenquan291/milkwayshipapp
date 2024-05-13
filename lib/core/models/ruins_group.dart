@@ -70,12 +70,22 @@ class RuinGroupSchedule {
     return formatDateTime_3(endTime);
   }
 
-  Map<String, dynamic> toDict() {
+  Map<String, dynamic> toDictForUpdate() {
     return {
       'id': id,
       'group_id': groupId,
       'schedule_name': scheduleName,
       'updated_time': updatedTime,
+      'target_score': targetScore,
+      'start_time': startTime != null ? startTime!.toIso8601String() : null,
+      'end_time': endTime != null ? endTime!.toIso8601String() : null,
+    };
+  }
+
+  Map<String, dynamic> toDictForCreate() {
+    return {
+      'group_id': groupId,
+      'schedule_name': scheduleName,
       'target_score': targetScore,
       'start_time': startTime != null ? startTime!.toIso8601String() : null,
       'end_time': endTime != null ? endTime!.toIso8601String() : null,
@@ -149,7 +159,7 @@ class RuinGroupModel {
     return formatDateTime_1(createdTime);
   }
 
-  Map<String, dynamic> toDict() {
+  Map<String, dynamic> toDictForUpdate() {
     return {
       'id': id,
       'group_name': groupName,
@@ -157,10 +167,24 @@ class RuinGroupModel {
       'updated_time': updatedTime,
       'score_desc': scoreDesc,
       'schedules': schedules != null
-          ? schedules!.map((item) => item.toDict()).toList()
+          ? schedules!.map((item) => item.toDictForUpdate()).toList()
           : null,
       'registers': registers != null
-          ? registers!.map((item) => item.toDict()).toList()
+          ? registers!.map((item) => item.toDictForUpdate()).toList()
+          : null,
+    };
+  }
+
+  Map<String, dynamic> toDictForCreate() {
+    return {
+      'group_name': groupName,
+      'target_shipuser_cnt': targetShipuserCnt,
+      'score_desc': scoreDesc,
+      'schedules': schedules != null
+          ? schedules!.map((item) => item.toDictForCreate()).toList()
+          : null,
+      'registers': registers != null
+          ? registers!.map((item) => item.toDictForCreate()).toList()
           : null,
     };
   }

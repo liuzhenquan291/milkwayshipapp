@@ -231,7 +231,7 @@ class RegionOptionsPage extends GetView<RegionOptionsController> {
               ),
               const SizedBox(height: 24),
               SizedBox(
-                height: ctl.hasOptions ? 200 : 0,
+                height: (ctl.validOptions.length + 1) / 2 * 50 + 10,
                 child: GridView.builder(
                   padding: const EdgeInsets.all(8),
                   itemCount: ctl.validOptions.length,

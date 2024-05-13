@@ -206,7 +206,7 @@ class UserOptionPage extends GetView<UserOptionController> {
               ),
               const SizedBox(height: 24),
               SizedBox(
-                height: 200,
+                height: (ctl.validOptions.length + 1) / 2 * 50 + 10,
                 child: GridView.builder(
                   padding: const EdgeInsets.all(8),
                   itemCount: ctl.validOptions.length,

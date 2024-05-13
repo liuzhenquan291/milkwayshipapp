@@ -68,7 +68,7 @@ class RuinsEditPage extends GetView<RuinsEditController> {
                             Expanded(
                               child: CustomTextField(
                                 keyboardType: TextInputType.text,
-                                labelText: "废墟任务编号:  RUyyyyMMdd",
+                                labelText: "S35W1 表示第35赛季第一周废墟",
                                 controller: ctl.numberCtl,
                                 // placeholder: "废墟任务编号:  RUyyyyMMdd",
                                 height: 20,

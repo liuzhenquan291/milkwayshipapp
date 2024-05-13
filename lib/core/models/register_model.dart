@@ -87,10 +87,23 @@ class RuinRegisterModel {
     return formatDateTime_1(createdTime);
   }
 
-  Map<String, dynamic> toDict() {
+  Map<String, dynamic> toDictForUpdate() {
     return {
       'id': id,
       'updated_time': updatedTime,
+      'group_id': groupId,
+      'ship_user_id': shipuserId,
+      'ship_user_mks_name': shipuserMskName,
+      'score': score,
+      'committee_alive': committeeAlive,
+      'committee_level': committeeLevel,
+      'committee_node': committeeNode,
+      'committee_props_lack': committeePropsLack,
+    };
+  }
+
+  Map<String, dynamic> toDictForCreate() {
+    return {
       'group_id': groupId,
       'ship_user_id': shipuserId,
       'ship_user_mks_name': shipuserMskName,

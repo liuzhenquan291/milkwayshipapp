@@ -73,8 +73,8 @@ class UserListPage extends GetView<UserListController> {
                             ),
                           ),
                           child: getTableHead(
-                            ["手机号", "微信昵称", "用户状态", "用户身份", "角色数"],
-                            [5, 3, 3, 3, 3, 2],
+                            ["序号", "手机号", "微信昵称", "用户状态", "用户身份", "角色数"],
+                            [2, 5, 3, 3, 3, 3, 2],
                           ),
                         ),
                         Expanded(
@@ -93,14 +93,14 @@ class UserListPage extends GetView<UserListController> {
                                       child: Row(
                                         children: [
                                           Expanded(
-                                            flex: userNameExpandedFlex,
+                                            flex: 2,
                                             child: InkWell(
                                               onTap: () async {
                                                 String userId = user.id;
                                                 _tapOnUser(userId);
                                               },
                                               child: Text(
-                                                user.username,
+                                                "  ${index + 1}",
                                                 style: const TextStyle(
                                                   color: Colors.blue,
                                                 ),
@@ -111,6 +111,10 @@ class UserListPage extends GetView<UserListController> {
                                           //   flex: otherExpandedFlex,
                                           //   child: Text(user.displayName),
                                           // ),
+                                          Expanded(
+                                            flex: userNameExpandedFlex,
+                                            child: Text(user.username),
+                                          ),
                                           Expanded(
                                             flex: otherExpandedFlex,
                                             child: Text(user.wechatName),

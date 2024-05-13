@@ -115,7 +115,7 @@ class RuinOptionPage extends GetView<RuinOptionController> {
                   ),
                   const SizedBox(height: 10),
                   SizedBox(
-                    height: 200,
+                    height: (ctl.options.length + 1) / 2 * 50 + 10,
                     child: GridView.builder(
                       padding: const EdgeInsets.all(8),
                       itemCount: ctl.options.length,

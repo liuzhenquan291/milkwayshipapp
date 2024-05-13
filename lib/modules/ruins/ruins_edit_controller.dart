@@ -245,12 +245,13 @@ class RuinsEditController extends GetxController {
     getCtlMap(); // 将控制器里面的数据设置到对象里
     getRuinCtls(); // 将控制器里面的数据设置到对象里
     ruinData?.groups = groups;
-    Map<String, dynamic> payload = ruinData!.toDict();
     if (ruinId == '-1') {
       url = apiUrl.ruinsListCreatePath;
       title = '确认创建';
+      final payload = ruinData!.toDictForCreate();
       result = await customePostOption(title, url, payload);
     } else {
+      final payload = ruinData!.toDictForUpdate();
       url = sprintf(apiUrl.ruinsRetrUpdDestPath, [ruinId]);
       title = '确认更新';
       result = await customePutOption(title, url, payload);
