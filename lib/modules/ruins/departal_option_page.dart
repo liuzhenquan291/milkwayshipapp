@@ -97,7 +97,7 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                 ),
                 child: getTableHead(
                   ["序号", "角色名", "轮次", "节点", ctl.isCommittee ? "上次废墟" : "缺少道具"],
-                  [2, 4, 2, 2, 3],
+                  [2, 3, 2, 2, 3],
                 ),
               ),
               Expanded(
@@ -106,7 +106,6 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                         itemBuilder: (ctx, index) {
                           ShipuserDepartmentalInfoModel? tmp =
                               controller.departData?.shipUserDatas?[index];
-                          bool skillAlive = tmp?.skillAlive ?? false;
                           bool canEdit = false;
                           canEdit = canEdit || ctl.isManager;
                           final thisUserId = tmp?.shipUser?.userId ?? "";
@@ -124,46 +123,40 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                               children: [
                                 Expanded(
                                   flex: 2,
-                                  child: canEdit
-                                      ? InkWell(
-                                          onTap: () async {
-                                            final result = await Get.toNamed(
-                                              AppRoute
-                                                  .departShipUserInfoEditPage,
-                                              parameters: {
-                                                'shipUserId':
-                                                    tmp?.shipUserId ?? "-1",
-                                                'departId':
-                                                    "${tmp?.agendaId ?? -1}",
-                                              },
-                                            );
-                                            if (result == true) {
-                                              await ctl.reloadData();
-                                            }
+                                  child: InkWell(
+                                    onTap: () async {
+                                      if (canEdit) {
+                                        final result = await Get.toNamed(
+                                          AppRoute.departShipUserInfoEditPage,
+                                          parameters: {
+                                            'shipUserId':
+                                                tmp?.shipUserId ?? "-1",
+                                            'departId':
+                                                "${tmp?.agendaId ?? -1}",
                                           },
-                                          child: Text(
-                                            "  ${index + 1}",
-                                            style: const TextStyle(
-                                              color: Colors.blue,
-                                            ),
-                                          ),
-                                        )
-                                      : Text(
-                                          "  ${index + 1}",
-                                          style: const TextStyle(
-                                              // color: Colors.white,
-                                              ),
-                                        ),
+                                        );
+                                        if (result == true) {
+                                          await ctl.reloadData();
+                                        }
+                                      }
+                                    },
+                                    child: Text(
+                                      "  ${index + 1}",
+                                      style: TextStyle(
+                                        color: canEdit
+                                            ? Colors.blue
+                                            : Colors.white,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 Expanded(
-                                  flex: 4,
+                                  flex: 3,
                                   child: Text(tmp?.shipUserMksName ?? ""),
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child: Center(
-                                    child: Text("${tmp?.agendaLevel}"),
-                                  ),
+                                  child: Text("${tmp?.agendaLevel}"),
                                 ),
                                 // Expanded(
                                 //     flex: 3,
@@ -172,16 +165,12 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                                 //     )),
                                 Expanded(
                                   flex: 2,
-                                  child: Center(
-                                    child: Text("${tmp?.agendaNode}"),
-                                  ),
+                                  child: Text("${tmp?.agendaNode}"),
                                 ),
                                 Expanded(
                                   flex: 3,
-                                  child: Center(
-                                    child: Text(
-                                        "${ctl.isCommittee ? tmp?.lastRuinTime : tmp?.propsLack ?? 0}"),
-                                  ),
+                                  child: Text(
+                                      "${ctl.isCommittee ? tmp?.lastRuinTime : tmp?.propsLack ?? 0}"),
                                 ),
                                 // Expanded(
                                 //   flex: ctl.isCommittee ? 3 : 0,
