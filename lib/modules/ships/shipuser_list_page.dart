@@ -77,7 +77,7 @@ class ShipuserListPage extends GetView<ShipuserListController> {
                                       ctl.shipUsers?[index];
                                   // String? username = tempUser["用户名"];
                                   return Container(
-                                    height: 50,
+                                    height: 35,
                                     decoration: const BoxDecoration(
                                       border: Border(
                                         bottom: BorderSide(

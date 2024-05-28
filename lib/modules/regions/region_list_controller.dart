@@ -13,6 +13,7 @@ class RegionListController extends GetxController {
   List<RegionModel> regionList = [];
   int page = 1;
   String? isSelf;
+  bool canCreate = false;
 
   @override
   void onInit() {
@@ -29,6 +30,7 @@ class RegionListController extends GetxController {
   void reloadData() async {
     regionList = [];
     page = 1;
+    canCreate = false;
     _loadData();
   }
 
@@ -37,6 +39,7 @@ class RegionListController extends GetxController {
     final AuthService authCtl = Get.find<AuthService>();
     String isSelf = Get.parameters['isSelf'] ?? "";
     String userId = isSelf != "" ? authCtl.userId as String : "";
+    canCreate = authCtl.isSuper();
 
     final response = await apiService.getRequest(
         apiUrl.regionsCreateListPath, {'page': page, 'user_id': userId});

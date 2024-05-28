@@ -60,8 +60,8 @@ class DepartalListPage extends GetView<DepartalListController> {
                           ),
                         ),
                         child: getTableHead(
-                          ["序号", "议程", "创建人", "议程技能", "升级道具", "创建时间"],
-                          [2, 3, 2, 3, 3, 4],
+                          ["序号", "议程", "议程技能", "升级道具", "创建时间"],
+                          [2, 3, 3, 3, 4],
                         ),
                       ),
                       Expanded(
@@ -98,12 +98,12 @@ class DepartalListPage extends GetView<DepartalListController> {
                                           flex: 3,
                                           child: Text(tmp.name),
                                         ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Text(
-                                            tmp.creator?.wechatName ?? '',
-                                          ),
-                                        ),
+                                        // Expanded(
+                                        //   flex: 2,
+                                        //   child: Text(
+                                        //     tmp.creator?.wechatName ?? '',
+                                        //   ),
+                                        // ),
                                         Expanded(
                                           flex: 3,
                                           child: Text(tmp.skill),

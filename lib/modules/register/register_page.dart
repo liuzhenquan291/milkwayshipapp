@@ -34,6 +34,7 @@ class _RegisterState extends State<RegisterPage> {
   final TextEditingController wxDisNameController = TextEditingController();
   final TextEditingController wxGNameController = TextEditingController();
   final TextEditingController captchaController = TextEditingController();
+  final TextEditingController regionNumCtl = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final EncrypterController encrypterController =
       Get.find<EncrypterController>();
@@ -105,6 +106,14 @@ class _RegisterState extends State<RegisterPage> {
                   labelText: '微信群昵称',
                 ),
               ),
+              const SizedBox(height: 16.0),
+              TextField(
+                controller: regionNumCtl,
+                // obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: '势力编号',
+                ),
+              ),
               // const SizedBox(height: 24.0),
               // TextFormField(
               //   controller: captchaController,
@@ -127,12 +136,14 @@ class _RegisterState extends State<RegisterPage> {
                   ElevatedButton(
                     onPressed: () async {
                       await _register(
-                          usernameController.text,
-                          passwordController.text,
-                          rePasswdController.text,
-                          displayNameController.text,
-                          wxDisNameController.text,
-                          wxGNameController.text);
+                        usernameController.text,
+                        passwordController.text,
+                        rePasswdController.text,
+                        displayNameController.text,
+                        wxDisNameController.text,
+                        wxGNameController.text,
+                        regionNumCtl.text,
+                      );
                     },
                     child: const Text(
                       '立即注册',
@@ -156,8 +167,15 @@ class _RegisterState extends State<RegisterPage> {
     );
   }
 
-  _register(String username, String password, String repassword,
-      String displayname, String wxDisplayName, String wxGname) async {
+  _register(
+    String username,
+    String password,
+    String repassword,
+    String displayname,
+    String wxDisplayName,
+    String wxGname,
+    String regionNum,
+  ) async {
     if (username.isEmpty) {
       Get.snackbar(
         "注册异常",
@@ -200,6 +218,13 @@ class _RegisterState extends State<RegisterPage> {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
+    } else if (regionNum.isEmpty) {
+      Get.snackbar(
+        "注册异常",
+        "势力编号不能为空",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     } else {
       // 去注册
       final passwdEnc = EncrypterController().encryptMd5(password);
@@ -212,6 +237,7 @@ class _RegisterState extends State<RegisterPage> {
         "display_name": displayname,
         "wechat_name": wxDisplayName,
         "wcq_name": wxGname,
+        "region_number": regionNum,
       };
       try {
         final response = await as.postRequest(apiUrl.useListCreatePath, data);
@@ -229,6 +255,8 @@ class _RegisterState extends State<RegisterPage> {
               user.displayName,
               user.userRole,
               user.token ?? "",
+              user.regionId,
+              user.regionName,
             );
             await au.onLogin();
 

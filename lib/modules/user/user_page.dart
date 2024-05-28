@@ -9,9 +9,6 @@ import '../../core/models/user_model.dart';
 import '../../core/custome_table_field.dart';
 import '../../modules/user/user_list_controller.dart';
 
-const userNameExpandedFlex = 5;
-const otherExpandedFlex = 3;
-
 class UserListPage extends GetView<UserListController> {
   final ApiService gc = ApiService();
 
@@ -73,8 +70,8 @@ class UserListPage extends GetView<UserListController> {
                             ),
                           ),
                           child: getTableHead(
-                            ["序号", "手机号", "微信昵称", "用户状态", "用户身份", "角色数"],
-                            [2, 5, 3, 3, 3, 3, 2],
+                            ["序号", "手机号", "微信昵称", "用户状态", "角色数"],
+                            [2, 4, 3, 3, 2],
                           ),
                         ),
                         Expanded(
@@ -83,7 +80,7 @@ class UserListPage extends GetView<UserListController> {
                                   itemBuilder: (ctx, index) {
                                     UserModel user = ctl.userList[index];
                                     return Container(
-                                      height: 50,
+                                      height: 25,
                                       decoration: const BoxDecoration(
                                         border: Border(
                                           bottom: BorderSide(
@@ -112,27 +109,29 @@ class UserListPage extends GetView<UserListController> {
                                           //   child: Text(user.displayName),
                                           // ),
                                           Expanded(
-                                            flex: userNameExpandedFlex,
-                                            child: Text(user.username),
+                                            flex: 4,
+                                            child: Text(user.encphone ?? ''),
                                           ),
                                           Expanded(
-                                            flex: otherExpandedFlex,
+                                            flex: 3,
                                             child: Text(user.wechatName),
                                           ),
                                           Expanded(
-                                            flex: otherExpandedFlex,
+                                            flex: 3,
                                             child: Text(
                                               user.statusName,
                                             ),
                                           ),
-                                          Expanded(
-                                            flex: otherExpandedFlex,
-                                            child: Text(user.roleName),
-                                          ),
+                                          // Expanded(
+                                          //   flex: otherExpandedFlex,
+                                          //   child: Text(user.roleName),
+                                          // ),
                                           Expanded(
                                             flex: 2,
-                                            child:
-                                                Text("${user.shipUserCount}"),
+                                            child: Text(
+                                              "${user.shipUserCount}",
+                                              textAlign: TextAlign.center,
+                                            ),
                                           ),
                                         ],
                                       ),

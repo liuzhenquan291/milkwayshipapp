@@ -342,7 +342,7 @@ class ShipUserOptionController extends GetxController {
       apiUrl.setCornInfoByRemain,
       payload,
     );
-    print(result);
+    // print(result);
     if (result == true) {
       await reloadData();
     }

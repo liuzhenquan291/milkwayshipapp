@@ -68,7 +68,7 @@ class RegionPage extends GetView<RegionListController> {
                     // scrollDirection: Axis.horizontal,
                     children: [
                       Container(
-                        height: 50,
+                        height: 35,
                         decoration: const BoxDecoration(
                           border: Border(
                             bottom: BorderSide(color: Colors.black, width: 1),
@@ -138,6 +138,19 @@ class RegionPage extends GetView<RegionListController> {
                     ]),
               ),
             ),
+            ctl.canCreate
+                ? ElevatedButton(
+                    onPressed: () async {
+                      bool result = await Get.toNamed(AppRoute.regionNewPage);
+                      if (result == true) {
+                        // _reloadData();
+                      }
+                    },
+                    child: const Text('创建势力'),
+                  )
+                : const SizedBox(
+                    height: 1,
+                  ),
           ],
         ),
         // floatingActionButton: FloatingActionButton(

@@ -16,6 +16,7 @@ class DepartOptionsController extends GetxController {
   int shipUserLength = 0;
   bool hasOptions = false;
   bool isManager = false;
+  bool isCommittee = false; // 是否是委员会
   String userId = '';
   List<OptionModel> validOptions = [];
 
@@ -32,6 +33,7 @@ class DepartOptionsController extends GetxController {
     hasOptions = false;
     isManager = false;
     validOptions = [];
+    isCommittee = false;
     loadData();
   }
 
@@ -48,6 +50,9 @@ class DepartOptionsController extends GetxController {
       if (responseData.data != null) {
         departData = DepartmentalAgendaModel.fromJson(responseData.data);
         if (departData != null) {
+          if (departData?.id == 1) {
+            isCommittee = true;
+          }
           final users = departData?.shipUserDatas ?? [];
           if (users.isNotEmpty) {
             hasUser = true;

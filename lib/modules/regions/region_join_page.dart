@@ -26,34 +26,35 @@ class RegoinJoinPage extends GetView<RegionJoinController> {
           appBar: AppBar(
             title: const Text('创建新角色加入势力'),
           ),
-          body: ctl.regionDataList.isNotEmpty
+          body: ctl.hasRegion
               ? Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            const Text("请选择要加入的势力: "),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: DropdownButtonFormField(
-                                value: ctl.toJoinRegionId,
-                                items: ctl.regionDataList
-                                    .map((option) => DropdownMenuItem(
-                                          value: option.id,
-                                          child: Text(option.name),
-                                        ))
-                                    .toList(),
-                                onChanged: (newValue) {
-                                  ctl.setToJoinRegionId(newValue);
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Row(
+                        //   mainAxisSize: MainAxisSize.max,
+                        //   children: [
+                        //     const Text("请选择要加入的势力: "),
+                        //     const SizedBox(width: 20),
+                        //     Expanded(
+                        //       child: DropdownButtonFormField(
+                        //         value: ctl.toJoinRegionId,
+                        //         items: ctl.regionDataList
+                        //             .map((option) => DropdownMenuItem(
+                        //                   value: option.id,
+                        //                   child: Text(option.name),
+                        //                 ))
+                        //             .toList(),
+                        //         onChanged: (newValue) {
+                        //           ctl.setToJoinRegionId(newValue);
+                        //         },
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        Text("您要加入的势力是：${ctl.toJoinRegionName}"),
                         const SizedBox(height: 16.0),
                         TextField(
                           controller: mskNameCtl,
@@ -84,56 +85,56 @@ class RegoinJoinPage extends GetView<RegionJoinController> {
                               labelText: '战力', hintText: '战力'),
                         ),
                         const SizedBox(height: 16.0),
-                        Row(
-                          children: [
-                            const Text("上次开盆时间："),
-                            const SizedBox(width: 10),
-                            ElevatedButton(
-                              onPressed: () {
-                                DatePicker.showDateTimePicker(
-                                  context,
-                                  showTitleActions: true,
-                                  locale: LocaleType.zh,
-                                  onChanged: (time) {
-                                    ctl.setLastOpenTime(formatDateTime_1(time));
-                                  },
-                                  onConfirm: (time) {
-                                    // Update state when time is confirmed
-                                    ctl.timeCtl.selectTime(time);
-                                  },
-                                  currentTime: DateTime.now(),
-                                );
-                              },
-                              child: Text("${ctl.lastOpenTime}"),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16.0),
-                        Row(
-                          children: [
-                            const Text("上次参盆时间："),
-                            const SizedBox(width: 10),
-                            ElevatedButton(
-                              onPressed: () {
-                                DatePicker.showDateTimePicker(
-                                  context,
-                                  showTitleActions: true,
-                                  locale: LocaleType.zh,
-                                  onChanged: (time) {
-                                    ctl.setLastJoinTime(formatDateTime_1(time));
-                                  },
-                                  onConfirm: (time) {
-                                    // Update state when time is confirmed
-                                    ctl.timeCtl.selectTime(time);
-                                  },
-                                  currentTime: DateTime.now(),
-                                );
-                              },
-                              child: Text("${ctl.lastJoinTime}"),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 32.0),
+                        // Row(
+                        //   children: [
+                        //     const Text("上次开盆时间："),
+                        //     const SizedBox(width: 10),
+                        //     ElevatedButton(
+                        //       onPressed: () {
+                        //         DatePicker.showDateTimePicker(
+                        //           context,
+                        //           showTitleActions: true,
+                        //           locale: LocaleType.zh,
+                        //           onChanged: (time) {
+                        //             ctl.setLastOpenTime(formatDateTime_1(time));
+                        //           },
+                        //           onConfirm: (time) {
+                        //             // Update state when time is confirmed
+                        //             ctl.timeCtl.selectTime(time);
+                        //           },
+                        //           currentTime: DateTime.now(),
+                        //         );
+                        //       },
+                        //       child: Text("${ctl.lastOpenTime}"),
+                        //     ),
+                        //   ],
+                        // ),
+                        // const SizedBox(height: 16.0),
+                        // Row(
+                        //   children: [
+                        //     const Text("上次参盆时间："),
+                        //     const SizedBox(width: 10),
+                        //     ElevatedButton(
+                        //       onPressed: () {
+                        //         DatePicker.showDateTimePicker(
+                        //           context,
+                        //           showTitleActions: true,
+                        //           locale: LocaleType.zh,
+                        //           onChanged: (time) {
+                        //             ctl.setLastJoinTime(formatDateTime_1(time));
+                        //           },
+                        //           onConfirm: (time) {
+                        //             // Update state when time is confirmed
+                        //             ctl.timeCtl.selectTime(time);
+                        //           },
+                        //           currentTime: DateTime.now(),
+                        //         );
+                        //       },
+                        //       child: Text("${ctl.lastJoinTime}"),
+                        //     ),
+                        //   ],
+                        // ),
+                        // const SizedBox(height: 32.0),
                         ElevatedButton(
                           onPressed: () async {
                             await ctl.onCreateShipUser(

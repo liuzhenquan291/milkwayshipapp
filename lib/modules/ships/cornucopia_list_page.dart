@@ -152,7 +152,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                               }
                                             },
                                             child: const Text(
-                                              '设置开盆',
+                                              '刚开盆成功',
                                               style: TextStyle(fontSize: 10),
                                             ),
                                           ),
@@ -170,7 +170,7 @@ class CornucopiaListPage extends GetView<CornucopiaListController> {
                                               }
                                             },
                                             child: const Text(
-                                              '设置参盆',
+                                              '刚参盆成功',
                                               style: TextStyle(fontSize: 10),
                                             ),
                                           ),

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../core/urls.dart';
@@ -11,9 +12,10 @@ import '../../core/models/ship_user_model.dart';
 
 class RegionJoinController extends GetxController {
   final RefreshController refreshController = RefreshController();
-  List<RegionModel> regionDataList = [];
+  // List<RegionModel> regionDataList = [];
   bool hasRegion = false;
-  bool hasUser = false;
+  // bool hasUser = false;
+  String? toJoinRegionName;
   String? toJoinRegionId;
 
   // final TimePickerController lastOpenTimeCtl = Get.find<TimePickerController>();
@@ -31,39 +33,47 @@ class RegionJoinController extends GetxController {
     _loadData();
   }
 
-  void setLastOpenTime(String? time) {
-    lastOpenTime = time;
-    update();
-  }
+  // void setLastOpenTime(String? time) {
+  //   lastOpenTime = time;
+  //   update();
+  // }
 
-  void setLastJoinTime(String? time) {
-    lastJoinTime = time;
-    update();
-  }
+  // void setLastJoinTime(String? time) {
+  //   lastJoinTime = time;
+  //   update();
+  // }
 
   // dio.Response? response;
   Future<void> _loadData() async {
-    final as = ApiService();
-    final params = {'can_join': true};
-    final response = await as.getRequest(apiUrl.regionsCreateListPath, params);
-    final resData = ResponseData.fromJson(response.data);
-    if (resData.data == null) {
-      return;
-    } else {
+    final au = Get.find<AuthService>();
+    toJoinRegionId = au.regionId;
+    toJoinRegionName = au.regionName;
+
+    if (toJoinRegionId != '') {
       hasRegion = true;
-      regionDataList = RegionModel.fromJsonToList(resData.data);
-      // final userCnt = resData?.shipUsers?.length ?? 0;
-      // if (userCnt > 0) {
-      //   hasUser = true;
-      // }
     }
+
+    // final as = ApiService();
+    // final params = {'can_join': true};
+    // final response = await as.getRequest(apiUrl.regionsCreateListPath, params);
+    // final resData = ResponseData.fromJson(response.data);
+    // if (resData.data == null) {
+    //   return;
+    // } else {
+    //   hasRegion = true;
+    //   regionDataList = RegionModel.fromJsonToList(resData.data);
+    //   // final userCnt = resData?.shipUsers?.length ?? 0;
+    //   // if (userCnt > 0) {
+    //   //   hasUser = true;
+    //   // }
+    // }
 
     update();
   }
 
-  void setToJoinRegionId(String? regionId) {
-    toJoinRegionId = regionId;
-  }
+  // void setToJoinRegionId(String? regionId) {
+  //   toJoinRegionId = regionId;
+  // }
 
   Future<void> onCreateShipUser(
     String? mskName,
@@ -72,7 +82,7 @@ class RegionJoinController extends GetxController {
     String? swordName,
   ) async {
     final payload = {
-      "regions_id": toJoinRegionId,
+      // "regions_id": toJoinRegionId,
       "mks_name": mskName,
       "region_role": regionRole,
       "type_name": typeName,
@@ -80,12 +90,6 @@ class RegionJoinController extends GetxController {
       "last_open_corn_time": lastOpenTime,
       "last_join_corn_time": lastJoinTime,
     };
-    //                 "mks_uuid": "银河战舰UUID", # 非必填,
-    // "mks_name": "银河战舰昵称", # 必填
-    // "regions_id": 势力ID, # 非必填
-    // "regions_role": 势力中职务, # 非必填
-    // "last_join_corn_time": 上次参盆时间,  # 非必填
-    // "last_open_corn_time": 上次开盆时间,  # 非必填
     final response = customePostOptionWithResp(
       "加入势力",
       apiUrl.shipUserListCreatePath,

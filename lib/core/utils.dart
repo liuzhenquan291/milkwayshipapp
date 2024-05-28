@@ -72,3 +72,30 @@ String formatDateTime_3(DateTime? dateTime) {
   }
   return formatter_3.format(dateTime);
 }
+
+const Map<int, String> weekDayMap = {
+  7: '周日',
+  1: '周一',
+  2: '周二',
+  3: '周三',
+  4: '周四',
+  5: '周五',
+  6: '周六',
+};
+
+String formatDateTime_4(DateTime? dateTime) {
+  // 获取周几几时
+  if (dateTime == null) {
+    return "";
+  }
+  final weekDay = dateTime.weekday;
+  String str = weekDayMap[weekDay] ?? '';
+  final hour = dateTime.hour;
+  String hourStr = '';
+  if (hour <= 9) {
+    hourStr = "0$hour时";
+  } else {
+    hourStr = "$hour时";
+  }
+  return "$str$hourStr";
+}

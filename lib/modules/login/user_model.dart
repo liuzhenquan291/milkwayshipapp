@@ -7,6 +7,8 @@ class UserModel {
   String? displayName;
   String? userRole;
   bool? isLogin;
+  String? regionId;
+  String? regionName;
 
   UserModel({
     this.userId,
@@ -15,6 +17,8 @@ class UserModel {
     this.displayName,
     this.userRole,
     this.isLogin,
+    this.regionId,
+    this.regionName,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +27,8 @@ class UserModel {
     token = json['token'] ?? "";
     displayName = json['displayname'] ?? "";
     userRole = json['user_role'] ?? "";
+    regionId = json['region_id'] ?? '';
+    regionName = json['region_name'] ?? '';
     isLogin = true;
   }
 

@@ -96,8 +96,8 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                   ),
                 ),
                 child: getTableHead(
-                  ["序号", "角色名", "轮次", "已激活?", "本轮节点", "本轮缺少道具"],
-                  [2, 4, 2, 3, 3, 4],
+                  ["序号", "角色名", "轮次", "节点", ctl.isCommittee ? "上次废墟" : "缺少道具"],
+                  [2, 4, 2, 2, 3],
                 ),
               ),
               Expanded(
@@ -151,8 +151,8 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                                       : Text(
                                           "  ${index + 1}",
                                           style: const TextStyle(
-                                            color: Colors.blue,
-                                          ),
+                                              // color: Colors.white,
+                                              ),
                                         ),
                                 ),
                                 Expanded(
@@ -165,23 +165,31 @@ class DepartOptionsPage extends GetView<DepartOptionsController> {
                                     child: Text("${tmp?.agendaLevel}"),
                                   ),
                                 ),
+                                // Expanded(
+                                //     flex: 3,
+                                //     child: Center(
+                                //       child: Text(skillAlive ? "是" : "否"),
+                                //     )),
                                 Expanded(
-                                    flex: 3,
-                                    child: Center(
-                                      child: Text(skillAlive ? "是" : "否"),
-                                    )),
-                                Expanded(
-                                  flex: 3,
+                                  flex: 2,
                                   child: Center(
                                     child: Text("${tmp?.agendaNode}"),
                                   ),
                                 ),
                                 Expanded(
-                                  flex: 4,
+                                  flex: 3,
                                   child: Center(
-                                    child: Text("${tmp?.propsLack ?? 0}"),
+                                    child: Text(
+                                        "${ctl.isCommittee ? tmp?.lastRuinTime : tmp?.propsLack ?? 0}"),
                                   ),
                                 ),
+                                // Expanded(
+                                //   flex: ctl.isCommittee ? 3 : 0,
+                                //   child: Center(
+                                //     child: Text(
+                                //         "${ctl.isCommittee ? tmp?.lastRuinTime : ""}"),
+                                //   ),
+                                // ),
                               ],
                             ),
                           );

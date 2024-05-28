@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+// import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 
-import '../../core/utils.dart';
+// import '../../core/utils.dart';
 import '../../modules/ships/shipuser_option_controller.dart';
 
 class ShipUserOptionPage extends GetView<ShipUserOptionController> {
@@ -199,84 +199,6 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                   ctl.hasUpdOption
                       ? Column(
                           children: [
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            Container(
-                              color: Colors.black12,
-                              child: Column(
-                                children: [
-                                  Row(children: const [
-                                    Text(
-                                      "设置聚宝盆时间点: ",
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                  ]),
-                                  Row(
-                                    children: [
-                                      const Text("上次开盆时间："),
-                                      const SizedBox(width: 10),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          DatePicker.showDateTimePicker(
-                                            context,
-                                            showTitleActions: true,
-                                            locale: LocaleType.zh,
-                                            onChanged: (time) {
-                                              ctl.setLastOpenTime(
-                                                  formatDateTime_1(time));
-                                            },
-                                            onConfirm: (time) {
-                                              // Update state when time is confirmed
-                                              ctl.timeCtl.selectTime(time);
-                                            },
-                                            currentTime: DateTime.now(),
-                                          );
-                                        },
-                                        child: Text("${ctl.lastOpenTime}"),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Row(
-                                    children: [
-                                      const Text("上次参盆时间："),
-                                      const SizedBox(width: 10),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          DatePicker.showDateTimePicker(
-                                            context,
-                                            showTitleActions: true,
-                                            locale: LocaleType.zh,
-                                            onChanged: (time) {
-                                              ctl.setLastJoinTime(
-                                                  formatDateTime_1(time));
-                                            },
-                                            onConfirm: (time) {
-                                              // Update state when time is confirmed
-                                              ctl.timeCtl.selectTime(time);
-                                            },
-                                            currentTime: DateTime.now(),
-                                          );
-                                        },
-                                        child: Text("${ctl.lastJoinTime}"),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 6),
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      result =
-                                          await ctl.onOptionUpdateByTimePoint();
-                                    },
-                                    child: const Text("更新聚宝盆信息"),
-                                  ),
-                                  const SizedBox(height: 6),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 8.0),
-                            const Text("或"),
                             const SizedBox(height: 8.0),
                             Container(
                               // height: 100,
@@ -291,14 +213,14 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                                   ]),
                                   Row(
                                     children: [
-                                      Text("距可收盆还有: "),
+                                      const Text("距可收盆还有: "),
                                       DropdownButton<int>(
                                         value: ctl.jd,
-                                        icon: Icon(Icons.arrow_downward),
+                                        icon: const Icon(Icons.arrow_downward),
                                         iconSize: 24,
                                         elevation: 16,
-                                        style:
-                                            TextStyle(color: Colors.deepPurple),
+                                        style: const TextStyle(
+                                            color: Colors.deepPurple),
                                         underline: Container(
                                           height: 2,
                                           color: Colors.deepPurpleAccent,
@@ -309,18 +231,18 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                                         items: ctl.jdNums.map((number) {
                                           return DropdownMenuItem<int>(
                                             value: number,
-                                            child: Text('${number}'),
+                                            child: Text('$number'),
                                           );
                                         }).toList(),
                                       ),
-                                      Text("  天"),
+                                      const Text("  天"),
                                       DropdownButton<int>(
                                         value: ctl.jh,
-                                        icon: Icon(Icons.arrow_downward),
+                                        icon: const Icon(Icons.arrow_downward),
                                         iconSize: 24,
                                         elevation: 16,
-                                        style:
-                                            TextStyle(color: Colors.deepPurple),
+                                        style: const TextStyle(
+                                            color: Colors.deepPurple),
                                         underline: Container(
                                           height: 2,
                                           color: Colors.deepPurpleAccent,
@@ -331,18 +253,18 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                                         items: ctl.jhNums.map((number) {
                                           return DropdownMenuItem<int>(
                                             value: number,
-                                            child: Text('${number}'),
+                                            child: Text('$number'),
                                           );
                                         }).toList(),
                                       ),
-                                      Text("小时"),
+                                      const Text("小时"),
                                       DropdownButton<int>(
                                         value: ctl.jm,
-                                        icon: Icon(Icons.arrow_downward),
+                                        icon: const Icon(Icons.arrow_downward),
                                         iconSize: 24,
                                         elevation: 16,
-                                        style:
-                                            TextStyle(color: Colors.deepPurple),
+                                        style: const TextStyle(
+                                            color: Colors.deepPurple),
                                         underline: Container(
                                           height: 2,
                                           color: Colors.deepPurpleAccent,
@@ -353,23 +275,23 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                                         items: ctl.jmNums.map((number) {
                                           return DropdownMenuItem<int>(
                                             value: number,
-                                            child: Text('${number}'),
+                                            child: Text('$number'),
                                           );
                                         }).toList(),
                                       ),
-                                      Text("分钟"),
+                                      const Text("分钟"),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      Text("距可开盆还有: "),
+                                      const Text("距可开盆还有: "),
                                       DropdownButton<int>(
                                         value: ctl.od,
-                                        icon: Icon(Icons.arrow_downward),
+                                        icon: const Icon(Icons.arrow_downward),
                                         iconSize: 24,
                                         elevation: 16,
-                                        style:
-                                            TextStyle(color: Colors.deepPurple),
+                                        style: const TextStyle(
+                                            color: Colors.deepPurple),
                                         underline: Container(
                                           height: 2,
                                           color: Colors.deepPurpleAccent,
@@ -380,14 +302,14 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                                         items: ctl.odNums.map((number) {
                                           return DropdownMenuItem<int>(
                                             value: number,
-                                            child: Text('${number}'),
+                                            child: Text('$number'),
                                           );
                                         }).toList(),
                                       ),
-                                      Text("天"),
+                                      const Text("天"),
                                       DropdownButton<int>(
                                         value: ctl.oh,
-                                        icon: Icon(Icons.arrow_downward),
+                                        icon: const Icon(Icons.arrow_downward),
                                         iconSize: 24,
                                         elevation: 16,
                                         style:
@@ -406,10 +328,10 @@ class ShipUserOptionPage extends GetView<ShipUserOptionController> {
                                           );
                                         }).toList(),
                                       ),
-                                      Text("小时"),
+                                      const Text("小时"),
                                       DropdownButton<int>(
                                         value: ctl.om,
-                                        icon: Icon(Icons.arrow_downward),
+                                        icon: const Icon(Icons.arrow_downward),
                                         iconSize: 24,
                                         elevation: 16,
                                         style:

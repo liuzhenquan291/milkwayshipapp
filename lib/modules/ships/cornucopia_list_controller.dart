@@ -35,7 +35,7 @@ class CornucopiaListController extends GetxController {
     // toCorcuCnt = 0; // 开盆计划
     // processingCorcuCnt = 0; // 进行中的盆
     _loadData();
-    print('reload');
+    // print('reload');
   }
 
   Future<bool> setShipUserOption(

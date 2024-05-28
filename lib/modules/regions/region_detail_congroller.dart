@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:milkwayshipapp/core/auth.dart';
 
 import '../../core/models/options_model.dart';
 import '../../core/models/region_model.dart';
@@ -73,19 +74,19 @@ class RegionDetailController extends GetxController {
   }
 
   void addOption() {
-    if (hasAddRegionOption) {
-      listOptions.add(
-        ElevatedButton(
-          onPressed: () async {
-            bool result = await Get.toNamed(AppRoute.regionNewPage);
-            if (result == true) {
-              _reloadData();
-            }
-          },
-          child: const Text('创建势力'),
-        ),
-      );
-    }
+    // if (hasAddRegionOption) {
+    //   listOptions.add(
+    //     ElevatedButton(
+    //       onPressed: () async {
+    //         bool result = await Get.toNamed(AppRoute.regionNewPage);
+    //         if (result == true) {
+    //           _reloadData();
+    //         }
+    //       },
+    //       child: const Text('创建势力'),
+    //     ),
+    //   );
+    // }
     if (hasJoinRegionOption) {
       if (listOptions.isNotEmpty) {
         listOptions.add(const SizedBox(width: 32));

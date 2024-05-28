@@ -60,7 +60,7 @@ class RuinListPage extends GetView<RuinsListController> {
                             ),
                           ),
                           child: getTableHead(
-                            ["序号", "编号", "外环", "中环", "占据废墟", "目标", "成果"],
+                            ["序号", "编号", "外环", "中环", "占据废墟", "目标", "状态"],
                             [2, 4, 2, 2, 3, 2, 2],
                           ),
                         ),
@@ -128,7 +128,7 @@ class RuinListPage extends GetView<RuinsListController> {
                                           Expanded(
                                             flex: 2,
                                             child: Text(
-                                              "${tmp.actualShipUserCnt}",
+                                              "${tmp.statusName}",
                                               textAlign: TextAlign.center,
                                             ),
                                           ),

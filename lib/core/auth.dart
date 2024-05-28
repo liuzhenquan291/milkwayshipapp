@@ -10,6 +10,8 @@ class AuthService extends GetxService {
   String? username = '';
   String? displayName = '';
   String? userRole = '';
+  String? regionId = '';
+  String? regionName = '';
   bool get isLogin => _isLogin;
 
   static String tokenKey = 'token';
@@ -17,6 +19,8 @@ class AuthService extends GetxService {
   String usernameKey = 'username';
   String displayNameKey = 'displayName';
   String userRoleKey = 'userRole';
+  String regionIdKey = 'regionId';
+  String regionNameKey = 'regionName';
 
   Future<AuthService> init() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -25,6 +29,8 @@ class AuthService extends GetxService {
     username = preferences.getString(usernameKey);
     displayName = preferences.getString(displayNameKey);
     userRole = preferences.getString(userRoleKey);
+    regionId = preferences.getString(regionIdKey);
+    regionName = preferences.getString(regionNameKey);
     if (token.isNotEmpty) {
       _isLogin = true;
       final ApiService as = ApiService();
@@ -46,6 +52,8 @@ class AuthService extends GetxService {
     preferences.remove(displayNameKey);
     preferences.remove(userRoleKey);
     preferences.remove(tokenKey);
+    preferences.remove(regionIdKey);
+    preferences.remove(regionNameKey);
     await init();
     final as = ApiService();
     as.token = null;

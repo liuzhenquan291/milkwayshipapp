@@ -41,8 +41,8 @@ class RuinsRegistSelectPage extends GetView<RuinsRegistSelectController> {
                   ),
                 ),
                 child: getTableHead(
-                  ["", "序号", "角色名", "轮次", "已激活?", "本轮节点", "本轮缺少道具"],
-                  [2, 2, 4, 2, 2, 3, 4],
+                  ["", "角色名", "轮次", "激活技能", "节点", "上次废墟"],
+                  [1, 3, 2, 3, 2, 3],
                 ),
               ),
               Expanded(
@@ -63,7 +63,7 @@ class RuinsRegistSelectPage extends GetView<RuinsRegistSelectController> {
                             child: Row(
                               children: [
                                 Expanded(
-                                  flex: 2,
+                                  flex: 1,
                                   child: Checkbox(
                                     value: ctl.selector[index],
                                     onChanged: (bool? value) {
@@ -71,12 +71,12 @@ class RuinsRegistSelectPage extends GetView<RuinsRegistSelectController> {
                                     },
                                   ),
                                 ),
+                                // Expanded(
+                                //   flex: 4,
+                                //   child: Text("  ${index + 1}"),
+                                // ),
                                 Expanded(
-                                  flex: 4,
-                                  child: Text("  ${index + 1}"),
-                                ),
-                                Expanded(
-                                  flex: 4,
+                                  flex: 3,
                                   child: Text(tmp.shipUserMksName),
                                 ),
                                 Expanded(
@@ -84,16 +84,16 @@ class RuinsRegistSelectPage extends GetView<RuinsRegistSelectController> {
                                   child: Text("${tmp.agendaLevel}"),
                                 ),
                                 Expanded(
-                                  flex: 2,
+                                  flex: 3,
                                   child: Text(tmp.skillAliveName ?? ''),
                                 ),
                                 Expanded(
-                                  flex: 3,
+                                  flex: 2,
                                   child: Text("${tmp.agendaNode}"),
                                 ),
                                 Expanded(
-                                  flex: 4,
-                                  child: Text("${tmp.propsLack}"),
+                                  flex: 3,
+                                  child: Text("${tmp.lastRuinTime}"),
                                 ),
                               ],
                             ),

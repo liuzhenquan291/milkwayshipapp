@@ -25,7 +25,7 @@ class RegionModel {
   int? spyCount;
   int? concealCount;
   List<ShipUserModel>? shipUsers;
-  List<OptionModel>? options; // TODO: options
+  List<OptionModel>? options;
 
   RegionModel({
     required this.id,

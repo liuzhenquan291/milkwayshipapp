@@ -114,6 +114,8 @@ class _LoginState extends State<LoginPage> {
             user.displayName,
             user.userRole,
             user.token ?? "",
+            user.regionId,
+            user.regionName,
           );
 
           await au.onLogin();

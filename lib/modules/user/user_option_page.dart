@@ -88,6 +88,14 @@ class UserOptionPage extends GetView<UserOptionController> {
                         ),
                       ],
                     ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child:
+                              Text("用户角色:   ${ctl.userData?.roleName ?? ''}"),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -117,6 +125,9 @@ class UserOptionPage extends GetView<UserOptionController> {
                       child: Row(
                         children: const [
                           Expanded(
+                            child: Text("序号"),
+                          ),
+                          Expanded(
                             child: Text("角色名"),
                           ),
                           Expanded(
@@ -124,7 +135,7 @@ class UserOptionPage extends GetView<UserOptionController> {
                           ),
                           Expanded(
                             flex: 2,
-                            child: Text("势力编号"),
+                            child: Text("角色类型"),
                           ),
                           Expanded(
                             child: Text("司令"),
@@ -154,11 +165,19 @@ class UserOptionPage extends GetView<UserOptionController> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          tempUser?.mksName ?? "",
+                                          "  ${index + 1}",
                                           style: const TextStyle(
                                             color: Colors.blue,
                                           ),
                                         ),
+                                        // ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          tempUser?.mksName ?? "",
+                                        ),
+                                        // child: Container(
+                                        //   child: Text(tempUser["用户昵称"]),
                                         // ),
                                       ),
                                       Expanded(
@@ -172,7 +191,7 @@ class UserOptionPage extends GetView<UserOptionController> {
                                       Expanded(
                                         flex: 2,
                                         child: Text(
-                                          tempUser?.region?.number ?? "",
+                                          tempUser?.typeName ?? '',
                                         ),
                                       ),
                                       Expanded(

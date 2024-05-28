@@ -79,6 +79,7 @@ class DepartmentalAgendaModel {
 class ShipuserDepartmentalInfoModel {
   String? id;
   String shipUserId;
+  String? userId;
   String shipUserMksName;
   int? agendaId;
   String? agendaName;
@@ -91,9 +92,11 @@ class ShipuserDepartmentalInfoModel {
   String? updatedTime;
   bool? deleted;
   ShipUserModel? shipUser;
+  String? lastRuinTime;
 
   ShipuserDepartmentalInfoModel({
     this.id,
+    this.userId,
     required this.shipUserId,
     required this.shipUserMksName,
     this.agendaId,
@@ -107,6 +110,7 @@ class ShipuserDepartmentalInfoModel {
     this.updatedTime,
     this.deleted,
     this.shipUser,
+    this.lastRuinTime,
   });
 
   factory ShipuserDepartmentalInfoModel.fromJson(Map<String, dynamic> json) {
@@ -126,6 +130,7 @@ class ShipuserDepartmentalInfoModel {
           : null,
       updatedTime: json['updated_time'],
       deleted: json['deleted'] ?? false,
+      lastRuinTime: json['last_ruin_time'] ?? '',
       shipUser: json['ship_user'] != null
           ? ShipUserModel.fromJson(json['ship_user'])
           : null,

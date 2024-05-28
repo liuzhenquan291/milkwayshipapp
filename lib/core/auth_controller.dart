@@ -6,6 +6,8 @@ class StorageKeys {
   static String usernameKey = 'username';
   static String displayNameKey = 'displayName';
   static String userRoleKey = 'userRole';
+  static String regionIdKey = 'regionId';
+  static String regionNameKey = 'regionName';
 }
 
 class StorageHelper {
@@ -35,12 +37,16 @@ class StorageHelper {
     String? displayName,
     String? userRole,
     String token,
+    String? regionId,
+    String? regionName,
   ) async {
     set(StorageKeys.userIdKey, userId);
     set(StorageKeys.usernameKey, username);
     set(StorageKeys.displayNameKey, displayName);
     set(StorageKeys.userRoleKey, userRole);
     set(StorageKeys.tokenKey, token);
+    set(StorageKeys.regionIdKey, token);
+    set(StorageKeys.regionNameKey, token);
   }
 
   static Future<void> removeAll() async {
@@ -49,5 +55,7 @@ class StorageHelper {
     remove(StorageKeys.displayNameKey);
     remove(StorageKeys.userRoleKey);
     remove(StorageKeys.tokenKey);
+    remove(StorageKeys.regionIdKey);
+    remove(StorageKeys.regionNameKey);
   }
 }
