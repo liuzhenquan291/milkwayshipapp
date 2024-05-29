@@ -45,8 +45,8 @@ class StorageHelper {
     set(StorageKeys.displayNameKey, displayName);
     set(StorageKeys.userRoleKey, userRole);
     set(StorageKeys.tokenKey, token);
-    set(StorageKeys.regionIdKey, token);
-    set(StorageKeys.regionNameKey, token);
+    set(StorageKeys.regionIdKey, regionId);
+    set(StorageKeys.regionNameKey, regionName);
   }
 
   static Future<void> removeAll() async {
