@@ -42,7 +42,7 @@ class UserListController extends GetxController {
     // totalOptions = res1Data.data["options_str"] as String;
 
     final response = await apiService.getRequest(
-      apiUrl.useListCreatePath,
+      apiUrl.useListPath,
       {'page': page},
     );
     if (response.statusCode != 200) {

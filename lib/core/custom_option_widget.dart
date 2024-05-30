@@ -15,6 +15,7 @@ Future<bool> customePostOption(
     middleText: '确定要执行该操作吗？',
     textConfirm: '确认',
     textCancel: '取消',
+    content: const Text(''),
     confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
     onCancel: () async {
       // Get.back();
@@ -72,6 +73,7 @@ Future<bool> customePutOption(
     onCancel: () {
       completer.complete(false);
     },
+    content: const Text(''),
     onConfirm: () async {
       Get.back();
 
@@ -186,6 +188,7 @@ Future<bool> customeDeleteOption(
     middleText: '确定要执行该操作吗？',
     textConfirm: '确认',
     textCancel: '取消',
+    content: const Text(''),
     confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
     onCancel: () {
       // Get.back();
@@ -237,6 +240,7 @@ ResponseData? customePostOptionWithResp(
     middleText: '确定要执行该操作吗？',
     textConfirm: '确认',
     textCancel: '取消',
+    content: const Text(''),
     confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
     onCancel: () {
       // Get.back();
@@ -288,6 +292,7 @@ Future<ResponseData?> customePutOptionWithResp(
     middleText: '确定要执行该操作吗？',
     textConfirm: '确认',
     textCancel: '取消',
+    content: const Text(''),
     confirmTextColor: Colors.white, // 自定义确认按钮文本颜色
     onCancel: () {
       // Get.back();

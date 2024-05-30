@@ -39,7 +39,31 @@ class _IndexState extends State<IndexPage> {
   Widget build(BuildContext context) {
     String displayName = Get.find<AuthService>().displayName as String;
 
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        await Get.defaultDialog(
+          title: '退出龍魂?',
+          textConfirm: '确认',
+          textCancel: '取消',
+          content: const Text(''),
+          confirm: TextButton(
+            onPressed: () async {
+              // 你可以直接在这里返回结果，或者在 onPressed 外部通过其他方式处理
+              Get.back(result: true);
+            },
+            child: const Text('退出'),
+          ),
+          onCancel: () async {
+            setState(() {});
+          },
+        ).then((value) {
+          if (value == true) {
+            Get.back();
+          }
+        });
+        return true;
+      },
+      child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('$displayName, 您好!'),
@@ -89,6 +113,8 @@ class _IndexState extends State<IndexPage> {
               label: '我的',
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

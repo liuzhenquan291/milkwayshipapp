@@ -17,10 +17,12 @@ class ApiUrl {
   //// 访问后端 user 应用
   // 登录
   String userLoginPath = "$_userApp/login/";
+  // 注册
+  String userRegisterPath = '$_userApp/register/';
 // 登录
   // String userLoginPath;
 // 注册、用户列表
-  String useListCreatePath = "$_userApp/users/";
+  String useListPath = "$_userApp/users/";
 // 用户详情、更新、注销
   String userRetriveUpdateDestroyPath = "$_userApp/users/%s/";
 // 管理员审核通过用户申请

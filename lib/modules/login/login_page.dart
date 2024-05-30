@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../core/auth.dart';
 import '../../core/apps.dart';
+import '../../core/host.dart';
 import '../../core/urls.dart';
 import '../../core/utils.dart';
 import '../../core/server.dart';
@@ -98,7 +99,11 @@ class _LoginState extends State<LoginPage> {
       final AuthService au = Get.find<AuthService>();
       final EncrypterController enc = Get.find<EncrypterController>();
       final passwdEnc = enc.encryptMd5(password);
-      final data = {'username': username, 'password': passwdEnc};
+      final data = {
+        'username': username,
+        'password': passwdEnc,
+        'version': version,
+      };
       final response = await apiService.postRequest(apiUrl.userLoginPath, data);
 
       // 检查登录成功与否

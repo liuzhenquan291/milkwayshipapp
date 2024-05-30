@@ -240,7 +240,7 @@ class _RegisterState extends State<RegisterPage> {
         "region_number": regionNum,
       };
       try {
-        final response = await as.postRequest(apiUrl.useListCreatePath, data);
+        final response = await as.postRequest(apiUrl.userRegisterPath, data);
 
         // 检查登录成功与否
         if (response.statusCode == 200) {
