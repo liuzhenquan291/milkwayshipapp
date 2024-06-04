@@ -1,16 +1,30 @@
 # milkwayshipapp
 
-A new Flutter project.
+银河战舰游戏的管理平台  
+目前只给龍魂势力使用  
+包含功能：
 
-## Getting Started
+- 人员管理
+- 角色管理
+- 聚宝盆管理
+- 废墟任务管理
 
-This project is a starting point for a Flutter application.
+## 启动项目
 
-A few resources to get you started if this is your first Flutter project:
+```text
+> flutter pub get
+> flutter run -v
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 模块介绍
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- asserts 包含一些图片
+- core 配置信息
+- modules 每个模块
+
+* modules/user 用户管理
+* modules/ship 角色管理
+* modules/ruins 废墟管理
+* modules/regions 势力管理
+
+- routes 路由管理

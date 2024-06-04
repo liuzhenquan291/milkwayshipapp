@@ -103,11 +103,11 @@ class RuinsModel {
   }
 
   String getStartTime() {
-    return formatDateTime_4(startTime);
+    return formatDateTime_3(startTime);
   }
 
   String getEndTime() {
-    return formatDateTime_4(endTime);
+    return formatDateTime_3(endTime);
   }
 
   Map<String, dynamic> toDictForUpdate() {
