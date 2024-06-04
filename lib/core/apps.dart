@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 
+import '../modules/ships/shipuser_edit_controller.dart';
+import '../modules/ships/shipuser_edit_page.dart';
+import '../modules/user/modify_passwd_page.dart';
 import '../modules/ruins/departal_controller.dart';
 import '../modules/ruins/departal_option_controller.dart';
 import '../modules/ruins/departal_page.dart';
@@ -73,6 +76,8 @@ abstract class AppRoute {
   static String registerPage = '/register';
   // 用户管理页
   static String userPage = '/user';
+  // 用户修改密码
+  static String userModyPassPage = '/userRepasswd';
   // 势力管理页
   static String regionPage = '/region';
   // 势力详情页
@@ -195,16 +200,26 @@ abstract class AppRoute {
         page: () => UserOptionPage(),
         binding: BindingsBuilder(() {
           Get.lazyPut(() => UserOptionController());
+          Get.lazyPut(() => EncrypterController());
         }),
       ),
-      // 用户信息编辑页-- 编辑自己;
+      // 用户信息编辑页
       GetPage(
-          name: AppRoute.userEditPage,
-          page: () => const UserEditPage(),
-          binding: BindingsBuilder(() {
-            Get.lazyPut(() => UserEditController());
-            Get.lazyPut(() => EncrypterController());
-          })),
+        name: AppRoute.userEditPage,
+        page: () => UserEditPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => UserEditController());
+          Get.lazyPut(() => EncrypterController());
+        }),
+      ),
+      // 用户-修改密码页面
+      GetPage(
+        name: AppRoute.userModyPassPage,
+        page: () => UserModyPasswdPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => EncrypterController());
+        }),
+      ),
       // 势力管理页
       GetPage(
         name: AppRoute.regionPage,
@@ -241,6 +256,13 @@ abstract class AppRoute {
         binding: BindingsBuilder(() {
           Get.lazyPut(() => ShipUserOptionController());
           Get.lazyPut(() => TimePickerController());
+        }),
+      ),
+      GetPage(
+        name: AppRoute.shipUserEditPage,
+        page: () => ShipUserEditPage(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut(() => ShipUserEditController());
         }),
       ),
       GetPage(

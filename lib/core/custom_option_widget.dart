@@ -119,6 +119,7 @@ Future<bool> editablePostOption(
   String infoName, // 传参名称
   TextEditingController ctl,
   Map<String, dynamic>? payload,
+  Function? encFunc, // 是否加密输入信息
 ) async {
   Completer<bool> completer = Completer<bool>(); // 创建一个 Completer 实例
   Get.defaultDialog(
@@ -143,7 +144,11 @@ Future<bool> editablePostOption(
     onConfirm: () async {
       Get.back();
 
-      payload?[infoName] = ctl.text;
+      if (encFunc != null) {
+        payload?[infoName] = encFunc(ctl.text);
+      } else {
+        payload?[infoName] = ctl.text;
+      }
 
       final as = ApiService();
       final response = await as.postRequest(optionUrl, payload);

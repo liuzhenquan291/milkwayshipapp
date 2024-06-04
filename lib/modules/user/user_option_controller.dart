@@ -11,6 +11,7 @@ import '../../core/option_conf.dart';
 import '../../core/models/user_model.dart';
 import '../../core/custom_option_widget.dart';
 import '../../core/models/options_model.dart';
+import '../../core/utils.dart';
 
 class UserOptionController extends GetxController {
   String? userId;
@@ -111,16 +112,19 @@ class UserOptionController extends GetxController {
       case UserOptionConf.UPDATE:
         result = await onOptionUpdate(option);
         break;
+
       // 注销账号
       case UserOptionConf.LOGOUT:
         result = await onOptionLogout(option);
         break;
-      // 退出登录
-      // case UserOptionConf.LOGOFF:
-      //   onOptionLogoff(option);
-      //   break;
+
       case UserOptionConf.SET_ROLES:
         result = await onOptionSetRoles(option);
+        break;
+
+      // 管理员重置密码
+      case UserOptionConf.RESET_PAWD:
+        result = await onOptionResetPasswd(option);
         break;
     }
     if (result == true) {
@@ -157,6 +161,7 @@ class UserOptionController extends GetxController {
       "refused_reason",
       txc,
       myPayload,
+      null,
     );
     return result;
   }
@@ -192,23 +197,13 @@ class UserOptionController extends GetxController {
   Future<bool> onOptionUpdate(OptionModel? option) async {
     bool result = await Get.toNamed(
       AppRoute.userEditPage,
-      parameters: {"user_id": userId ?? ""},
+      parameters: {
+        "userId": userId ?? "",
+        "isSelf": 'false',
+      },
     );
     return result;
   }
-
-  // // 退出登录
-  // void onOptionLogoff(OptionModel? option) {
-  //   final gc = Get.find<GlobalController>;
-  //   Get.find<GlobalController>().userId = "";
-  //   Get.find<GlobalController>().token = "";
-  //   Get.find<GlobalController>().username = "";
-  //   Get.find<GlobalController>().displayName = "";
-  //   Get.find<GlobalController>().userRole = "";
-  //   Get.find<GlobalController>().isLogin = false;
-
-  //   Get.offAllNamed(AppRoute.rootPage);
-  // }
 
   // 注销账号
   Future<bool> onOptionLogout(OptionModel? option) async {
@@ -238,6 +233,25 @@ class UserOptionController extends GetxController {
       "role_name",
       txc,
       myPayload,
+      null,
+    );
+    return result;
+  }
+
+  Future<bool> onOptionResetPasswd(OptionModel? option) async {
+    final Map<String, dynamic> myPayload = {
+      "user_id": userId,
+      "updated_time": userData?.updatedTime,
+      // "refused_reason": "拒绝用户申请", 在弹窗中填入
+    };
+    bool result = await editablePostOption(
+      option?.title ?? "",
+      apiUrl.resetPasswd,
+      "请输入新密码",
+      "new_passwd",
+      txc,
+      myPayload,
+      Get.find<EncrypterController>().encryptMd5,
     );
     return result;
   }

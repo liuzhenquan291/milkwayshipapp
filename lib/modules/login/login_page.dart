@@ -52,8 +52,7 @@ class _LoginState extends State<LoginPage> {
               controller: passwordController,
               obscureText: true,
               decoration: const InputDecoration(
-                labelText: '密码',
-              ),
+                  labelText: '密码', helperText: '忘记密码? 找司令重置!'),
             ),
             const SizedBox(height: 32),
             Row(

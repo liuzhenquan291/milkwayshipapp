@@ -32,6 +32,8 @@ class ShipUserModel {
   String? typeName;
   int? sword; // 战力
   String? swordName;
+  int? toOpenSeconds;
+  int? toJoinSeconds;
 
   UserModel? user; // 用户
   RegionModel? region; // 势力
@@ -69,6 +71,8 @@ class ShipUserModel {
     this.typeName,
     this.sword,
     this.swordName,
+    this.toJoinSeconds,
+    this.toOpenSeconds,
   });
 
   factory ShipUserModel.fromJson(Map<String, dynamic> json) {
@@ -95,6 +99,8 @@ class ShipUserModel {
       typeName: json['type_name'] ?? '',
       sword: json['sword'] ?? 0,
       swordName: json['sword_name'] ?? '',
+      toOpenSeconds: json['to_open_seconds'] ?? 0,
+      toJoinSeconds: json['to_join_seconds'] ?? 0,
       region: json['region'] != null
           ? RegionModel.fromJson(json['region'] ?? {})
           : null,
@@ -134,10 +140,10 @@ class ShipUserModel {
   }
 
   String getLastJoinCornTime() {
-    return formatDateTime_1(lastJoinCornTime);
+    return formatDateTime_3(lastJoinCornTime);
   }
 
   String getLastOpenCornTime() {
-    return formatDateTime_1(lastOpenCornTime);
+    return formatDateTime_3(lastOpenCornTime);
   }
 }

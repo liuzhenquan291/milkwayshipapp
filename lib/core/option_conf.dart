@@ -29,17 +29,22 @@ class UserOptionConf {
   static const String SET_ROLES = 'set_roles';
   static const String LOGOFF = 'logoff';
   static const String UPDATE = 'update';
+  static const String MODY_PAWD = 'modi_passwd';
+  static const String RESET_PAWD = 'reset_passwd';
 
   // 用户管理页可执行操作
   static const List<String> _userOptionPageOptions = [
     APPROVE,
     REFUSE,
-    DEMOTE,
-    FORBIDDEN,
+    // DEMOTE,
+    UPDATE,
+    // FORBIDDEN,
     SET_ROLES,
+    RESET_PAWD,
+    LOGOUT,
   ];
   // 用户编辑页可执行操作
-  static const List<String> _userEditPageOptions = [LOGOFF, UPDATE, LOGOUT];
+  static const List<String> _userEditPageOptions = [LOGOFF, MODY_PAWD];
 
   bool optionInOptionPage(String option) {
     return _userOptionPageOptions.contains(option);
@@ -109,11 +114,12 @@ class ShipuserOptionConf {
   // 角色管理页可执行操作
   static const List<String> _userOptionPageOptions = [
     APPROVE,
-    DEMOTE,
-    FORBIDDEN,
+    // DEMOTE,
+    // FORBIDDEN,
     DESIGNATE,
     REMARK,
     LOGOUT,
+    UPDATE,
     // OPEN_CORNUCOPIA,  # 暂时不做聚宝盆数据了
     // JOIN_CORNUCOPIA,
   ];

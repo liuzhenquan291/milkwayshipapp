@@ -227,7 +227,7 @@ class _RegisterState extends State<RegisterPage> {
       );
     } else {
       // 去注册
-      final passwdEnc = EncrypterController().encryptMd5(password);
+      final passwdEnc = Get.find<EncrypterController>().encryptMd5(password);
       final as = ApiService();
       final au = Get.find<AuthService>();
 

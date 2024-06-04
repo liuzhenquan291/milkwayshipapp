@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../core/auth.dart';
+// import '../../core/auth.dart';
 import '../../core/apps.dart';
 import '../../core/server.dart';
 import '../../core/models/user_model.dart';
@@ -155,7 +155,7 @@ class UserListPage extends GetView<UserListController> {
   // 如果点的是自己进入编辑页
   // 如果点的是别人进入用户操作页
   void _tapOnUser(String userId) async {
-    final gc = Get.find<AuthService>();
+    // final gc = Get.find<AuthService>();
     bool? result = false;
     // if (gc.isManager() || userId != gc.userId) {
     //   result = await Get.toNamed(
@@ -168,16 +168,20 @@ class UserListPage extends GetView<UserListController> {
     //     AppRoute.userEditPage,
     //   );
     // }
-    if (userId == gc.userId) {
-      result = await Get.toNamed(
-        AppRoute.userEditPage,
-      );
-    } else {
-      result = await Get.toNamed(
-        AppRoute.userOptionPage,
-        parameters: {'userId': userId},
-      );
-    }
+    // if (userId == gc.userId) {
+    //   result = await Get.toNamed(
+    //     AppRoute.userEditPage,
+    //   );
+    // } else {
+    //   result = await Get.toNamed(
+    //     AppRoute.userOptionPage,
+    //     parameters: {'userId': userId},
+    //   );
+    // }
+    result = await Get.toNamed(
+      AppRoute.userOptionPage,
+      parameters: {'userId': userId},
+    );
     if (result == true) {
       controller.reloadData();
     }

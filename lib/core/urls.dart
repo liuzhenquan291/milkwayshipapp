@@ -36,7 +36,9 @@ class ApiUrl {
 // 获取用户的身份和对用户可执行的操作
   String userTotalOptions = "$_userApp/total_options/";
   // 管理员重置密码
-  String resetPasswd = "$_userApp/reset_pass/";
+  String resetPasswd = "$_userApp/reset_passwd/";
+  // 用户自己修改密码
+  String modyPasswd = "$_userApp/modify_passwd/";
 
 //// 连接后端 ship 应用
 // 游戏角色创建、展示
