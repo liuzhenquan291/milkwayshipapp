@@ -3,12 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/auth.dart';
 import '../../core/apps.dart';
 import '../../core/urls.dart';
 import '../../core/utils.dart';
 import '../../core/server.dart';
-import '../login/user_model.dart';
 import '../../core/auth_controller.dart';
 
 class UserModyPasswdPage extends StatefulWidget {
@@ -45,7 +43,6 @@ class _State extends State<UserModyPasswdPage> {
 
   @override
   Widget build(BuildContext context) {
-    // String captcha = _generateCaptcha();
     final userId = Get.parameters['userId'] ?? "";
     final updatedTime = Get.parameters['updatedTime'] ?? '';
     return Scaffold(
@@ -99,7 +96,7 @@ class _State extends State<UserModyPasswdPage> {
     );
   }
 
-  _modyPasswd(
+  Future<void> _modyPasswd(
     String userId,
     String userUpdatedTime,
     String oldPasswd,
@@ -139,7 +136,7 @@ class _State extends State<UserModyPasswdPage> {
         "old_passwd": oldEnc,
         "new_passwd": newEnc,
       };
-      final as = Get.find<ApiService>();
+      final as = ApiService();
       final response = await as.postRequest(apiUrl.modyPasswd, data);
 
       // 检查登录成功与否
@@ -147,20 +144,16 @@ class _State extends State<UserModyPasswdPage> {
         // 模拟登录成功后更新token
         ResponseData resData = ResponseData.fromJson(response.data);
         if (resData.code == 0) {
-          UserModel user = UserModel.fromJson(resData.data);
-
-          await StorageHelper.setAll(
-            user.userId,
-            user.username,
-            user.displayName,
-            user.userRole,
-            user.token ?? "",
-            user.regionId,
-            user.regionName,
+          Get.snackbar(
+            '密码修改成功',
+            '请返回登录',
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
           );
-          await Get.find<AuthService>().onLogin();
 
-          Get.offAllNamed(AppRoute.rootPage);
+          await StorageHelper.removeAll();
+
+          Get.offAllNamed(AppRoute.loginPage);
         } else {
           Get.snackbar(
             "修改密码失败",

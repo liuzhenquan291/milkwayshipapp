@@ -31,6 +31,7 @@ Future<bool> customePostOption(
       if (responseData.code != 0) {
         Get.defaultDialog(
           title: '操作失败',
+          middleText: '',
           content: Text(responseData.message as String),
           confirm: TextButton(
             onPressed: () async {
@@ -43,6 +44,7 @@ Future<bool> customePostOption(
         Get.defaultDialog(
           title: "",
           content: const Text("操作成功"),
+          middleText: '',
           confirm: TextButton(
             onPressed: () async {
               Get.back();
@@ -84,6 +86,7 @@ Future<bool> customePutOption(
       if (responseData.code != 0) {
         Get.defaultDialog(
           title: '操作失败',
+          middleText: '',
           content: Text(responseData.message as String),
           confirm: TextButton(
             onPressed: () async {
@@ -97,6 +100,7 @@ Future<bool> customePutOption(
         Get.defaultDialog(
           title: "",
           content: const Text("操作成功"),
+          middleText: '',
           confirm: TextButton(
             onPressed: () async {
               Get.back();
@@ -157,6 +161,7 @@ Future<bool> editablePostOption(
       if (responseData.code != 0) {
         Get.defaultDialog(
           title: '操作失败',
+          middleText: '',
           content: Text(responseData.message as String),
           confirm: TextButton(
             onPressed: () {
@@ -168,6 +173,7 @@ Future<bool> editablePostOption(
       } else {
         Get.defaultDialog(
           title: '操作成功',
+          middleText: '',
           confirm: TextButton(
             onPressed: () {
               Get.back();
@@ -208,6 +214,7 @@ Future<bool> customeDeleteOption(
       if (response?.statusCode != 204) {
         Get.defaultDialog(
           title: '操作失败',
+          middleText: '',
           content: Text(response?.statusMessage ?? ""),
           confirm: TextButton(
             onPressed: () {
@@ -219,6 +226,7 @@ Future<bool> customeDeleteOption(
       } else {
         Get.defaultDialog(
           title: '',
+          middleText: '',
           content: const Text('操作成功'),
           confirm: TextButton(
             onPressed: () async {
@@ -260,6 +268,7 @@ ResponseData? customePostOptionWithResp(
       if (responseData.code != 0) {
         Get.defaultDialog(
           title: '操作失败',
+          middleText: '',
           content: Text(responseData.message as String),
           confirm: TextButton(
             onPressed: () {
@@ -271,6 +280,7 @@ ResponseData? customePostOptionWithResp(
       } else {
         Get.defaultDialog(
           title: "",
+          middleText: '',
           content: const Text("操作成功"),
           confirm: TextButton(
             onPressed: () {
@@ -312,6 +322,7 @@ Future<ResponseData?> customePutOptionWithResp(
       if (responseData.code != 0) {
         Get.defaultDialog(
           title: '操作失败',
+          middleText: '',
           content: Text(responseData.message as String),
           confirm: TextButton(
             onPressed: () {
@@ -323,6 +334,7 @@ Future<ResponseData?> customePutOptionWithResp(
       } else {
         Get.defaultDialog(
           title: "",
+          middleText: '',
           content: const Text("操作成功"),
           confirm: TextButton(
             onPressed: () {
